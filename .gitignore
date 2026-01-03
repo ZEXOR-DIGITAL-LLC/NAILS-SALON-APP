@@ -44,6 +44,8 @@ next-env.d.ts
 /documentation/
 
 .claude/
+.grok/
+screenshots/
 CLAUDE.md
 GEMINI.md
 node_modules
