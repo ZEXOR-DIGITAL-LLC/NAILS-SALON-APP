@@ -524,7 +524,7 @@ function Header({ language, setLanguage }: { language: Language; setLanguage: (l
           <div className="flex items-center gap-3">
             <div className="relative">
               <Image
-                src="/envato-graphic-5c878ab2-4ca8-479e-a00d-c844da0723c7.png"
+                src="/nails-salon.png"
                 alt="Nails Salon Logo"
                 width={44}
                 height={44}
@@ -1049,7 +1049,7 @@ export default function Home() {
             {/* Logo & Tagline */}
             <div className="flex items-center gap-3">
               <Image
-                src="/envato-graphic-5c878ab2-4ca8-479e-a00d-c844da0723c7.png"
+                src="/nails-salon.png"
                 alt="Nails Salon Logo"
                 width={32}
                 height={32}
