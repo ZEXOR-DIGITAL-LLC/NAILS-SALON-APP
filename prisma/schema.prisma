@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  // No url or directUrl - these are now in prisma.config.ts
+}
+
+model Salon {
+  id                String   @id @default(cuid())
+  firstName         String
+  lastName          String
+  email             String   @unique
+  businessName      String
+  type              String
+  otherType         String?
+  waitingAmenities  String[] // JSON array of amenities
+  otherAmenity      String?
+  country           String
+  city              String
+  address           String
+  phoneNumber       String
+  phoneCode         String
+  termsAccepted     Boolean
+  pin               String?  // 6-digit PIN for confirmation
+  confirmed         Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
