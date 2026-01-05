@@ -75,6 +75,7 @@ export const SalonScalarFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName',
   email: 'email',
+  password: 'password',
   businessName: 'businessName',
   type: 'type',
   otherType: 'otherType',

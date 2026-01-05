@@ -29,6 +29,7 @@ export type SalonMinAggregateOutputType = {
   firstName: string | null
   lastName: string | null
   email: string | null
+  password: string | null
   businessName: string | null
   type: string | null
   otherType: string | null
@@ -50,6 +51,7 @@ export type SalonMaxAggregateOutputType = {
   firstName: string | null
   lastName: string | null
   email: string | null
+  password: string | null
   businessName: string | null
   type: string | null
   otherType: string | null
@@ -71,6 +73,7 @@ export type SalonCountAggregateOutputType = {
   firstName: number
   lastName: number
   email: number
+  password: number
   businessName: number
   type: number
   otherType: number
@@ -95,6 +98,7 @@ export type SalonMinAggregateInputType = {
   firstName?: true
   lastName?: true
   email?: true
+  password?: true
   businessName?: true
   type?: true
   otherType?: true
@@ -116,6 +120,7 @@ export type SalonMaxAggregateInputType = {
   firstName?: true
   lastName?: true
   email?: true
+  password?: true
   businessName?: true
   type?: true
   otherType?: true
@@ -137,6 +142,7 @@ export type SalonCountAggregateInputType = {
   firstName?: true
   lastName?: true
   email?: true
+  password?: true
   businessName?: true
   type?: true
   otherType?: true
@@ -232,6 +238,7 @@ export type SalonGroupByOutputType = {
   firstName: string
   lastName: string
   email: string
+  password: string
   businessName: string
   type: string
   otherType: string | null
@@ -275,6 +282,7 @@ export type SalonWhereInput = {
   firstName?: Prisma.StringFilter<"Salon"> | string
   lastName?: Prisma.StringFilter<"Salon"> | string
   email?: Prisma.StringFilter<"Salon"> | string
+  password?: Prisma.StringFilter<"Salon"> | string
   businessName?: Prisma.StringFilter<"Salon"> | string
   type?: Prisma.StringFilter<"Salon"> | string
   otherType?: Prisma.StringNullableFilter<"Salon"> | string | null
@@ -297,6 +305,7 @@ export type SalonOrderByWithRelationInput = {
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   businessName?: Prisma.SortOrder
   type?: Prisma.SortOrder
   otherType?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -322,6 +331,7 @@ export type SalonWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SalonWhereInput | Prisma.SalonWhereInput[]
   firstName?: Prisma.StringFilter<"Salon"> | string
   lastName?: Prisma.StringFilter<"Salon"> | string
+  password?: Prisma.StringFilter<"Salon"> | string
   businessName?: Prisma.StringFilter<"Salon"> | string
   type?: Prisma.StringFilter<"Salon"> | string
   otherType?: Prisma.StringNullableFilter<"Salon"> | string | null
@@ -344,6 +354,7 @@ export type SalonOrderByWithAggregationInput = {
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   businessName?: Prisma.SortOrder
   type?: Prisma.SortOrder
   otherType?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -372,6 +383,7 @@ export type SalonScalarWhereWithAggregatesInput = {
   firstName?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   lastName?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   email?: Prisma.StringWithAggregatesFilter<"Salon"> | string
+  password?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   businessName?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   type?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   otherType?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
@@ -394,6 +406,7 @@ export type SalonCreateInput = {
   firstName: string
   lastName: string
   email: string
+  password: string
   businessName: string
   type: string
   otherType?: string | null
@@ -416,6 +429,7 @@ export type SalonUncheckedCreateInput = {
   firstName: string
   lastName: string
   email: string
+  password: string
   businessName: string
   type: string
   otherType?: string | null
@@ -438,6 +452,7 @@ export type SalonUpdateInput = {
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -460,6 +475,7 @@ export type SalonUncheckedUpdateInput = {
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -482,6 +498,7 @@ export type SalonCreateManyInput = {
   firstName: string
   lastName: string
   email: string
+  password: string
   businessName: string
   type: string
   otherType?: string | null
@@ -504,6 +521,7 @@ export type SalonUpdateManyMutationInput = {
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -526,6 +544,7 @@ export type SalonUncheckedUpdateManyInput = {
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -556,6 +575,7 @@ export type SalonCountOrderByAggregateInput = {
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   businessName?: Prisma.SortOrder
   type?: Prisma.SortOrder
   otherType?: Prisma.SortOrder
@@ -578,6 +598,7 @@ export type SalonMaxOrderByAggregateInput = {
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   businessName?: Prisma.SortOrder
   type?: Prisma.SortOrder
   otherType?: Prisma.SortOrder
@@ -599,6 +620,7 @@ export type SalonMinOrderByAggregateInput = {
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   businessName?: Prisma.SortOrder
   type?: Prisma.SortOrder
   otherType?: Prisma.SortOrder
@@ -647,6 +669,7 @@ export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   firstName?: boolean
   lastName?: boolean
   email?: boolean
+  password?: boolean
   businessName?: boolean
   type?: boolean
   otherType?: boolean
@@ -669,6 +692,7 @@ export type SalonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   firstName?: boolean
   lastName?: boolean
   email?: boolean
+  password?: boolean
   businessName?: boolean
   type?: boolean
   otherType?: boolean
@@ -691,6 +715,7 @@ export type SalonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   firstName?: boolean
   lastName?: boolean
   email?: boolean
+  password?: boolean
   businessName?: boolean
   type?: boolean
   otherType?: boolean
@@ -713,6 +738,7 @@ export type SalonSelectScalar = {
   firstName?: boolean
   lastName?: boolean
   email?: boolean
+  password?: boolean
   businessName?: boolean
   type?: boolean
   otherType?: boolean
@@ -730,7 +756,7 @@ export type SalonSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SalonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "businessName" | "type" | "otherType" | "waitingAmenities" | "otherAmenity" | "country" | "city" | "address" | "phoneNumber" | "phoneCode" | "termsAccepted" | "pin" | "confirmed" | "createdAt" | "updatedAt", ExtArgs["result"]["salon"]>
+export type SalonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "businessName" | "type" | "otherType" | "waitingAmenities" | "otherAmenity" | "country" | "city" | "address" | "phoneNumber" | "phoneCode" | "termsAccepted" | "pin" | "confirmed" | "createdAt" | "updatedAt", ExtArgs["result"]["salon"]>
 
 export type $SalonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Salon"
@@ -740,6 +766,7 @@ export type $SalonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     firstName: string
     lastName: string
     email: string
+    password: string
     businessName: string
     type: string
     otherType: string | null
@@ -1182,6 +1209,7 @@ export interface SalonFieldRefs {
   readonly firstName: Prisma.FieldRef<"Salon", 'String'>
   readonly lastName: Prisma.FieldRef<"Salon", 'String'>
   readonly email: Prisma.FieldRef<"Salon", 'String'>
+  readonly password: Prisma.FieldRef<"Salon", 'String'>
   readonly businessName: Prisma.FieldRef<"Salon", 'String'>
   readonly type: Prisma.FieldRef<"Salon", 'String'>
   readonly otherType: Prisma.FieldRef<"Salon", 'String'>
