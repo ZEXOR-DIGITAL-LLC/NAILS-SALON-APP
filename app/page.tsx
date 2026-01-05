@@ -354,6 +354,7 @@ const translations = {
     links: {
       privacy: { EN: 'Privacy Policy', ES: 'Política de Privacidad', FR: 'Politique de Confidentialité', PT: 'Política de Privacidade' },
       terms: { EN: 'Terms of Service', ES: 'Términos de Servicio', FR: "Conditions d'Utilisation", PT: 'Termos de Serviço' },
+      cookie: { EN: 'Cookie Policy', ES: 'Política de Cookies', FR: 'Politique de Cookies', PT: 'Política de Cookies' },
       contact: { EN: 'Contact', ES: 'Contacto', FR: 'Contact', PT: 'Contato' },
     },
   },
@@ -1060,8 +1061,9 @@ export default function Home() {
 
             {/* Links */}
             <div className="flex items-center gap-8 text-sm text-gray-500 font-medium">
-              <a href="#" className="hover:text-rose-600 transition-colors">{t.footer.links.privacy[language]}</a>
-              <a href="#" className="hover:text-rose-600 transition-colors">{t.footer.links.terms[language]}</a>
+              <a href="/privacy-policy" className="hover:text-rose-600 transition-colors">{t.footer.links.privacy[language]}</a>
+              <a href="/cookie-policy" className="hover:text-rose-600 transition-colors">{t.footer.links.cookie[language]}</a>
+              <a href="/terms-of-service" className="hover:text-rose-600 transition-colors">{t.footer.links.terms[language]}</a>
               <a href="#" className="hover:text-rose-600 transition-colors">{t.footer.links.contact[language]}</a>
             </div>
             
