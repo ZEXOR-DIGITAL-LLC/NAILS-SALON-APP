@@ -20,8 +20,20 @@ export type SalonModel = runtime.Types.Result.DefaultSelection<Prisma.$SalonPayl
 
 export type AggregateSalon = {
   _count: SalonCountAggregateOutputType | null
+  _avg: SalonAvgAggregateOutputType | null
+  _sum: SalonSumAggregateOutputType | null
   _min: SalonMinAggregateOutputType | null
   _max: SalonMaxAggregateOutputType | null
+}
+
+export type SalonAvgAggregateOutputType = {
+  latitude: number | null
+  longitude: number | null
+}
+
+export type SalonSumAggregateOutputType = {
+  latitude: number | null
+  longitude: number | null
 }
 
 export type SalonMinAggregateOutputType = {
@@ -31,17 +43,22 @@ export type SalonMinAggregateOutputType = {
   email: string | null
   password: string | null
   businessName: string | null
+  businessImage: string | null
   type: string | null
   otherType: string | null
   otherAmenity: string | null
   country: string | null
   city: string | null
   address: string | null
+  latitude: number | null
+  longitude: number | null
   phoneNumber: string | null
   phoneCode: string | null
   termsAccepted: boolean | null
   pin: string | null
   confirmed: boolean | null
+  resetPin: string | null
+  resetPinExpiry: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,17 +70,22 @@ export type SalonMaxAggregateOutputType = {
   email: string | null
   password: string | null
   businessName: string | null
+  businessImage: string | null
   type: string | null
   otherType: string | null
   otherAmenity: string | null
   country: string | null
   city: string | null
   address: string | null
+  latitude: number | null
+  longitude: number | null
   phoneNumber: string | null
   phoneCode: string | null
   termsAccepted: boolean | null
   pin: string | null
   confirmed: boolean | null
+  resetPin: string | null
+  resetPinExpiry: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -75,6 +97,7 @@ export type SalonCountAggregateOutputType = {
   email: number
   password: number
   businessName: number
+  businessImage: number
   type: number
   otherType: number
   waitingAmenities: number
@@ -82,16 +105,30 @@ export type SalonCountAggregateOutputType = {
   country: number
   city: number
   address: number
+  latitude: number
+  longitude: number
   phoneNumber: number
   phoneCode: number
   termsAccepted: number
   pin: number
   confirmed: number
+  resetPin: number
+  resetPinExpiry: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
+
+export type SalonAvgAggregateInputType = {
+  latitude?: true
+  longitude?: true
+}
+
+export type SalonSumAggregateInputType = {
+  latitude?: true
+  longitude?: true
+}
 
 export type SalonMinAggregateInputType = {
   id?: true
@@ -100,17 +137,22 @@ export type SalonMinAggregateInputType = {
   email?: true
   password?: true
   businessName?: true
+  businessImage?: true
   type?: true
   otherType?: true
   otherAmenity?: true
   country?: true
   city?: true
   address?: true
+  latitude?: true
+  longitude?: true
   phoneNumber?: true
   phoneCode?: true
   termsAccepted?: true
   pin?: true
   confirmed?: true
+  resetPin?: true
+  resetPinExpiry?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -122,17 +164,22 @@ export type SalonMaxAggregateInputType = {
   email?: true
   password?: true
   businessName?: true
+  businessImage?: true
   type?: true
   otherType?: true
   otherAmenity?: true
   country?: true
   city?: true
   address?: true
+  latitude?: true
+  longitude?: true
   phoneNumber?: true
   phoneCode?: true
   termsAccepted?: true
   pin?: true
   confirmed?: true
+  resetPin?: true
+  resetPinExpiry?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -144,6 +191,7 @@ export type SalonCountAggregateInputType = {
   email?: true
   password?: true
   businessName?: true
+  businessImage?: true
   type?: true
   otherType?: true
   waitingAmenities?: true
@@ -151,11 +199,15 @@ export type SalonCountAggregateInputType = {
   country?: true
   city?: true
   address?: true
+  latitude?: true
+  longitude?: true
   phoneNumber?: true
   phoneCode?: true
   termsAccepted?: true
   pin?: true
   confirmed?: true
+  resetPin?: true
+  resetPinExpiry?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -199,6 +251,18 @@ export type SalonAggregateArgs<ExtArgs extends runtime.Types.Extensions.Internal
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: SalonAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: SalonSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: SalonMinAggregateInputType
@@ -229,6 +293,8 @@ export type SalonGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   _count?: SalonCountAggregateInputType | true
+  _avg?: SalonAvgAggregateInputType
+  _sum?: SalonSumAggregateInputType
   _min?: SalonMinAggregateInputType
   _max?: SalonMaxAggregateInputType
 }
@@ -240,6 +306,7 @@ export type SalonGroupByOutputType = {
   email: string
   password: string
   businessName: string
+  businessImage: string | null
   type: string
   otherType: string | null
   waitingAmenities: string[]
@@ -247,14 +314,20 @@ export type SalonGroupByOutputType = {
   country: string
   city: string
   address: string
+  latitude: number | null
+  longitude: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
   pin: string | null
   confirmed: boolean
+  resetPin: string | null
+  resetPinExpiry: Date | null
   createdAt: Date
   updatedAt: Date
   _count: SalonCountAggregateOutputType | null
+  _avg: SalonAvgAggregateOutputType | null
+  _sum: SalonSumAggregateOutputType | null
   _min: SalonMinAggregateOutputType | null
   _max: SalonMaxAggregateOutputType | null
 }
@@ -284,6 +357,7 @@ export type SalonWhereInput = {
   email?: Prisma.StringFilter<"Salon"> | string
   password?: Prisma.StringFilter<"Salon"> | string
   businessName?: Prisma.StringFilter<"Salon"> | string
+  businessImage?: Prisma.StringNullableFilter<"Salon"> | string | null
   type?: Prisma.StringFilter<"Salon"> | string
   otherType?: Prisma.StringNullableFilter<"Salon"> | string | null
   waitingAmenities?: Prisma.StringNullableListFilter<"Salon">
@@ -291,13 +365,19 @@ export type SalonWhereInput = {
   country?: Prisma.StringFilter<"Salon"> | string
   city?: Prisma.StringFilter<"Salon"> | string
   address?: Prisma.StringFilter<"Salon"> | string
+  latitude?: Prisma.FloatNullableFilter<"Salon"> | number | null
+  longitude?: Prisma.FloatNullableFilter<"Salon"> | number | null
   phoneNumber?: Prisma.StringFilter<"Salon"> | string
   phoneCode?: Prisma.StringFilter<"Salon"> | string
   termsAccepted?: Prisma.BoolFilter<"Salon"> | boolean
   pin?: Prisma.StringNullableFilter<"Salon"> | string | null
   confirmed?: Prisma.BoolFilter<"Salon"> | boolean
+  resetPin?: Prisma.StringNullableFilter<"Salon"> | string | null
+  resetPinExpiry?: Prisma.DateTimeNullableFilter<"Salon"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Salon"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Salon"> | Date | string
+  appointments?: Prisma.OwnerAppointmentListRelationFilter
+  galleries?: Prisma.GalleryListRelationFilter
 }
 
 export type SalonOrderByWithRelationInput = {
@@ -307,6 +387,7 @@ export type SalonOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   businessName?: Prisma.SortOrder
+  businessImage?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   otherType?: Prisma.SortOrderInput | Prisma.SortOrder
   waitingAmenities?: Prisma.SortOrder
@@ -314,13 +395,19 @@ export type SalonOrderByWithRelationInput = {
   country?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   phoneCode?: Prisma.SortOrder
   termsAccepted?: Prisma.SortOrder
   pin?: Prisma.SortOrderInput | Prisma.SortOrder
   confirmed?: Prisma.SortOrder
+  resetPin?: Prisma.SortOrderInput | Prisma.SortOrder
+  resetPinExpiry?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  appointments?: Prisma.OwnerAppointmentOrderByRelationAggregateInput
+  galleries?: Prisma.GalleryOrderByRelationAggregateInput
 }
 
 export type SalonWhereUniqueInput = Prisma.AtLeast<{
@@ -333,6 +420,7 @@ export type SalonWhereUniqueInput = Prisma.AtLeast<{
   lastName?: Prisma.StringFilter<"Salon"> | string
   password?: Prisma.StringFilter<"Salon"> | string
   businessName?: Prisma.StringFilter<"Salon"> | string
+  businessImage?: Prisma.StringNullableFilter<"Salon"> | string | null
   type?: Prisma.StringFilter<"Salon"> | string
   otherType?: Prisma.StringNullableFilter<"Salon"> | string | null
   waitingAmenities?: Prisma.StringNullableListFilter<"Salon">
@@ -340,13 +428,19 @@ export type SalonWhereUniqueInput = Prisma.AtLeast<{
   country?: Prisma.StringFilter<"Salon"> | string
   city?: Prisma.StringFilter<"Salon"> | string
   address?: Prisma.StringFilter<"Salon"> | string
+  latitude?: Prisma.FloatNullableFilter<"Salon"> | number | null
+  longitude?: Prisma.FloatNullableFilter<"Salon"> | number | null
   phoneNumber?: Prisma.StringFilter<"Salon"> | string
   phoneCode?: Prisma.StringFilter<"Salon"> | string
   termsAccepted?: Prisma.BoolFilter<"Salon"> | boolean
   pin?: Prisma.StringNullableFilter<"Salon"> | string | null
   confirmed?: Prisma.BoolFilter<"Salon"> | boolean
+  resetPin?: Prisma.StringNullableFilter<"Salon"> | string | null
+  resetPinExpiry?: Prisma.DateTimeNullableFilter<"Salon"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Salon"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Salon"> | Date | string
+  appointments?: Prisma.OwnerAppointmentListRelationFilter
+  galleries?: Prisma.GalleryListRelationFilter
 }, "id" | "email">
 
 export type SalonOrderByWithAggregationInput = {
@@ -356,6 +450,7 @@ export type SalonOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   businessName?: Prisma.SortOrder
+  businessImage?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   otherType?: Prisma.SortOrderInput | Prisma.SortOrder
   waitingAmenities?: Prisma.SortOrder
@@ -363,16 +458,22 @@ export type SalonOrderByWithAggregationInput = {
   country?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   phoneCode?: Prisma.SortOrder
   termsAccepted?: Prisma.SortOrder
   pin?: Prisma.SortOrderInput | Prisma.SortOrder
   confirmed?: Prisma.SortOrder
+  resetPin?: Prisma.SortOrderInput | Prisma.SortOrder
+  resetPinExpiry?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SalonCountOrderByAggregateInput
+  _avg?: Prisma.SalonAvgOrderByAggregateInput
   _max?: Prisma.SalonMaxOrderByAggregateInput
   _min?: Prisma.SalonMinOrderByAggregateInput
+  _sum?: Prisma.SalonSumOrderByAggregateInput
 }
 
 export type SalonScalarWhereWithAggregatesInput = {
@@ -385,6 +486,7 @@ export type SalonScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   password?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   businessName?: Prisma.StringWithAggregatesFilter<"Salon"> | string
+  businessImage?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
   type?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   otherType?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
   waitingAmenities?: Prisma.StringNullableListFilter<"Salon">
@@ -392,11 +494,15 @@ export type SalonScalarWhereWithAggregatesInput = {
   country?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   city?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   address?: Prisma.StringWithAggregatesFilter<"Salon"> | string
+  latitude?: Prisma.FloatNullableWithAggregatesFilter<"Salon"> | number | null
+  longitude?: Prisma.FloatNullableWithAggregatesFilter<"Salon"> | number | null
   phoneNumber?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   phoneCode?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   termsAccepted?: Prisma.BoolWithAggregatesFilter<"Salon"> | boolean
   pin?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
   confirmed?: Prisma.BoolWithAggregatesFilter<"Salon"> | boolean
+  resetPin?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
+  resetPinExpiry?: Prisma.DateTimeNullableWithAggregatesFilter<"Salon"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Salon"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Salon"> | Date | string
 }
@@ -408,6 +514,7 @@ export type SalonCreateInput = {
   email: string
   password: string
   businessName: string
+  businessImage?: string | null
   type: string
   otherType?: string | null
   waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
@@ -415,13 +522,19 @@ export type SalonCreateInput = {
   country: string
   city: string
   address: string
+  latitude?: number | null
+  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
   pin?: string | null
   confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  appointments?: Prisma.OwnerAppointmentCreateNestedManyWithoutSalonInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateInput = {
@@ -431,6 +544,7 @@ export type SalonUncheckedCreateInput = {
   email: string
   password: string
   businessName: string
+  businessImage?: string | null
   type: string
   otherType?: string | null
   waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
@@ -438,13 +552,19 @@ export type SalonUncheckedCreateInput = {
   country: string
   city: string
   address: string
+  latitude?: number | null
+  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
   pin?: string | null
   confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  appointments?: Prisma.OwnerAppointmentUncheckedCreateNestedManyWithoutSalonInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUpdateInput = {
@@ -454,6 +574,7 @@ export type SalonUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
@@ -461,13 +582,19 @@ export type SalonUpdateInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointments?: Prisma.OwnerAppointmentUpdateManyWithoutSalonNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateInput = {
@@ -477,6 +604,7 @@ export type SalonUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
@@ -484,13 +612,19 @@ export type SalonUncheckedUpdateInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointments?: Prisma.OwnerAppointmentUncheckedUpdateManyWithoutSalonNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateManyInput = {
@@ -500,6 +634,7 @@ export type SalonCreateManyInput = {
   email: string
   password: string
   businessName: string
+  businessImage?: string | null
   type: string
   otherType?: string | null
   waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
@@ -507,11 +642,15 @@ export type SalonCreateManyInput = {
   country: string
   city: string
   address: string
+  latitude?: number | null
+  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
   pin?: string | null
   confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -523,6 +662,7 @@ export type SalonUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
@@ -530,11 +670,15 @@ export type SalonUpdateManyMutationInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -546,6 +690,7 @@ export type SalonUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.StringFieldUpdateOperationsInput | string
   otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
@@ -553,11 +698,15 @@ export type SalonUncheckedUpdateManyInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -577,6 +726,7 @@ export type SalonCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   businessName?: Prisma.SortOrder
+  businessImage?: Prisma.SortOrder
   type?: Prisma.SortOrder
   otherType?: Prisma.SortOrder
   waitingAmenities?: Prisma.SortOrder
@@ -584,13 +734,22 @@ export type SalonCountOrderByAggregateInput = {
   country?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   phoneCode?: Prisma.SortOrder
   termsAccepted?: Prisma.SortOrder
   pin?: Prisma.SortOrder
   confirmed?: Prisma.SortOrder
+  resetPin?: Prisma.SortOrder
+  resetPinExpiry?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type SalonAvgOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
 }
 
 export type SalonMaxOrderByAggregateInput = {
@@ -600,17 +759,22 @@ export type SalonMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   businessName?: Prisma.SortOrder
+  businessImage?: Prisma.SortOrder
   type?: Prisma.SortOrder
   otherType?: Prisma.SortOrder
   otherAmenity?: Prisma.SortOrder
   country?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   phoneCode?: Prisma.SortOrder
   termsAccepted?: Prisma.SortOrder
   pin?: Prisma.SortOrder
   confirmed?: Prisma.SortOrder
+  resetPin?: Prisma.SortOrder
+  resetPinExpiry?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -622,19 +786,34 @@ export type SalonMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   businessName?: Prisma.SortOrder
+  businessImage?: Prisma.SortOrder
   type?: Prisma.SortOrder
   otherType?: Prisma.SortOrder
   otherAmenity?: Prisma.SortOrder
   country?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   phoneCode?: Prisma.SortOrder
   termsAccepted?: Prisma.SortOrder
   pin?: Prisma.SortOrder
   confirmed?: Prisma.SortOrder
+  resetPin?: Prisma.SortOrder
+  resetPinExpiry?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type SalonSumOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+}
+
+export type SalonScalarRelationFilter = {
+  is?: Prisma.SalonWhereInput
+  isNot?: Prisma.SalonWhereInput
 }
 
 export type SalonCreatewaitingAmenitiesInput = {
@@ -654,14 +833,356 @@ export type SalonUpdatewaitingAmenitiesInput = {
   push?: string | string[]
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type SalonCreateNestedOneWithoutAppointmentsInput = {
+  create?: Prisma.XOR<Prisma.SalonCreateWithoutAppointmentsInput, Prisma.SalonUncheckedCreateWithoutAppointmentsInput>
+  connectOrCreate?: Prisma.SalonCreateOrConnectWithoutAppointmentsInput
+  connect?: Prisma.SalonWhereUniqueInput
+}
+
+export type SalonUpdateOneRequiredWithoutAppointmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.SalonCreateWithoutAppointmentsInput, Prisma.SalonUncheckedCreateWithoutAppointmentsInput>
+  connectOrCreate?: Prisma.SalonCreateOrConnectWithoutAppointmentsInput
+  upsert?: Prisma.SalonUpsertWithoutAppointmentsInput
+  connect?: Prisma.SalonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SalonUpdateToOneWithWhereWithoutAppointmentsInput, Prisma.SalonUpdateWithoutAppointmentsInput>, Prisma.SalonUncheckedUpdateWithoutAppointmentsInput>
+}
+
+export type SalonCreateNestedOneWithoutGalleriesInput = {
+  create?: Prisma.XOR<Prisma.SalonCreateWithoutGalleriesInput, Prisma.SalonUncheckedCreateWithoutGalleriesInput>
+  connectOrCreate?: Prisma.SalonCreateOrConnectWithoutGalleriesInput
+  connect?: Prisma.SalonWhereUniqueInput
+}
+
+export type SalonUpdateOneRequiredWithoutGalleriesNestedInput = {
+  create?: Prisma.XOR<Prisma.SalonCreateWithoutGalleriesInput, Prisma.SalonUncheckedCreateWithoutGalleriesInput>
+  connectOrCreate?: Prisma.SalonCreateOrConnectWithoutGalleriesInput
+  upsert?: Prisma.SalonUpsertWithoutGalleriesInput
+  connect?: Prisma.SalonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SalonUpdateToOneWithWhereWithoutGalleriesInput, Prisma.SalonUpdateWithoutGalleriesInput>, Prisma.SalonUncheckedUpdateWithoutGalleriesInput>
+}
+
+export type SalonCreateWithoutAppointmentsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  businessName: string
+  businessImage?: string | null
+  type: string
+  otherType?: string | null
+  waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
+  otherAmenity?: string | null
+  country: string
+  city: string
+  address: string
+  latitude?: number | null
+  longitude?: number | null
+  phoneNumber: string
+  phoneCode: string
+  termsAccepted: boolean
+  pin?: string | null
+  confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  galleries?: Prisma.GalleryCreateNestedManyWithoutSalonInput
+}
+
+export type SalonUncheckedCreateWithoutAppointmentsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  businessName: string
+  businessImage?: string | null
+  type: string
+  otherType?: string | null
+  waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
+  otherAmenity?: string | null
+  country: string
+  city: string
+  address: string
+  latitude?: number | null
+  longitude?: number | null
+  phoneNumber: string
+  phoneCode: string
+  termsAccepted: boolean
+  pin?: string | null
+  confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutSalonInput
+}
+
+export type SalonCreateOrConnectWithoutAppointmentsInput = {
+  where: Prisma.SalonWhereUniqueInput
+  create: Prisma.XOR<Prisma.SalonCreateWithoutAppointmentsInput, Prisma.SalonUncheckedCreateWithoutAppointmentsInput>
+}
+
+export type SalonUpsertWithoutAppointmentsInput = {
+  update: Prisma.XOR<Prisma.SalonUpdateWithoutAppointmentsInput, Prisma.SalonUncheckedUpdateWithoutAppointmentsInput>
+  create: Prisma.XOR<Prisma.SalonCreateWithoutAppointmentsInput, Prisma.SalonUncheckedCreateWithoutAppointmentsInput>
+  where?: Prisma.SalonWhereInput
+}
+
+export type SalonUpdateToOneWithWhereWithoutAppointmentsInput = {
+  where?: Prisma.SalonWhereInput
+  data: Prisma.XOR<Prisma.SalonUpdateWithoutAppointmentsInput, Prisma.SalonUncheckedUpdateWithoutAppointmentsInput>
+}
+
+export type SalonUpdateWithoutAppointmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
+  otherAmenity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  galleries?: Prisma.GalleryUpdateManyWithoutSalonNestedInput
+}
+
+export type SalonUncheckedUpdateWithoutAppointmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
+  otherAmenity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutSalonNestedInput
+}
+
+export type SalonCreateWithoutGalleriesInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  businessName: string
+  businessImage?: string | null
+  type: string
+  otherType?: string | null
+  waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
+  otherAmenity?: string | null
+  country: string
+  city: string
+  address: string
+  latitude?: number | null
+  longitude?: number | null
+  phoneNumber: string
+  phoneCode: string
+  termsAccepted: boolean
+  pin?: string | null
+  confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  appointments?: Prisma.OwnerAppointmentCreateNestedManyWithoutSalonInput
+}
+
+export type SalonUncheckedCreateWithoutGalleriesInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  businessName: string
+  businessImage?: string | null
+  type: string
+  otherType?: string | null
+  waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
+  otherAmenity?: string | null
+  country: string
+  city: string
+  address: string
+  latitude?: number | null
+  longitude?: number | null
+  phoneNumber: string
+  phoneCode: string
+  termsAccepted: boolean
+  pin?: string | null
+  confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  appointments?: Prisma.OwnerAppointmentUncheckedCreateNestedManyWithoutSalonInput
+}
+
+export type SalonCreateOrConnectWithoutGalleriesInput = {
+  where: Prisma.SalonWhereUniqueInput
+  create: Prisma.XOR<Prisma.SalonCreateWithoutGalleriesInput, Prisma.SalonUncheckedCreateWithoutGalleriesInput>
+}
+
+export type SalonUpsertWithoutGalleriesInput = {
+  update: Prisma.XOR<Prisma.SalonUpdateWithoutGalleriesInput, Prisma.SalonUncheckedUpdateWithoutGalleriesInput>
+  create: Prisma.XOR<Prisma.SalonCreateWithoutGalleriesInput, Prisma.SalonUncheckedCreateWithoutGalleriesInput>
+  where?: Prisma.SalonWhereInput
+}
+
+export type SalonUpdateToOneWithWhereWithoutGalleriesInput = {
+  where?: Prisma.SalonWhereInput
+  data: Prisma.XOR<Prisma.SalonUpdateWithoutGalleriesInput, Prisma.SalonUncheckedUpdateWithoutGalleriesInput>
+}
+
+export type SalonUpdateWithoutGalleriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
+  otherAmenity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointments?: Prisma.OwnerAppointmentUpdateManyWithoutSalonNestedInput
+}
+
+export type SalonUncheckedUpdateWithoutGalleriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
+  otherAmenity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointments?: Prisma.OwnerAppointmentUncheckedUpdateManyWithoutSalonNestedInput
+}
+
+
+/**
+ * Count Type SalonCountOutputType
+ */
+
+export type SalonCountOutputType = {
+  appointments: number
+  galleries: number
+}
+
+export type SalonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  appointments?: boolean | SalonCountOutputTypeCountAppointmentsArgs
+  galleries?: boolean | SalonCountOutputTypeCountGalleriesArgs
+}
+
+/**
+ * SalonCountOutputType without action
+ */
+export type SalonCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalonCountOutputType
+   */
+  select?: Prisma.SalonCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SalonCountOutputType without action
+ */
+export type SalonCountOutputTypeCountAppointmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OwnerAppointmentWhereInput
+}
+
+/**
+ * SalonCountOutputType without action
+ */
+export type SalonCountOutputTypeCountGalleriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GalleryWhereInput
+}
 
 
 export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -671,6 +1192,7 @@ export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   email?: boolean
   password?: boolean
   businessName?: boolean
+  businessImage?: boolean
   type?: boolean
   otherType?: boolean
   waitingAmenities?: boolean
@@ -678,13 +1200,20 @@ export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   country?: boolean
   city?: boolean
   address?: boolean
+  latitude?: boolean
+  longitude?: boolean
   phoneNumber?: boolean
   phoneCode?: boolean
   termsAccepted?: boolean
   pin?: boolean
   confirmed?: boolean
+  resetPin?: boolean
+  resetPinExpiry?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  appointments?: boolean | Prisma.Salon$appointmentsArgs<ExtArgs>
+  galleries?: boolean | Prisma.Salon$galleriesArgs<ExtArgs>
+  _count?: boolean | Prisma.SalonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["salon"]>
 
 export type SalonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -694,6 +1223,7 @@ export type SalonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   email?: boolean
   password?: boolean
   businessName?: boolean
+  businessImage?: boolean
   type?: boolean
   otherType?: boolean
   waitingAmenities?: boolean
@@ -701,11 +1231,15 @@ export type SalonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   country?: boolean
   city?: boolean
   address?: boolean
+  latitude?: boolean
+  longitude?: boolean
   phoneNumber?: boolean
   phoneCode?: boolean
   termsAccepted?: boolean
   pin?: boolean
   confirmed?: boolean
+  resetPin?: boolean
+  resetPinExpiry?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["salon"]>
@@ -717,6 +1251,7 @@ export type SalonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   email?: boolean
   password?: boolean
   businessName?: boolean
+  businessImage?: boolean
   type?: boolean
   otherType?: boolean
   waitingAmenities?: boolean
@@ -724,11 +1259,15 @@ export type SalonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   country?: boolean
   city?: boolean
   address?: boolean
+  latitude?: boolean
+  longitude?: boolean
   phoneNumber?: boolean
   phoneCode?: boolean
   termsAccepted?: boolean
   pin?: boolean
   confirmed?: boolean
+  resetPin?: boolean
+  resetPinExpiry?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["salon"]>
@@ -740,6 +1279,7 @@ export type SalonSelectScalar = {
   email?: boolean
   password?: boolean
   businessName?: boolean
+  businessImage?: boolean
   type?: boolean
   otherType?: boolean
   waitingAmenities?: boolean
@@ -747,20 +1287,34 @@ export type SalonSelectScalar = {
   country?: boolean
   city?: boolean
   address?: boolean
+  latitude?: boolean
+  longitude?: boolean
   phoneNumber?: boolean
   phoneCode?: boolean
   termsAccepted?: boolean
   pin?: boolean
   confirmed?: boolean
+  resetPin?: boolean
+  resetPinExpiry?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SalonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "businessName" | "type" | "otherType" | "waitingAmenities" | "otherAmenity" | "country" | "city" | "address" | "phoneNumber" | "phoneCode" | "termsAccepted" | "pin" | "confirmed" | "createdAt" | "updatedAt", ExtArgs["result"]["salon"]>
+export type SalonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "businessName" | "businessImage" | "type" | "otherType" | "waitingAmenities" | "otherAmenity" | "country" | "city" | "address" | "latitude" | "longitude" | "phoneNumber" | "phoneCode" | "termsAccepted" | "pin" | "confirmed" | "resetPin" | "resetPinExpiry" | "createdAt" | "updatedAt", ExtArgs["result"]["salon"]>
+export type SalonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  appointments?: boolean | Prisma.Salon$appointmentsArgs<ExtArgs>
+  galleries?: boolean | Prisma.Salon$galleriesArgs<ExtArgs>
+  _count?: boolean | Prisma.SalonCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type SalonIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type SalonIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $SalonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Salon"
-  objects: {}
+  objects: {
+    appointments: Prisma.$OwnerAppointmentPayload<ExtArgs>[]
+    galleries: Prisma.$GalleryPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     firstName: string
@@ -768,6 +1322,7 @@ export type $SalonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     email: string
     password: string
     businessName: string
+    businessImage: string | null
     type: string
     otherType: string | null
     waitingAmenities: string[]
@@ -775,11 +1330,15 @@ export type $SalonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     country: string
     city: string
     address: string
+    latitude: number | null
+    longitude: number | null
     phoneNumber: string
     phoneCode: string
     termsAccepted: boolean
     pin: string | null
     confirmed: boolean
+    resetPin: string | null
+    resetPinExpiry: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["salon"]>
@@ -1176,6 +1735,8 @@ readonly fields: SalonFieldRefs;
  */
 export interface Prisma__SalonClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  appointments<T extends Prisma.Salon$appointmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OwnerAppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  galleries<T extends Prisma.Salon$galleriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$galleriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GalleryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1211,6 +1772,7 @@ export interface SalonFieldRefs {
   readonly email: Prisma.FieldRef<"Salon", 'String'>
   readonly password: Prisma.FieldRef<"Salon", 'String'>
   readonly businessName: Prisma.FieldRef<"Salon", 'String'>
+  readonly businessImage: Prisma.FieldRef<"Salon", 'String'>
   readonly type: Prisma.FieldRef<"Salon", 'String'>
   readonly otherType: Prisma.FieldRef<"Salon", 'String'>
   readonly waitingAmenities: Prisma.FieldRef<"Salon", 'String[]'>
@@ -1218,11 +1780,15 @@ export interface SalonFieldRefs {
   readonly country: Prisma.FieldRef<"Salon", 'String'>
   readonly city: Prisma.FieldRef<"Salon", 'String'>
   readonly address: Prisma.FieldRef<"Salon", 'String'>
+  readonly latitude: Prisma.FieldRef<"Salon", 'Float'>
+  readonly longitude: Prisma.FieldRef<"Salon", 'Float'>
   readonly phoneNumber: Prisma.FieldRef<"Salon", 'String'>
   readonly phoneCode: Prisma.FieldRef<"Salon", 'String'>
   readonly termsAccepted: Prisma.FieldRef<"Salon", 'Boolean'>
   readonly pin: Prisma.FieldRef<"Salon", 'String'>
   readonly confirmed: Prisma.FieldRef<"Salon", 'Boolean'>
+  readonly resetPin: Prisma.FieldRef<"Salon", 'String'>
+  readonly resetPinExpiry: Prisma.FieldRef<"Salon", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Salon", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Salon", 'DateTime'>
 }
@@ -1242,6 +1808,10 @@ export type SalonFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.SalonOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonInclude<ExtArgs> | null
+  /**
    * Filter, which Salon to fetch.
    */
   where: Prisma.SalonWhereUniqueInput
@@ -1260,6 +1830,10 @@ export type SalonFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.SalonOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonInclude<ExtArgs> | null
+  /**
    * Filter, which Salon to fetch.
    */
   where: Prisma.SalonWhereUniqueInput
@@ -1277,6 +1851,10 @@ export type SalonFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Salon
    */
   omit?: Prisma.SalonOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonInclude<ExtArgs> | null
   /**
    * Filter, which Salon to fetch.
    */
@@ -1326,6 +1904,10 @@ export type SalonFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.SalonOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonInclude<ExtArgs> | null
+  /**
    * Filter, which Salon to fetch.
    */
   where?: Prisma.SalonWhereInput
@@ -1374,6 +1956,10 @@ export type SalonFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.SalonOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonInclude<ExtArgs> | null
+  /**
    * Filter, which Salons to fetch.
    */
   where?: Prisma.SalonWhereInput
@@ -1416,6 +2002,10 @@ export type SalonCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Salon
    */
   omit?: Prisma.SalonOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonInclude<ExtArgs> | null
   /**
    * The data needed to create a Salon.
    */
@@ -1464,6 +2054,10 @@ export type SalonUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Salon
    */
   omit?: Prisma.SalonOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonInclude<ExtArgs> | null
   /**
    * The data needed to update a Salon.
    */
@@ -1531,6 +2125,10 @@ export type SalonUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   omit?: Prisma.SalonOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonInclude<ExtArgs> | null
+  /**
    * The filter to search for the Salon to update in case it exists.
    */
   where: Prisma.SalonWhereUniqueInput
@@ -1557,6 +2155,10 @@ export type SalonDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   omit?: Prisma.SalonOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonInclude<ExtArgs> | null
+  /**
    * Filter which Salon to delete.
    */
   where: Prisma.SalonWhereUniqueInput
@@ -1577,6 +2179,54 @@ export type SalonDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Salon.appointments
+ */
+export type Salon$appointmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OwnerAppointment
+   */
+  select?: Prisma.OwnerAppointmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OwnerAppointment
+   */
+  omit?: Prisma.OwnerAppointmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OwnerAppointmentInclude<ExtArgs> | null
+  where?: Prisma.OwnerAppointmentWhereInput
+  orderBy?: Prisma.OwnerAppointmentOrderByWithRelationInput | Prisma.OwnerAppointmentOrderByWithRelationInput[]
+  cursor?: Prisma.OwnerAppointmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OwnerAppointmentScalarFieldEnum | Prisma.OwnerAppointmentScalarFieldEnum[]
+}
+
+/**
+ * Salon.galleries
+ */
+export type Salon$galleriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Gallery
+   */
+  select?: Prisma.GallerySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Gallery
+   */
+  omit?: Prisma.GalleryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GalleryInclude<ExtArgs> | null
+  where?: Prisma.GalleryWhereInput
+  orderBy?: Prisma.GalleryOrderByWithRelationInput | Prisma.GalleryOrderByWithRelationInput[]
+  cursor?: Prisma.GalleryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GalleryScalarFieldEnum | Prisma.GalleryScalarFieldEnum[]
+}
+
+/**
  * Salon without action
  */
 export type SalonDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1588,4 +2238,8 @@ export type SalonDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Salon
    */
   omit?: Prisma.SalonOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonInclude<ExtArgs> | null
 }

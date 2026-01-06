@@ -9,4 +9,8 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Salon'
+export type * from './models/Client'
+export type * from './models/OwnerAppointment'
+export type * from './models/Gallery'
+export type * from './models/GalleryImage'
 export type * from './commonInputTypes'
