@@ -42,3 +42,23 @@ export type Gallery = Prisma.GalleryModel
  * 
  */
 export type GalleryImage = Prisma.GalleryImageModel
+/**
+ * Model Employee
+ * 
+ */
+export type Employee = Prisma.EmployeeModel
+/**
+ * Model ProductCategory
+ * 
+ */
+export type ProductCategory = Prisma.ProductCategoryModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel
+/**
+ * Model ProductHistory
+ * 
+ */
+export type ProductHistory = Prisma.ProductHistoryModel

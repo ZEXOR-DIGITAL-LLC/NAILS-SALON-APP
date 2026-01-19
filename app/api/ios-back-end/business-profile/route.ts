@@ -29,6 +29,13 @@ export async function GET(request: NextRequest) {
         longitude: true,
         phoneNumber: true,
         phoneCode: true,
+        // Business Hours
+        isOpen: true,
+        workingDays: true,
+        openingHour: true,
+        openingMinute: true,
+        closingHour: true,
+        closingMinute: true,
       },
     });
 
@@ -62,6 +69,13 @@ export async function PATCH(request: NextRequest) {
       longitude,
       phoneNumber,
       phoneCode,
+      // Business Hours
+      isOpen,
+      workingDays,
+      openingHour,
+      openingMinute,
+      closingHour,
+      closingMinute,
     } = body;
 
     if (!salonId) {
@@ -115,6 +129,13 @@ export async function PATCH(request: NextRequest) {
       longitude?: number | null;
       phoneNumber?: string;
       phoneCode?: string;
+      // Business Hours
+      isOpen?: boolean;
+      workingDays?: number[];
+      openingHour?: number;
+      openingMinute?: number;
+      closingHour?: number;
+      closingMinute?: number;
     } = {};
 
     if (email !== undefined) updateData.email = email;
@@ -130,6 +151,13 @@ export async function PATCH(request: NextRequest) {
     if (longitude !== undefined) updateData.longitude = longitude;
     if (phoneNumber !== undefined) updateData.phoneNumber = phoneNumber;
     if (phoneCode !== undefined) updateData.phoneCode = phoneCode;
+    // Business Hours
+    if (isOpen !== undefined) updateData.isOpen = isOpen;
+    if (workingDays !== undefined) updateData.workingDays = workingDays;
+    if (openingHour !== undefined) updateData.openingHour = openingHour;
+    if (openingMinute !== undefined) updateData.openingMinute = openingMinute;
+    if (closingHour !== undefined) updateData.closingHour = closingHour;
+    if (closingMinute !== undefined) updateData.closingMinute = closingMinute;
 
     // Update the salon
     const updatedSalon = await prisma.salon.update({
@@ -150,6 +178,13 @@ export async function PATCH(request: NextRequest) {
         longitude: true,
         phoneNumber: true,
         phoneCode: true,
+        // Business Hours
+        isOpen: true,
+        workingDays: true,
+        openingHour: true,
+        openingMinute: true,
+        closingHour: true,
+        closingMinute: true,
       },
       data: updateData,
     });

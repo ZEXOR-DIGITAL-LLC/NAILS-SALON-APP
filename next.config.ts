@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/mro-logix-app-images/**",
       },
+      {
+        protocol: "https",
+        hostname: "pub-3914379f7ca044998cd4b48b7d9f44a6.r2.dev",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   // Performance optimizations
@@ -76,7 +82,7 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.googletagmanager.com https://*.googletagmanager.com https://vercel.live https://js.stripe.com",
               "frame-src 'self' https://challenges.cloudflare.com https://vercel.live https://js.stripe.com https://*.stripe.com",
               "connect-src 'self' https://storage.googleapis.com https://challenges.cloudflare.com https://*.supabase.co https://*.r2.cloudflarestorage.com https://www.googletagmanager.com https://*.googletagmanager.com https://vercel.live https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://api.stripe.com",
-              "img-src 'self' data: blob: https://storage.googleapis.com https://*.googleusercontent.com https://*.r2.cloudflarestorage.com",
+              "img-src 'self' data: blob: https://storage.googleapis.com https://*.googleusercontent.com https://*.r2.cloudflarestorage.com https://*.r2.dev",
               "style-src 'self' 'unsafe-inline'",
               "font-src 'self' data:",
               "worker-src 'self' blob:",

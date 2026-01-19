@@ -19,6 +19,7 @@ export async function GET(request: NextRequest) {
     const dateParam = searchParams.get('date'); // Expected format: YYYY-MM-DD
     const typeParam = searchParams.get('type'); // 'future' for future appointments, 'counts' for status counts
     const statusParam = searchParams.get('status'); // 'Pending', 'Completed', 'Canceled'
+    const employeeIdParam = searchParams.get('employeeId'); // Optional: filter by specific employee
 
     if (!salonId) {
       return NextResponse.json({ error: 'Salon ID is required' }, { status: 400 });
@@ -59,10 +60,24 @@ export async function GET(request: NextRequest) {
 
     // Handle completed appointments query - all completed appointments
     if (typeParam === 'completed') {
+      const whereClause: { salonId: string; status: string; employeeId?: string } = {
+        salonId,
+        status: 'Completed',
+      };
+      if (employeeIdParam) {
+        whereClause.employeeId = employeeIdParam;
+      }
+
       const appointments = await prisma.ownerAppointment.findMany({
-        where: {
-          salonId,
-          status: 'Completed',
+        where: whereClause,
+        include: {
+          employee: {
+            select: {
+              id: true,
+              name: true,
+              color: true,
+            },
+          },
         },
         orderBy: [
           { appointmentDate: 'desc' },
@@ -80,10 +95,24 @@ export async function GET(request: NextRequest) {
 
     // Handle canceled appointments query - all canceled appointments
     if (typeParam === 'canceled') {
+      const whereClause: { salonId: string; status: string; employeeId?: string } = {
+        salonId,
+        status: 'Canceled',
+      };
+      if (employeeIdParam) {
+        whereClause.employeeId = employeeIdParam;
+      }
+
       const appointments = await prisma.ownerAppointment.findMany({
-        where: {
-          salonId,
-          status: 'Canceled',
+        where: whereClause,
+        include: {
+          employee: {
+            select: {
+              id: true,
+              name: true,
+              color: true,
+            },
+          },
         },
         orderBy: [
           { appointmentDate: 'desc' },
@@ -99,6 +128,107 @@ export async function GET(request: NextRequest) {
       }, { status: 200 });
     }
 
+    // Handle today's revenue query - returns today's earnings for dashboard card
+    if (typeParam === 'todayRevenue') {
+      // Use the date parameter if provided (from client's local timezone), otherwise use server's current date
+      const dateParam = searchParams.get('date');
+      let todayStr: string;
+      if (dateParam && /^\d{4}-\d{2}-\d{2}$/.test(dateParam)) {
+        todayStr = dateParam;
+      } else {
+        const now = new Date();
+        todayStr = now.toISOString().split('T')[0];
+      }
+      const todayStart = parseDateToUTC(todayStr);
+      const todayEnd = new Date(todayStart);
+      todayEnd.setUTCHours(23, 59, 59, 999);
+
+      const result = await prisma.ownerAppointment.aggregate({
+        where: {
+          salonId,
+          status: 'Completed',
+          appointmentDate: { gte: todayStart, lte: todayEnd },
+          amount: { not: null },
+        },
+        _sum: { amount: true },
+        _count: { id: true },
+      });
+
+      return NextResponse.json({
+        todayEarnings: result._sum.amount || 0,
+        completedWithAmountCount: result._count.id,
+        type: 'todayRevenue',
+      }, { status: 200 });
+    }
+
+    // Handle revenue query - returns earnings data with optional filters
+    if (typeParam === 'revenue') {
+      const startDateParam = searchParams.get('startDate'); // Optional: range start YYYY-MM-DD
+      const endDateParam = searchParams.get('endDate'); // Optional: range end YYYY-MM-DD
+      const clientNameParam = searchParams.get('clientName'); // Optional: filter by client
+
+      // Build where clause
+      const whereClause: {
+        salonId: string;
+        status: string;
+        amount: { not: null };
+        appointmentDate?: { gte?: Date; lte?: Date };
+        clientName?: { contains: string; mode: 'insensitive' };
+      } = {
+        salonId,
+        status: 'Completed',
+        amount: { not: null }, // Only appointments with amount set
+      };
+
+      // Date filtering
+      if (startDateParam && /^\d{4}-\d{2}-\d{2}$/.test(startDateParam)) {
+        whereClause.appointmentDate = {
+          ...whereClause.appointmentDate,
+          gte: parseDateToUTC(startDateParam),
+        };
+      }
+      if (endDateParam && /^\d{4}-\d{2}-\d{2}$/.test(endDateParam)) {
+        const endDate = parseDateToUTC(endDateParam);
+        endDate.setUTCHours(23, 59, 59, 999);
+        whereClause.appointmentDate = {
+          ...whereClause.appointmentDate,
+          lte: endDate,
+        };
+      }
+
+      // Client name filtering (case-insensitive partial match)
+      if (clientNameParam && clientNameParam.trim() !== '') {
+        whereClause.clientName = { contains: clientNameParam.trim(), mode: 'insensitive' };
+      }
+
+      const appointments = await prisma.ownerAppointment.findMany({
+        where: whereClause,
+        orderBy: [
+          { appointmentDate: 'desc' },
+          { appointmentHour: 'desc' },
+        ],
+        select: {
+          id: true,
+          clientName: true,
+          service: true,
+          appointmentDate: true,
+          appointmentHour: true,
+          appointmentMinute: true,
+          amount: true,
+        },
+      });
+
+      // Calculate totals
+      const totalEarnings = appointments.reduce((sum, apt) => sum + (apt.amount || 0), 0);
+
+      return NextResponse.json({
+        appointments,
+        count: appointments.length,
+        totalEarnings,
+        type: 'revenue',
+      }, { status: 200 });
+    }
+
     // Handle future appointments query
     if (typeParam === 'future') {
       // Get tomorrow's date at midnight UTC (future starts from tomorrow)
@@ -107,13 +237,30 @@ export async function GET(request: NextRequest) {
 
       console.log('Fetching future appointments from:', tomorrow);
 
+      const whereClause: {
+        salonId: string;
+        appointmentDate: { gte: Date };
+        status: string;
+        employeeId?: string;
+      } = {
+        salonId,
+        appointmentDate: { gte: tomorrow },
+        status: 'Pending',
+      };
+      if (employeeIdParam) {
+        whereClause.employeeId = employeeIdParam;
+      }
+
       const appointments = await prisma.ownerAppointment.findMany({
-        where: {
-          salonId,
-          appointmentDate: {
-            gte: tomorrow,
+        where: whereClause,
+        include: {
+          employee: {
+            select: {
+              id: true,
+              name: true,
+              color: true,
+            },
           },
-          status: 'Pending', // Only pending future appointments
         },
         orderBy: [
           { appointmentDate: 'asc' },
@@ -146,11 +293,12 @@ export async function GET(request: NextRequest) {
     const endOfDay = new Date(startOfDay);
     endOfDay.setUTCHours(23, 59, 59, 999);
 
-    // Build where clause with optional status filter
+    // Build where clause with optional status and employee filters
     const whereClause: {
       salonId: string;
       appointmentDate: { gte: Date; lte: Date };
       status?: string;
+      employeeId?: string;
     } = {
       salonId,
       appointmentDate: {
@@ -164,10 +312,24 @@ export async function GET(request: NextRequest) {
       whereClause.status = statusParam;
     }
 
-    console.log('Query params:', { salonId, dateStr, startOfDay, endOfDay, status: statusParam });
+    // Add employee filter if provided
+    if (employeeIdParam) {
+      whereClause.employeeId = employeeIdParam;
+    }
+
+    console.log('Query params:', { salonId, dateStr, startOfDay, endOfDay, status: statusParam, employeeId: employeeIdParam });
 
     const appointments = await prisma.ownerAppointment.findMany({
       where: whereClause,
+      include: {
+        employee: {
+          select: {
+            id: true,
+            name: true,
+            color: true,
+          },
+        },
+      },
       orderBy: [
         { appointmentHour: 'asc' },
         { appointmentMinute: 'asc' },
@@ -194,6 +356,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const {
       salonId,
+      employeeId, // Optional: Assign to specific employee
       clientName,
       service,
       appointmentDate,
@@ -261,17 +424,54 @@ export async function POST(request: NextRequest) {
       parsedDate = parseDateToUTC(dateStr);
     }
 
+    // Validate employeeId if provided
+    if (employeeId) {
+      const employee = await prisma.employee.findFirst({
+        where: { id: employeeId, salonId },
+      });
+      if (!employee) {
+        return NextResponse.json({ error: 'Employee not found' }, { status: 404 });
+      }
+      if (!employee.isActive) {
+        return NextResponse.json({ error: 'Cannot assign to inactive employee' }, { status: 400 });
+      }
+    }
+
     // --- OVERLAP AND MARGIN CHECK ---
     const startInMinutes = hour * 60 + minute;
     const endInMinutes = startInMinutes + dHours * 60 + dMinutes;
 
-    const existingAppointments = await prisma.ownerAppointment.findMany({
-      where: {
-        salonId,
-        appointmentDate: parsedDate,
-        status: 'Pending', // Only check against Pending appointments
-      },
-    });
+    // Build where clause for overlap check
+    // If employeeId is provided: check against that employee's appointments AND unassigned appointments
+    // If employeeId is null: check against ALL salon appointments (preserves backward compatibility)
+    let existingAppointments;
+
+    if (employeeId) {
+      // When booking with an employee, check against:
+      // 1. That employee's appointments (to prevent double-booking the employee)
+      // 2. Unassigned appointments (which could be assigned to this employee later)
+      existingAppointments = await prisma.ownerAppointment.findMany({
+        where: {
+          salonId,
+          appointmentDate: parsedDate,
+          status: 'Pending',
+          OR: [
+            { employeeId: employeeId },
+            { employeeId: null },
+          ],
+        },
+      });
+    } else {
+      // When booking without an employee (unassigned), check against ALL appointments
+      // This preserves backward compatibility
+      existingAppointments = await prisma.ownerAppointment.findMany({
+        where: {
+          salonId,
+          appointmentDate: parsedDate,
+          status: 'Pending',
+        },
+      });
+    }
 
     for (const existing of existingAppointments) {
       const existingStart = existing.appointmentHour * 60 + existing.appointmentMinute;
@@ -310,6 +510,7 @@ export async function POST(request: NextRequest) {
     const appointment = await prisma.ownerAppointment.create({
       data: {
         salonId,
+        employeeId: employeeId || null, // Optional employee assignment
         clientName: clientName.trim(),
         service: service.trim(),
         appointmentDate: parsedDate,
@@ -318,6 +519,15 @@ export async function POST(request: NextRequest) {
         durationHours: dHours,
         durationMinutes: dMinutes,
         status: 'Pending',
+      },
+      include: {
+        employee: {
+          select: {
+            id: true,
+            name: true,
+            color: true,
+          },
+        },
       },
     });
 
@@ -341,6 +551,7 @@ export async function PATCH(request: NextRequest) {
     const {
       id,
       salonId,
+      employeeId, // Optional: Reassign to different employee
       clientName,
       service,
       appointmentDate,
@@ -349,6 +560,7 @@ export async function PATCH(request: NextRequest) {
       durationHours,
       durationMinutes,
       status,
+      amount,
     } = body;
 
     if (!id || !salonId) {
@@ -369,6 +581,42 @@ export async function PATCH(request: NextRequest) {
     if (service !== undefined) updateData.service = service.trim();
     if (status !== undefined) updateData.status = status;
 
+    // Handle employeeId update (allow setting to null to unassign)
+    let targetEmployeeId = currentAppointment.employeeId;
+    if (employeeId !== undefined) {
+      if (employeeId === null || employeeId === '') {
+        updateData.employeeId = null;
+        targetEmployeeId = null;
+      } else {
+        // Validate the new employee
+        const employee = await prisma.employee.findFirst({
+          where: { id: employeeId, salonId },
+        });
+        if (!employee) {
+          return NextResponse.json({ error: 'Employee not found' }, { status: 404 });
+        }
+        if (!employee.isActive) {
+          return NextResponse.json({ error: 'Cannot assign to inactive employee' }, { status: 400 });
+        }
+        updateData.employeeId = employeeId;
+        targetEmployeeId = employeeId;
+      }
+    }
+
+    // Handle amount update (only for completed appointments)
+    if (amount !== undefined) {
+      const parsedAmount = parseFloat(amount);
+      if (isNaN(parsedAmount) || parsedAmount < 0) {
+        return NextResponse.json({ error: 'Amount must be a non-negative number' }, { status: 400 });
+      }
+      // Only allow amount on completed appointments
+      const appointmentStatus = status || currentAppointment.status;
+      if (appointmentStatus !== 'Completed') {
+        return NextResponse.json({ error: 'Amount can only be set for completed appointments' }, { status: 400 });
+      }
+      updateData.amount = parsedAmount;
+    }
+
     let targetDate = currentAppointment.appointmentDate;
     if (appointmentDate) {
       targetDate =
@@ -384,16 +632,17 @@ export async function PATCH(request: NextRequest) {
     if (durationHours !== undefined) updateData.durationHours = parseInt(durationHours, 10);
     if (durationMinutes !== undefined) updateData.durationMinutes = parseInt(durationMinutes, 10);
 
-    // --- OVERLAP CHECK (only if time/date/duration changed and status is Pending) ---
+    // --- OVERLAP CHECK (only if time/date/duration/employee changed and status is Pending) ---
     const isPending = (status || currentAppointment.status) === 'Pending';
-    const timeChanged =
+    const timeOrEmployeeChanged =
       appointmentHour !== undefined ||
       appointmentMinute !== undefined ||
       durationHours !== undefined ||
       durationMinutes !== undefined ||
-      appointmentDate !== undefined;
+      appointmentDate !== undefined ||
+      employeeId !== undefined;
 
-    if (isPending && timeChanged) {
+    if (isPending && timeOrEmployeeChanged) {
       const hour = updateData.appointmentHour ?? currentAppointment.appointmentHour;
       const minute = updateData.appointmentMinute ?? currentAppointment.appointmentMinute;
       const dHours = updateData.durationHours ?? currentAppointment.durationHours;
@@ -402,14 +651,36 @@ export async function PATCH(request: NextRequest) {
       const startInMinutes = hour * 60 + minute;
       const endInMinutes = startInMinutes + dHours * 60 + dMinutes;
 
-      const existingAppointments = await prisma.ownerAppointment.findMany({
-        where: {
-          salonId,
-          appointmentDate: targetDate,
-          status: 'Pending',
-          id: { not: id }, // Exclude current appointment
-        },
-      });
+      // Build overlap check where clause
+      // If targetEmployeeId is set: check against that employee's appointments AND unassigned
+      // If null: check against ALL salon appointments (backward compatibility)
+      let existingAppointments;
+
+      if (targetEmployeeId) {
+        // Check against this employee's appointments + unassigned appointments
+        existingAppointments = await prisma.ownerAppointment.findMany({
+          where: {
+            salonId,
+            appointmentDate: targetDate,
+            status: 'Pending',
+            id: { not: id },
+            OR: [
+              { employeeId: targetEmployeeId },
+              { employeeId: null },
+            ],
+          },
+        });
+      } else {
+        // Check against ALL appointments when unassigned
+        existingAppointments = await prisma.ownerAppointment.findMany({
+          where: {
+            salonId,
+            appointmentDate: targetDate,
+            status: 'Pending',
+            id: { not: id },
+          },
+        });
+      }
 
       for (const existing of existingAppointments) {
         const existingStart = existing.appointmentHour * 60 + existing.appointmentMinute;
@@ -446,6 +717,15 @@ export async function PATCH(request: NextRequest) {
     const updated = await prisma.ownerAppointment.update({
       where: { id },
       data: updateData,
+      include: {
+        employee: {
+          select: {
+            id: true,
+            name: true,
+            color: true,
+          },
+        },
+      },
     });
 
     return NextResponse.json(

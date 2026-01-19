@@ -33,11 +33,23 @@ model Salon {
   confirmed         Boolean   @default(false)
   resetPin          String?   // 6-digit PIN for password reset
   resetPinExpiry    DateTime? // Expiry time for reset PIN
+
+  // Business Hours
+  isOpen            Boolean   @default(true)      // Open/Closed toggle for bookings
+  workingDays       Int[]     @default([1, 2, 3, 4, 5, 6]) // Days of week: 0=Sun, 1=Mon, ..., 6=Sat
+  openingHour       Int       @default(9)         // Opening hour (0-23)
+  openingMinute     Int       @default(0)         // Opening minute (0-59)
+  closingHour       Int       @default(18)        // Closing hour (0-23)
+  closingMinute     Int       @default(0)         // Closing minute (0-59)
+
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
   appointments      OwnerAppointment[]
   galleries         Gallery[]
+  employees         Employee[]
+  products          Product[]
+  productCategories ProductCategory[]
 }
 
 model Client {
@@ -63,6 +75,7 @@ model Client {
 model OwnerAppointment {
   id                String    @id @default(cuid())
   salonId           String    // Links to Salon owner - isolates data by user
+  employeeId        String?   // Optional: Assigned employee (null = unassigned)
   clientName        String    // Name of the client for the appointment
   service           String    // Service description
   appointmentDate   DateTime  // Date of the appointment
@@ -71,13 +84,17 @@ model OwnerAppointment {
   durationHours     Int       @default(1)
   durationMinutes   Int       @default(0)
   status            String    @default("Pending") // Pending, Completed, Canceled
+  amount            Float?    // Earnings amount in dollars (null until set by salon owner)
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
   salon             Salon     @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  employee          Employee? @relation(fields: [employeeId], references: [id], onDelete: SetNull)
 
   @@index([salonId])
   @@index([salonId, appointmentDate])
+  @@index([employeeId])
+  @@index([salonId, employeeId])
 }
 
 model Gallery {
@@ -104,4 +121,80 @@ model GalleryImage {
   gallery   Gallery  @relation(fields: [galleryId], references: [id], onDelete: Cascade)
 
   @@index([galleryId])
+}
+
+model Employee {
+  id          String    @id @default(cuid())
+  salonId     String    // Links to Salon owner
+  name        String    // Employee display name
+  isActive    Boolean   @default(true) // Active/Inactive toggle
+  color       String?   // Hex color for UI differentiation (e.g., "#FF5733")
+  specialties String[]  // Array of service specialties
+  order       Int       @default(0) // Display order in lists
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  salon        Salon     @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  appointments OwnerAppointment[]
+
+  @@index([salonId])
+  @@index([salonId, isActive])
+}
+
+model ProductCategory {
+  id          String    @id @default(cuid())
+  salonId     String
+  name        String
+  description String?
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  salon       Salon     @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  products    Product[]
+
+  @@index([salonId])
+}
+
+model Product {
+  id              String    @id @default(cuid())
+  salonId         String
+  categoryId      String?
+  name            String
+  description     String?
+  sku             String?
+  currentStock    Int       @default(0)
+  reorderPoint    Int       @default(5)
+  criticalPoint   Int       @default(2)
+  unitCost        Float?
+  supplier        String?
+  expirationDate  DateTime?
+  isExpired       Boolean   @default(false)
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  salon           Salon           @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  category        ProductCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  history         ProductHistory[]
+
+  @@index([salonId])
+  @@index([salonId, categoryId])
+  @@index([salonId, isActive])
+}
+
+model ProductHistory {
+  id            String    @id @default(cuid())
+  productId     String
+  action        String
+  previousStock Int?
+  newStock      Int?
+  quantity      Int?
+  notes         String?
+  createdAt     DateTime  @default(now())
+
+  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([productId, createdAt])
 }

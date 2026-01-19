@@ -31,6 +31,7 @@ export type OwnerAppointmentAvgAggregateOutputType = {
   appointmentMinute: number | null
   durationHours: number | null
   durationMinutes: number | null
+  amount: number | null
 }
 
 export type OwnerAppointmentSumAggregateOutputType = {
@@ -38,11 +39,13 @@ export type OwnerAppointmentSumAggregateOutputType = {
   appointmentMinute: number | null
   durationHours: number | null
   durationMinutes: number | null
+  amount: number | null
 }
 
 export type OwnerAppointmentMinAggregateOutputType = {
   id: string | null
   salonId: string | null
+  employeeId: string | null
   clientName: string | null
   service: string | null
   appointmentDate: Date | null
@@ -51,6 +54,7 @@ export type OwnerAppointmentMinAggregateOutputType = {
   durationHours: number | null
   durationMinutes: number | null
   status: string | null
+  amount: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,6 +62,7 @@ export type OwnerAppointmentMinAggregateOutputType = {
 export type OwnerAppointmentMaxAggregateOutputType = {
   id: string | null
   salonId: string | null
+  employeeId: string | null
   clientName: string | null
   service: string | null
   appointmentDate: Date | null
@@ -66,6 +71,7 @@ export type OwnerAppointmentMaxAggregateOutputType = {
   durationHours: number | null
   durationMinutes: number | null
   status: string | null
+  amount: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -73,6 +79,7 @@ export type OwnerAppointmentMaxAggregateOutputType = {
 export type OwnerAppointmentCountAggregateOutputType = {
   id: number
   salonId: number
+  employeeId: number
   clientName: number
   service: number
   appointmentDate: number
@@ -81,6 +88,7 @@ export type OwnerAppointmentCountAggregateOutputType = {
   durationHours: number
   durationMinutes: number
   status: number
+  amount: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -92,6 +100,7 @@ export type OwnerAppointmentAvgAggregateInputType = {
   appointmentMinute?: true
   durationHours?: true
   durationMinutes?: true
+  amount?: true
 }
 
 export type OwnerAppointmentSumAggregateInputType = {
@@ -99,11 +108,13 @@ export type OwnerAppointmentSumAggregateInputType = {
   appointmentMinute?: true
   durationHours?: true
   durationMinutes?: true
+  amount?: true
 }
 
 export type OwnerAppointmentMinAggregateInputType = {
   id?: true
   salonId?: true
+  employeeId?: true
   clientName?: true
   service?: true
   appointmentDate?: true
@@ -112,6 +123,7 @@ export type OwnerAppointmentMinAggregateInputType = {
   durationHours?: true
   durationMinutes?: true
   status?: true
+  amount?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -119,6 +131,7 @@ export type OwnerAppointmentMinAggregateInputType = {
 export type OwnerAppointmentMaxAggregateInputType = {
   id?: true
   salonId?: true
+  employeeId?: true
   clientName?: true
   service?: true
   appointmentDate?: true
@@ -127,6 +140,7 @@ export type OwnerAppointmentMaxAggregateInputType = {
   durationHours?: true
   durationMinutes?: true
   status?: true
+  amount?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -134,6 +148,7 @@ export type OwnerAppointmentMaxAggregateInputType = {
 export type OwnerAppointmentCountAggregateInputType = {
   id?: true
   salonId?: true
+  employeeId?: true
   clientName?: true
   service?: true
   appointmentDate?: true
@@ -142,6 +157,7 @@ export type OwnerAppointmentCountAggregateInputType = {
   durationHours?: true
   durationMinutes?: true
   status?: true
+  amount?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -236,6 +252,7 @@ export type OwnerAppointmentGroupByArgs<ExtArgs extends runtime.Types.Extensions
 export type OwnerAppointmentGroupByOutputType = {
   id: string
   salonId: string
+  employeeId: string | null
   clientName: string
   service: string
   appointmentDate: Date
@@ -244,6 +261,7 @@ export type OwnerAppointmentGroupByOutputType = {
   durationHours: number
   durationMinutes: number
   status: string
+  amount: number | null
   createdAt: Date
   updatedAt: Date
   _count: OwnerAppointmentCountAggregateOutputType | null
@@ -274,6 +292,7 @@ export type OwnerAppointmentWhereInput = {
   NOT?: Prisma.OwnerAppointmentWhereInput | Prisma.OwnerAppointmentWhereInput[]
   id?: Prisma.StringFilter<"OwnerAppointment"> | string
   salonId?: Prisma.StringFilter<"OwnerAppointment"> | string
+  employeeId?: Prisma.StringNullableFilter<"OwnerAppointment"> | string | null
   clientName?: Prisma.StringFilter<"OwnerAppointment"> | string
   service?: Prisma.StringFilter<"OwnerAppointment"> | string
   appointmentDate?: Prisma.DateTimeFilter<"OwnerAppointment"> | Date | string
@@ -282,14 +301,17 @@ export type OwnerAppointmentWhereInput = {
   durationHours?: Prisma.IntFilter<"OwnerAppointment"> | number
   durationMinutes?: Prisma.IntFilter<"OwnerAppointment"> | number
   status?: Prisma.StringFilter<"OwnerAppointment"> | string
+  amount?: Prisma.FloatNullableFilter<"OwnerAppointment"> | number | null
   createdAt?: Prisma.DateTimeFilter<"OwnerAppointment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OwnerAppointment"> | Date | string
   salon?: Prisma.XOR<Prisma.SalonScalarRelationFilter, Prisma.SalonWhereInput>
+  employee?: Prisma.XOR<Prisma.EmployeeNullableScalarRelationFilter, Prisma.EmployeeWhereInput> | null
 }
 
 export type OwnerAppointmentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  employeeId?: Prisma.SortOrderInput | Prisma.SortOrder
   clientName?: Prisma.SortOrder
   service?: Prisma.SortOrder
   appointmentDate?: Prisma.SortOrder
@@ -298,9 +320,11 @@ export type OwnerAppointmentOrderByWithRelationInput = {
   durationHours?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  amount?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   salon?: Prisma.SalonOrderByWithRelationInput
+  employee?: Prisma.EmployeeOrderByWithRelationInput
 }
 
 export type OwnerAppointmentWhereUniqueInput = Prisma.AtLeast<{
@@ -309,6 +333,7 @@ export type OwnerAppointmentWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.OwnerAppointmentWhereInput[]
   NOT?: Prisma.OwnerAppointmentWhereInput | Prisma.OwnerAppointmentWhereInput[]
   salonId?: Prisma.StringFilter<"OwnerAppointment"> | string
+  employeeId?: Prisma.StringNullableFilter<"OwnerAppointment"> | string | null
   clientName?: Prisma.StringFilter<"OwnerAppointment"> | string
   service?: Prisma.StringFilter<"OwnerAppointment"> | string
   appointmentDate?: Prisma.DateTimeFilter<"OwnerAppointment"> | Date | string
@@ -317,14 +342,17 @@ export type OwnerAppointmentWhereUniqueInput = Prisma.AtLeast<{
   durationHours?: Prisma.IntFilter<"OwnerAppointment"> | number
   durationMinutes?: Prisma.IntFilter<"OwnerAppointment"> | number
   status?: Prisma.StringFilter<"OwnerAppointment"> | string
+  amount?: Prisma.FloatNullableFilter<"OwnerAppointment"> | number | null
   createdAt?: Prisma.DateTimeFilter<"OwnerAppointment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OwnerAppointment"> | Date | string
   salon?: Prisma.XOR<Prisma.SalonScalarRelationFilter, Prisma.SalonWhereInput>
+  employee?: Prisma.XOR<Prisma.EmployeeNullableScalarRelationFilter, Prisma.EmployeeWhereInput> | null
 }, "id">
 
 export type OwnerAppointmentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  employeeId?: Prisma.SortOrderInput | Prisma.SortOrder
   clientName?: Prisma.SortOrder
   service?: Prisma.SortOrder
   appointmentDate?: Prisma.SortOrder
@@ -333,6 +361,7 @@ export type OwnerAppointmentOrderByWithAggregationInput = {
   durationHours?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  amount?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OwnerAppointmentCountOrderByAggregateInput
@@ -348,6 +377,7 @@ export type OwnerAppointmentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.OwnerAppointmentScalarWhereWithAggregatesInput | Prisma.OwnerAppointmentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"OwnerAppointment"> | string
   salonId?: Prisma.StringWithAggregatesFilter<"OwnerAppointment"> | string
+  employeeId?: Prisma.StringNullableWithAggregatesFilter<"OwnerAppointment"> | string | null
   clientName?: Prisma.StringWithAggregatesFilter<"OwnerAppointment"> | string
   service?: Prisma.StringWithAggregatesFilter<"OwnerAppointment"> | string
   appointmentDate?: Prisma.DateTimeWithAggregatesFilter<"OwnerAppointment"> | Date | string
@@ -356,6 +386,7 @@ export type OwnerAppointmentScalarWhereWithAggregatesInput = {
   durationHours?: Prisma.IntWithAggregatesFilter<"OwnerAppointment"> | number
   durationMinutes?: Prisma.IntWithAggregatesFilter<"OwnerAppointment"> | number
   status?: Prisma.StringWithAggregatesFilter<"OwnerAppointment"> | string
+  amount?: Prisma.FloatNullableWithAggregatesFilter<"OwnerAppointment"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"OwnerAppointment"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OwnerAppointment"> | Date | string
 }
@@ -370,14 +401,17 @@ export type OwnerAppointmentCreateInput = {
   durationHours?: number
   durationMinutes?: number
   status?: string
+  amount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   salon: Prisma.SalonCreateNestedOneWithoutAppointmentsInput
+  employee?: Prisma.EmployeeCreateNestedOneWithoutAppointmentsInput
 }
 
 export type OwnerAppointmentUncheckedCreateInput = {
   id?: string
   salonId: string
+  employeeId?: string | null
   clientName: string
   service: string
   appointmentDate: Date | string
@@ -386,6 +420,7 @@ export type OwnerAppointmentUncheckedCreateInput = {
   durationHours?: number
   durationMinutes?: number
   status?: string
+  amount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -400,14 +435,17 @@ export type OwnerAppointmentUpdateInput = {
   durationHours?: Prisma.IntFieldUpdateOperationsInput | number
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   salon?: Prisma.SalonUpdateOneRequiredWithoutAppointmentsNestedInput
+  employee?: Prisma.EmployeeUpdateOneWithoutAppointmentsNestedInput
 }
 
 export type OwnerAppointmentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   salonId?: Prisma.StringFieldUpdateOperationsInput | string
+  employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   service?: Prisma.StringFieldUpdateOperationsInput | string
   appointmentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -416,6 +454,7 @@ export type OwnerAppointmentUncheckedUpdateInput = {
   durationHours?: Prisma.IntFieldUpdateOperationsInput | number
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -423,6 +462,7 @@ export type OwnerAppointmentUncheckedUpdateInput = {
 export type OwnerAppointmentCreateManyInput = {
   id?: string
   salonId: string
+  employeeId?: string | null
   clientName: string
   service: string
   appointmentDate: Date | string
@@ -431,6 +471,7 @@ export type OwnerAppointmentCreateManyInput = {
   durationHours?: number
   durationMinutes?: number
   status?: string
+  amount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -445,6 +486,7 @@ export type OwnerAppointmentUpdateManyMutationInput = {
   durationHours?: Prisma.IntFieldUpdateOperationsInput | number
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -452,6 +494,7 @@ export type OwnerAppointmentUpdateManyMutationInput = {
 export type OwnerAppointmentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   salonId?: Prisma.StringFieldUpdateOperationsInput | string
+  employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   service?: Prisma.StringFieldUpdateOperationsInput | string
   appointmentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -460,6 +503,7 @@ export type OwnerAppointmentUncheckedUpdateManyInput = {
   durationHours?: Prisma.IntFieldUpdateOperationsInput | number
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -477,6 +521,7 @@ export type OwnerAppointmentOrderByRelationAggregateInput = {
 export type OwnerAppointmentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  employeeId?: Prisma.SortOrder
   clientName?: Prisma.SortOrder
   service?: Prisma.SortOrder
   appointmentDate?: Prisma.SortOrder
@@ -485,6 +530,7 @@ export type OwnerAppointmentCountOrderByAggregateInput = {
   durationHours?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -494,11 +540,13 @@ export type OwnerAppointmentAvgOrderByAggregateInput = {
   appointmentMinute?: Prisma.SortOrder
   durationHours?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
 }
 
 export type OwnerAppointmentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  employeeId?: Prisma.SortOrder
   clientName?: Prisma.SortOrder
   service?: Prisma.SortOrder
   appointmentDate?: Prisma.SortOrder
@@ -507,6 +555,7 @@ export type OwnerAppointmentMaxOrderByAggregateInput = {
   durationHours?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -514,6 +563,7 @@ export type OwnerAppointmentMaxOrderByAggregateInput = {
 export type OwnerAppointmentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  employeeId?: Prisma.SortOrder
   clientName?: Prisma.SortOrder
   service?: Prisma.SortOrder
   appointmentDate?: Prisma.SortOrder
@@ -522,6 +572,7 @@ export type OwnerAppointmentMinOrderByAggregateInput = {
   durationHours?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -531,6 +582,7 @@ export type OwnerAppointmentSumOrderByAggregateInput = {
   appointmentMinute?: Prisma.SortOrder
   durationHours?: Prisma.SortOrder
   durationMinutes?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
 }
 
 export type OwnerAppointmentCreateNestedManyWithoutSalonInput = {
@@ -575,12 +627,46 @@ export type OwnerAppointmentUncheckedUpdateManyWithoutSalonNestedInput = {
   deleteMany?: Prisma.OwnerAppointmentScalarWhereInput | Prisma.OwnerAppointmentScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type OwnerAppointmentCreateNestedManyWithoutEmployeeInput = {
+  create?: Prisma.XOR<Prisma.OwnerAppointmentCreateWithoutEmployeeInput, Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput> | Prisma.OwnerAppointmentCreateWithoutEmployeeInput[] | Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput[]
+  connectOrCreate?: Prisma.OwnerAppointmentCreateOrConnectWithoutEmployeeInput | Prisma.OwnerAppointmentCreateOrConnectWithoutEmployeeInput[]
+  createMany?: Prisma.OwnerAppointmentCreateManyEmployeeInputEnvelope
+  connect?: Prisma.OwnerAppointmentWhereUniqueInput | Prisma.OwnerAppointmentWhereUniqueInput[]
+}
+
+export type OwnerAppointmentUncheckedCreateNestedManyWithoutEmployeeInput = {
+  create?: Prisma.XOR<Prisma.OwnerAppointmentCreateWithoutEmployeeInput, Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput> | Prisma.OwnerAppointmentCreateWithoutEmployeeInput[] | Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput[]
+  connectOrCreate?: Prisma.OwnerAppointmentCreateOrConnectWithoutEmployeeInput | Prisma.OwnerAppointmentCreateOrConnectWithoutEmployeeInput[]
+  createMany?: Prisma.OwnerAppointmentCreateManyEmployeeInputEnvelope
+  connect?: Prisma.OwnerAppointmentWhereUniqueInput | Prisma.OwnerAppointmentWhereUniqueInput[]
+}
+
+export type OwnerAppointmentUpdateManyWithoutEmployeeNestedInput = {
+  create?: Prisma.XOR<Prisma.OwnerAppointmentCreateWithoutEmployeeInput, Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput> | Prisma.OwnerAppointmentCreateWithoutEmployeeInput[] | Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput[]
+  connectOrCreate?: Prisma.OwnerAppointmentCreateOrConnectWithoutEmployeeInput | Prisma.OwnerAppointmentCreateOrConnectWithoutEmployeeInput[]
+  upsert?: Prisma.OwnerAppointmentUpsertWithWhereUniqueWithoutEmployeeInput | Prisma.OwnerAppointmentUpsertWithWhereUniqueWithoutEmployeeInput[]
+  createMany?: Prisma.OwnerAppointmentCreateManyEmployeeInputEnvelope
+  set?: Prisma.OwnerAppointmentWhereUniqueInput | Prisma.OwnerAppointmentWhereUniqueInput[]
+  disconnect?: Prisma.OwnerAppointmentWhereUniqueInput | Prisma.OwnerAppointmentWhereUniqueInput[]
+  delete?: Prisma.OwnerAppointmentWhereUniqueInput | Prisma.OwnerAppointmentWhereUniqueInput[]
+  connect?: Prisma.OwnerAppointmentWhereUniqueInput | Prisma.OwnerAppointmentWhereUniqueInput[]
+  update?: Prisma.OwnerAppointmentUpdateWithWhereUniqueWithoutEmployeeInput | Prisma.OwnerAppointmentUpdateWithWhereUniqueWithoutEmployeeInput[]
+  updateMany?: Prisma.OwnerAppointmentUpdateManyWithWhereWithoutEmployeeInput | Prisma.OwnerAppointmentUpdateManyWithWhereWithoutEmployeeInput[]
+  deleteMany?: Prisma.OwnerAppointmentScalarWhereInput | Prisma.OwnerAppointmentScalarWhereInput[]
+}
+
+export type OwnerAppointmentUncheckedUpdateManyWithoutEmployeeNestedInput = {
+  create?: Prisma.XOR<Prisma.OwnerAppointmentCreateWithoutEmployeeInput, Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput> | Prisma.OwnerAppointmentCreateWithoutEmployeeInput[] | Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput[]
+  connectOrCreate?: Prisma.OwnerAppointmentCreateOrConnectWithoutEmployeeInput | Prisma.OwnerAppointmentCreateOrConnectWithoutEmployeeInput[]
+  upsert?: Prisma.OwnerAppointmentUpsertWithWhereUniqueWithoutEmployeeInput | Prisma.OwnerAppointmentUpsertWithWhereUniqueWithoutEmployeeInput[]
+  createMany?: Prisma.OwnerAppointmentCreateManyEmployeeInputEnvelope
+  set?: Prisma.OwnerAppointmentWhereUniqueInput | Prisma.OwnerAppointmentWhereUniqueInput[]
+  disconnect?: Prisma.OwnerAppointmentWhereUniqueInput | Prisma.OwnerAppointmentWhereUniqueInput[]
+  delete?: Prisma.OwnerAppointmentWhereUniqueInput | Prisma.OwnerAppointmentWhereUniqueInput[]
+  connect?: Prisma.OwnerAppointmentWhereUniqueInput | Prisma.OwnerAppointmentWhereUniqueInput[]
+  update?: Prisma.OwnerAppointmentUpdateWithWhereUniqueWithoutEmployeeInput | Prisma.OwnerAppointmentUpdateWithWhereUniqueWithoutEmployeeInput[]
+  updateMany?: Prisma.OwnerAppointmentUpdateManyWithWhereWithoutEmployeeInput | Prisma.OwnerAppointmentUpdateManyWithWhereWithoutEmployeeInput[]
+  deleteMany?: Prisma.OwnerAppointmentScalarWhereInput | Prisma.OwnerAppointmentScalarWhereInput[]
 }
 
 export type OwnerAppointmentCreateWithoutSalonInput = {
@@ -593,12 +679,15 @@ export type OwnerAppointmentCreateWithoutSalonInput = {
   durationHours?: number
   durationMinutes?: number
   status?: string
+  amount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  employee?: Prisma.EmployeeCreateNestedOneWithoutAppointmentsInput
 }
 
 export type OwnerAppointmentUncheckedCreateWithoutSalonInput = {
   id?: string
+  employeeId?: string | null
   clientName: string
   service: string
   appointmentDate: Date | string
@@ -607,6 +696,7 @@ export type OwnerAppointmentUncheckedCreateWithoutSalonInput = {
   durationHours?: number
   durationMinutes?: number
   status?: string
+  amount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -643,6 +733,7 @@ export type OwnerAppointmentScalarWhereInput = {
   NOT?: Prisma.OwnerAppointmentScalarWhereInput | Prisma.OwnerAppointmentScalarWhereInput[]
   id?: Prisma.StringFilter<"OwnerAppointment"> | string
   salonId?: Prisma.StringFilter<"OwnerAppointment"> | string
+  employeeId?: Prisma.StringNullableFilter<"OwnerAppointment"> | string | null
   clientName?: Prisma.StringFilter<"OwnerAppointment"> | string
   service?: Prisma.StringFilter<"OwnerAppointment"> | string
   appointmentDate?: Prisma.DateTimeFilter<"OwnerAppointment"> | Date | string
@@ -651,11 +742,12 @@ export type OwnerAppointmentScalarWhereInput = {
   durationHours?: Prisma.IntFilter<"OwnerAppointment"> | number
   durationMinutes?: Prisma.IntFilter<"OwnerAppointment"> | number
   status?: Prisma.StringFilter<"OwnerAppointment"> | string
+  amount?: Prisma.FloatNullableFilter<"OwnerAppointment"> | number | null
   createdAt?: Prisma.DateTimeFilter<"OwnerAppointment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"OwnerAppointment"> | Date | string
 }
 
-export type OwnerAppointmentCreateManySalonInput = {
+export type OwnerAppointmentCreateWithoutEmployeeInput = {
   id?: string
   clientName: string
   service: string
@@ -665,6 +757,66 @@ export type OwnerAppointmentCreateManySalonInput = {
   durationHours?: number
   durationMinutes?: number
   status?: string
+  amount?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  salon: Prisma.SalonCreateNestedOneWithoutAppointmentsInput
+}
+
+export type OwnerAppointmentUncheckedCreateWithoutEmployeeInput = {
+  id?: string
+  salonId: string
+  clientName: string
+  service: string
+  appointmentDate: Date | string
+  appointmentHour: number
+  appointmentMinute: number
+  durationHours?: number
+  durationMinutes?: number
+  status?: string
+  amount?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type OwnerAppointmentCreateOrConnectWithoutEmployeeInput = {
+  where: Prisma.OwnerAppointmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.OwnerAppointmentCreateWithoutEmployeeInput, Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput>
+}
+
+export type OwnerAppointmentCreateManyEmployeeInputEnvelope = {
+  data: Prisma.OwnerAppointmentCreateManyEmployeeInput | Prisma.OwnerAppointmentCreateManyEmployeeInput[]
+  skipDuplicates?: boolean
+}
+
+export type OwnerAppointmentUpsertWithWhereUniqueWithoutEmployeeInput = {
+  where: Prisma.OwnerAppointmentWhereUniqueInput
+  update: Prisma.XOR<Prisma.OwnerAppointmentUpdateWithoutEmployeeInput, Prisma.OwnerAppointmentUncheckedUpdateWithoutEmployeeInput>
+  create: Prisma.XOR<Prisma.OwnerAppointmentCreateWithoutEmployeeInput, Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput>
+}
+
+export type OwnerAppointmentUpdateWithWhereUniqueWithoutEmployeeInput = {
+  where: Prisma.OwnerAppointmentWhereUniqueInput
+  data: Prisma.XOR<Prisma.OwnerAppointmentUpdateWithoutEmployeeInput, Prisma.OwnerAppointmentUncheckedUpdateWithoutEmployeeInput>
+}
+
+export type OwnerAppointmentUpdateManyWithWhereWithoutEmployeeInput = {
+  where: Prisma.OwnerAppointmentScalarWhereInput
+  data: Prisma.XOR<Prisma.OwnerAppointmentUpdateManyMutationInput, Prisma.OwnerAppointmentUncheckedUpdateManyWithoutEmployeeInput>
+}
+
+export type OwnerAppointmentCreateManySalonInput = {
+  id?: string
+  employeeId?: string | null
+  clientName: string
+  service: string
+  appointmentDate: Date | string
+  appointmentHour: number
+  appointmentMinute: number
+  durationHours?: number
+  durationMinutes?: number
+  status?: string
+  amount?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -679,12 +831,15 @@ export type OwnerAppointmentUpdateWithoutSalonInput = {
   durationHours?: Prisma.IntFieldUpdateOperationsInput | number
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneWithoutAppointmentsNestedInput
 }
 
 export type OwnerAppointmentUncheckedUpdateWithoutSalonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   service?: Prisma.StringFieldUpdateOperationsInput | string
   appointmentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -693,12 +848,14 @@ export type OwnerAppointmentUncheckedUpdateWithoutSalonInput = {
   durationHours?: Prisma.IntFieldUpdateOperationsInput | number
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OwnerAppointmentUncheckedUpdateManyWithoutSalonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   service?: Prisma.StringFieldUpdateOperationsInput | string
   appointmentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -707,6 +864,71 @@ export type OwnerAppointmentUncheckedUpdateManyWithoutSalonInput = {
   durationHours?: Prisma.IntFieldUpdateOperationsInput | number
   durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OwnerAppointmentCreateManyEmployeeInput = {
+  id?: string
+  salonId: string
+  clientName: string
+  service: string
+  appointmentDate: Date | string
+  appointmentHour: number
+  appointmentMinute: number
+  durationHours?: number
+  durationMinutes?: number
+  status?: string
+  amount?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type OwnerAppointmentUpdateWithoutEmployeeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientName?: Prisma.StringFieldUpdateOperationsInput | string
+  service?: Prisma.StringFieldUpdateOperationsInput | string
+  appointmentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointmentHour?: Prisma.IntFieldUpdateOperationsInput | number
+  appointmentMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  durationHours?: Prisma.IntFieldUpdateOperationsInput | number
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salon?: Prisma.SalonUpdateOneRequiredWithoutAppointmentsNestedInput
+}
+
+export type OwnerAppointmentUncheckedUpdateWithoutEmployeeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  salonId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientName?: Prisma.StringFieldUpdateOperationsInput | string
+  service?: Prisma.StringFieldUpdateOperationsInput | string
+  appointmentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointmentHour?: Prisma.IntFieldUpdateOperationsInput | number
+  appointmentMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  durationHours?: Prisma.IntFieldUpdateOperationsInput | number
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type OwnerAppointmentUncheckedUpdateManyWithoutEmployeeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  salonId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientName?: Prisma.StringFieldUpdateOperationsInput | string
+  service?: Prisma.StringFieldUpdateOperationsInput | string
+  appointmentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointmentHour?: Prisma.IntFieldUpdateOperationsInput | number
+  appointmentMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  durationHours?: Prisma.IntFieldUpdateOperationsInput | number
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -716,6 +938,7 @@ export type OwnerAppointmentUncheckedUpdateManyWithoutSalonInput = {
 export type OwnerAppointmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   salonId?: boolean
+  employeeId?: boolean
   clientName?: boolean
   service?: boolean
   appointmentDate?: boolean
@@ -724,14 +947,17 @@ export type OwnerAppointmentSelect<ExtArgs extends runtime.Types.Extensions.Inte
   durationHours?: boolean
   durationMinutes?: boolean
   status?: boolean
+  amount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
+  employee?: boolean | Prisma.OwnerAppointment$employeeArgs<ExtArgs>
 }, ExtArgs["result"]["ownerAppointment"]>
 
 export type OwnerAppointmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   salonId?: boolean
+  employeeId?: boolean
   clientName?: boolean
   service?: boolean
   appointmentDate?: boolean
@@ -740,14 +966,17 @@ export type OwnerAppointmentSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   durationHours?: boolean
   durationMinutes?: boolean
   status?: boolean
+  amount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
+  employee?: boolean | Prisma.OwnerAppointment$employeeArgs<ExtArgs>
 }, ExtArgs["result"]["ownerAppointment"]>
 
 export type OwnerAppointmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   salonId?: boolean
+  employeeId?: boolean
   clientName?: boolean
   service?: boolean
   appointmentDate?: boolean
@@ -756,14 +985,17 @@ export type OwnerAppointmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   durationHours?: boolean
   durationMinutes?: boolean
   status?: boolean
+  amount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
+  employee?: boolean | Prisma.OwnerAppointment$employeeArgs<ExtArgs>
 }, ExtArgs["result"]["ownerAppointment"]>
 
 export type OwnerAppointmentSelectScalar = {
   id?: boolean
   salonId?: boolean
+  employeeId?: boolean
   clientName?: boolean
   service?: boolean
   appointmentDate?: boolean
@@ -772,29 +1004,35 @@ export type OwnerAppointmentSelectScalar = {
   durationHours?: boolean
   durationMinutes?: boolean
   status?: boolean
+  amount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OwnerAppointmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "salonId" | "clientName" | "service" | "appointmentDate" | "appointmentHour" | "appointmentMinute" | "durationHours" | "durationMinutes" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["ownerAppointment"]>
+export type OwnerAppointmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "salonId" | "employeeId" | "clientName" | "service" | "appointmentDate" | "appointmentHour" | "appointmentMinute" | "durationHours" | "durationMinutes" | "status" | "amount" | "createdAt" | "updatedAt", ExtArgs["result"]["ownerAppointment"]>
 export type OwnerAppointmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
+  employee?: boolean | Prisma.OwnerAppointment$employeeArgs<ExtArgs>
 }
 export type OwnerAppointmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
+  employee?: boolean | Prisma.OwnerAppointment$employeeArgs<ExtArgs>
 }
 export type OwnerAppointmentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
+  employee?: boolean | Prisma.OwnerAppointment$employeeArgs<ExtArgs>
 }
 
 export type $OwnerAppointmentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "OwnerAppointment"
   objects: {
     salon: Prisma.$SalonPayload<ExtArgs>
+    employee: Prisma.$EmployeePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     salonId: string
+    employeeId: string | null
     clientName: string
     service: string
     appointmentDate: Date
@@ -803,6 +1041,7 @@ export type $OwnerAppointmentPayload<ExtArgs extends runtime.Types.Extensions.In
     durationHours: number
     durationMinutes: number
     status: string
+    amount: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["ownerAppointment"]>
@@ -1200,6 +1439,7 @@ readonly fields: OwnerAppointmentFieldRefs;
 export interface Prisma__OwnerAppointmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   salon<T extends Prisma.SalonDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalonDefaultArgs<ExtArgs>>): Prisma.Prisma__SalonClient<runtime.Types.Result.GetResult<Prisma.$SalonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  employee<T extends Prisma.OwnerAppointment$employeeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OwnerAppointment$employeeArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1231,6 +1471,7 @@ export interface Prisma__OwnerAppointmentClient<T, Null = never, ExtArgs extends
 export interface OwnerAppointmentFieldRefs {
   readonly id: Prisma.FieldRef<"OwnerAppointment", 'String'>
   readonly salonId: Prisma.FieldRef<"OwnerAppointment", 'String'>
+  readonly employeeId: Prisma.FieldRef<"OwnerAppointment", 'String'>
   readonly clientName: Prisma.FieldRef<"OwnerAppointment", 'String'>
   readonly service: Prisma.FieldRef<"OwnerAppointment", 'String'>
   readonly appointmentDate: Prisma.FieldRef<"OwnerAppointment", 'DateTime'>
@@ -1239,6 +1480,7 @@ export interface OwnerAppointmentFieldRefs {
   readonly durationHours: Prisma.FieldRef<"OwnerAppointment", 'Int'>
   readonly durationMinutes: Prisma.FieldRef<"OwnerAppointment", 'Int'>
   readonly status: Prisma.FieldRef<"OwnerAppointment", 'String'>
+  readonly amount: Prisma.FieldRef<"OwnerAppointment", 'Float'>
   readonly createdAt: Prisma.FieldRef<"OwnerAppointment", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"OwnerAppointment", 'DateTime'>
 }
@@ -1634,6 +1876,25 @@ export type OwnerAppointmentDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many OwnerAppointments to delete.
    */
   limit?: number
+}
+
+/**
+ * OwnerAppointment.employee
+ */
+export type OwnerAppointment$employeeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Employee
+   */
+  select?: Prisma.EmployeeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Employee
+   */
+  omit?: Prisma.EmployeeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmployeeInclude<ExtArgs> | null
+  where?: Prisma.EmployeeWhereInput
 }
 
 /**

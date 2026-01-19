@@ -55,7 +55,11 @@ export const ModelName = {
   Client: 'Client',
   OwnerAppointment: 'OwnerAppointment',
   Gallery: 'Gallery',
-  GalleryImage: 'GalleryImage'
+  GalleryImage: 'GalleryImage',
+  Employee: 'Employee',
+  ProductCategory: 'ProductCategory',
+  Product: 'Product',
+  ProductHistory: 'ProductHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -98,6 +102,12 @@ export const SalonScalarFieldEnum = {
   confirmed: 'confirmed',
   resetPin: 'resetPin',
   resetPinExpiry: 'resetPinExpiry',
+  isOpen: 'isOpen',
+  workingDays: 'workingDays',
+  openingHour: 'openingHour',
+  openingMinute: 'openingMinute',
+  closingHour: 'closingHour',
+  closingMinute: 'closingMinute',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -131,6 +141,7 @@ export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof 
 export const OwnerAppointmentScalarFieldEnum = {
   id: 'id',
   salonId: 'salonId',
+  employeeId: 'employeeId',
   clientName: 'clientName',
   service: 'service',
   appointmentDate: 'appointmentDate',
@@ -139,6 +150,7 @@ export const OwnerAppointmentScalarFieldEnum = {
   durationHours: 'durationHours',
   durationMinutes: 'durationMinutes',
   status: 'status',
+  amount: 'amount',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -167,6 +179,70 @@ export const GalleryImageScalarFieldEnum = {
 } as const
 
 export type GalleryImageScalarFieldEnum = (typeof GalleryImageScalarFieldEnum)[keyof typeof GalleryImageScalarFieldEnum]
+
+
+export const EmployeeScalarFieldEnum = {
+  id: 'id',
+  salonId: 'salonId',
+  name: 'name',
+  isActive: 'isActive',
+  color: 'color',
+  specialties: 'specialties',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
+
+
+export const ProductCategoryScalarFieldEnum = {
+  id: 'id',
+  salonId: 'salonId',
+  name: 'name',
+  description: 'description',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductCategoryScalarFieldEnum = (typeof ProductCategoryScalarFieldEnum)[keyof typeof ProductCategoryScalarFieldEnum]
+
+
+export const ProductScalarFieldEnum = {
+  id: 'id',
+  salonId: 'salonId',
+  categoryId: 'categoryId',
+  name: 'name',
+  description: 'description',
+  sku: 'sku',
+  currentStock: 'currentStock',
+  reorderPoint: 'reorderPoint',
+  criticalPoint: 'criticalPoint',
+  unitCost: 'unitCost',
+  supplier: 'supplier',
+  expirationDate: 'expirationDate',
+  isExpired: 'isExpired',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const ProductHistoryScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  action: 'action',
+  previousStock: 'previousStock',
+  newStock: 'newStock',
+  quantity: 'quantity',
+  notes: 'notes',
+  createdAt: 'createdAt'
+} as const
+
+export type ProductHistoryScalarFieldEnum = (typeof ProductHistoryScalarFieldEnum)[keyof typeof ProductHistoryScalarFieldEnum]
 
 
 export const SortOrder = {

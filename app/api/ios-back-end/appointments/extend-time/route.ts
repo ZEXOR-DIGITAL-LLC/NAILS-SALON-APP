@@ -82,17 +82,32 @@ export async function POST(request: NextRequest) {
     const endOfDay = new Date(startOfDay);
     endOfDay.setUTCHours(23, 59, 59, 999);
 
-    // Find all subsequent pending appointments on the same day
-    const subsequentAppointments = await prisma.ownerAppointment.findMany({
-      where: {
-        salonId,
-        appointmentDate: {
-          gte: startOfDay,
-          lte: endOfDay,
-        },
-        status: 'Pending',
-        id: { not: appointmentId },
+    // Build where clause for subsequent appointments
+    // If appointment has an employee, only shift that employee's appointments
+    // If no employee (unassigned), shift all salon appointments (backward compatible)
+    const subsequentWhereClause: {
+      salonId: string;
+      appointmentDate: { gte: Date; lte: Date };
+      status: string;
+      id: { not: string };
+      employeeId?: string | null;
+    } = {
+      salonId,
+      appointmentDate: {
+        gte: startOfDay,
+        lte: endOfDay,
       },
+      status: 'Pending',
+      id: { not: appointmentId },
+    };
+
+    if (appointment.employeeId) {
+      subsequentWhereClause.employeeId = appointment.employeeId;
+    }
+
+    // Find all subsequent pending appointments on the same day (same employee if assigned)
+    const subsequentAppointments = await prisma.ownerAppointment.findMany({
+      where: subsequentWhereClause,
       orderBy: [{ appointmentHour: 'asc' }, { appointmentMinute: 'asc' }],
     });
 
@@ -131,6 +146,15 @@ export async function POST(request: NextRequest) {
         data: {
           durationHours: newDurationHours,
           durationMinutes: newDurationMinutes,
+        },
+        include: {
+          employee: {
+            select: {
+              id: true,
+              name: true,
+              color: true,
+            },
+          },
         },
       });
 
