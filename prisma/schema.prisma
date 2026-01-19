@@ -24,8 +24,6 @@ model Salon {
   country           String
   city              String
   address           String
-  latitude          Float?    // GPS latitude coordinate
-  longitude         Float?    // GPS longitude coordinate
   phoneNumber       String
   phoneCode         String
   termsAccepted     Boolean

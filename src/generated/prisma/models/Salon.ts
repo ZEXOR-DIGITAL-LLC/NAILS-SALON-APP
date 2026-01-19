@@ -27,8 +27,6 @@ export type AggregateSalon = {
 }
 
 export type SalonAvgAggregateOutputType = {
-  latitude: number | null
-  longitude: number | null
   workingDays: number | null
   openingHour: number | null
   openingMinute: number | null
@@ -37,8 +35,6 @@ export type SalonAvgAggregateOutputType = {
 }
 
 export type SalonSumAggregateOutputType = {
-  latitude: number | null
-  longitude: number | null
   workingDays: number[]
   openingHour: number | null
   openingMinute: number | null
@@ -60,8 +56,6 @@ export type SalonMinAggregateOutputType = {
   country: string | null
   city: string | null
   address: string | null
-  latitude: number | null
-  longitude: number | null
   phoneNumber: string | null
   phoneCode: string | null
   termsAccepted: boolean | null
@@ -92,8 +86,6 @@ export type SalonMaxAggregateOutputType = {
   country: string | null
   city: string | null
   address: string | null
-  latitude: number | null
-  longitude: number | null
   phoneNumber: string | null
   phoneCode: string | null
   termsAccepted: boolean | null
@@ -125,8 +117,6 @@ export type SalonCountAggregateOutputType = {
   country: number
   city: number
   address: number
-  latitude: number
-  longitude: number
   phoneNumber: number
   phoneCode: number
   termsAccepted: number
@@ -147,8 +137,6 @@ export type SalonCountAggregateOutputType = {
 
 
 export type SalonAvgAggregateInputType = {
-  latitude?: true
-  longitude?: true
   workingDays?: true
   openingHour?: true
   openingMinute?: true
@@ -157,8 +145,6 @@ export type SalonAvgAggregateInputType = {
 }
 
 export type SalonSumAggregateInputType = {
-  latitude?: true
-  longitude?: true
   workingDays?: true
   openingHour?: true
   openingMinute?: true
@@ -180,8 +166,6 @@ export type SalonMinAggregateInputType = {
   country?: true
   city?: true
   address?: true
-  latitude?: true
-  longitude?: true
   phoneNumber?: true
   phoneCode?: true
   termsAccepted?: true
@@ -212,8 +196,6 @@ export type SalonMaxAggregateInputType = {
   country?: true
   city?: true
   address?: true
-  latitude?: true
-  longitude?: true
   phoneNumber?: true
   phoneCode?: true
   termsAccepted?: true
@@ -245,8 +227,6 @@ export type SalonCountAggregateInputType = {
   country?: true
   city?: true
   address?: true
-  latitude?: true
-  longitude?: true
   phoneNumber?: true
   phoneCode?: true
   termsAccepted?: true
@@ -366,8 +346,6 @@ export type SalonGroupByOutputType = {
   country: string
   city: string
   address: string
-  latitude: number | null
-  longitude: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -423,8 +401,6 @@ export type SalonWhereInput = {
   country?: Prisma.StringFilter<"Salon"> | string
   city?: Prisma.StringFilter<"Salon"> | string
   address?: Prisma.StringFilter<"Salon"> | string
-  latitude?: Prisma.FloatNullableFilter<"Salon"> | number | null
-  longitude?: Prisma.FloatNullableFilter<"Salon"> | number | null
   phoneNumber?: Prisma.StringFilter<"Salon"> | string
   phoneCode?: Prisma.StringFilter<"Salon"> | string
   termsAccepted?: Prisma.BoolFilter<"Salon"> | boolean
@@ -462,8 +438,6 @@ export type SalonOrderByWithRelationInput = {
   country?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
-  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   phoneCode?: Prisma.SortOrder
   termsAccepted?: Prisma.SortOrder
@@ -504,8 +478,6 @@ export type SalonWhereUniqueInput = Prisma.AtLeast<{
   country?: Prisma.StringFilter<"Salon"> | string
   city?: Prisma.StringFilter<"Salon"> | string
   address?: Prisma.StringFilter<"Salon"> | string
-  latitude?: Prisma.FloatNullableFilter<"Salon"> | number | null
-  longitude?: Prisma.FloatNullableFilter<"Salon"> | number | null
   phoneNumber?: Prisma.StringFilter<"Salon"> | string
   phoneCode?: Prisma.StringFilter<"Salon"> | string
   termsAccepted?: Prisma.BoolFilter<"Salon"> | boolean
@@ -543,8 +515,6 @@ export type SalonOrderByWithAggregationInput = {
   country?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
-  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   phoneCode?: Prisma.SortOrder
   termsAccepted?: Prisma.SortOrder
@@ -585,8 +555,6 @@ export type SalonScalarWhereWithAggregatesInput = {
   country?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   city?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   address?: Prisma.StringWithAggregatesFilter<"Salon"> | string
-  latitude?: Prisma.FloatNullableWithAggregatesFilter<"Salon"> | number | null
-  longitude?: Prisma.FloatNullableWithAggregatesFilter<"Salon"> | number | null
   phoneNumber?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   phoneCode?: Prisma.StringWithAggregatesFilter<"Salon"> | string
   termsAccepted?: Prisma.BoolWithAggregatesFilter<"Salon"> | boolean
@@ -619,8 +587,6 @@ export type SalonCreateInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -658,8 +624,6 @@ export type SalonUncheckedCreateInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -697,8 +661,6 @@ export type SalonUpdateInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -736,8 +698,6 @@ export type SalonUncheckedUpdateInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -775,8 +735,6 @@ export type SalonCreateManyInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -809,8 +767,6 @@ export type SalonUpdateManyMutationInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -843,8 +799,6 @@ export type SalonUncheckedUpdateManyInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -893,8 +847,6 @@ export type SalonCountOrderByAggregateInput = {
   country?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   phoneCode?: Prisma.SortOrder
   termsAccepted?: Prisma.SortOrder
@@ -913,8 +865,6 @@ export type SalonCountOrderByAggregateInput = {
 }
 
 export type SalonAvgOrderByAggregateInput = {
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
   workingDays?: Prisma.SortOrder
   openingHour?: Prisma.SortOrder
   openingMinute?: Prisma.SortOrder
@@ -936,8 +886,6 @@ export type SalonMaxOrderByAggregateInput = {
   country?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   phoneCode?: Prisma.SortOrder
   termsAccepted?: Prisma.SortOrder
@@ -968,8 +916,6 @@ export type SalonMinOrderByAggregateInput = {
   country?: Prisma.SortOrder
   city?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   phoneCode?: Prisma.SortOrder
   termsAccepted?: Prisma.SortOrder
@@ -987,8 +933,6 @@ export type SalonMinOrderByAggregateInput = {
 }
 
 export type SalonSumOrderByAggregateInput = {
-  latitude?: Prisma.SortOrder
-  longitude?: Prisma.SortOrder
   workingDays?: Prisma.SortOrder
   openingHour?: Prisma.SortOrder
   openingMinute?: Prisma.SortOrder
@@ -1020,14 +964,6 @@ export type NullableStringFieldUpdateOperationsInput = {
 export type SalonUpdatewaitingAmenitiesInput = {
   set?: string[]
   push?: string | string[]
-}
-
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type BoolFieldUpdateOperationsInput = {
@@ -1140,8 +1076,6 @@ export type SalonCreateWithoutAppointmentsInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -1178,8 +1112,6 @@ export type SalonUncheckedCreateWithoutAppointmentsInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -1232,8 +1164,6 @@ export type SalonUpdateWithoutAppointmentsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1270,8 +1200,6 @@ export type SalonUncheckedUpdateWithoutAppointmentsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1308,8 +1236,6 @@ export type SalonCreateWithoutGalleriesInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -1346,8 +1272,6 @@ export type SalonUncheckedCreateWithoutGalleriesInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -1400,8 +1324,6 @@ export type SalonUpdateWithoutGalleriesInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1438,8 +1360,6 @@ export type SalonUncheckedUpdateWithoutGalleriesInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1476,8 +1396,6 @@ export type SalonCreateWithoutEmployeesInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -1514,8 +1432,6 @@ export type SalonUncheckedCreateWithoutEmployeesInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -1568,8 +1484,6 @@ export type SalonUpdateWithoutEmployeesInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1606,8 +1520,6 @@ export type SalonUncheckedUpdateWithoutEmployeesInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1644,8 +1556,6 @@ export type SalonCreateWithoutProductCategoriesInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -1682,8 +1592,6 @@ export type SalonUncheckedCreateWithoutProductCategoriesInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -1736,8 +1644,6 @@ export type SalonUpdateWithoutProductCategoriesInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1774,8 +1680,6 @@ export type SalonUncheckedUpdateWithoutProductCategoriesInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1812,8 +1716,6 @@ export type SalonCreateWithoutProductsInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -1850,8 +1752,6 @@ export type SalonUncheckedCreateWithoutProductsInput = {
   country: string
   city: string
   address: string
-  latitude?: number | null
-  longitude?: number | null
   phoneNumber: string
   phoneCode: string
   termsAccepted: boolean
@@ -1904,8 +1804,6 @@ export type SalonUpdateWithoutProductsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1942,8 +1840,6 @@ export type SalonUncheckedUpdateWithoutProductsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
   phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
   termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2047,8 +1943,6 @@ export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   country?: boolean
   city?: boolean
   address?: boolean
-  latitude?: boolean
-  longitude?: boolean
   phoneNumber?: boolean
   phoneCode?: boolean
   termsAccepted?: boolean
@@ -2087,8 +1981,6 @@ export type SalonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   country?: boolean
   city?: boolean
   address?: boolean
-  latitude?: boolean
-  longitude?: boolean
   phoneNumber?: boolean
   phoneCode?: boolean
   termsAccepted?: boolean
@@ -2121,8 +2013,6 @@ export type SalonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   country?: boolean
   city?: boolean
   address?: boolean
-  latitude?: boolean
-  longitude?: boolean
   phoneNumber?: boolean
   phoneCode?: boolean
   termsAccepted?: boolean
@@ -2155,8 +2045,6 @@ export type SalonSelectScalar = {
   country?: boolean
   city?: boolean
   address?: boolean
-  latitude?: boolean
-  longitude?: boolean
   phoneNumber?: boolean
   phoneCode?: boolean
   termsAccepted?: boolean
@@ -2174,7 +2062,7 @@ export type SalonSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SalonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "businessName" | "businessImage" | "type" | "otherType" | "waitingAmenities" | "otherAmenity" | "country" | "city" | "address" | "latitude" | "longitude" | "phoneNumber" | "phoneCode" | "termsAccepted" | "pin" | "confirmed" | "resetPin" | "resetPinExpiry" | "isOpen" | "workingDays" | "openingHour" | "openingMinute" | "closingHour" | "closingMinute" | "createdAt" | "updatedAt", ExtArgs["result"]["salon"]>
+export type SalonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "businessName" | "businessImage" | "type" | "otherType" | "waitingAmenities" | "otherAmenity" | "country" | "city" | "address" | "phoneNumber" | "phoneCode" | "termsAccepted" | "pin" | "confirmed" | "resetPin" | "resetPinExpiry" | "isOpen" | "workingDays" | "openingHour" | "openingMinute" | "closingHour" | "closingMinute" | "createdAt" | "updatedAt", ExtArgs["result"]["salon"]>
 export type SalonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   appointments?: boolean | Prisma.Salon$appointmentsArgs<ExtArgs>
   galleries?: boolean | Prisma.Salon$galleriesArgs<ExtArgs>
@@ -2210,8 +2098,6 @@ export type $SalonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     country: string
     city: string
     address: string
-    latitude: number | null
-    longitude: number | null
     phoneNumber: string
     phoneCode: string
     termsAccepted: boolean
@@ -2669,8 +2555,6 @@ export interface SalonFieldRefs {
   readonly country: Prisma.FieldRef<"Salon", 'String'>
   readonly city: Prisma.FieldRef<"Salon", 'String'>
   readonly address: Prisma.FieldRef<"Salon", 'String'>
-  readonly latitude: Prisma.FieldRef<"Salon", 'Float'>
-  readonly longitude: Prisma.FieldRef<"Salon", 'Float'>
   readonly phoneNumber: Prisma.FieldRef<"Salon", 'String'>
   readonly phoneCode: Prisma.FieldRef<"Salon", 'String'>
   readonly termsAccepted: Prisma.FieldRef<"Salon", 'Boolean'>

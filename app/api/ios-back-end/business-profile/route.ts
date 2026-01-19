@@ -25,8 +25,6 @@ export async function GET(request: NextRequest) {
         country: true,
         city: true,
         address: true,
-        latitude: true,
-        longitude: true,
         phoneNumber: true,
         phoneCode: true,
         // Business Hours
@@ -65,8 +63,6 @@ export async function PATCH(request: NextRequest) {
       country,
       city,
       address,
-      latitude,
-      longitude,
       phoneNumber,
       phoneCode,
       // Business Hours
@@ -125,8 +121,6 @@ export async function PATCH(request: NextRequest) {
       country?: string;
       city?: string;
       address?: string;
-      latitude?: number | null;
-      longitude?: number | null;
       phoneNumber?: string;
       phoneCode?: string;
       // Business Hours
@@ -147,8 +141,6 @@ export async function PATCH(request: NextRequest) {
     if (country !== undefined) updateData.country = country;
     if (city !== undefined) updateData.city = city;
     if (address !== undefined) updateData.address = address;
-    if (latitude !== undefined) updateData.latitude = latitude;
-    if (longitude !== undefined) updateData.longitude = longitude;
     if (phoneNumber !== undefined) updateData.phoneNumber = phoneNumber;
     if (phoneCode !== undefined) updateData.phoneCode = phoneCode;
     // Business Hours
@@ -174,8 +166,6 @@ export async function PATCH(request: NextRequest) {
         country: true,
         city: true,
         address: true,
-        latitude: true,
-        longitude: true,
         phoneNumber: true,
         phoneCode: true,
         // Business Hours

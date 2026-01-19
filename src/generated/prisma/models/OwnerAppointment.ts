@@ -627,6 +627,14 @@ export type OwnerAppointmentUncheckedUpdateManyWithoutSalonNestedInput = {
   deleteMany?: Prisma.OwnerAppointmentScalarWhereInput | Prisma.OwnerAppointmentScalarWhereInput[]
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type OwnerAppointmentCreateNestedManyWithoutEmployeeInput = {
   create?: Prisma.XOR<Prisma.OwnerAppointmentCreateWithoutEmployeeInput, Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput> | Prisma.OwnerAppointmentCreateWithoutEmployeeInput[] | Prisma.OwnerAppointmentUncheckedCreateWithoutEmployeeInput[]
   connectOrCreate?: Prisma.OwnerAppointmentCreateOrConnectWithoutEmployeeInput | Prisma.OwnerAppointmentCreateOrConnectWithoutEmployeeInput[]

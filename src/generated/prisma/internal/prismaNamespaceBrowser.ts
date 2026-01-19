@@ -93,8 +93,6 @@ export const SalonScalarFieldEnum = {
   country: 'country',
   city: 'city',
   address: 'address',
-  latitude: 'latitude',
-  longitude: 'longitude',
   phoneNumber: 'phoneNumber',
   phoneCode: 'phoneCode',
   termsAccepted: 'termsAccepted',
