@@ -13,7 +13,7 @@ const translations = {
     features: { EN: 'Features', ES: 'Funciones', FR: 'Fonctionnalités', PT: 'Recursos' },
     howItWorks: { EN: 'How It Works', ES: 'Cómo Funciona', FR: 'Comment Ça Marche', PT: 'Como Funciona' },
     faq: { EN: 'FAQ', ES: 'Preguntas', FR: 'FAQ', PT: 'Perguntas' },
-    joinWaitlist: { EN: 'Join Waitlist', ES: 'Unirse', FR: 'Rejoindre', PT: 'Entrar' },
+    download: { EN: 'Download App', ES: 'Descargar App', FR: "Télécharger", PT: 'Baixar App' },
   },
   hero: {
     headline: {
@@ -23,16 +23,16 @@ const translations = {
       PT: 'Organize seus agendamentos como uma profissional.',
     },
     subheadline: {
-      EN: 'Join the waitlist now for early access to the simplest booking app for nail techs. Get organized before launch and be first in line for beta testing.',
-      ES: 'Únete a la lista de espera ahora para acceso temprano a la app de reservas más simple para técnicos de uñas. Organízate antes del lanzamiento y sé la primera en la fila para pruebas beta.',
-      FR: "Rejoignez la liste d'attente maintenant pour un accès anticipé à l'application de réservation la plus simple pour les techniciennes ongulaires.",
-      PT: 'Junte-se à lista de espera agora para acesso antecipado ao app de agendamento mais simples para manicures.',
+      EN: 'The simplest booking app for salon owners and nail techs. Manage appointments, clients, employees, inventory, and revenue in one place.',
+      ES: 'La app de reservas más simple para dueños de salones y técnicas de uñas. Gestiona citas, clientes, empleados, inventario e ingresos en un solo lugar.',
+      FR: "L'application de réservation la plus simple pour les propriétaires de salons et techniciennes ongulaires. Gérez rendez-vous, clients, employés, inventaire et revenus.",
+      PT: 'O app de agendamento mais simples para donos de salões e manicures. Gerencie agendamentos, clientes, funcionários, inventário e receitas em um só lugar.',
     },
     primaryCTA: {
-      EN: 'Join the Waitlist',
-      ES: 'Únete a la Lista',
-      FR: "Rejoindre la Liste",
-      PT: 'Entrar na Lista',
+      EN: 'Download for iOS',
+      ES: 'Descargar para iOS',
+      FR: "Télécharger pour iOS",
+      PT: 'Baixar para iOS',
     },
     secondaryCTA: {
       EN: 'See How It Works',
@@ -40,107 +40,107 @@ const translations = {
       FR: 'Voir Comment Ça Marche',
       PT: 'Veja Como Funciona',
     },
+    badge: {
+      EN: 'For Salon Owners',
+      ES: 'Para Dueños de Salón',
+      FR: 'Pour Propriétaires de Salon',
+      PT: 'Para Donos de Salão',
+    },
     bullets: {
       EN: [
-        'No more no-shows',
-        "Instant client history",
-        'Zero booking chaos',
+        'Live dashboard status',
+        "Employee management",
+        'Inventory tracking',
       ],
       ES: [
-        'Sin más ausencias',
-        'Historial al instante',
-        'Cero caos de reservas',
+        'Estado en tiempo real',
+        'Gestión de empleados',
+        'Control de inventario',
       ],
       FR: [
-        'Plus de rendez-vous manqués',
-        "Historique instantané",
-        'Zéro chaos de réservation',
+        'Tableau de bord en direct',
+        "Gestion des employés",
+        'Suivi d\'inventaire',
       ],
       PT: [
-        'Sem mais faltas',
-        'Histórico instantâneo',
-        'Zero caos de agendamento',
+        'Painel em tempo real',
+        'Gestão de funcionários',
+        'Controle de estoque',
       ],
-    },
-    emailPlaceholder: {
-      EN: 'Enter your email',
-      ES: 'Ingresa tu email',
-      FR: 'Entrez votre email',
-      PT: 'Digite seu email',
     },
   },
   problem: {
     badge: { EN: 'Sound familiar?', ES: '¿Te suena familiar?', FR: 'Ça vous parle ?', PT: 'Parece familiar?' },
     headline: {
-      EN: 'Tired of booking nightmares that steal your nail time?',
-      ES: '¿Cansada de pesadillas de reservas que roban tu tiempo de uñas?',
-      FR: 'Fatiguée des cauchemars de réservation qui volent votre temps de manucure ?',
-      PT: 'Cansada de pesadelos de agendamento que roubam seu tempo de unhas?',
+      EN: 'Running a salon without the right tools?',
+      ES: '¿Manejando un salón sin las herramientas correctas?',
+      FR: 'Gérer un salon sans les bons outils ?',
+      PT: 'Gerenciando um salão sem as ferramentas certas?',
     },
     bullets: {
       EN: [
-        '"I spend hours scrolling through WhatsApp to confirm appointments instead of doing nails."',
-        '"Clients cancel last minute or don\'t show up, and I lose money every time."',
-        '"I forget what designs they liked or their nail history—it\'s embarrassing."',
-        '"My schedule is a mess between Instagram DMs and my notebook."',
-        '"I\'m always chasing new clients because I can\'t keep the regulars coming back."',
+        '"I spend hours coordinating schedules between my team instead of serving clients."',
+        '"I never know which products are running low until we run out completely."',
+        '"Tracking revenue across multiple employees is a nightmare with spreadsheets."',
+        '"Clients book through WhatsApp and Instagram DMs—it\'s impossible to keep organized."',
+        '"I can\'t see who\'s busy and who\'s available without walking through the salon."',
       ],
       ES: [
-        '"Paso horas revisando WhatsApp para confirmar citas en lugar de hacer uñas."',
-        '"Las clientas cancelan a última hora o no aparecen, y pierdo dinero cada vez."',
-        '"Olvido qué diseños les gustaron o su historial de uñas—es vergonzoso."',
-        '"Mi agenda es un desastre entre DMs de Instagram y mi libreta."',
-        '"Siempre estoy buscando nuevas clientas porque no puedo hacer que las regulares vuelvan."',
+        '"Paso horas coordinando horarios entre mi equipo en lugar de atender clientes."',
+        '"Nunca sé qué productos se están acabando hasta que se agotan por completo."',
+        '"Rastrear ingresos de múltiples empleados es una pesadilla con hojas de cálculo."',
+        '"Los clientes reservan por WhatsApp e Instagram DMs—es imposible mantenerse organizado."',
+        '"No puedo ver quién está ocupado y quién disponible sin caminar por todo el salón."',
       ],
       FR: [
-        '"Je passe des heures à défiler WhatsApp pour confirmer les rendez-vous au lieu de faire des ongles."',
-        '"Les clientes annulent à la dernière minute ou ne se présentent pas, et je perds de l\'argent."',
-        '"J\'oublie quels designs elles aimaient ou leur historique—c\'est embarrassant."',
-        '"Mon agenda est un désastre entre les DM Instagram et mon carnet."',
-        '"Je suis toujours à la recherche de nouvelles clientes car je ne peux pas garder les régulières."',
+        '"Je passe des heures à coordonner les horaires de mon équipe au lieu de servir les clientes."',
+        '"Je ne sais jamais quels produits sont bas jusqu\'à ce qu\'ils soient épuisés."',
+        '"Suivre les revenus de plusieurs employés est un cauchemar avec des tableurs."',
+        '"Les clientes réservent via WhatsApp et DM Instagram—impossible de rester organisé."',
+        '"Je ne peux pas voir qui est occupé sans faire le tour du salon."',
       ],
       PT: [
-        '"Passo horas no WhatsApp para confirmar agendamentos em vez de fazer unhas."',
-        '"Clientes cancelam de última hora ou não aparecem, e perco dinheiro toda vez."',
-        '"Esqueço quais designs elas gostaram ou seu histórico—é constrangedor."',
-        '"Minha agenda é uma bagunça entre DMs do Instagram e meu caderno."',
-        '"Estou sempre buscando novas clientes porque não consigo fazer as regulares voltarem."',
+        '"Passo horas coordenando horários entre minha equipe em vez de atender clientes."',
+        '"Nunca sei quais produtos estão acabando até que acabem completamente."',
+        '"Rastrear receitas de múltiplos funcionários é um pesadelo com planilhas."',
+        '"Clientes agendam por WhatsApp e DMs do Instagram—é impossível manter organizado."',
+        '"Não consigo ver quem está ocupado e quem está disponível sem andar pelo salão."',
       ],
     },
   },
   solution: {
     badge: { EN: 'The Solution', ES: 'La Solución', FR: 'La Solution', PT: 'A Solução' },
     headline: {
-      EN: "Here's how Nails Salon will make booking easy",
-      ES: 'Así es como Nails Salon hará que las reservas sean fáciles',
-      FR: 'Voici comment Nails Salon rendra la réservation facile',
-      PT: 'Veja como o Nails Salon tornará o agendamento fácil',
+      EN: "Here's how Nails Salon makes running your business easy",
+      ES: 'Así es como Nails Salon hace que manejar tu negocio sea fácil',
+      FR: 'Voici comment Nails Salon facilite la gestion de votre salon',
+      PT: 'Veja como o Nails Salon facilita a gestão do seu negócio',
     },
-    comingSoon: { EN: 'Launching Soon', ES: 'Próximamente', FR: 'Bientôt Disponible', PT: 'Em Breve' },
+    liveNow: { EN: 'Available Now', ES: 'Disponible Ahora', FR: 'Disponible Maintenant', PT: 'Disponível Agora' },
     steps: {
       EN: [
-        { title: 'Set Your Availability', description: 'Open the app and mark your available times for the week. No more back-and-forth texts—just a clean calendar view that clients can book directly.' },
-        { title: 'Clients Book Instantly', description: 'Share your booking link via WhatsApp or Instagram. Clients pick a time, service (like a gel set or fill), and confirm—no more chasing confirmations.' },
-        { title: 'Automatic Reminders', description: 'The app sends reminder texts or emails to you and the client 24 hours before, cutting down on no-shows and saving you stress.' },
-        { title: 'Track Everything', description: 'After the appointment, add photos of the design and notes on preferences. Next time they book, their history pops up automatically.' },
+        { title: 'Register Your Salon', description: 'Sign up and create your salon profile. Add your business info, working hours, services, and team members. Get your personal booking link in minutes.' },
+        { title: 'Manage Your Team', description: 'Add employees with color-coded profiles. Assign appointments to team members and track who\'s available in real-time from your live dashboard.' },
+        { title: 'Track Everything', description: 'Monitor appointments, inventory levels, and revenue in one place. Get alerts for low stock, view earnings by date range, and export reports.' },
+        { title: 'Grow Your Business', description: 'Share your booking link to let clients schedule directly. Build your work gallery to showcase nail art and attract new customers.' },
       ],
       ES: [
-        { title: 'Configura Tu Disponibilidad', description: 'Abre la app y marca tus horarios disponibles para la semana. Sin más mensajes de ida y vuelta—solo un calendario limpio donde las clientas pueden reservar directamente.' },
-        { title: 'Clientas Reservan Al Instante', description: 'Comparte tu link de reservas por WhatsApp o Instagram. Las clientas eligen hora, servicio (como un set de gel o relleno), y confirman—sin perseguir confirmaciones.' },
-        { title: 'Recordatorios Automáticos', description: 'La app envía recordatorios por mensaje o email a ti y a la clienta 24 horas antes, reduciendo ausencias y ahorrándote estrés.' },
-        { title: 'Registra Todo', description: 'Después de la cita, agrega fotos del diseño y notas sobre preferencias. La próxima vez que reserven, su historial aparece automáticamente.' },
+        { title: 'Registra Tu Salón', description: 'Regístrate y crea el perfil de tu salón. Agrega info de negocio, horarios, servicios y miembros del equipo. Obtén tu link de reservas en minutos.' },
+        { title: 'Gestiona Tu Equipo', description: 'Agrega empleados con perfiles de colores. Asigna citas a miembros del equipo y rastrea quién está disponible en tiempo real.' },
+        { title: 'Rastrea Todo', description: 'Monitorea citas, niveles de inventario e ingresos en un solo lugar. Recibe alertas de bajo stock, ve ganancias por rango de fecha.' },
+        { title: 'Haz Crecer Tu Negocio', description: 'Comparte tu link de reservas para que los clientes agenden directamente. Crea tu galería de trabajos para mostrar nail art.' },
       ],
       FR: [
-        { title: 'Définissez Votre Disponibilité', description: "Ouvrez l'app et marquez vos créneaux disponibles pour la semaine. Plus de messages interminables—juste un calendrier clair où les clientes peuvent réserver directement." },
-        { title: 'Réservation Instantanée', description: 'Partagez votre lien de réservation via WhatsApp ou Instagram. Les clientes choisissent un créneau, un service, et confirment—plus de relances.' },
-        { title: 'Rappels Automatiques', description: "L'app envoie des rappels par message ou email à vous et à la cliente 24 heures avant, réduisant les absences et votre stress." },
-        { title: 'Suivez Tout', description: "Après le rendez-vous, ajoutez des photos du design et des notes sur les préférences. La prochaine fois qu'elles réservent, leur historique apparaît automatiquement." },
+        { title: 'Enregistrez Votre Salon', description: 'Inscrivez-vous et créez votre profil de salon. Ajoutez vos infos, horaires, services et membres de l\'équipe. Obtenez votre lien de réservation.' },
+        { title: 'Gérez Votre Équipe', description: 'Ajoutez des employés avec des profils colorés. Assignez des rendez-vous et suivez qui est disponible en temps réel.' },
+        { title: 'Suivez Tout', description: 'Surveillez rendez-vous, niveaux d\'inventaire et revenus en un seul endroit. Recevez des alertes de stock bas.' },
+        { title: 'Développez Votre Activité', description: 'Partagez votre lien de réservation pour que les clientes réservent directement. Créez votre galerie pour montrer votre nail art.' },
       ],
       PT: [
-        { title: 'Configure Sua Disponibilidade', description: 'Abra o app e marque seus horários disponíveis para a semana. Sem mais mensagens de vai e vem—apenas um calendário limpo onde clientes podem agendar diretamente.' },
-        { title: 'Clientes Agendam Instantaneamente', description: 'Compartilhe seu link de agendamento via WhatsApp ou Instagram. Clientes escolhem horário, serviço (como gel ou manutenção), e confirmam—sem perseguir confirmações.' },
-        { title: 'Lembretes Automáticos', description: 'O app envia lembretes por mensagem ou email para você e a cliente 24 horas antes, reduzindo faltas e economizando seu estresse.' },
-        { title: 'Registre Tudo', description: 'Após o atendimento, adicione fotos do design e notas sobre preferências. Na próxima vez que agendarem, o histórico aparece automaticamente.' },
+        { title: 'Registre Seu Salão', description: 'Cadastre-se e crie o perfil do seu salão. Adicione info do negócio, horários, serviços e membros da equipe. Obtenha seu link de agendamento.' },
+        { title: 'Gerencie Sua Equipe', description: 'Adicione funcionários com perfis coloridos. Atribua agendamentos a membros da equipe e acompanhe quem está disponível em tempo real.' },
+        { title: 'Rastreie Tudo', description: 'Monitore agendamentos, níveis de estoque e receitas em um só lugar. Receba alertas de estoque baixo e exporte relatórios.' },
+        { title: 'Cresça Seu Negócio', description: 'Compartilhe seu link de agendamento para clientes agendarem diretamente. Crie sua galeria de trabalhos para mostrar nail art.' },
       ],
     },
   },
@@ -154,122 +154,128 @@ const translations = {
     },
     items: {
       EN: [
-        { name: 'Smart Calendar', benefit: 'Keep your schedule organized with instant bookings, reducing no-shows by 50% so you can focus on perfect nail art instead of texts.' },
-        { name: 'Client History Gallery', benefit: "Access photos of every client's past designs and preferences in seconds, helping you deliver exactly what they love without guesswork." },
-        { name: 'Automated Reminders', benefit: 'Let the app handle reminders so clients show up on time, freeing you from constant follow-ups and letting you build a reliable client base.' },
-        { name: 'Income Tracking', benefit: 'Track earnings from each service to spot trends, like when fills bring in more than sets, and plan your week better.' },
-        { name: 'Multilingual Support', benefit: 'Switch to Spanish, French, or Portuguese easily, making it simple to communicate with diverse clients and grow beyond your local area.' },
-        { name: 'Mobile Ready', benefit: 'Works perfectly on your phone browser. Take your business anywhere—manage appointments between clients or from home.' },
+        { name: 'Live Dashboard', benefit: 'See real-time status of your salon: who\'s being served, who\'s next, and time remaining. Toggle your salon open/closed with one tap.' },
+        { name: 'Online Booking', benefit: 'Clients book appointments through your personal link. No more WhatsApp chaos—just organized, professional scheduling.' },
+        { name: 'Employee Management', benefit: 'Add team members with color-coded profiles, track availability, and assign appointments. See who\'s busy and who\'s available at a glance.' },
+        { name: 'Inventory Tracking', benefit: 'Manage stock levels with alerts for low inventory, expiration dates, and supplier info. Export reports to Excel anytime.' },
+        { name: 'Revenue Analytics', benefit: 'Track earnings by day, week, or month. Filter by client and see total revenue with detailed transaction history.' },
+        { name: 'Work Gallery', benefit: 'Showcase your best nail art with photo galleries. Create multiple albums to display your skills and attract new clients.' },
+        { name: 'Smart Calendar', benefit: 'View daily, weekly, and monthly schedules. See pending, in-service, completed, and cancelled appointments at once.' },
+        { name: 'Client Profiles', benefit: 'Store contact info, visit history, preferences, and favorite designs for each client. Personal touch, every time.' },
+        { name: 'Multilingual Support', benefit: 'Switch between English, Spanish, French, and Portuguese. Serve diverse clients in their preferred language.' },
       ],
       ES: [
-        { name: 'Calendario Inteligente', benefit: 'Mantén tu agenda organizada con reservas instantáneas, reduciendo ausencias un 50% para que puedas enfocarte en el nail art perfecto.' },
-        { name: 'Galería de Historial', benefit: 'Accede a fotos de diseños pasados y preferencias de cada clienta en segundos, ayudándote a entregar exactamente lo que les encanta.' },
-        { name: 'Recordatorios Automáticos', benefit: 'Deja que la app maneje los recordatorios para que las clientas lleguen a tiempo, liberándote de seguimientos constantes.' },
-        { name: 'Seguimiento de Ingresos', benefit: 'Rastrea ganancias de cada servicio para identificar tendencias, como cuándo los rellenos generan más que los sets.' },
-        { name: 'Soporte Multilingüe', benefit: 'Cambia a español, francés o portugués fácilmente, simplificando la comunicación con clientas diversas.' },
-        { name: 'Listo para Móvil', benefit: 'Funciona perfectamente en el navegador de tu teléfono. Lleva tu negocio a cualquier lugar.' },
+        { name: 'Panel en Vivo', benefit: 'Ve el estado en tiempo real de tu salón: quién está siendo atendido, quién sigue, y tiempo restante. Abre/cierra tu salón con un toque.' },
+        { name: 'Reservas Online', benefit: 'Los clientes reservan citas a través de tu link personal. Sin caos de WhatsApp—solo agendamiento organizado y profesional.' },
+        { name: 'Gestión de Empleados', benefit: 'Agrega miembros del equipo con perfiles de colores, rastrea disponibilidad y asigna citas. Ve quién está ocupado de un vistazo.' },
+        { name: 'Control de Inventario', benefit: 'Gestiona niveles de stock con alertas de bajo inventario, fechas de vencimiento e info de proveedores. Exporta reportes a Excel.' },
+        { name: 'Análisis de Ingresos', benefit: 'Rastrea ganancias por día, semana o mes. Filtra por cliente y ve ingresos totales con historial detallado.' },
+        { name: 'Galería de Trabajos', benefit: 'Muestra tu mejor nail art con galerías de fotos. Crea múltiples álbumes para exhibir tus habilidades.' },
+        { name: 'Calendario Inteligente', benefit: 'Ve agendas diarias, semanales y mensuales. Ve citas pendientes, en servicio, completadas y canceladas de una vez.' },
+        { name: 'Perfiles de Clientes', benefit: 'Guarda info de contacto, historial de visitas, preferencias y diseños favoritos de cada cliente.' },
+        { name: 'Soporte Multilingüe', benefit: 'Cambia entre inglés, español, francés y portugués. Atiende clientes diversos en su idioma preferido.' },
       ],
       FR: [
-        { name: 'Calendrier Intelligent', benefit: "Gardez votre agenda organisé avec des réservations instantanées, réduisant les absences de 50% pour vous concentrer sur le nail art." },
-        { name: 'Galerie Historique', benefit: "Accédez aux photos des designs passés et préférences de chaque cliente en secondes, vous aidant à livrer exactement ce qu'elles aiment." },
-        { name: 'Rappels Automatiques', benefit: "Laissez l'app gérer les rappels pour que les clientes arrivent à l'heure, vous libérant des relances constantes." },
-        { name: 'Suivi des Revenus', benefit: 'Suivez les gains de chaque service pour repérer les tendances et mieux planifier votre semaine.' },
-        { name: 'Support Multilingue', benefit: 'Passez facilement au français, espagnol ou portugais, simplifiant la communication avec des clientes diverses.' },
-        { name: 'Prêt pour Mobile', benefit: "Fonctionne parfaitement sur le navigateur de votre téléphone. Emportez votre activité partout." },
+        { name: 'Tableau de Bord en Direct', benefit: 'Voyez l\'état en temps réel de votre salon: qui est servi, qui suit, et le temps restant. Ouvrez/fermez votre salon d\'un tap.' },
+        { name: 'Réservation en Ligne', benefit: 'Les clientes réservent via votre lien personnel. Plus de chaos WhatsApp—juste une planification professionnelle.' },
+        { name: 'Gestion des Employés', benefit: 'Ajoutez des membres avec des profils colorés, suivez la disponibilité et assignez des rendez-vous.' },
+        { name: 'Suivi d\'Inventaire', benefit: 'Gérez les niveaux de stock avec des alertes de bas inventaire, dates d\'expiration et infos fournisseurs. Exportez vers Excel.' },
+        { name: 'Analyse des Revenus', benefit: 'Suivez les gains par jour, semaine ou mois. Filtrez par cliente et voyez les revenus totaux avec historique détaillé.' },
+        { name: 'Galerie de Travaux', benefit: 'Présentez votre meilleur nail art avec des galeries photo. Créez plusieurs albums pour montrer vos compétences.' },
+        { name: 'Calendrier Intelligent', benefit: 'Affichez les agendas quotidiens, hebdomadaires et mensuels. Voyez tous les types de rendez-vous d\'un coup.' },
+        { name: 'Profils Clients', benefit: 'Stockez infos de contact, historique de visites, préférences et designs favoris pour chaque cliente.' },
+        { name: 'Support Multilingue', benefit: 'Passez de l\'anglais au français, espagnol et portugais. Servez des clientes diverses dans leur langue.' },
       ],
       PT: [
-        { name: 'Calendário Inteligente', benefit: 'Mantenha sua agenda organizada com agendamentos instantâneos, reduzindo faltas em 50% para você focar na nail art perfeita.' },
-        { name: 'Galeria de Histórico', benefit: 'Acesse fotos de designs anteriores e preferências de cada cliente em segundos, ajudando você a entregar exatamente o que elas amam.' },
-        { name: 'Lembretes Automáticos', benefit: 'Deixe o app gerenciar lembretes para que clientes cheguem na hora, liberando você de follow-ups constantes.' },
-        { name: 'Rastreamento de Renda', benefit: 'Acompanhe ganhos de cada serviço para identificar tendências e planejar melhor sua semana.' },
-        { name: 'Suporte Multilíngue', benefit: 'Mude para português, espanhol ou francês facilmente, simplificando a comunicação com clientes diversas.' },
-        { name: 'Pronto para Mobile', benefit: 'Funciona perfeitamente no navegador do seu celular. Leve seu negócio para qualquer lugar.' },
+        { name: 'Painel em Tempo Real', benefit: 'Veja o status em tempo real do seu salão: quem está sendo atendido, quem é o próximo, e tempo restante. Abra/feche com um toque.' },
+        { name: 'Agendamento Online', benefit: 'Clientes agendam através do seu link pessoal. Sem caos de WhatsApp—apenas agendamento organizado e profissional.' },
+        { name: 'Gestão de Funcionários', benefit: 'Adicione membros da equipe com perfis coloridos, acompanhe disponibilidade e atribua agendamentos.' },
+        { name: 'Controle de Estoque', benefit: 'Gerencie níveis de estoque com alertas de baixo inventário, datas de validade e info de fornecedores. Exporte para Excel.' },
+        { name: 'Análise de Receitas', benefit: 'Acompanhe ganhos por dia, semana ou mês. Filtre por cliente e veja receitas totais com histórico detalhado.' },
+        { name: 'Galeria de Trabalhos', benefit: 'Mostre sua melhor nail art com galerias de fotos. Crie múltiplos álbuns para exibir suas habilidades.' },
+        { name: 'Calendário Inteligente', benefit: 'Veja agendas diárias, semanais e mensais. Veja agendamentos pendentes, em serviço, concluídos e cancelados.' },
+        { name: 'Perfis de Clientes', benefit: 'Armazene info de contato, histórico de visitas, preferências e designs favoritos de cada cliente.' },
+        { name: 'Suporte Multilíngue', benefit: 'Alterne entre inglês, espanhol, francês e português. Atenda clientes diversos no idioma preferido.' },
       ],
     },
   },
   socialProof: {
     badge: { EN: 'Testimonials', ES: 'Testimonios', FR: 'Témoignages', PT: 'Depoimentos' },
     headline: {
-      EN: 'Nail techs like you are already excited',
-      ES: 'Técnicas de uñas como tú ya están emocionadas',
-      FR: 'Les techniciennes ongulaires comme vous sont déjà excitées',
-      PT: 'Manicures como você já estão empolgadas',
+      EN: 'Salon owners like you are loving it',
+      ES: 'A dueños de salones como tú les encanta',
+      FR: 'Les propriétaires de salons comme vous adorent',
+      PT: 'Donos de salões como você estão amando',
     },
-    note: { EN: '* Sample testimonials from beta feedback', ES: '* Testimonios de ejemplo de retroalimentación beta', FR: '* Témoignages exemples des retours bêta', PT: '* Depoimentos de exemplo do feedback beta' },
+    note: { EN: '', ES: '', FR: '', PT: '' },
     testimonials: {
       EN: [
-        { quote: "This is exactly what I needed—my calendar is finally organized!", author: 'Ana', role: 'Nail Tech', location: 'Santo Domingo' },
-        { quote: 'No more lost bookings in WhatsApp. I feel so professional now.', author: 'Maria', role: 'Home-Based Artist', location: 'Mexico City' },
-        { quote: "My clients love the reminders, and I'm getting way fewer cancellations.", author: 'Sofia', role: 'Small Salon Owner', location: 'Buenos Aires' },
+        { quote: "Finally I can see who's busy and who's available without walking around the salon!", author: 'Ana', role: 'Salon Owner', location: 'Santo Domingo' },
+        { quote: 'The inventory tracking saves me so much time. No more surprise stockouts.', author: 'Maria', role: 'Salon Manager', location: 'Mexico City' },
+        { quote: "Managing 5 employees used to be chaos. Now I assign appointments in seconds.", author: 'Sofia', role: 'Salon Owner', location: 'Buenos Aires' },
       ],
       ES: [
-        { quote: '¡Esto es exactamente lo que necesitaba—mi calendario finalmente está organizado!', author: 'Ana', role: 'Técnica de Uñas', location: 'Santo Domingo' },
-        { quote: 'No más reservas perdidas en WhatsApp. Me siento tan profesional ahora.', author: 'Maria', role: 'Artista en Casa', location: 'Ciudad de México' },
-        { quote: 'A mis clientas les encantan los recordatorios, y tengo muchas menos cancelaciones.', author: 'Sofia', role: 'Dueña de Salón', location: 'Buenos Aires' },
+        { quote: '¡Por fin puedo ver quién está ocupado y quién disponible sin caminar por el salón!', author: 'Ana', role: 'Dueña de Salón', location: 'Santo Domingo' },
+        { quote: 'El control de inventario me ahorra tanto tiempo. No más sorpresas de falta de stock.', author: 'Maria', role: 'Gerente de Salón', location: 'Ciudad de México' },
+        { quote: 'Gestionar 5 empleados era un caos. Ahora asigno citas en segundos.', author: 'Sofia', role: 'Dueña de Salón', location: 'Buenos Aires' },
       ],
       FR: [
-        { quote: "C'est exactement ce dont j'avais besoin—mon calendrier est enfin organisé !", author: 'Ana', role: 'Technicienne Ongulaire', location: 'Saint-Domingue' },
-        { quote: 'Plus de réservations perdues dans WhatsApp. Je me sens tellement professionnelle maintenant.', author: 'Maria', role: 'Artiste à Domicile', location: 'Mexico' },
-        { quote: "Mes clientes adorent les rappels, et j'ai beaucoup moins d'annulations.", author: 'Sofia', role: 'Propriétaire de Salon', location: 'Buenos Aires' },
+        { quote: "Enfin je peux voir qui est occupé et qui est disponible sans faire le tour du salon !", author: 'Ana', role: 'Propriétaire de Salon', location: 'Saint-Domingue' },
+        { quote: "Le suivi d'inventaire me fait gagner tellement de temps. Plus de ruptures surprises.", author: 'Maria', role: 'Gérante de Salon', location: 'Mexico' },
+        { quote: "Gérer 5 employés était le chaos. Maintenant j'assigne des rendez-vous en secondes.", author: 'Sofia', role: 'Propriétaire de Salon', location: 'Buenos Aires' },
       ],
       PT: [
-        { quote: 'Isso é exatamente o que eu precisava—meu calendário finalmente está organizado!', author: 'Ana', role: 'Manicure', location: 'Santo Domingo' },
-        { quote: 'Sem mais agendamentos perdidos no WhatsApp. Me sinto tão profissional agora.', author: 'Maria', role: 'Artista em Casa', location: 'Cidade do México' },
-        { quote: 'Minhas clientes amam os lembretes, e estou tendo muito menos cancelamentos.', author: 'Sofia', role: 'Dona de Salão', location: 'Buenos Aires' },
+        { quote: 'Finalmente posso ver quem está ocupado e quem está disponível sem andar pelo salão!', author: 'Ana', role: 'Dona de Salão', location: 'Santo Domingo' },
+        { quote: 'O controle de estoque me poupa tanto tempo. Sem mais surpresas de falta de produtos.', author: 'Maria', role: 'Gerente de Salão', location: 'Cidade do México' },
+        { quote: 'Gerenciar 5 funcionários era um caos. Agora atribuo agendamentos em segundos.', author: 'Sofia', role: 'Dona de Salão', location: 'Buenos Aires' },
       ],
     },
     indicators: {
-      EN: ['Designed specifically for independent nail techs', 'No long-term contracts—cancel anytime', 'Built by people who understand appointments'],
-      ES: ['Diseñado específicamente para técnicas independientes', 'Sin contratos a largo plazo—cancela cuando quieras', 'Creado por personas que entienden las citas'],
-      FR: ['Conçu spécifiquement pour les techniciennes indépendantes', 'Pas de contrats à long terme—annulez quand vous voulez', 'Créé par des gens qui comprennent les rendez-vous'],
-      PT: ['Projetado especificamente para manicures independentes', 'Sem contratos de longo prazo—cancele quando quiser', 'Criado por pessoas que entendem agendamentos'],
+      EN: ['Designed for salon owners and nail techs', 'Employee management built-in', 'Inventory tracking included'],
+      ES: ['Diseñado para dueños de salones y técnicas', 'Gestión de empleados incluida', 'Control de inventario incluido'],
+      FR: ['Conçu pour propriétaires de salons et techniciennes', 'Gestion des employés intégrée', "Suivi d'inventaire inclus"],
+      PT: ['Projetado para donos de salões e manicures', 'Gestão de funcionários incluída', 'Controle de estoque incluído'],
     },
   },
-  earlyAccess: {
-    badge: { EN: 'Early Access', ES: 'Acceso Temprano', FR: 'Accès Anticipé', PT: 'Acesso Antecipado' },
+  downloadSection: {
+    badge: { EN: 'Get Started', ES: 'Empezar', FR: 'Commencer', PT: 'Começar' },
     headline: {
-      EN: 'Be the first nail tech to try Nails Salon',
-      ES: 'Sé la primera técnica de uñas en probar Nails Salon',
-      FR: 'Soyez la première technicienne à essayer Nails Salon',
-      PT: 'Seja a primeira manicure a testar o Nails Salon',
+      EN: 'Ready to upgrade your salon?',
+      ES: '¿Listo para mejorar tu salón?',
+      FR: 'Prêt à améliorer votre salon ?',
+      PT: 'Pronto para melhorar seu salão?',
     },
     subheadline: {
-      EN: 'Join our exclusive waitlist and get special perks when we launch.',
-      ES: 'Únete a nuestra lista exclusiva y obtén beneficios especiales cuando lancemos.',
-      FR: 'Rejoignez notre liste exclusive et obtenez des avantages spéciaux au lancement.',
-      PT: 'Junte-se à nossa lista exclusiva e ganhe benefícios especiais quando lançarmos.',
+      EN: 'Download Nails Salon Connect today and start managing your entire business in minutes.',
+      ES: 'Descarga Nails Salon Connect hoy y comienza a gestionar todo tu negocio en minutos.',
+      FR: "Téléchargez Nails Salon Connect aujourd'hui et commencez à gérer toute votre activité.",
+      PT: 'Baixe o Nails Salon Connect hoje e comece a gerenciar todo seu negócio em minutos.',
     },
     bullets: {
       EN: [
-        { icon: 'star', text: 'Get exclusive early feedback opportunities to shape the product' },
-        { icon: 'tag', text: 'Enjoy special launch pricing when it goes live' },
-        { icon: 'chat', text: 'Direct contact with the founder for personalized support' },
-        { icon: 'check', text: 'Free to join—no credit card required' },
+        { icon: 'star', text: 'Live dashboard to track salon status' },
+        { icon: 'tag', text: 'Manage employees and assign appointments' },
+        { icon: 'chat', text: 'Track inventory and revenue in one place' },
+        { icon: 'check', text: 'Free to try' },
       ],
       ES: [
-        { icon: 'star', text: 'Obtén oportunidades exclusivas de feedback para dar forma al producto' },
-        { icon: 'tag', text: 'Disfruta de precios especiales de lanzamiento cuando esté disponible' },
-        { icon: 'chat', text: 'Contacto directo con el fundador para soporte personalizado' },
-        { icon: 'check', text: 'Gratis para unirse—no se requiere tarjeta de crédito' },
+        { icon: 'star', text: 'Panel en vivo para rastrear estado del salón' },
+        { icon: 'tag', text: 'Gestiona empleados y asigna citas' },
+        { icon: 'chat', text: 'Rastrea inventario e ingresos en un lugar' },
+        { icon: 'check', text: 'Prueba gratis' },
       ],
       FR: [
-        { icon: 'star', text: 'Obtenez des opportunités exclusives de feedback pour façonner le produit' },
-        { icon: 'tag', text: 'Profitez de prix spéciaux de lancement' },
-        { icon: 'chat', text: 'Contact direct avec le fondateur pour un support personnalisé' },
-        { icon: 'check', text: "Gratuit pour s'inscrire—aucune carte de crédit requise" },
+        { icon: 'star', text: 'Tableau de bord en direct pour suivre le salon' },
+        { icon: 'tag', text: 'Gérez employés et assignez des rendez-vous' },
+        { icon: 'chat', text: 'Suivez inventaire et revenus en un seul endroit' },
+        { icon: 'check', text: 'Essai gratuit' },
       ],
       PT: [
-        { icon: 'star', text: 'Tenha oportunidades exclusivas de feedback para moldar o produto' },
-        { icon: 'tag', text: 'Aproveite preços especiais de lançamento quando estiver disponível' },
-        { icon: 'chat', text: 'Contato direto com o fundador para suporte personalizado' },
-        { icon: 'check', text: 'Grátis para entrar—não precisa de cartão de crédito' },
+        { icon: 'star', text: 'Painel em tempo real para acompanhar o salão' },
+        { icon: 'tag', text: 'Gerencie funcionários e atribua agendamentos' },
+        { icon: 'chat', text: 'Acompanhe estoque e receitas em um só lugar' },
+        { icon: 'check', text: 'Teste grátis' },
       ],
-    },
-    cta: {
-      EN: 'Join Early Access Now',
-      ES: 'Únete al Acceso Temprano',
-      FR: "Rejoindre l'Accès Anticipé",
-      PT: 'Entrar no Acesso Antecipado',
     },
   },
   faq: {
@@ -282,73 +288,63 @@ const translations = {
     },
     items: {
       EN: [
-        { q: 'Is it available now?', a: "Not yet—it's in pre-launch beta. Join the waitlist to be first to try it when we launch." },
-        { q: 'Will there be mobile apps?', a: 'Yes, mobile apps for iOS and Android are coming soon after the web launch. The web app works great on mobile browsers too.' },
-        { q: 'Is it only for nails?', a: "Absolutely—it's built specifically for nail techs and salons, with features like design galleries and service types tailored for nails." },
-        { q: 'Is it available in multiple languages?', a: 'Yes! Starting with English and Spanish, with French and Portuguese being added soon.' },
-        { q: 'Do I need a computer or can I use it on my phone browser?', a: 'You can use it on any device with a web browser—phone, tablet, or computer. It works perfectly on mobile.' },
-        { q: 'What will it cost approximately?', a: 'Pricing will start at $19/month for basic plans, with premium features available. Early access members get special pricing.' },
-        { q: 'What happens when I join the waitlist?', a: "You'll get early access to beta testing, exclusive updates, and first dibs on launch. We'll also ask for your feedback to improve the app." },
-        { q: 'Will my feedback influence features?', a: 'Definitely—early access members will have direct input on new features and improvements. We build this for you!' },
+        { q: 'Who is this app for?', a: "Nails Salon Connect is designed for salon owners and independent nail techs who want to manage their entire business—bookings, employees, inventory, and revenue—from one app." },
+        { q: 'Is it available now?', a: "Yes! Download the app for iOS and Android right now. Start managing your salon in minutes." },
+        { q: 'Can I manage multiple employees?', a: "Absolutely! Add team members with color-coded profiles, assign appointments, and track who's available in real-time from your live dashboard." },
+        { q: 'Does it include inventory management?', a: 'Yes! Track stock levels with low inventory alerts, expiration dates, supplier info, and export reports to Excel anytime.' },
+        { q: 'Can my clients book online?', a: "Yes! You get a personal booking link to share on Instagram or WhatsApp. Clients can book directly without downloading the app." },
+        { q: 'What languages are supported?', a: 'The app supports English, Spanish, French, and Portuguese—perfect for serving diverse clients.' },
+        { q: 'What does it cost?', a: 'The app is free to download with a trial period. After that, we offer affordable monthly plans for all salon sizes.' },
       ],
       ES: [
-        { q: '¿Está disponible ahora?', a: 'Todavía no—está en beta pre-lanzamiento. Únete a la lista de espera para ser la primera en probarlo cuando lancemos.' },
-        { q: '¿Habrá apps móviles?', a: 'Sí, las apps móviles para iOS y Android vienen pronto después del lanzamiento web. La app web también funciona muy bien en navegadores móviles.' },
-        { q: '¿Es solo para uñas?', a: 'Absolutamente—está construida específicamente para técnicas de uñas y salones, con funciones como galerías de diseños y tipos de servicio adaptados para uñas.' },
-        { q: '¿Está disponible en varios idiomas?', a: '¡Sí! Empezando con inglés y español, con francés y portugués siendo agregados pronto.' },
-        { q: '¿Necesito una computadora o puedo usarlo en el navegador de mi teléfono?', a: 'Puedes usarlo en cualquier dispositivo con navegador web—teléfono, tablet o computadora. Funciona perfectamente en móvil.' },
-        { q: '¿Cuánto costará aproximadamente?', a: 'Los precios comenzarán en $19/mes para planes básicos, con funciones premium disponibles. Los miembros de acceso temprano obtienen precios especiales.' },
-        { q: '¿Qué pasa cuando me uno a la lista de espera?', a: 'Obtendrás acceso temprano a pruebas beta, actualizaciones exclusivas, y prioridad en el lanzamiento. También te pediremos feedback para mejorar la app.' },
-        { q: '¿Mi feedback influenciará las funciones?', a: 'Definitivamente—los miembros de acceso temprano tendrán input directo en nuevas funciones y mejoras. ¡Construimos esto para ti!' },
+        { q: '¿Para quién es esta app?', a: 'Nails Salon Connect está diseñada para dueños de salones y técnicas independientes que quieren gestionar todo su negocio—reservas, empleados, inventario e ingresos—desde una app.' },
+        { q: '¿Está disponible ahora?', a: '¡Sí! Descarga la app para iOS y Android ahora mismo. Comienza a gestionar tu salón en minutos.' },
+        { q: '¿Puedo gestionar múltiples empleados?', a: '¡Absolutamente! Agrega miembros del equipo con perfiles de colores, asigna citas y rastrea quién está disponible en tiempo real.' },
+        { q: '¿Incluye gestión de inventario?', a: '¡Sí! Rastrea niveles de stock con alertas de bajo inventario, fechas de vencimiento, info de proveedores y exporta reportes a Excel.' },
+        { q: '¿Mis clientes pueden reservar online?', a: '¡Sí! Obtienes un link personal de reservas para compartir en Instagram o WhatsApp. Los clientes reservan directamente sin bajar la app.' },
+        { q: '¿Qué idiomas soporta?', a: 'La app soporta inglés, español, francés y portugués—perfecto para atender clientes diversos.' },
+        { q: '¿Cuánto cuesta?', a: 'La descarga es gratis con un periodo de prueba. Después, ofrecemos planes mensuales accesibles para todos los tamaños de salón.' },
       ],
       FR: [
-        { q: 'Est-ce disponible maintenant ?', a: "Pas encore—c'est en bêta pré-lancement. Rejoignez la liste d'attente pour être la première à l'essayer." },
-        { q: 'Y aura-t-il des apps mobiles ?', a: "Oui, les apps mobiles pour iOS et Android arrivent bientôt après le lancement web. L'app web fonctionne très bien sur les navigateurs mobiles aussi." },
-        { q: "C'est uniquement pour les ongles ?", a: "Absolument—c'est conçu spécifiquement pour les techniciennes ongulaires et salons, avec des fonctionnalités comme les galeries de designs adaptées aux ongles." },
-        { q: 'Est-ce disponible en plusieurs langues ?', a: 'Oui ! En commençant par anglais et espagnol, avec français et portugais bientôt ajoutés.' },
-        { q: "Ai-je besoin d'un ordinateur ou puis-je l'utiliser sur mon téléphone ?", a: "Vous pouvez l'utiliser sur n'importe quel appareil avec un navigateur web—téléphone, tablette ou ordinateur." },
-        { q: 'Combien ça coûtera approximativement ?', a: 'Les prix commenceront à 19$/mois pour les plans de base. Les membres en accès anticipé bénéficient de prix spéciaux.' },
-        { q: "Que se passe-t-il quand je rejoins la liste d'attente ?", a: "Vous aurez un accès anticipé aux tests bêta, des mises à jour exclusives, et la priorité au lancement." },
-        { q: 'Mon feedback influencera-t-il les fonctionnalités ?', a: "Définitivement—les membres en accès anticipé auront un input direct sur les nouvelles fonctionnalités. Nous construisons cela pour vous !" },
+        { q: 'Pour qui est cette app ?', a: "Nails Salon Connect est conçu pour les propriétaires de salons et techniciennes indépendantes qui veulent gérer leur activité—réservations, employés, inventaire et revenus—depuis une app." },
+        { q: 'Est-ce disponible maintenant ?', a: "Oui ! Téléchargez l'app pour iOS et Android maintenant. Commencez à gérer votre salon en minutes." },
+        { q: 'Puis-je gérer plusieurs employés ?', a: "Absolument ! Ajoutez des membres avec des profils colorés, assignez des rendez-vous et suivez qui est disponible en temps réel." },
+        { q: "Inclut-il la gestion d'inventaire ?", a: "Oui ! Suivez les niveaux de stock avec des alertes, dates d'expiration, infos fournisseurs et exportez vers Excel." },
+        { q: 'Mes clientes peuvent-elles réserver en ligne ?', a: "Oui ! Vous obtenez un lien de réservation personnel à partager. Les clientes réservent directement sans télécharger l'app." },
+        { q: 'Quelles langues sont supportées ?', a: "L'app supporte anglais, espagnol, français et portugais—parfait pour servir des clientes diverses." },
+        { q: 'Combien ça coûte ?', a: "Le téléchargement est gratuit avec une période d'essai. Ensuite, nous offrons des plans mensuels abordables." },
       ],
       PT: [
-        { q: 'Está disponível agora?', a: 'Ainda não—está em beta pré-lançamento. Junte-se à lista de espera para ser a primeira a testar quando lançarmos.' },
-        { q: 'Haverá apps móveis?', a: 'Sim, apps móveis para iOS e Android estão chegando logo após o lançamento web. O app web também funciona muito bem em navegadores móveis.' },
-        { q: 'É só para unhas?', a: 'Absolutamente—é construído especificamente para manicures e salões, com recursos como galerias de designs e tipos de serviço adaptados para unhas.' },
-        { q: 'Está disponível em vários idiomas?', a: 'Sim! Começando com inglês e espanhol, com francês e português sendo adicionados em breve.' },
-        { q: 'Preciso de um computador ou posso usar no navegador do celular?', a: 'Você pode usar em qualquer dispositivo com navegador web—celular, tablet ou computador. Funciona perfeitamente no mobile.' },
-        { q: 'Quanto vai custar aproximadamente?', a: 'Os preços começarão em $19/mês para planos básicos. Membros de acesso antecipado ganham preços especiais.' },
-        { q: 'O que acontece quando entro na lista de espera?', a: 'Você terá acesso antecipado a testes beta, atualizações exclusivas, e prioridade no lançamento. Também pediremos seu feedback para melhorar o app.' },
-        { q: 'Meu feedback influenciará os recursos?', a: 'Definitivamente—membros de acesso antecipado terão input direto em novos recursos e melhorias. Construímos isso para você!' },
+        { q: 'Para quem é este app?', a: 'Nails Salon Connect é projetado para donos de salões e manicures independentes que querem gerenciar todo seu negócio—agendamentos, funcionários, estoque e receitas—de um só app.' },
+        { q: 'Está disponível agora?', a: 'Sim! Baixe o app para iOS e Android agora mesmo. Comece a gerenciar seu salão em minutos.' },
+        { q: 'Posso gerenciar múltiplos funcionários?', a: 'Absolutamente! Adicione membros da equipe com perfis coloridos, atribua agendamentos e acompanhe quem está disponível em tempo real.' },
+        { q: 'Inclui gestão de estoque?', a: 'Sim! Acompanhe níveis de estoque com alertas de baixo inventário, datas de validade, info de fornecedores e exporte relatórios para Excel.' },
+        { q: 'Meus clientes podem agendar online?', a: 'Sim! Você ganha um link pessoal de agendamento para compartilhar. Clientes agendam diretamente sem baixar o app.' },
+        { q: 'Quais idiomas são suportados?', a: 'O app suporta inglês, espanhol, francês e português—perfeito para atender clientes diversos.' },
+        { q: 'Quanto custa?', a: 'O download é grátis com um período de teste. Depois, oferecemos planos mensais acessíveis para todos os tamanhos de salão.' },
       ],
     },
   },
   finalCTA: {
     headline: {
-      EN: 'Ready to ditch the chaos?',
-      ES: '¿Lista para deshacerte del caos?',
-      FR: 'Prête à abandonner le chaos ?',
-      PT: 'Pronta para abandonar o caos?',
+      EN: 'Ready to transform your salon?',
+      ES: '¿Lista para transformar tu salón?',
+      FR: 'Prête à transformer votre salon ?',
+      PT: 'Pronta para transformar seu salão?',
     },
     subheadline: {
-      EN: 'Secure your spot in the first wave of nail techs to try Nails Salon.',
-      ES: 'Asegura tu lugar en la primera ola de técnicas de uñas en probar Nails Salon.',
-      FR: 'Réservez votre place parmi les premières techniciennes à essayer Nails Salon.',
-      PT: 'Garanta seu lugar na primeira onda de manicures a testar o Nails Salon.',
-    },
-    button: {
-      EN: 'Join the Waitlist Now',
-      ES: 'Únete a la Lista Ahora',
-      FR: 'Rejoindre la Liste Maintenant',
-      PT: 'Entrar na Lista Agora',
+      EN: 'Join salon owners who manage bookings, employees, inventory, and revenue all from one app.',
+      ES: 'Únete a dueños de salones que gestionan reservas, empleados, inventario e ingresos desde una sola app.',
+      FR: 'Rejoignez les propriétaires de salons qui gèrent réservations, employés, inventaire et revenus depuis une seule app.',
+      PT: 'Junte-se a donos de salões que gerenciam agendamentos, funcionários, estoque e receitas de um só app.',
     },
   },
   footer: {
     tagline: {
-      EN: 'The simplest booking app for nail techs.',
-      ES: 'La app de reservas más simple para técnicas de uñas.',
-      FR: 'La plus simple app de réservation pour techniciennes ongulaires.',
-      PT: 'O app de agendamento mais simples para manicures.',
+      EN: 'The complete salon management app.',
+      ES: 'La app completa de gestión de salones.',
+      FR: 'L\'app complète de gestion de salon.',
+      PT: 'O app completo de gestão de salões.',
     },
     copyright: { EN: 'All rights reserved.', ES: 'Todos los derechos reservados.', FR: 'Tous droits réservés.', PT: 'Todos os direitos reservados.' },
     links: {
@@ -409,12 +405,12 @@ const Icons = {
   ),
   Star: ({ className }: { className?: string }) => (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475 .345l5.518 .442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84 .61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
     </svg>
   ),
   Tag: ({ className }: { className?: string }) => (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607 .33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6Z" />
     </svg>
   ),
@@ -453,9 +449,19 @@ const Icons = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
     </svg>
   ),
+  Apple: ({ className }: { className?: string }) => (
+    <svg className={className} viewBox="0 0 384 512" fill="currentColor">
+      <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 52.3-11.4 69.5-34.3z" />
+    </svg>
+  ),
+  PlayStore: ({ className }: { className?: string }) => (
+    <svg className={className} viewBox="0 0 512 512" fill="currentColor">
+      <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l220.7-221.2 60.1 60.1L104.6 499z" />
+    </svg>
+  ),
 };
 
-const featureIcons = [Icons.Calendar, Icons.Photo, Icons.Bell, Icons.Chart, Icons.Globe, Icons.Phone];
+const featureIcons = [Icons.Chart, Icons.Calendar, Icons.Bell, Icons.Tag, Icons.Star, Icons.Photo, Icons.Calendar, Icons.Chat, Icons.Globe];
 
 // ============================================================================ 
 // COMPONENTS
@@ -531,7 +537,6 @@ function Header({ language, setLanguage }: { language: Language; setLanguage: (l
                 height={44}
                 className="rounded-xl shadow-lg shadow-rose-200/50"
               />
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 border-2 border-white rounded-full"></div>
             </div>
             <span className="font-serif font-bold text-2xl text-gray-900 tracking-tight">Nails Salon</span>
           </div>
@@ -543,8 +548,8 @@ function Header({ language, setLanguage }: { language: Language; setLanguage: (l
             <button onClick={() => scrollTo('faq')} className="text-sm font-medium text-gray-600 hover:text-rose-600 transition-colors">{t.faq[language]}</button>
             <div className="w-px h-5 bg-gray-200"></div>
             <LanguageSwitcher language={language} setLanguage={setLanguage} />
-            <button onClick={() => scrollTo('early-access')} className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-2.5 rounded-full text-sm font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-              {t.joinWaitlist[language]}
+            <button onClick={() => scrollTo('download')} className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-2.5 rounded-full text-sm font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+              {t.download[language]}
             </button>
           </div>
 
@@ -564,8 +569,8 @@ function Header({ language, setLanguage }: { language: Language; setLanguage: (l
               <button onClick={() => scrollTo('features')} className="text-left font-medium text-lg text-gray-600 hover:text-rose-600 py-2">{t.features[language]}</button>
               <button onClick={() => scrollTo('how-it-works')} className="text-left font-medium text-lg text-gray-600 hover:text-rose-600 py-2">{t.howItWorks[language]}</button>
               <button onClick={() => scrollTo('faq')} className="text-left font-medium text-lg text-gray-600 hover:text-rose-600 py-2">{t.faq[language]}</button>
-              <button onClick={() => scrollTo('early-access')} className="bg-gray-900 text-white px-4 py-3.5 rounded-xl text-center font-medium shadow-lg mt-2">
-                {t.joinWaitlist[language]}
+              <button onClick={() => scrollTo('download')} className="bg-gray-900 text-white px-4 py-3.5 rounded-xl text-center font-medium shadow-lg mt-2">
+                {t.download[language]}
               </button>
             </div>
           </div>
@@ -575,53 +580,24 @@ function Header({ language, setLanguage }: { language: Language; setLanguage: (l
   );
 }
 
-function EmailForm({ language, variant = 'light' }: { language: Language; variant?: 'light' | 'dark' }) {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-  const t = translations.hero;
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSubmitted(true);
-      console.log('Email submitted:', email);
-    }
-  };
-
-  if (submitted) {
-    return (
-      <div className={`flex items-center gap-3 px-6 py-4 rounded-2xl ${variant === 'dark' ? 'bg-white/10 text-white backdrop-blur-sm' : 'bg-green-50 text-green-800 border border-green-100'}`}>
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${variant === 'dark' ? 'bg-green-500' : 'bg-green-100'}`}>
-           <Icons.Check className={`w-5 h-5 ${variant === 'dark' ? 'text-white' : 'text-green-600'}`} />
-        </div>
-        <span className="font-medium text-lg">
-          {language === 'EN' && "You're on the list!"}
-          {language === 'ES' && '¡Estás en la lista!'}
-          {language === 'FR' && 'Vous êtes sur la liste !'}
-          {language === 'PT' && 'Você está na lista!'}
-        </span>
-      </div>
-    );
-  }
-
+function StoreLinks({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full max-w-lg relative z-20">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder={t.emailPlaceholder[language]}
-        required
-        className={`flex-1 px-6 py-4 rounded-full text-gray-900 placeholder-gray-400 text-base shadow-sm focus:outline-none focus:ring-4 transition-all ${variant === 'dark' ? 'bg-white/10 text-white placeholder-rose-100 focus:ring-rose-500/30 border border-white/20' : 'bg-white border border-gray-200 focus:ring-rose-100 focus:border-rose-300'}`}
-      />
-      <button
-        type="submit"
-        className="group bg-rose-600 hover:bg-rose-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-rose-200 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap hover:-translate-y-0.5"
-      >
-        {t.primaryCTA[language]}
-        <Icons.ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-      </button>
-    </form>
+    <div className="flex flex-col sm:flex-row gap-3 w-full max-w-lg relative z-20">
+       <button className="flex items-center gap-3 bg-gray-900 hover:bg-gray-800 text-white px-5 py-3 rounded-xl transition-all duration-300 shadow-lg hover:-translate-y-1 flex-1 sm:flex-none justify-center">
+          <Icons.Apple className="w-8 h-8" />
+          <div className="text-left">
+            <div className="text-[10px] uppercase font-bold tracking-wider opacity-80">Download on the</div>
+            <div className="text-lg font-bold leading-none">App Store</div>
+          </div>
+       </button>
+       <button className="flex items-center gap-3 bg-gray-900 hover:bg-gray-800 text-white px-5 py-3 rounded-xl transition-all duration-300 shadow-lg hover:-translate-y-1 flex-1 sm:flex-none justify-center">
+          <Icons.PlayStore className="w-7 h-7" />
+          <div className="text-left">
+            <div className="text-[10px] uppercase font-bold tracking-wider opacity-80">Get it on</div>
+            <div className="text-lg font-bold leading-none">Google Play</div>
+          </div>
+       </button>
+    </div>
   );
 }
 
@@ -768,15 +744,18 @@ export default function Home() {
             
             {/* Text Content */}
             <div className="text-center lg:text-left">
-               <div className="inline-flex items-center gap-2 bg-white border border-rose-100 shadow-sm text-rose-700 px-4 py-1.5 rounded-full text-sm font-medium mb-8 animate-fade-in-up">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-                  </span>
-                  {language === 'EN' && 'Coming Soon — Join the Waitlist'}
-                  {language === 'ES' && 'Próximamente — Únete a la Lista'}
-                  {language === 'FR' && "Bientôt — Rejoignez la Liste"}
-                  {language === 'PT' && 'Em Breve — Entre na Lista'}
+               <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
+                  <div className="inline-flex items-center gap-2 bg-white border border-green-100 shadow-sm text-green-700 px-4 py-1.5 rounded-full text-sm font-medium animate-fade-in-up">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    {t.solution.liveNow[language]}
+                  </div>
+                  <div className="inline-flex items-center gap-2 bg-rose-50 border border-rose-200 text-rose-700 px-4 py-1.5 rounded-full text-sm font-medium">
+                    <Icons.Star className="w-4 h-4" />
+                    {t.hero.badge[language]}
+                  </div>
                </div>
 
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-gray-900 leading-[1.1] mb-6 tracking-tight">
@@ -791,7 +770,7 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col items-center lg:items-start gap-8">
-                  <EmailForm language={language} />
+                  <StoreLinks />
                   
                   <div className="flex flex-wrap justify-center lg:justify-start gap-x-8 gap-y-3 text-sm font-medium text-gray-500">
                     {t.hero.bullets[language].map((bullet, i) => (
@@ -863,9 +842,9 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6">
               {t.solution.headline[language]}
             </h2>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-800 rounded-full text-sm font-semibold">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold">
                <Icons.Sparkle className="w-4 h-4" />
-               {t.solution.comingSoon[language]}
+               {t.solution.liveNow[language]}
             </div>
           </div>
 
@@ -899,7 +878,7 @@ export default function Home() {
                 {t.features.headline[language]}
                 </h2>
             </div>
-            <button onClick={() => document.getElementById('early-access')?.scrollIntoView({behavior: 'smooth'})} className="hidden md:flex items-center gap-2 text-rose-600 font-bold hover:gap-3 transition-all">
+            <button onClick={() => document.getElementById('download')?.scrollIntoView({behavior: 'smooth'})} className="hidden md:flex items-center gap-2 text-rose-600 font-bold hover:gap-3 transition-all">
                 {t.hero.secondaryCTA[language]} <Icons.ArrowRight className="w-5 h-5" />
             </button>
           </div>
@@ -968,26 +947,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Early Access Section */}
-      <section id="early-access" className="py-24 bg-gradient-to-b from-rose-50 to-white relative overflow-hidden">
+      {/* Download Section (Formerly Early Access) */}
+      <section id="download" className="py-24 bg-gradient-to-b from-rose-50 to-white relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
            <div className="bg-white rounded-[3rem] shadow-2xl shadow-rose-200/50 p-8 md:p-16 border border-rose-100 text-center relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-rose-400 via-pink-500 to-rose-400"></div>
                 
                 <span className="inline-block bg-rose-100 text-rose-700 px-4 py-1.5 rounded-full text-sm font-bold tracking-wide uppercase mb-6">
-                    {t.earlyAccess.badge[language]}
+                    {t.downloadSection.badge[language]}
                 </span>
                 
                 <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6">
-                    {t.earlyAccess.headline[language]}
+                    {t.downloadSection.headline[language]}
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-                    {t.earlyAccess.subheadline[language]}
+                    {t.downloadSection.subheadline[language]}
                 </p>
 
                 <div className="max-w-2xl mx-auto bg-gray-50 rounded-2xl p-8 mb-10 grid sm:grid-cols-2 gap-6 text-left">
-                    {t.earlyAccess.bullets[language].map((item, i) => (
+                    {t.downloadSection.bullets[language].map((item, i) => (
                         <div key={i} className="flex gap-3">
                             <div className="w-6 h-6 bg-rose-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                                 <Icons.Check className="w-3.5 h-3.5 text-rose-600" />
@@ -998,7 +977,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex justify-center">
-                    <EmailForm language={language} />
+                    <StoreLinks />
                 </div>
            </div>
         </div>
@@ -1011,7 +990,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">
               {t.faq.headline[language]}
             </h2>
-            <p className="text-gray-500">Everything you need to know about the beta.</p>
+            <p className="text-gray-500">Everything you need to know.</p>
           </div>
 
           <div className="bg-white rounded-3xl border border-gray-100 shadow-sm divide-y divide-gray-100 overflow-hidden">
@@ -1038,7 +1017,7 @@ export default function Home() {
             {t.finalCTA.subheadline[language]}
           </p>
           <div className="flex justify-center">
-            <EmailForm language={language} />
+            <StoreLinks />
           </div>
         </div>
       </section>
