@@ -59,7 +59,9 @@ export const ModelName = {
   Employee: 'Employee',
   ProductCategory: 'ProductCategory',
   Product: 'Product',
-  ProductHistory: 'ProductHistory'
+  ProductHistory: 'ProductHistory',
+  NotificationSettings: 'NotificationSettings',
+  InventoryNotification: 'InventoryNotification'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -241,6 +243,35 @@ export const ProductHistoryScalarFieldEnum = {
 } as const
 
 export type ProductHistoryScalarFieldEnum = (typeof ProductHistoryScalarFieldEnum)[keyof typeof ProductHistoryScalarFieldEnum]
+
+
+export const NotificationSettingsScalarFieldEnum = {
+  id: 'id',
+  salonId: 'salonId',
+  inventoryExpirationEnabled: 'inventoryExpirationEnabled',
+  daysBeforeExpiration: 'daysBeforeExpiration',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationSettingsScalarFieldEnum = (typeof NotificationSettingsScalarFieldEnum)[keyof typeof NotificationSettingsScalarFieldEnum]
+
+
+export const InventoryNotificationScalarFieldEnum = {
+  id: 'id',
+  salonId: 'salonId',
+  productId: 'productId',
+  productName: 'productName',
+  type: 'type',
+  message: 'message',
+  isRead: 'isRead',
+  isArchived: 'isArchived',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InventoryNotificationScalarFieldEnum = (typeof InventoryNotificationScalarFieldEnum)[keyof typeof InventoryNotificationScalarFieldEnum]
 
 
 export const SortOrder = {

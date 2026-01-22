@@ -319,6 +319,7 @@ export type ProductWhereInput = {
   salon?: Prisma.XOR<Prisma.SalonScalarRelationFilter, Prisma.SalonWhereInput>
   category?: Prisma.XOR<Prisma.ProductCategoryNullableScalarRelationFilter, Prisma.ProductCategoryWhereInput> | null
   history?: Prisma.ProductHistoryListRelationFilter
+  notifications?: Prisma.InventoryNotificationListRelationFilter
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -341,6 +342,7 @@ export type ProductOrderByWithRelationInput = {
   salon?: Prisma.SalonOrderByWithRelationInput
   category?: Prisma.ProductCategoryOrderByWithRelationInput
   history?: Prisma.ProductHistoryOrderByRelationAggregateInput
+  notifications?: Prisma.InventoryNotificationOrderByRelationAggregateInput
 }
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -366,6 +368,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   salon?: Prisma.XOR<Prisma.SalonScalarRelationFilter, Prisma.SalonWhereInput>
   category?: Prisma.XOR<Prisma.ProductCategoryNullableScalarRelationFilter, Prisma.ProductCategoryWhereInput> | null
   history?: Prisma.ProductHistoryListRelationFilter
+  notifications?: Prisma.InventoryNotificationListRelationFilter
 }, "id">
 
 export type ProductOrderByWithAggregationInput = {
@@ -432,6 +435,7 @@ export type ProductCreateInput = {
   salon: Prisma.SalonCreateNestedOneWithoutProductsInput
   category?: Prisma.ProductCategoryCreateNestedOneWithoutProductsInput
   history?: Prisma.ProductHistoryCreateNestedManyWithoutProductInput
+  notifications?: Prisma.InventoryNotificationCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateInput = {
@@ -452,6 +456,7 @@ export type ProductUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   history?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutProductInput
+  notifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductUpdateInput = {
@@ -472,6 +477,7 @@ export type ProductUpdateInput = {
   salon?: Prisma.SalonUpdateOneRequiredWithoutProductsNestedInput
   category?: Prisma.ProductCategoryUpdateOneWithoutProductsNestedInput
   history?: Prisma.ProductHistoryUpdateManyWithoutProductNestedInput
+  notifications?: Prisma.InventoryNotificationUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -492,6 +498,7 @@ export type ProductUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.ProductHistoryUncheckedUpdateManyWithoutProductNestedInput
+  notifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyInput = {
@@ -733,6 +740,20 @@ export type ProductUpdateOneRequiredWithoutHistoryNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutHistoryInput, Prisma.ProductUpdateWithoutHistoryInput>, Prisma.ProductUncheckedUpdateWithoutHistoryInput>
 }
 
+export type ProductCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutNotificationsInput, Prisma.ProductUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.ProductWhereUniqueInput
+}
+
+export type ProductUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutNotificationsInput, Prisma.ProductUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.ProductUpsertWithoutNotificationsInput
+  connect?: Prisma.ProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutNotificationsInput, Prisma.ProductUpdateWithoutNotificationsInput>, Prisma.ProductUncheckedUpdateWithoutNotificationsInput>
+}
+
 export type ProductCreateWithoutSalonInput = {
   id?: string
   name: string
@@ -750,6 +771,7 @@ export type ProductCreateWithoutSalonInput = {
   updatedAt?: Date | string
   category?: Prisma.ProductCategoryCreateNestedOneWithoutProductsInput
   history?: Prisma.ProductHistoryCreateNestedManyWithoutProductInput
+  notifications?: Prisma.InventoryNotificationCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutSalonInput = {
@@ -769,6 +791,7 @@ export type ProductUncheckedCreateWithoutSalonInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   history?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutProductInput
+  notifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutSalonInput = {
@@ -836,6 +859,7 @@ export type ProductCreateWithoutCategoryInput = {
   updatedAt?: Date | string
   salon: Prisma.SalonCreateNestedOneWithoutProductsInput
   history?: Prisma.ProductHistoryCreateNestedManyWithoutProductInput
+  notifications?: Prisma.InventoryNotificationCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutCategoryInput = {
@@ -855,6 +879,7 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   history?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutProductInput
+  notifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutCategoryInput = {
@@ -900,6 +925,7 @@ export type ProductCreateWithoutHistoryInput = {
   updatedAt?: Date | string
   salon: Prisma.SalonCreateNestedOneWithoutProductsInput
   category?: Prisma.ProductCategoryCreateNestedOneWithoutProductsInput
+  notifications?: Prisma.InventoryNotificationCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutHistoryInput = {
@@ -919,6 +945,7 @@ export type ProductUncheckedCreateWithoutHistoryInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  notifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutHistoryInput = {
@@ -954,6 +981,7 @@ export type ProductUpdateWithoutHistoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   salon?: Prisma.SalonUpdateOneRequiredWithoutProductsNestedInput
   category?: Prisma.ProductCategoryUpdateOneWithoutProductsNestedInput
+  notifications?: Prisma.InventoryNotificationUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutHistoryInput = {
@@ -973,6 +1001,103 @@ export type ProductUncheckedUpdateWithoutHistoryInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  sku?: string | null
+  currentStock?: number
+  reorderPoint?: number
+  criticalPoint?: number
+  unitCost?: number | null
+  supplier?: string | null
+  expirationDate?: Date | string | null
+  isExpired?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  salon: Prisma.SalonCreateNestedOneWithoutProductsInput
+  category?: Prisma.ProductCategoryCreateNestedOneWithoutProductsInput
+  history?: Prisma.ProductHistoryCreateNestedManyWithoutProductInput
+}
+
+export type ProductUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  salonId: string
+  categoryId?: string | null
+  name: string
+  description?: string | null
+  sku?: string | null
+  currentStock?: number
+  reorderPoint?: number
+  criticalPoint?: number
+  unitCost?: number | null
+  supplier?: string | null
+  expirationDate?: Date | string | null
+  isExpired?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  history?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.ProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductCreateWithoutNotificationsInput, Prisma.ProductUncheckedCreateWithoutNotificationsInput>
+}
+
+export type ProductUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.ProductUpdateWithoutNotificationsInput, Prisma.ProductUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.ProductCreateWithoutNotificationsInput, Prisma.ProductUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.ProductWhereInput
+}
+
+export type ProductUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.ProductWhereInput
+  data: Prisma.XOR<Prisma.ProductUpdateWithoutNotificationsInput, Prisma.ProductUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type ProductUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentStock?: Prisma.IntFieldUpdateOperationsInput | number
+  reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
+  criticalPoint?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  supplier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expirationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isExpired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salon?: Prisma.SalonUpdateOneRequiredWithoutProductsNestedInput
+  category?: Prisma.ProductCategoryUpdateOneWithoutProductsNestedInput
+  history?: Prisma.ProductHistoryUpdateManyWithoutProductNestedInput
+}
+
+export type ProductUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  salonId?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentStock?: Prisma.IntFieldUpdateOperationsInput | number
+  reorderPoint?: Prisma.IntFieldUpdateOperationsInput | number
+  criticalPoint?: Prisma.IntFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  supplier?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expirationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isExpired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  history?: Prisma.ProductHistoryUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManySalonInput = {
@@ -1010,6 +1135,7 @@ export type ProductUpdateWithoutSalonInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.ProductCategoryUpdateOneWithoutProductsNestedInput
   history?: Prisma.ProductHistoryUpdateManyWithoutProductNestedInput
+  notifications?: Prisma.InventoryNotificationUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutSalonInput = {
@@ -1029,6 +1155,7 @@ export type ProductUncheckedUpdateWithoutSalonInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.ProductHistoryUncheckedUpdateManyWithoutProductNestedInput
+  notifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutSalonInput = {
@@ -1084,6 +1211,7 @@ export type ProductUpdateWithoutCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   salon?: Prisma.SalonUpdateOneRequiredWithoutProductsNestedInput
   history?: Prisma.ProductHistoryUpdateManyWithoutProductNestedInput
+  notifications?: Prisma.InventoryNotificationUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutCategoryInput = {
@@ -1103,6 +1231,7 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   history?: Prisma.ProductHistoryUncheckedUpdateManyWithoutProductNestedInput
+  notifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutCategoryInput = {
@@ -1130,10 +1259,12 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
 
 export type ProductCountOutputType = {
   history: number
+  notifications: number
 }
 
 export type ProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   history?: boolean | ProductCountOutputTypeCountHistoryArgs
+  notifications?: boolean | ProductCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -1151,6 +1282,13 @@ export type ProductCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
  */
 export type ProductCountOutputTypeCountHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProductHistoryWhereInput
+}
+
+/**
+ * ProductCountOutputType without action
+ */
+export type ProductCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InventoryNotificationWhereInput
 }
 
 
@@ -1174,6 +1312,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
   category?: boolean | Prisma.Product$categoryArgs<ExtArgs>
   history?: boolean | Prisma.Product$historyArgs<ExtArgs>
+  notifications?: boolean | Prisma.Product$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -1243,6 +1382,7 @@ export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
   category?: boolean | Prisma.Product$categoryArgs<ExtArgs>
   history?: boolean | Prisma.Product$historyArgs<ExtArgs>
+  notifications?: boolean | Prisma.Product$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1260,6 +1400,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     salon: Prisma.$SalonPayload<ExtArgs>
     category: Prisma.$ProductCategoryPayload<ExtArgs> | null
     history: Prisma.$ProductHistoryPayload<ExtArgs>[]
+    notifications: Prisma.$InventoryNotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1675,6 +1816,7 @@ export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.
   salon<T extends Prisma.SalonDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalonDefaultArgs<ExtArgs>>): Prisma.Prisma__SalonClient<runtime.Types.Result.GetResult<Prisma.$SalonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   category<T extends Prisma.Product$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$categoryArgs<ExtArgs>>): Prisma.Prisma__ProductCategoryClient<runtime.Types.Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   history<T extends Prisma.Product$historyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$historyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.Product$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryNotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2156,6 +2298,30 @@ export type Product$historyArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.ProductHistoryScalarFieldEnum | Prisma.ProductHistoryScalarFieldEnum[]
+}
+
+/**
+ * Product.notifications
+ */
+export type Product$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InventoryNotification
+   */
+  select?: Prisma.InventoryNotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InventoryNotification
+   */
+  omit?: Prisma.InventoryNotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InventoryNotificationInclude<ExtArgs> | null
+  where?: Prisma.InventoryNotificationWhereInput
+  orderBy?: Prisma.InventoryNotificationOrderByWithRelationInput | Prisma.InventoryNotificationOrderByWithRelationInput[]
+  cursor?: Prisma.InventoryNotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InventoryNotificationScalarFieldEnum | Prisma.InventoryNotificationScalarFieldEnum[]
 }
 
 /**

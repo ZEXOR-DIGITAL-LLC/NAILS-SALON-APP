@@ -43,11 +43,13 @@ model Salon {
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
-  appointments      OwnerAppointment[]
-  galleries         Gallery[]
-  employees         Employee[]
-  products          Product[]
-  productCategories ProductCategory[]
+  appointments           OwnerAppointment[]
+  galleries              Gallery[]
+  employees              Employee[]
+  products               Product[]
+  productCategories      ProductCategory[]
+  notificationSettings   NotificationSettings?
+  inventoryNotifications InventoryNotification[]
 }
 
 model Client {
@@ -175,6 +177,7 @@ model Product {
   salon           Salon           @relation(fields: [salonId], references: [id], onDelete: Cascade)
   category        ProductCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   history         ProductHistory[]
+  notifications   InventoryNotification[]
 
   @@index([salonId])
   @@index([salonId, categoryId])
@@ -195,4 +198,39 @@ model ProductHistory {
 
   @@index([productId])
   @@index([productId, createdAt])
+}
+
+model NotificationSettings {
+  id                          String    @id @default(cuid())
+  salonId                     String    @unique
+  inventoryExpirationEnabled  Boolean   @default(false)
+  daysBeforeExpiration        Int       @default(7)
+  createdAt                   DateTime  @default(now())
+  updatedAt                   DateTime  @updatedAt
+
+  salon                       Salon     @relation(fields: [salonId], references: [id], onDelete: Cascade)
+
+  @@index([salonId])
+}
+
+model InventoryNotification {
+  id          String    @id @default(cuid())
+  salonId     String
+  productId   String
+  productName String
+  type        String    // 'expiring' | 'expired'
+  message     String
+  isRead      Boolean   @default(false)
+  isArchived  Boolean   @default(false)
+  expiresAt   DateTime  // The actual expiration date of the product
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  salon       Salon     @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([salonId])
+  @@index([salonId, isRead])
+  @@index([salonId, isArchived])
+  @@index([productId])
 }

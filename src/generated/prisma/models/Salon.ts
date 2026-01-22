@@ -421,6 +421,8 @@ export type SalonWhereInput = {
   employees?: Prisma.EmployeeListRelationFilter
   products?: Prisma.ProductListRelationFilter
   productCategories?: Prisma.ProductCategoryListRelationFilter
+  notificationSettings?: Prisma.XOR<Prisma.NotificationSettingsNullableScalarRelationFilter, Prisma.NotificationSettingsWhereInput> | null
+  inventoryNotifications?: Prisma.InventoryNotificationListRelationFilter
 }
 
 export type SalonOrderByWithRelationInput = {
@@ -458,6 +460,8 @@ export type SalonOrderByWithRelationInput = {
   employees?: Prisma.EmployeeOrderByRelationAggregateInput
   products?: Prisma.ProductOrderByRelationAggregateInput
   productCategories?: Prisma.ProductCategoryOrderByRelationAggregateInput
+  notificationSettings?: Prisma.NotificationSettingsOrderByWithRelationInput
+  inventoryNotifications?: Prisma.InventoryNotificationOrderByRelationAggregateInput
 }
 
 export type SalonWhereUniqueInput = Prisma.AtLeast<{
@@ -498,6 +502,8 @@ export type SalonWhereUniqueInput = Prisma.AtLeast<{
   employees?: Prisma.EmployeeListRelationFilter
   products?: Prisma.ProductListRelationFilter
   productCategories?: Prisma.ProductCategoryListRelationFilter
+  notificationSettings?: Prisma.XOR<Prisma.NotificationSettingsNullableScalarRelationFilter, Prisma.NotificationSettingsWhereInput> | null
+  inventoryNotifications?: Prisma.InventoryNotificationListRelationFilter
 }, "id" | "email">
 
 export type SalonOrderByWithAggregationInput = {
@@ -607,6 +613,8 @@ export type SalonCreateInput = {
   employees?: Prisma.EmployeeCreateNestedManyWithoutSalonInput
   products?: Prisma.ProductCreateNestedManyWithoutSalonInput
   productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateInput = {
@@ -644,6 +652,8 @@ export type SalonUncheckedCreateInput = {
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSalonInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutSalonInput
   productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUpdateInput = {
@@ -681,6 +691,8 @@ export type SalonUpdateInput = {
   employees?: Prisma.EmployeeUpdateManyWithoutSalonNestedInput
   products?: Prisma.ProductUpdateManyWithoutSalonNestedInput
   productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateInput = {
@@ -718,6 +730,8 @@ export type SalonUncheckedUpdateInput = {
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSalonNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutSalonNestedInput
   productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateManyInput = {
@@ -1061,6 +1075,34 @@ export type SalonUpdateOneRequiredWithoutProductsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SalonUpdateToOneWithWhereWithoutProductsInput, Prisma.SalonUpdateWithoutProductsInput>, Prisma.SalonUncheckedUpdateWithoutProductsInput>
 }
 
+export type SalonCreateNestedOneWithoutNotificationSettingsInput = {
+  create?: Prisma.XOR<Prisma.SalonCreateWithoutNotificationSettingsInput, Prisma.SalonUncheckedCreateWithoutNotificationSettingsInput>
+  connectOrCreate?: Prisma.SalonCreateOrConnectWithoutNotificationSettingsInput
+  connect?: Prisma.SalonWhereUniqueInput
+}
+
+export type SalonUpdateOneRequiredWithoutNotificationSettingsNestedInput = {
+  create?: Prisma.XOR<Prisma.SalonCreateWithoutNotificationSettingsInput, Prisma.SalonUncheckedCreateWithoutNotificationSettingsInput>
+  connectOrCreate?: Prisma.SalonCreateOrConnectWithoutNotificationSettingsInput
+  upsert?: Prisma.SalonUpsertWithoutNotificationSettingsInput
+  connect?: Prisma.SalonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SalonUpdateToOneWithWhereWithoutNotificationSettingsInput, Prisma.SalonUpdateWithoutNotificationSettingsInput>, Prisma.SalonUncheckedUpdateWithoutNotificationSettingsInput>
+}
+
+export type SalonCreateNestedOneWithoutInventoryNotificationsInput = {
+  create?: Prisma.XOR<Prisma.SalonCreateWithoutInventoryNotificationsInput, Prisma.SalonUncheckedCreateWithoutInventoryNotificationsInput>
+  connectOrCreate?: Prisma.SalonCreateOrConnectWithoutInventoryNotificationsInput
+  connect?: Prisma.SalonWhereUniqueInput
+}
+
+export type SalonUpdateOneRequiredWithoutInventoryNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.SalonCreateWithoutInventoryNotificationsInput, Prisma.SalonUncheckedCreateWithoutInventoryNotificationsInput>
+  connectOrCreate?: Prisma.SalonCreateOrConnectWithoutInventoryNotificationsInput
+  upsert?: Prisma.SalonUpsertWithoutInventoryNotificationsInput
+  connect?: Prisma.SalonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SalonUpdateToOneWithWhereWithoutInventoryNotificationsInput, Prisma.SalonUpdateWithoutInventoryNotificationsInput>, Prisma.SalonUncheckedUpdateWithoutInventoryNotificationsInput>
+}
+
 export type SalonCreateWithoutAppointmentsInput = {
   id?: string
   firstName: string
@@ -1095,6 +1137,8 @@ export type SalonCreateWithoutAppointmentsInput = {
   employees?: Prisma.EmployeeCreateNestedManyWithoutSalonInput
   products?: Prisma.ProductCreateNestedManyWithoutSalonInput
   productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutAppointmentsInput = {
@@ -1131,6 +1175,8 @@ export type SalonUncheckedCreateWithoutAppointmentsInput = {
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSalonInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutSalonInput
   productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutAppointmentsInput = {
@@ -1183,6 +1229,8 @@ export type SalonUpdateWithoutAppointmentsInput = {
   employees?: Prisma.EmployeeUpdateManyWithoutSalonNestedInput
   products?: Prisma.ProductUpdateManyWithoutSalonNestedInput
   productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutAppointmentsInput = {
@@ -1219,6 +1267,8 @@ export type SalonUncheckedUpdateWithoutAppointmentsInput = {
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSalonNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutSalonNestedInput
   productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutGalleriesInput = {
@@ -1255,6 +1305,8 @@ export type SalonCreateWithoutGalleriesInput = {
   employees?: Prisma.EmployeeCreateNestedManyWithoutSalonInput
   products?: Prisma.ProductCreateNestedManyWithoutSalonInput
   productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutGalleriesInput = {
@@ -1291,6 +1343,8 @@ export type SalonUncheckedCreateWithoutGalleriesInput = {
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSalonInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutSalonInput
   productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutGalleriesInput = {
@@ -1343,6 +1397,8 @@ export type SalonUpdateWithoutGalleriesInput = {
   employees?: Prisma.EmployeeUpdateManyWithoutSalonNestedInput
   products?: Prisma.ProductUpdateManyWithoutSalonNestedInput
   productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutGalleriesInput = {
@@ -1379,6 +1435,8 @@ export type SalonUncheckedUpdateWithoutGalleriesInput = {
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSalonNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutSalonNestedInput
   productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutEmployeesInput = {
@@ -1415,6 +1473,8 @@ export type SalonCreateWithoutEmployeesInput = {
   galleries?: Prisma.GalleryCreateNestedManyWithoutSalonInput
   products?: Prisma.ProductCreateNestedManyWithoutSalonInput
   productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutEmployeesInput = {
@@ -1451,6 +1511,8 @@ export type SalonUncheckedCreateWithoutEmployeesInput = {
   galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutSalonInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutSalonInput
   productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutEmployeesInput = {
@@ -1503,6 +1565,8 @@ export type SalonUpdateWithoutEmployeesInput = {
   galleries?: Prisma.GalleryUpdateManyWithoutSalonNestedInput
   products?: Prisma.ProductUpdateManyWithoutSalonNestedInput
   productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutEmployeesInput = {
@@ -1539,6 +1603,8 @@ export type SalonUncheckedUpdateWithoutEmployeesInput = {
   galleries?: Prisma.GalleryUncheckedUpdateManyWithoutSalonNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutSalonNestedInput
   productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutProductCategoriesInput = {
@@ -1575,6 +1641,8 @@ export type SalonCreateWithoutProductCategoriesInput = {
   galleries?: Prisma.GalleryCreateNestedManyWithoutSalonInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutSalonInput
   products?: Prisma.ProductCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutProductCategoriesInput = {
@@ -1611,6 +1679,8 @@ export type SalonUncheckedCreateWithoutProductCategoriesInput = {
   galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutSalonInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSalonInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutProductCategoriesInput = {
@@ -1663,6 +1733,8 @@ export type SalonUpdateWithoutProductCategoriesInput = {
   galleries?: Prisma.GalleryUpdateManyWithoutSalonNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutSalonNestedInput
   products?: Prisma.ProductUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutProductCategoriesInput = {
@@ -1699,6 +1771,8 @@ export type SalonUncheckedUpdateWithoutProductCategoriesInput = {
   galleries?: Prisma.GalleryUncheckedUpdateManyWithoutSalonNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSalonNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutProductsInput = {
@@ -1735,6 +1809,8 @@ export type SalonCreateWithoutProductsInput = {
   galleries?: Prisma.GalleryCreateNestedManyWithoutSalonInput
   employees?: Prisma.EmployeeCreateNestedManyWithoutSalonInput
   productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutProductsInput = {
@@ -1771,6 +1847,8 @@ export type SalonUncheckedCreateWithoutProductsInput = {
   galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutSalonInput
   employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSalonInput
   productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutProductsInput = {
@@ -1823,6 +1901,8 @@ export type SalonUpdateWithoutProductsInput = {
   galleries?: Prisma.GalleryUpdateManyWithoutSalonNestedInput
   employees?: Prisma.EmployeeUpdateManyWithoutSalonNestedInput
   productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutProductsInput = {
@@ -1859,6 +1939,344 @@ export type SalonUncheckedUpdateWithoutProductsInput = {
   galleries?: Prisma.GalleryUncheckedUpdateManyWithoutSalonNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSalonNestedInput
   productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+}
+
+export type SalonCreateWithoutNotificationSettingsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  businessName: string
+  businessImage?: string | null
+  type: string
+  otherType?: string | null
+  waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
+  otherAmenity?: string | null
+  country: string
+  city: string
+  address: string
+  phoneNumber: string
+  phoneCode: string
+  termsAccepted: boolean
+  pin?: string | null
+  confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
+  isOpen?: boolean
+  workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
+  openingHour?: number
+  openingMinute?: number
+  closingHour?: number
+  closingMinute?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  appointments?: Prisma.OwnerAppointmentCreateNestedManyWithoutSalonInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutSalonInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutSalonInput
+  products?: Prisma.ProductCreateNestedManyWithoutSalonInput
+  productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+}
+
+export type SalonUncheckedCreateWithoutNotificationSettingsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  businessName: string
+  businessImage?: string | null
+  type: string
+  otherType?: string | null
+  waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
+  otherAmenity?: string | null
+  country: string
+  city: string
+  address: string
+  phoneNumber: string
+  phoneCode: string
+  termsAccepted: boolean
+  pin?: string | null
+  confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
+  isOpen?: boolean
+  workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
+  openingHour?: number
+  openingMinute?: number
+  closingHour?: number
+  closingMinute?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  appointments?: Prisma.OwnerAppointmentUncheckedCreateNestedManyWithoutSalonInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutSalonInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSalonInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutSalonInput
+  productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+}
+
+export type SalonCreateOrConnectWithoutNotificationSettingsInput = {
+  where: Prisma.SalonWhereUniqueInput
+  create: Prisma.XOR<Prisma.SalonCreateWithoutNotificationSettingsInput, Prisma.SalonUncheckedCreateWithoutNotificationSettingsInput>
+}
+
+export type SalonUpsertWithoutNotificationSettingsInput = {
+  update: Prisma.XOR<Prisma.SalonUpdateWithoutNotificationSettingsInput, Prisma.SalonUncheckedUpdateWithoutNotificationSettingsInput>
+  create: Prisma.XOR<Prisma.SalonCreateWithoutNotificationSettingsInput, Prisma.SalonUncheckedCreateWithoutNotificationSettingsInput>
+  where?: Prisma.SalonWhereInput
+}
+
+export type SalonUpdateToOneWithWhereWithoutNotificationSettingsInput = {
+  where?: Prisma.SalonWhereInput
+  data: Prisma.XOR<Prisma.SalonUpdateWithoutNotificationSettingsInput, Prisma.SalonUncheckedUpdateWithoutNotificationSettingsInput>
+}
+
+export type SalonUpdateWithoutNotificationSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
+  otherAmenity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
+  openingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  closingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointments?: Prisma.OwnerAppointmentUpdateManyWithoutSalonNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutSalonNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutSalonNestedInput
+  products?: Prisma.ProductUpdateManyWithoutSalonNestedInput
+  productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+}
+
+export type SalonUncheckedUpdateWithoutNotificationSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
+  otherAmenity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
+  openingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  closingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointments?: Prisma.OwnerAppointmentUncheckedUpdateManyWithoutSalonNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutSalonNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSalonNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutSalonNestedInput
+  productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+}
+
+export type SalonCreateWithoutInventoryNotificationsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  businessName: string
+  businessImage?: string | null
+  type: string
+  otherType?: string | null
+  waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
+  otherAmenity?: string | null
+  country: string
+  city: string
+  address: string
+  phoneNumber: string
+  phoneCode: string
+  termsAccepted: boolean
+  pin?: string | null
+  confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
+  isOpen?: boolean
+  workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
+  openingHour?: number
+  openingMinute?: number
+  closingHour?: number
+  closingMinute?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  appointments?: Prisma.OwnerAppointmentCreateNestedManyWithoutSalonInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutSalonInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutSalonInput
+  products?: Prisma.ProductCreateNestedManyWithoutSalonInput
+  productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
+}
+
+export type SalonUncheckedCreateWithoutInventoryNotificationsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  businessName: string
+  businessImage?: string | null
+  type: string
+  otherType?: string | null
+  waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
+  otherAmenity?: string | null
+  country: string
+  city: string
+  address: string
+  phoneNumber: string
+  phoneCode: string
+  termsAccepted: boolean
+  pin?: string | null
+  confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
+  isOpen?: boolean
+  workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
+  openingHour?: number
+  openingMinute?: number
+  closingHour?: number
+  closingMinute?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  appointments?: Prisma.OwnerAppointmentUncheckedCreateNestedManyWithoutSalonInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutSalonInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSalonInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutSalonInput
+  productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
+}
+
+export type SalonCreateOrConnectWithoutInventoryNotificationsInput = {
+  where: Prisma.SalonWhereUniqueInput
+  create: Prisma.XOR<Prisma.SalonCreateWithoutInventoryNotificationsInput, Prisma.SalonUncheckedCreateWithoutInventoryNotificationsInput>
+}
+
+export type SalonUpsertWithoutInventoryNotificationsInput = {
+  update: Prisma.XOR<Prisma.SalonUpdateWithoutInventoryNotificationsInput, Prisma.SalonUncheckedUpdateWithoutInventoryNotificationsInput>
+  create: Prisma.XOR<Prisma.SalonCreateWithoutInventoryNotificationsInput, Prisma.SalonUncheckedCreateWithoutInventoryNotificationsInput>
+  where?: Prisma.SalonWhereInput
+}
+
+export type SalonUpdateToOneWithWhereWithoutInventoryNotificationsInput = {
+  where?: Prisma.SalonWhereInput
+  data: Prisma.XOR<Prisma.SalonUpdateWithoutInventoryNotificationsInput, Prisma.SalonUncheckedUpdateWithoutInventoryNotificationsInput>
+}
+
+export type SalonUpdateWithoutInventoryNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
+  otherAmenity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
+  openingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  closingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointments?: Prisma.OwnerAppointmentUpdateManyWithoutSalonNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutSalonNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutSalonNestedInput
+  products?: Prisma.ProductUpdateManyWithoutSalonNestedInput
+  productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
+}
+
+export type SalonUncheckedUpdateWithoutInventoryNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
+  otherAmenity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
+  openingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  closingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointments?: Prisma.OwnerAppointmentUncheckedUpdateManyWithoutSalonNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutSalonNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSalonNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutSalonNestedInput
+  productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
 }
 
 
@@ -1872,6 +2290,7 @@ export type SalonCountOutputType = {
   employees: number
   products: number
   productCategories: number
+  inventoryNotifications: number
 }
 
 export type SalonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1880,6 +2299,7 @@ export type SalonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   employees?: boolean | SalonCountOutputTypeCountEmployeesArgs
   products?: boolean | SalonCountOutputTypeCountProductsArgs
   productCategories?: boolean | SalonCountOutputTypeCountProductCategoriesArgs
+  inventoryNotifications?: boolean | SalonCountOutputTypeCountInventoryNotificationsArgs
 }
 
 /**
@@ -1927,6 +2347,13 @@ export type SalonCountOutputTypeCountProductCategoriesArgs<ExtArgs extends runti
   where?: Prisma.ProductCategoryWhereInput
 }
 
+/**
+ * SalonCountOutputType without action
+ */
+export type SalonCountOutputTypeCountInventoryNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InventoryNotificationWhereInput
+}
+
 
 export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1963,6 +2390,8 @@ export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   employees?: boolean | Prisma.Salon$employeesArgs<ExtArgs>
   products?: boolean | Prisma.Salon$productsArgs<ExtArgs>
   productCategories?: boolean | Prisma.Salon$productCategoriesArgs<ExtArgs>
+  notificationSettings?: boolean | Prisma.Salon$notificationSettingsArgs<ExtArgs>
+  inventoryNotifications?: boolean | Prisma.Salon$inventoryNotificationsArgs<ExtArgs>
   _count?: boolean | Prisma.SalonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["salon"]>
 
@@ -2069,6 +2498,8 @@ export type SalonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   employees?: boolean | Prisma.Salon$employeesArgs<ExtArgs>
   products?: boolean | Prisma.Salon$productsArgs<ExtArgs>
   productCategories?: boolean | Prisma.Salon$productCategoriesArgs<ExtArgs>
+  notificationSettings?: boolean | Prisma.Salon$notificationSettingsArgs<ExtArgs>
+  inventoryNotifications?: boolean | Prisma.Salon$inventoryNotificationsArgs<ExtArgs>
   _count?: boolean | Prisma.SalonCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SalonIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2082,6 +2513,8 @@ export type $SalonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     employees: Prisma.$EmployeePayload<ExtArgs>[]
     products: Prisma.$ProductPayload<ExtArgs>[]
     productCategories: Prisma.$ProductCategoryPayload<ExtArgs>[]
+    notificationSettings: Prisma.$NotificationSettingsPayload<ExtArgs> | null
+    inventoryNotifications: Prisma.$InventoryNotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2512,6 +2945,8 @@ export interface Prisma__SalonClient<T, Null = never, ExtArgs extends runtime.Ty
   employees<T extends Prisma.Salon$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   products<T extends Prisma.Salon$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   productCategories<T extends Prisma.Salon$productCategoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$productCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationSettings<T extends Prisma.Salon$notificationSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$notificationSettingsArgs<ExtArgs>>): Prisma.Prisma__NotificationSettingsClient<runtime.Types.Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  inventoryNotifications<T extends Prisma.Salon$inventoryNotificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$inventoryNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryNotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3075,6 +3510,49 @@ export type Salon$productCategoriesArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.ProductCategoryScalarFieldEnum | Prisma.ProductCategoryScalarFieldEnum[]
+}
+
+/**
+ * Salon.notificationSettings
+ */
+export type Salon$notificationSettingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationSettings
+   */
+  select?: Prisma.NotificationSettingsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationSettings
+   */
+  omit?: Prisma.NotificationSettingsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationSettingsInclude<ExtArgs> | null
+  where?: Prisma.NotificationSettingsWhereInput
+}
+
+/**
+ * Salon.inventoryNotifications
+ */
+export type Salon$inventoryNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InventoryNotification
+   */
+  select?: Prisma.InventoryNotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InventoryNotification
+   */
+  omit?: Prisma.InventoryNotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InventoryNotificationInclude<ExtArgs> | null
+  where?: Prisma.InventoryNotificationWhereInput
+  orderBy?: Prisma.InventoryNotificationOrderByWithRelationInput | Prisma.InventoryNotificationOrderByWithRelationInput[]
+  cursor?: Prisma.InventoryNotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InventoryNotificationScalarFieldEnum | Prisma.InventoryNotificationScalarFieldEnum[]
 }
 
 /**

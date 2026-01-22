@@ -62,3 +62,13 @@ export type Product = Prisma.ProductModel
  * 
  */
 export type ProductHistory = Prisma.ProductHistoryModel
+/**
+ * Model NotificationSettings
+ * 
+ */
+export type NotificationSettings = Prisma.NotificationSettingsModel
+/**
+ * Model InventoryNotification
+ * 
+ */
+export type InventoryNotification = Prisma.InventoryNotificationModel
