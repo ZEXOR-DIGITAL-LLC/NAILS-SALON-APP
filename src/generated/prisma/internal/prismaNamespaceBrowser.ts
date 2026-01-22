@@ -102,6 +102,7 @@ export const SalonScalarFieldEnum = {
   confirmed: 'confirmed',
   resetPin: 'resetPin',
   resetPinExpiry: 'resetPinExpiry',
+  revenuePin: 'revenuePin',
   isOpen: 'isOpen',
   workingDays: 'workingDays',
   openingHour: 'openingHour',

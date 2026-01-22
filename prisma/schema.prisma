@@ -31,6 +31,7 @@ model Salon {
   confirmed         Boolean   @default(false)
   resetPin          String?   // 6-digit PIN for password reset
   resetPinExpiry    DateTime? // Expiry time for reset PIN
+  revenuePin        String?   // 4-digit PIN for revenue page access
 
   // Business Hours
   isOpen            Boolean   @default(true)      // Open/Closed toggle for bookings
