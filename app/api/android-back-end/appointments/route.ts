@@ -357,6 +357,7 @@ export async function POST(request: NextRequest) {
     const {
       salonId,
       employeeId, // Optional: Assign to specific employee
+      salonClientId, // Optional: Link to salon client profile
       clientName,
       service,
       appointmentDate,
@@ -437,6 +438,16 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Validate salonClientId if provided
+    if (salonClientId) {
+      const salonClient = await prisma.salonClient.findFirst({
+        where: { id: salonClientId, salonId },
+      });
+      if (!salonClient) {
+        return NextResponse.json({ error: 'Client not found' }, { status: 404 });
+      }
+    }
+
     // --- OVERLAP AND MARGIN CHECK ---
     const startInMinutes = hour * 60 + minute;
     const endInMinutes = startInMinutes + dHours * 60 + dMinutes;
@@ -511,6 +522,7 @@ export async function POST(request: NextRequest) {
       data: {
         salonId,
         employeeId: employeeId || null, // Optional employee assignment
+        salonClientId: salonClientId || null, // Optional client profile link
         clientName: clientName.trim(),
         service: service.trim(),
         appointmentDate: parsedDate,
@@ -526,6 +538,13 @@ export async function POST(request: NextRequest) {
             id: true,
             name: true,
             color: true,
+          },
+        },
+        salonClient: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
           },
         },
       },
@@ -552,6 +571,7 @@ export async function PATCH(request: NextRequest) {
       id,
       salonId,
       employeeId, // Optional: Reassign to different employee
+      salonClientId, // Optional: Link/unlink salon client profile
       clientName,
       service,
       appointmentDate,
@@ -600,6 +620,21 @@ export async function PATCH(request: NextRequest) {
         }
         updateData.employeeId = employeeId;
         targetEmployeeId = employeeId;
+      }
+    }
+
+    // Handle salonClientId update (allow setting to null to unlink)
+    if (salonClientId !== undefined) {
+      if (salonClientId === null || salonClientId === '') {
+        updateData.salonClientId = null;
+      } else {
+        const salonClient = await prisma.salonClient.findFirst({
+          where: { id: salonClientId, salonId },
+        });
+        if (!salonClient) {
+          return NextResponse.json({ error: 'Client not found' }, { status: 404 });
+        }
+        updateData.salonClientId = salonClientId;
       }
     }
 
@@ -723,6 +758,13 @@ export async function PATCH(request: NextRequest) {
             id: true,
             name: true,
             color: true,
+          },
+        },
+        salonClient: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
           },
         },
       },

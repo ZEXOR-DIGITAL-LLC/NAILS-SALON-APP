@@ -57,6 +57,7 @@ export const ModelName = {
   Gallery: 'Gallery',
   GalleryImage: 'GalleryImage',
   Employee: 'Employee',
+  SalonClient: 'SalonClient',
   ProductCategory: 'ProductCategory',
   Product: 'Product',
   ProductHistory: 'ProductHistory',
@@ -143,6 +144,7 @@ export const OwnerAppointmentScalarFieldEnum = {
   id: 'id',
   salonId: 'salonId',
   employeeId: 'employeeId',
+  salonClientId: 'salonClientId',
   clientName: 'clientName',
   service: 'service',
   appointmentDate: 'appointmentDate',
@@ -195,6 +197,21 @@ export const EmployeeScalarFieldEnum = {
 } as const
 
 export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
+
+
+export const SalonClientScalarFieldEnum = {
+  id: 'id',
+  salonId: 'salonId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
+  email: 'email',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SalonClientScalarFieldEnum = (typeof SalonClientScalarFieldEnum)[keyof typeof SalonClientScalarFieldEnum]
 
 
 export const ProductCategoryScalarFieldEnum = {

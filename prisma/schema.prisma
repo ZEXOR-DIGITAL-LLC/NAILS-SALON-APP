@@ -47,6 +47,7 @@ model Salon {
   appointments           OwnerAppointment[]
   galleries              Gallery[]
   employees              Employee[]
+  salonClients           SalonClient[]
   products               Product[]
   productCategories      ProductCategory[]
   notificationSettings   NotificationSettings?
@@ -77,6 +78,7 @@ model OwnerAppointment {
   id                String    @id @default(cuid())
   salonId           String    // Links to Salon owner - isolates data by user
   employeeId        String?   // Optional: Assigned employee (null = unassigned)
+  salonClientId     String?   // Optional: Linked salon client profile
   clientName        String    // Name of the client for the appointment
   service           String    // Service description
   appointmentDate   DateTime  // Date of the appointment
@@ -89,13 +91,15 @@ model OwnerAppointment {
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
-  salon             Salon     @relation(fields: [salonId], references: [id], onDelete: Cascade)
-  employee          Employee? @relation(fields: [employeeId], references: [id], onDelete: SetNull)
+  salon             Salon         @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  employee          Employee?     @relation(fields: [employeeId], references: [id], onDelete: SetNull)
+  salonClient       SalonClient?  @relation(fields: [salonClientId], references: [id], onDelete: SetNull)
 
   @@index([salonId])
   @@index([salonId, appointmentDate])
   @@index([employeeId])
   @@index([salonId, employeeId])
+  @@index([salonClientId])
 }
 
 model Gallery {
@@ -140,6 +144,24 @@ model Employee {
 
   @@index([salonId])
   @@index([salonId, isActive])
+}
+
+model SalonClient {
+  id          String    @id @default(cuid())
+  salonId     String
+  firstName   String
+  lastName    String    @default("")
+  phone       String?
+  email       String?
+  notes       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  salon        Salon              @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  appointments OwnerAppointment[]
+
+  @@index([salonId])
+  @@index([salonId, firstName, lastName])
 }
 
 model ProductCategory {

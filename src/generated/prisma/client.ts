@@ -70,6 +70,11 @@ export type GalleryImage = Prisma.GalleryImageModel
  */
 export type Employee = Prisma.EmployeeModel
 /**
+ * Model SalonClient
+ * 
+ */
+export type SalonClient = Prisma.SalonClientModel
+/**
  * Model ProductCategory
  * 
  */
