@@ -453,15 +453,133 @@ function BookingPage() {
 
   if (error || !booking) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-pink-50 to-white">
-        <div className="text-center p-8">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+      <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+        {/* Language Selector */}
+        <div className="absolute top-4 right-4">
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as Language)}
+            className="px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+          >
+            <option value="EN">English</option>
+            <option value="ES">Espanol</option>
+            <option value="FR">Francais</option>
+            <option value="PT">Portugues</option>
+          </select>
+        </div>
+
+        <div className="max-w-md mx-auto px-4 py-12">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <h1 className="text-xl font-semibold text-gray-800 mb-2">{t('notFound')}</h1>
+            <p className="text-gray-500">{error}</p>
           </div>
-          <h1 className="text-xl font-semibold text-gray-800 mb-2">{t('notFound')}</h1>
-          <p className="text-gray-500">{error}</p>
+
+          {/* Track by Code Section - available even without a valid appointment */}
+          <div className="border-t border-gray-200 pt-8">
+            <div className="text-center mb-4">
+              <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg className="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <h2 className="text-lg font-bold text-gray-800">{t('trackByCode')}</h2>
+              <p className="text-sm text-gray-500 mt-1">{t('trackByCodeSubtitle')}</p>
+            </div>
+
+            <form onSubmit={handleCodeSearch} className="flex gap-2 mb-4">
+              <input
+                type="text"
+                value={codeInput}
+                onChange={(e) => setCodeInput(e.target.value.toUpperCase())}
+                placeholder={t('codePlaceholder')}
+                className="flex-1 px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              />
+              <button
+                type="submit"
+                disabled={codeLoading || !codeInput.trim()}
+                className="px-5 py-3 bg-pink-500 text-white rounded-xl text-sm font-medium hover:bg-pink-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {codeLoading ? t('searching') : t('search')}
+              </button>
+            </form>
+
+            {codeError && (
+              <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
+                <p className="text-sm text-red-600">{t('noAppointmentsFound')}</p>
+              </div>
+            )}
+
+            {codeResults && codeResults.length > 0 && (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-semibold text-gray-700">{t('yourAppointments')}</h3>
+                  {codeResults.some((r) => r.status === 'Pending') && (
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="text-xs text-green-600">{t('liveTracking')}</span>
+                    </div>
+                  )}
+                </div>
+
+                {codeResults.map((result) => (
+                  <div key={result.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div className={`px-4 py-2 border-b ${getStatusColor(result.status)}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className={`w-2 h-2 rounded-full ${
+                            result.status === 'Pending' ? 'bg-blue-500 animate-pulse' :
+                            result.status === 'Completed' ? 'bg-green-500' : 'bg-red-500'
+                          }`}></div>
+                          <span className="text-sm font-medium">{getStatusText(result.status)}</span>
+                        </div>
+                        {result.status === 'Pending' && result.queuePosition > 0 && (
+                          <span className="text-xs font-semibold bg-white/50 px-2 py-0.5 rounded-full">
+                            #{result.queuePosition} {t('inQueue')}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="p-4 space-y-3">
+                      <p className="text-sm font-semibold text-pink-600">{result.businessName}</p>
+                      <div className="flex gap-4">
+                        <div className="flex-1">
+                          <p className="text-xs text-gray-500">{t('date')}</p>
+                          <p className="text-sm font-medium text-gray-800">
+                            {formatDate(result.appointmentDate, language)}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">{t('time')}</p>
+                          <p className="text-sm font-medium text-gray-800">
+                            {formatTime(result.appointmentHour, result.appointmentMinute)}
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500">{t('service')}</p>
+                        <p className="text-sm font-medium text-gray-800">{result.service}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {codeLastUpdated && codeResults.some((r) => r.status === 'Pending') && (
+                  <p className="text-xs text-gray-400 text-center mt-2">
+                    {t('lastUpdated')}: {codeLastUpdated.toLocaleTimeString()}
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+
+          <div className="mt-8 text-center">
+            <p className="text-xs text-gray-400">Powered by Nails Salon Connect</p>
+          </div>
         </div>
       </div>
     );
