@@ -97,7 +97,7 @@ export async function POST(
       appointmentDate,
       appointmentHour,
       appointmentMinute,
-      durationHours = 1,
+      durationHours = 0,
       durationMinutes = 0,
       employeeId = null, // Optional: client can select a specific employee
     } = body;

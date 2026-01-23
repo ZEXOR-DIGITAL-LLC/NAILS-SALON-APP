@@ -53,6 +53,12 @@ const translations = {
     FR: 'Duree',
     PT: 'Duracao',
   },
+  durationPending: {
+    EN: 'Assigned by salon',
+    ES: 'Asignada por el salon',
+    FR: 'Attribuee par le salon',
+    PT: 'Atribuida pelo salao',
+  },
   service: {
     EN: 'Service',
     ES: 'Servicio',
@@ -500,8 +506,10 @@ export default function BookingPage() {
               </div>
               <div className="flex-1">
                 <p className="text-sm text-gray-500 mb-1">{t('duration')}</p>
-                <p className="text-lg font-semibold text-gray-800">
-                  {formatDuration(booking.durationHours, booking.durationMinutes)}
+                <p className={`text-lg font-semibold ${booking.durationHours === 0 && booking.durationMinutes === 0 ? 'text-amber-600' : 'text-gray-800'}`}>
+                  {booking.durationHours === 0 && booking.durationMinutes === 0
+                    ? t('durationPending')
+                    : formatDuration(booking.durationHours, booking.durationMinutes)}
                 </p>
               </div>
             </div>

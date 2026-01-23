@@ -141,11 +141,11 @@ const translations = {
     FR: 'Veuillez remplir tous les champs requis',
     PT: 'Por favor preencha todos os campos obrigatorios',
   },
-  durationRequired: {
-    EN: 'Please select a service duration',
-    ES: 'Por favor selecciona una duracion',
-    FR: 'Veuillez selectionner une duree',
-    PT: 'Por favor selecione uma duracao',
+  durationPending: {
+    EN: 'Assigned by salon',
+    ES: 'Asignada por el salon',
+    FR: 'Attribuee par le salon',
+    PT: 'Atribuida pelo salao',
   },
   pastTimeError: {
     EN: 'Cannot book appointments in the past',
@@ -297,8 +297,8 @@ const translations = {
 const HOURS_12 = Array.from({ length: 12 }, (_, i) => i + 1);
 const MINUTES = Array.from({ length: 60 }, (_, i) => i);
 
-// Fixed service duration (1 hour)
-const FIXED_DURATION_HOURS = 1;
+// No fixed duration - salon owner assigns duration after booking
+const FIXED_DURATION_HOURS = 0;
 const FIXED_DURATION_MINUTES = 0;
 
 // Generate calendar data for 3 months (current + next 2)
@@ -745,7 +745,9 @@ export default function PublicBookingPage() {
               <div className="flex justify-between items-center py-2 border-b border-gray-100">
                 <span className="text-gray-500">{t('duration')}</span>
                 <span className="font-medium text-gray-800">
-                  {formatDuration(bookingResult.durationHours, bookingResult.durationMinutes)}
+                  {bookingResult.durationHours === 0 && bookingResult.durationMinutes === 0
+                    ? t('durationPending')
+                    : formatDuration(bookingResult.durationHours, bookingResult.durationMinutes)}
                 </span>
               </div>
               <div className="flex justify-between items-center py-2">
