@@ -19,7 +19,7 @@ const R2_PUBLIC_URL = process.env.R2_PUBLIC_URL || '';
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB per file
 const MAX_TOTAL_SIZE = 50 * 1024 * 1024; // 50MB total for all files
-const MAX_IMAGES_PER_GALLERY = 10;
+const MAX_IMAGES_PER_GALLERY = 5;
 
 // Helper function to extract key from R2 URL
 function extractKeyFromUrl(url: string): string | null {
