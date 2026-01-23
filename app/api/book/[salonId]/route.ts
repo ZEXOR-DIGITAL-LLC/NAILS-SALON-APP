@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/app/lib/prisma';
 
-// 5-minute margin between appointments for preparation time
-const BOOKING_MARGIN_MINUTES = 5;
-
 // Helper function to parse YYYY-MM-DD string to UTC start of day
 function parseDateToUTC(dateStr: string): Date {
   const [year, month, day] = dateStr.split('-').map(Number);
@@ -176,53 +173,16 @@ export async function POST(
       parsedDate = parseDateToUTC(dateStr);
     }
 
-    // --- OVERLAP AND MARGIN CHECK ---
-    const startInMinutes = hour * 60 + minute;
-    const endInMinutes = startInMinutes + dHours * 60 + dMinutes;
-
-    // Check if salon has active employees
-    const activeEmployees = await prisma.employee.findMany({
-      where: {
-        salonId,
-        isActive: true,
-      },
-      select: { id: true },
-    });
-
-    // Get all pending appointments for this date
-    const existingAppointments = await prisma.ownerAppointment.findMany({
-      where: {
-        salonId,
-        appointmentDate: parsedDate,
-        status: 'Pending',
-      },
-    });
-
-    // Helper function to check if a time slot conflicts with an appointment
-    const hasConflict = (appointment: typeof existingAppointments[0]) => {
-      const existingStart = appointment.appointmentHour * 60 + appointment.appointmentMinute;
-      const existingEnd = existingStart + appointment.durationHours * 60 + appointment.durationMinutes;
-      const existingEndWithMargin = existingEnd + BOOKING_MARGIN_MINUTES;
-
-      // Direct overlap
-      if (startInMinutes < existingEnd && endInMinutes > existingStart) {
-        return { conflict: true, type: 'overlap' as const };
-      }
-
-      // Margin violation
-      const newStartsTooSoonAfterExisting = startInMinutes >= existingEnd && startInMinutes < existingEndWithMargin;
-      const newEndsTooCloseToExistingStart = endInMinutes > (existingStart - BOOKING_MARGIN_MINUTES) && endInMinutes <= existingStart;
-
-      if (newStartsTooSoonAfterExisting || newEndsTooCloseToExistingStart) {
-        return { conflict: true, type: 'margin' as const, suggestedTime: existingEndWithMargin };
-      }
-
-      return { conflict: false, type: null };
-    };
-
-    // If client selected a specific employee, verify they exist and are active
+    // Validate employee if selected
     let selectedEmployeeId: string | null = null;
     if (employeeId) {
+      const activeEmployees = await prisma.employee.findMany({
+        where: {
+          salonId,
+          isActive: true,
+        },
+        select: { id: true },
+      });
       const selectedEmployee = activeEmployees.find(emp => emp.id === employeeId);
       if (!selectedEmployee) {
         return NextResponse.json(
@@ -232,149 +192,6 @@ export async function POST(
       }
       selectedEmployeeId = employeeId;
     }
-
-    if (activeEmployees.length === 0) {
-      // NO EMPLOYEES MODE: Check against ALL appointments (single-owner backward compatibility)
-      for (const existing of existingAppointments) {
-        const result = hasConflict(existing);
-        if (result.conflict) {
-          if (result.type === 'overlap') {
-            return NextResponse.json(
-              { error: 'This time slot overlaps with another appointment.' },
-              { status: 409 }
-            );
-          } else {
-            return NextResponse.json(
-              {
-                error: 'A 5-minute margin is required between appointments for preparation.',
-                code: 'MARGIN_REQUIRED',
-                suggestedStartTime: result.suggestedTime,
-              },
-              { status: 422 }
-            );
-          }
-        }
-      }
-    } else if (selectedEmployeeId) {
-      // CLIENT SELECTED A SPECIFIC EMPLOYEE: Check only that employee's availability
-      const unassignedAppointments = existingAppointments.filter(apt => !apt.employeeId);
-      const employeeAppointments = existingAppointments.filter(apt => apt.employeeId === selectedEmployeeId);
-
-      // Check unassigned appointments (they could be assigned to this employee)
-      for (const existing of unassignedAppointments) {
-        const result = hasConflict(existing);
-        if (result.conflict) {
-          if (result.type === 'overlap') {
-            return NextResponse.json(
-              { error: 'This time slot overlaps with another appointment.' },
-              { status: 409 }
-            );
-          } else {
-            return NextResponse.json(
-              {
-                error: 'A 5-minute margin is required between appointments for preparation.',
-                code: 'MARGIN_REQUIRED',
-                suggestedStartTime: result.suggestedTime,
-              },
-              { status: 422 }
-            );
-          }
-        }
-      }
-
-      // Check the selected employee's appointments
-      for (const existing of employeeAppointments) {
-        const result = hasConflict(existing);
-        if (result.conflict) {
-          if (result.type === 'overlap') {
-            return NextResponse.json(
-              { error: 'This employee is not available at this time. Please choose a different time or employee.' },
-              { status: 409 }
-            );
-          } else {
-            return NextResponse.json(
-              {
-                error: 'A 5-minute margin is required between appointments for preparation.',
-                code: 'MARGIN_REQUIRED',
-                suggestedStartTime: result.suggestedTime,
-              },
-              { status: 422 }
-            );
-          }
-        }
-      }
-    } else {
-      // NO EMPLOYEE SELECTED: Check if at least one employee is available
-      const unassignedAppointments = existingAppointments.filter(apt => !apt.employeeId);
-
-      // First, check if unassigned appointments conflict (they block the entire time slot)
-      for (const existing of unassignedAppointments) {
-        const result = hasConflict(existing);
-        if (result.conflict) {
-          if (result.type === 'overlap') {
-            return NextResponse.json(
-              { error: 'This time slot overlaps with another appointment.' },
-              { status: 409 }
-            );
-          } else {
-            return NextResponse.json(
-              {
-                error: 'A 5-minute margin is required between appointments for preparation.',
-                code: 'MARGIN_REQUIRED',
-                suggestedStartTime: result.suggestedTime,
-              },
-              { status: 422 }
-            );
-          }
-        }
-      }
-
-      // Check each employee's availability
-      let availableEmployeeExists = false;
-      let lastMarginConflict: { suggestedTime: number } | null = null;
-
-      for (const employee of activeEmployees) {
-        const employeeAppointments = existingAppointments.filter(
-          apt => apt.employeeId === employee.id
-        );
-
-        let employeeHasConflict = false;
-        for (const existing of employeeAppointments) {
-          const result = hasConflict(existing);
-          if (result.conflict) {
-            employeeHasConflict = true;
-            if (result.type === 'margin' && result.suggestedTime) {
-              lastMarginConflict = { suggestedTime: result.suggestedTime };
-            }
-            break;
-          }
-        }
-
-        if (!employeeHasConflict) {
-          availableEmployeeExists = true;
-          break; // At least one employee is available, allow booking
-        }
-      }
-
-      if (!availableEmployeeExists) {
-        // All employees are busy at this time
-        if (lastMarginConflict) {
-          return NextResponse.json(
-            {
-              error: 'All employees are busy at this time. A 5-minute margin is required between appointments.',
-              code: 'MARGIN_REQUIRED',
-              suggestedStartTime: lastMarginConflict.suggestedTime,
-            },
-            { status: 422 }
-          );
-        }
-        return NextResponse.json(
-          { error: 'All employees are busy at this time. Please choose a different time.' },
-          { status: 409 }
-        );
-      }
-    }
-    // -----------------------
 
     // Create the appointment (with optional employee assignment)
     const appointment = await prisma.ownerAppointment.create({

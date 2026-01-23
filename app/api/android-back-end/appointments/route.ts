@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/app/lib/prisma';
 
-// 5-minute margin between appointments for preparation time
-const BOOKING_MARGIN_MINUTES = 5;
-
 // Helper function to parse YYYY-MM-DD string to UTC start of day
 function parseDateToUTC(dateStr: string): Date {
   const [year, month, day] = dateStr.split('-').map(Number);
@@ -448,75 +445,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // --- OVERLAP AND MARGIN CHECK ---
-    const startInMinutes = hour * 60 + minute;
-    const endInMinutes = startInMinutes + dHours * 60 + dMinutes;
-
-    // Build where clause for overlap check
-    // If employeeId is provided: check against that employee's appointments AND unassigned appointments
-    // If employeeId is null: check against ALL salon appointments (preserves backward compatibility)
-    let existingAppointments;
-
-    if (employeeId) {
-      // When booking with an employee, check against:
-      // 1. That employee's appointments (to prevent double-booking the employee)
-      // 2. Unassigned appointments (which could be assigned to this employee later)
-      existingAppointments = await prisma.ownerAppointment.findMany({
-        where: {
-          salonId,
-          appointmentDate: parsedDate,
-          status: 'Pending',
-          OR: [
-            { employeeId: employeeId },
-            { employeeId: null },
-          ],
-        },
-      });
-    } else {
-      // When booking without an employee (unassigned), check against ALL appointments
-      // This preserves backward compatibility
-      existingAppointments = await prisma.ownerAppointment.findMany({
-        where: {
-          salonId,
-          appointmentDate: parsedDate,
-          status: 'Pending',
-        },
-      });
-    }
-
-    for (const existing of existingAppointments) {
-      const existingStart = existing.appointmentHour * 60 + existing.appointmentMinute;
-      const existingEnd =
-        existingStart + existing.durationHours * 60 + existing.durationMinutes;
-      // Add 5-minute margin after the existing appointment
-      const existingEndWithMargin = existingEnd + BOOKING_MARGIN_MINUTES;
-
-      // Direct overlap condition: (startA < endB) AND (endA > startB)
-      if (startInMinutes < existingEnd && endInMinutes > existingStart) {
-        return NextResponse.json(
-          { error: 'This time slot overlaps with another appointment.' },
-          { status: 409 }
-        );
-      }
-
-      // Margin violation: new appointment starts within 5 minutes after existing ends
-      // OR new appointment ends within 5 minutes before existing starts
-      const newStartsTooSoonAfterExisting = startInMinutes >= existingEnd && startInMinutes < existingEndWithMargin;
-      const newEndsTooCloseToExistingStart = endInMinutes > (existingStart - BOOKING_MARGIN_MINUTES) && endInMinutes <= existingStart;
-
-      if (newStartsTooSoonAfterExisting || newEndsTooCloseToExistingStart) {
-        return NextResponse.json(
-          {
-            error: 'A 5-minute margin is required between appointments for preparation.',
-            code: 'MARGIN_REQUIRED',
-            suggestedStartTime: existingEndWithMargin,
-          },
-          { status: 422 }
-        );
-      }
-    }
-    // -----------------------
-
     // Create the appointment
     const appointment = await prisma.ownerAppointment.create({
       data: {
@@ -666,88 +594,6 @@ export async function PATCH(request: NextRequest) {
       updateData.appointmentMinute = parseInt(appointmentMinute, 10);
     if (durationHours !== undefined) updateData.durationHours = parseInt(durationHours, 10);
     if (durationMinutes !== undefined) updateData.durationMinutes = parseInt(durationMinutes, 10);
-
-    // --- OVERLAP CHECK (only if time/date/duration/employee changed and status is Pending) ---
-    const isPending = (status || currentAppointment.status) === 'Pending';
-    const timeOrEmployeeChanged =
-      appointmentHour !== undefined ||
-      appointmentMinute !== undefined ||
-      durationHours !== undefined ||
-      durationMinutes !== undefined ||
-      appointmentDate !== undefined ||
-      employeeId !== undefined;
-
-    if (isPending && timeOrEmployeeChanged) {
-      const hour = updateData.appointmentHour ?? currentAppointment.appointmentHour;
-      const minute = updateData.appointmentMinute ?? currentAppointment.appointmentMinute;
-      const dHours = updateData.durationHours ?? currentAppointment.durationHours;
-      const dMinutes = updateData.durationMinutes ?? currentAppointment.durationMinutes;
-
-      const startInMinutes = hour * 60 + minute;
-      const endInMinutes = startInMinutes + dHours * 60 + dMinutes;
-
-      // Build overlap check where clause
-      // If targetEmployeeId is set: check against that employee's appointments AND unassigned
-      // If null: check against ALL salon appointments (backward compatibility)
-      let existingAppointments;
-
-      if (targetEmployeeId) {
-        // Check against this employee's appointments + unassigned appointments
-        existingAppointments = await prisma.ownerAppointment.findMany({
-          where: {
-            salonId,
-            appointmentDate: targetDate,
-            status: 'Pending',
-            id: { not: id },
-            OR: [
-              { employeeId: targetEmployeeId },
-              { employeeId: null },
-            ],
-          },
-        });
-      } else {
-        // Check against ALL appointments when unassigned
-        existingAppointments = await prisma.ownerAppointment.findMany({
-          where: {
-            salonId,
-            appointmentDate: targetDate,
-            status: 'Pending',
-            id: { not: id },
-          },
-        });
-      }
-
-      for (const existing of existingAppointments) {
-        const existingStart = existing.appointmentHour * 60 + existing.appointmentMinute;
-        const existingEnd =
-          existingStart + existing.durationHours * 60 + existing.durationMinutes;
-        const existingEndWithMargin = existingEnd + BOOKING_MARGIN_MINUTES;
-
-        // Direct overlap
-        if (startInMinutes < existingEnd && endInMinutes > existingStart) {
-          return NextResponse.json(
-            { error: 'The new time slot overlaps with another appointment.' },
-            { status: 409 }
-          );
-        }
-
-        // Margin violation
-        const newStartsTooSoonAfterExisting = startInMinutes >= existingEnd && startInMinutes < existingEndWithMargin;
-        const newEndsTooCloseToExistingStart = endInMinutes > (existingStart - BOOKING_MARGIN_MINUTES) && endInMinutes <= existingStart;
-
-        if (newStartsTooSoonAfterExisting || newEndsTooCloseToExistingStart) {
-          return NextResponse.json(
-            {
-              error: 'A 5-minute margin is required between appointments for preparation.',
-              code: 'MARGIN_REQUIRED',
-              suggestedStartTime: existingEndWithMargin,
-            },
-            { status: 422 }
-          );
-        }
-      }
-    }
-    // -----------------------
 
     const updated = await prisma.ownerAppointment.update({
       where: { id },

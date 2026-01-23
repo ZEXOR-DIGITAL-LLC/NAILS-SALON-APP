@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/app/lib/prisma';
 
-// 5-minute margin between appointments for preparation time
-const BOOKING_MARGIN_MINUTES = 5;
-
 // Helper function to parse YYYY-MM-DD string to UTC start of day
 function parseDateToUTC(dateStr: string): Date {
   const [year, month, day] = dateStr.split('-').map(Number);
@@ -111,21 +108,18 @@ export async function POST(request: NextRequest) {
       orderBy: [{ appointmentHour: 'asc' }, { appointmentMinute: 'asc' }],
     });
 
-    // The new end time with the required 5-minute margin
-    const newEndWithMargin = newEndMinutes + BOOKING_MARGIN_MINUTES;
-
-    // Filter to appointments that would violate the margin after extension
+    // Filter to appointments that would overlap after extension
     // or were already starting after the current end time
     const appointmentsToShift = subsequentAppointments.filter((apt) => {
       const aptStart = apt.appointmentHour * 60 + apt.appointmentMinute;
-      // Include appointments that start before the new end time + margin
-      return aptStart >= currentEndMinutes && aptStart < newEndWithMargin;
+      // Include appointments that start before the new end time
+      return aptStart >= currentEndMinutes && aptStart < newEndMinutes;
     }).concat(
-      // Also include all appointments that start at or after newEndWithMargin
+      // Also include all appointments that start at or after newEndMinutes
       // but need to maintain their relative position
       subsequentAppointments.filter((apt) => {
         const aptStart = apt.appointmentHour * 60 + apt.appointmentMinute;
-        return aptStart >= newEndWithMargin;
+        return aptStart >= newEndMinutes;
       })
     );
 
@@ -158,9 +152,9 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      // Shift all subsequent appointments to maintain proper spacing with margin
+      // Shift all subsequent appointments to maintain proper spacing
       const shiftedAppointments = [];
-      let nextAvailableSlot = newEndWithMargin;
+      let nextAvailableSlot = newEndMinutes;
 
       for (const apt of uniqueAppointmentsToShift) {
         const currentStartMinutes = apt.appointmentHour * 60 + apt.appointmentMinute;
@@ -199,14 +193,13 @@ export async function POST(request: NextRequest) {
         shiftedAppointments.push(shifted);
 
         // Update next available slot for the following appointment
-        nextAvailableSlot = newHour * 60 + newMinute + aptDurationMinutes + BOOKING_MARGIN_MINUTES;
+        nextAvailableSlot = newHour * 60 + newMinute + aptDurationMinutes;
       }
 
       return {
         updatedAppointment,
         shiftedAppointments,
         shiftedCount: shiftedAppointments.length,
-        marginApplied: BOOKING_MARGIN_MINUTES,
       };
     });
 

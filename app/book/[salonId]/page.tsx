@@ -159,48 +159,6 @@ const translations = {
     FR: 'Veuillez selectionner une heure future pour votre rendez-vous.',
     PT: 'Por favor selecione um horario futuro para seu agendamento.',
   },
-  overlapError: {
-    EN: 'Time Slot Unavailable',
-    ES: 'Horario No Disponible',
-    FR: 'Creneau Non Disponible',
-    PT: 'Horario Indisponivel',
-  },
-  overlapMessage: {
-    EN: 'This time slot is already booked. Please choose a different time.',
-    ES: 'Este horario ya esta reservado. Por favor elige otro horario.',
-    FR: 'Ce creneau est deja reserve. Veuillez choisir un autre horaire.',
-    PT: 'Este horario ja esta reservado. Por favor escolha outro horario.',
-  },
-  marginError: {
-    EN: 'Preparation Time Required',
-    ES: 'Tiempo de Preparacion Requerido',
-    FR: 'Temps de Preparation Requis',
-    PT: 'Tempo de Preparacao Necessario',
-  },
-  marginMessage: {
-    EN: 'A 5-minute margin is required between appointments for preparation.',
-    ES: 'Se requiere un margen de 5 minutos entre citas para preparacion.',
-    FR: 'Une marge de 5 minutes est requise entre les rendez-vous.',
-    PT: 'E necessaria uma margem de 5 minutos entre agendamentos.',
-  },
-  suggestedTime: {
-    EN: 'Suggested Time',
-    ES: 'Hora Sugerida',
-    FR: 'Heure Suggeree',
-    PT: 'Horario Sugerido',
-  },
-  useSuggestedTime: {
-    EN: 'Use Suggested Time',
-    ES: 'Usar Hora Sugerida',
-    FR: "Utiliser l'heure suggeree",
-    PT: 'Usar Horario Sugerido',
-  },
-  understand: {
-    EN: 'I Understand',
-    ES: 'Entendido',
-    FR: "J'ai Compris",
-    PT: 'Entendi',
-  },
   bookingSuccess: {
     EN: 'Appointment Booked!',
     ES: 'Cita Reservada!',
@@ -481,9 +439,6 @@ export default function PublicBookingPage() {
 
   // Error modals
   const [showPastTimeError, setShowPastTimeError] = useState(false);
-  const [showOverlapError, setShowOverlapError] = useState(false);
-  const [showMarginError, setShowMarginError] = useState(false);
-  const [suggestedTime, setSuggestedTime] = useState<{ hour: number; minute: number } | null>(null);
   const [validationError, setValidationError] = useState<string | null>(null);
 
   // Success state
@@ -554,23 +509,6 @@ export default function PublicBookingPage() {
     return false;
   };
 
-  // Apply suggested time
-  const applySuggestedTime = () => {
-    if (suggestedTime) {
-      const hour24 = suggestedTime.hour;
-      const minute = suggestedTime.minute;
-
-      const ampm: AmPm = hour24 >= 12 ? 'PM' : 'AM';
-      let hour12 = hour24 % 12;
-      if (hour12 === 0) hour12 = 12;
-
-      setSelectedHour12(hour12);
-      setSelectedAmPm(ampm);
-      setSelectedMinute(minute);
-      setShowMarginError(false);
-    }
-  };
-
   // Handle booking submission
   const handleSubmit = async () => {
     setValidationError(null);
@@ -617,16 +555,6 @@ export default function PublicBookingPage() {
         // Redirect to the live status page
         router.push(`/booking/${data.appointment.id}`);
         return;
-      } else if (response.status === 409) {
-        setShowOverlapError(true);
-      } else if (response.status === 422 && data.code === 'MARGIN_REQUIRED') {
-        if (data.suggestedStartTime) {
-          const totalMinutes = data.suggestedStartTime;
-          const suggestedHour = Math.floor(totalMinutes / 60);
-          const suggestedMinute = totalMinutes % 60;
-          setSuggestedTime({ hour: suggestedHour, minute: suggestedMinute });
-        }
-        setShowMarginError(true);
       } else {
         setValidationError(data.error || 'Booking failed');
       }
@@ -1297,75 +1225,6 @@ export default function PublicBookingPage() {
             >
               OK
             </button>
-          </div>
-        </div>
-      )}
-
-      {/* Overlap Error Modal */}
-      {showOverlapError && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-sm p-6 text-center">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">{t('overlapError')}</h3>
-            <p className="text-gray-500 mb-6">{t('overlapMessage')}</p>
-            <button
-              onClick={() => setShowOverlapError(false)}
-              className="w-full bg-pink-500 text-white py-3 rounded-xl font-medium"
-            >
-              OK
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Margin Error Modal */}
-      {showMarginError && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-sm p-6 text-center">
-            <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">{t('marginError')}</h3>
-            <p className="text-gray-500 mb-4">{t('marginMessage')}</p>
-
-            {suggestedTime && (
-              <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
-                <p className="text-xs text-green-600 font-semibold mb-1">{t('suggestedTime')}</p>
-                <p className="text-2xl font-bold text-green-600">
-                  {formatTime(suggestedTime.hour, suggestedTime.minute)}
-                </p>
-              </div>
-            )}
-
-            <div className="space-y-2">
-              {suggestedTime && (
-                <button
-                  onClick={applySuggestedTime}
-                  className="w-full bg-green-500 text-white py-3 rounded-xl font-medium flex items-center justify-center gap-2"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  {t('useSuggestedTime')}
-                </button>
-              )}
-              <button
-                onClick={() => setShowMarginError(false)}
-                className={`w-full py-3 rounded-xl font-medium ${
-                  suggestedTime
-                    ? 'border border-gray-200 text-gray-600'
-                    : 'bg-orange-500 text-white'
-                }`}
-              >
-                {t('understand')}
-              </button>
-            </div>
           </div>
         </div>
       )}
