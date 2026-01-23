@@ -32,6 +32,7 @@ export async function GET(request: NextRequest) {
           salonId,
           inventoryExpirationEnabled: false,
           daysBeforeExpiration: 7,
+          lowStockEnabled: false,
         },
       });
     }
@@ -47,7 +48,7 @@ export async function GET(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   try {
     const body = await request.json();
-    const { salonId, inventoryExpirationEnabled, daysBeforeExpiration } = body;
+    const { salonId, inventoryExpirationEnabled, daysBeforeExpiration, lowStockEnabled } = body;
 
     if (!salonId) {
       return NextResponse.json({ error: 'Salon ID is required' }, { status: 400 });
@@ -66,6 +67,7 @@ export async function PATCH(request: NextRequest) {
     const updateData: {
       inventoryExpirationEnabled?: boolean;
       daysBeforeExpiration?: number;
+      lowStockEnabled?: boolean;
     } = {};
 
     if (inventoryExpirationEnabled !== undefined) {
@@ -73,6 +75,9 @@ export async function PATCH(request: NextRequest) {
     }
     if (daysBeforeExpiration !== undefined) {
       updateData.daysBeforeExpiration = daysBeforeExpiration;
+    }
+    if (lowStockEnabled !== undefined) {
+      updateData.lowStockEnabled = lowStockEnabled;
     }
 
     // Upsert the settings
@@ -83,12 +88,18 @@ export async function PATCH(request: NextRequest) {
         salonId,
         inventoryExpirationEnabled: inventoryExpirationEnabled ?? false,
         daysBeforeExpiration: daysBeforeExpiration ?? 7,
+        lowStockEnabled: lowStockEnabled ?? false,
       },
     });
 
-    // If notifications were enabled, generate notifications for expiring products
+    // If expiration notifications were enabled, generate notifications for expiring products
     if (inventoryExpirationEnabled) {
       await generateExpirationNotifications(salonId, settings.daysBeforeExpiration);
+    }
+
+    // If low stock notifications were enabled, generate notifications for low stock products
+    if (lowStockEnabled) {
+      await generateLowStockNotifications(salonId);
     }
 
     return NextResponse.json(
@@ -195,5 +206,73 @@ async function generateExpirationNotifications(salonId: string, daysBeforeExpira
     }
   } catch (error) {
     console.error('Error generating expiration notifications:', error);
+  }
+}
+
+// Helper function to generate low stock notifications
+async function generateLowStockNotifications(salonId: string) {
+  try {
+    const allActiveProducts = await prisma.product.findMany({
+      where: {
+        salonId,
+        isActive: true,
+      },
+    });
+
+    const lowProducts = allActiveProducts.filter(
+      (p) => p.currentStock <= p.reorderPoint && p.currentStock > p.criticalPoint
+    );
+
+    const criticalProducts = allActiveProducts.filter(
+      (p) => p.currentStock <= p.criticalPoint
+    );
+
+    for (const product of lowProducts) {
+      const existingNotification = await prisma.inventoryNotification.findFirst({
+        where: {
+          salonId,
+          productId: product.id,
+          type: { in: ['low_stock', 'critical_stock'] },
+          isArchived: false,
+        },
+      });
+
+      if (!existingNotification) {
+        await prisma.inventoryNotification.create({
+          data: {
+            salonId,
+            productId: product.id,
+            productName: product.name,
+            type: 'low_stock',
+            message: `${product.name} is low on stock (${product.currentStock} remaining)`,
+          },
+        });
+      }
+    }
+
+    for (const product of criticalProducts) {
+      const existingNotification = await prisma.inventoryNotification.findFirst({
+        where: {
+          salonId,
+          productId: product.id,
+          type: { in: ['low_stock', 'critical_stock'] },
+          isArchived: false,
+        },
+      });
+
+      if (!existingNotification) {
+        await prisma.inventoryNotification.create({
+          data: {
+            salonId,
+            productId: product.id,
+            productName: product.name,
+            type: 'critical_stock',
+            message: `${product.name} is critically low on stock (${product.currentStock} remaining)`,
+          },
+        });
+      }
+    }
+  } catch (error) {
+    console.error('Error generating low stock notifications:', error);
   }
 }

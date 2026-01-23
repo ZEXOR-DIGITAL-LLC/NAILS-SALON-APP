@@ -206,6 +206,7 @@ model NotificationSettings {
   salonId                     String    @unique
   inventoryExpirationEnabled  Boolean   @default(false)
   daysBeforeExpiration        Int       @default(7)
+  lowStockEnabled             Boolean   @default(false)
   createdAt                   DateTime  @default(now())
   updatedAt                   DateTime  @updatedAt
 
@@ -219,11 +220,11 @@ model InventoryNotification {
   salonId     String
   productId   String
   productName String
-  type        String    // 'expiring' | 'expired'
+  type        String    // 'expiring' | 'expired' | 'low_stock' | 'critical_stock'
   message     String
   isRead      Boolean   @default(false)
   isArchived  Boolean   @default(false)
-  expiresAt   DateTime  // The actual expiration date of the product
+  expiresAt   DateTime? // The actual expiration date of the product (null for stock notifications)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 

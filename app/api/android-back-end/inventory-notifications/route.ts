@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const salonId = searchParams.get('salonId');
     const includeArchived = searchParams.get('includeArchived') === 'true';
-    const type = searchParams.get('type'); // 'count' | 'expiring' | 'expired' | null (all)
+    const type = searchParams.get('type'); // 'count' | 'expiring' | 'expired' | 'low_stock' | 'critical_stock' | null (all)
 
     if (!salonId) {
       return NextResponse.json({ error: 'Salon ID is required' }, { status: 400 });
@@ -27,7 +27,10 @@ export async function GET(request: NextRequest) {
       where: { salonId },
     });
 
-    if (!settings?.inventoryExpirationEnabled) {
+    const expirationEnabled = settings?.inventoryExpirationEnabled ?? false;
+    const lowStockEnabled = settings?.lowStockEnabled ?? false;
+
+    if (!expirationEnabled && !lowStockEnabled) {
       return NextResponse.json(
         {
           notifications: [],
@@ -39,8 +42,13 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // First, refresh notifications based on current product expiration dates
-    await refreshExpirationNotifications(salonId, settings.daysBeforeExpiration);
+    // Refresh notifications based on current product states
+    if (expirationEnabled) {
+      await refreshExpirationNotifications(salonId, settings!.daysBeforeExpiration);
+    }
+    if (lowStockEnabled) {
+      await refreshLowStockNotifications(salonId);
+    }
 
     // If type is 'count', just return the count
     if (type === 'count') {
@@ -376,25 +384,25 @@ async function refreshExpirationNotifications(salonId: string, daysBeforeExpirat
       }
     }
 
-    // Remove notifications for products that are no longer expiring soon
+    // Remove expiration notifications for products that are no longer expiring soon
     // (e.g., expiration date was updated or product was deleted)
-    const allActiveNotifications = await prisma.inventoryNotification.findMany({
+    const allActiveExpirationNotifications = await prisma.inventoryNotification.findMany({
       where: {
         salonId,
         isArchived: false,
+        type: { in: ['expiring', 'expired'] },
       },
     });
 
     const expiringProductIds = new Set(expiringProducts.map((p) => p.id));
     const expiredProductIds = new Set(expiredProducts.map((p) => p.id));
 
-    for (const notification of allActiveNotifications) {
+    for (const notification of allActiveExpirationNotifications) {
       const productStillRelevant =
         (notification.type === 'expiring' && expiringProductIds.has(notification.productId)) ||
         (notification.type === 'expired' && expiredProductIds.has(notification.productId));
 
       if (!productStillRelevant) {
-        // Archive the notification instead of deleting
         await prisma.inventoryNotification.update({
           where: { id: notification.id },
           data: { isArchived: true },
@@ -403,5 +411,137 @@ async function refreshExpirationNotifications(salonId: string, daysBeforeExpirat
     }
   } catch (error) {
     console.error('Error refreshing expiration notifications:', error);
+  }
+}
+
+// Helper function to refresh low stock notifications
+async function refreshLowStockNotifications(salonId: string) {
+  try {
+    // Prisma doesn't support field-to-field comparison, so we filter in application code
+    const allActiveProducts = await prisma.product.findMany({
+      where: {
+        salonId,
+        isActive: true,
+      },
+    });
+
+    const lowProducts = allActiveProducts.filter(
+      (p) => p.currentStock <= p.reorderPoint && p.currentStock > p.criticalPoint
+    );
+
+    const criticalProducts = allActiveProducts.filter(
+      (p) => p.currentStock <= p.criticalPoint
+    );
+
+    // Create/update notifications for low stock products
+    for (const product of lowProducts) {
+      const existingNotification = await prisma.inventoryNotification.findFirst({
+        where: {
+          salonId,
+          productId: product.id,
+          type: { in: ['low_stock', 'critical_stock'] },
+          isArchived: false,
+        },
+      });
+
+      if (!existingNotification) {
+        await prisma.inventoryNotification.create({
+          data: {
+            salonId,
+            productId: product.id,
+            productName: product.name,
+            type: 'low_stock',
+            message: `${product.name} is low on stock (${product.currentStock} remaining)`,
+          },
+        });
+      } else if (existingNotification.type === 'critical_stock') {
+        // Upgrade from critical back to low (stock was replenished partially)
+        await prisma.inventoryNotification.update({
+          where: { id: existingNotification.id },
+          data: {
+            type: 'low_stock',
+            message: `${product.name} is low on stock (${product.currentStock} remaining)`,
+            isRead: false,
+          },
+        });
+      } else {
+        // Update the message with current stock count
+        await prisma.inventoryNotification.update({
+          where: { id: existingNotification.id },
+          data: {
+            message: `${product.name} is low on stock (${product.currentStock} remaining)`,
+          },
+        });
+      }
+    }
+
+    // Create/update notifications for critical stock products
+    for (const product of criticalProducts) {
+      const existingNotification = await prisma.inventoryNotification.findFirst({
+        where: {
+          salonId,
+          productId: product.id,
+          type: { in: ['low_stock', 'critical_stock'] },
+          isArchived: false,
+        },
+      });
+
+      if (!existingNotification) {
+        await prisma.inventoryNotification.create({
+          data: {
+            salonId,
+            productId: product.id,
+            productName: product.name,
+            type: 'critical_stock',
+            message: `${product.name} is critically low on stock (${product.currentStock} remaining)`,
+          },
+        });
+      } else if (existingNotification.type === 'low_stock') {
+        // Downgrade from low to critical (stock decreased further)
+        await prisma.inventoryNotification.update({
+          where: { id: existingNotification.id },
+          data: {
+            type: 'critical_stock',
+            message: `${product.name} is critically low on stock (${product.currentStock} remaining)`,
+            isRead: false,
+          },
+        });
+      } else {
+        // Update the message with current stock count
+        await prisma.inventoryNotification.update({
+          where: { id: existingNotification.id },
+          data: {
+            message: `${product.name} is critically low on stock (${product.currentStock} remaining)`,
+          },
+        });
+      }
+    }
+
+    // Archive stock notifications for products that are no longer low/critical
+    const allActiveStockNotifications = await prisma.inventoryNotification.findMany({
+      where: {
+        salonId,
+        isArchived: false,
+        type: { in: ['low_stock', 'critical_stock'] },
+      },
+    });
+
+    const lowProductIds = new Set(lowProducts.map((p) => p.id));
+    const criticalProductIds = new Set(criticalProducts.map((p) => p.id));
+
+    for (const notification of allActiveStockNotifications) {
+      const productStillRelevant =
+        (notification.type === 'low_stock' && lowProductIds.has(notification.productId)) ||
+        (notification.type === 'critical_stock' && criticalProductIds.has(notification.productId));
+
+      if (!productStillRelevant) {
+        await prisma.inventoryNotification.update({
+          where: { id: notification.id },
+          data: { isArchived: true },
+        });
+      }
+    }
+  } catch (error) {
+    console.error('Error refreshing low stock notifications:', error);
   }
 }

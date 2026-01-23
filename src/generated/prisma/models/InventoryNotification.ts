@@ -192,7 +192,7 @@ export type InventoryNotificationGroupByOutputType = {
   message: string
   isRead: boolean
   isArchived: boolean
-  expiresAt: Date
+  expiresAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: InventoryNotificationCountAggregateOutputType | null
@@ -227,7 +227,7 @@ export type InventoryNotificationWhereInput = {
   message?: Prisma.StringFilter<"InventoryNotification"> | string
   isRead?: Prisma.BoolFilter<"InventoryNotification"> | boolean
   isArchived?: Prisma.BoolFilter<"InventoryNotification"> | boolean
-  expiresAt?: Prisma.DateTimeFilter<"InventoryNotification"> | Date | string
+  expiresAt?: Prisma.DateTimeNullableFilter<"InventoryNotification"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"InventoryNotification"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"InventoryNotification"> | Date | string
   salon?: Prisma.XOR<Prisma.SalonScalarRelationFilter, Prisma.SalonWhereInput>
@@ -243,7 +243,7 @@ export type InventoryNotificationOrderByWithRelationInput = {
   message?: Prisma.SortOrder
   isRead?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
-  expiresAt?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   salon?: Prisma.SalonOrderByWithRelationInput
@@ -262,7 +262,7 @@ export type InventoryNotificationWhereUniqueInput = Prisma.AtLeast<{
   message?: Prisma.StringFilter<"InventoryNotification"> | string
   isRead?: Prisma.BoolFilter<"InventoryNotification"> | boolean
   isArchived?: Prisma.BoolFilter<"InventoryNotification"> | boolean
-  expiresAt?: Prisma.DateTimeFilter<"InventoryNotification"> | Date | string
+  expiresAt?: Prisma.DateTimeNullableFilter<"InventoryNotification"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"InventoryNotification"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"InventoryNotification"> | Date | string
   salon?: Prisma.XOR<Prisma.SalonScalarRelationFilter, Prisma.SalonWhereInput>
@@ -278,7 +278,7 @@ export type InventoryNotificationOrderByWithAggregationInput = {
   message?: Prisma.SortOrder
   isRead?: Prisma.SortOrder
   isArchived?: Prisma.SortOrder
-  expiresAt?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.InventoryNotificationCountOrderByAggregateInput
@@ -298,7 +298,7 @@ export type InventoryNotificationScalarWhereWithAggregatesInput = {
   message?: Prisma.StringWithAggregatesFilter<"InventoryNotification"> | string
   isRead?: Prisma.BoolWithAggregatesFilter<"InventoryNotification"> | boolean
   isArchived?: Prisma.BoolWithAggregatesFilter<"InventoryNotification"> | boolean
-  expiresAt?: Prisma.DateTimeWithAggregatesFilter<"InventoryNotification"> | Date | string
+  expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"InventoryNotification"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"InventoryNotification"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"InventoryNotification"> | Date | string
 }
@@ -310,7 +310,7 @@ export type InventoryNotificationCreateInput = {
   message: string
   isRead?: boolean
   isArchived?: boolean
-  expiresAt: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   salon: Prisma.SalonCreateNestedOneWithoutInventoryNotificationsInput
@@ -326,7 +326,7 @@ export type InventoryNotificationUncheckedCreateInput = {
   message: string
   isRead?: boolean
   isArchived?: boolean
-  expiresAt: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -338,7 +338,7 @@ export type InventoryNotificationUpdateInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   salon?: Prisma.SalonUpdateOneRequiredWithoutInventoryNotificationsNestedInput
@@ -354,7 +354,7 @@ export type InventoryNotificationUncheckedUpdateInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -368,7 +368,7 @@ export type InventoryNotificationCreateManyInput = {
   message: string
   isRead?: boolean
   isArchived?: boolean
-  expiresAt: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -380,7 +380,7 @@ export type InventoryNotificationUpdateManyMutationInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -394,7 +394,7 @@ export type InventoryNotificationUncheckedUpdateManyInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -542,7 +542,7 @@ export type InventoryNotificationCreateWithoutSalonInput = {
   message: string
   isRead?: boolean
   isArchived?: boolean
-  expiresAt: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   product: Prisma.ProductCreateNestedOneWithoutNotificationsInput
@@ -556,7 +556,7 @@ export type InventoryNotificationUncheckedCreateWithoutSalonInput = {
   message: string
   isRead?: boolean
   isArchived?: boolean
-  expiresAt: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -599,7 +599,7 @@ export type InventoryNotificationScalarWhereInput = {
   message?: Prisma.StringFilter<"InventoryNotification"> | string
   isRead?: Prisma.BoolFilter<"InventoryNotification"> | boolean
   isArchived?: Prisma.BoolFilter<"InventoryNotification"> | boolean
-  expiresAt?: Prisma.DateTimeFilter<"InventoryNotification"> | Date | string
+  expiresAt?: Prisma.DateTimeNullableFilter<"InventoryNotification"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"InventoryNotification"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"InventoryNotification"> | Date | string
 }
@@ -611,7 +611,7 @@ export type InventoryNotificationCreateWithoutProductInput = {
   message: string
   isRead?: boolean
   isArchived?: boolean
-  expiresAt: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   salon: Prisma.SalonCreateNestedOneWithoutInventoryNotificationsInput
@@ -625,7 +625,7 @@ export type InventoryNotificationUncheckedCreateWithoutProductInput = {
   message: string
   isRead?: boolean
   isArchived?: boolean
-  expiresAt: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -664,7 +664,7 @@ export type InventoryNotificationCreateManySalonInput = {
   message: string
   isRead?: boolean
   isArchived?: boolean
-  expiresAt: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -676,7 +676,7 @@ export type InventoryNotificationUpdateWithoutSalonInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product?: Prisma.ProductUpdateOneRequiredWithoutNotificationsNestedInput
@@ -690,7 +690,7 @@ export type InventoryNotificationUncheckedUpdateWithoutSalonInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -703,7 +703,7 @@ export type InventoryNotificationUncheckedUpdateManyWithoutSalonInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -716,7 +716,7 @@ export type InventoryNotificationCreateManyProductInput = {
   message: string
   isRead?: boolean
   isArchived?: boolean
-  expiresAt: Date | string
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -728,7 +728,7 @@ export type InventoryNotificationUpdateWithoutProductInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   salon?: Prisma.SalonUpdateOneRequiredWithoutInventoryNotificationsNestedInput
@@ -742,7 +742,7 @@ export type InventoryNotificationUncheckedUpdateWithoutProductInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -755,7 +755,7 @@ export type InventoryNotificationUncheckedUpdateManyWithoutProductInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isRead?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isArchived?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -853,7 +853,7 @@ export type $InventoryNotificationPayload<ExtArgs extends runtime.Types.Extensio
     message: string
     isRead: boolean
     isArchived: boolean
-    expiresAt: Date
+    expiresAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["inventoryNotification"]>

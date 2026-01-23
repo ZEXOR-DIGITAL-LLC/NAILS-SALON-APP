@@ -1438,6 +1438,7 @@ export const NotificationSettingsScalarFieldEnum = {
   salonId: 'salonId',
   inventoryExpirationEnabled: 'inventoryExpirationEnabled',
   daysBeforeExpiration: 'daysBeforeExpiration',
+  lowStockEnabled: 'lowStockEnabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
