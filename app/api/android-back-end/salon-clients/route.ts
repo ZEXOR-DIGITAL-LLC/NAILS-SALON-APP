@@ -1,12 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/app/lib/prisma';
 
+// Helper to generate the next client code for a salon (CLT-0001, CLT-0002, etc.)
+async function generateNextClientCode(salonId: string): Promise<string> {
+  const lastClient = await prisma.salonClient.findFirst({
+    where: { salonId, clientCode: { not: null } },
+    orderBy: { clientCode: 'desc' },
+    select: { clientCode: true },
+  });
+
+  let nextNumber = 1;
+  if (lastClient?.clientCode) {
+    const match = lastClient.clientCode.match(/CLT-(\d+)/);
+    if (match) {
+      nextNumber = parseInt(match[1], 10) + 1;
+    }
+  }
+
+  return `CLT-${nextNumber.toString().padStart(4, '0')}`;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const salonId = searchParams.get('salonId');
     const search = searchParams.get('search');
     const clientId = searchParams.get('clientId');
+    const clientCode = searchParams.get('clientCode');
 
     if (!salonId) {
       return NextResponse.json({ error: 'Salon ID is required' }, { status: 400 });
@@ -15,6 +35,17 @@ export async function GET(request: NextRequest) {
     const salon = await prisma.salon.findUnique({ where: { id: salonId } });
     if (!salon) {
       return NextResponse.json({ error: 'Salon not found' }, { status: 404 });
+    }
+
+    // Lookup by client code
+    if (clientCode) {
+      const client = await prisma.salonClient.findFirst({
+        where: { salonId, clientCode: clientCode.toUpperCase() },
+      });
+      if (!client) {
+        return NextResponse.json({ error: 'Client not found', found: false }, { status: 404 });
+      }
+      return NextResponse.json({ client, found: true }, { status: 200 });
     }
 
     // Single client detail with appointment history
@@ -53,6 +84,7 @@ export async function GET(request: NextRequest) {
         { firstName: { contains: search.trim(), mode: 'insensitive' } },
         { lastName: { contains: search.trim(), mode: 'insensitive' } },
         { phone: { contains: search.trim(), mode: 'insensitive' } },
+        { clientCode: { contains: search.trim(), mode: 'insensitive' } },
       ];
     }
 
@@ -77,6 +109,7 @@ export async function GET(request: NextRequest) {
 
       return {
         id: client.id,
+        clientCode: client.clientCode,
         firstName: client.firstName,
         lastName: client.lastName,
         phone: client.phone,
@@ -129,6 +162,19 @@ export async function POST(request: NextRequest) {
     });
 
     if (existingClient) {
+      // Backfill clientCode if missing (for clients created before this feature)
+      if (!existingClient.clientCode) {
+        const backfillCode = await generateNextClientCode(salonId);
+        const updatedExisting = await prisma.salonClient.update({
+          where: { id: existingClient.id },
+          data: { clientCode: backfillCode },
+        });
+        return NextResponse.json({
+          message: 'Client already exists',
+          client: updatedExisting,
+          existing: true,
+        }, { status: 200 });
+      }
       return NextResponse.json({
         message: 'Client already exists',
         client: existingClient,
@@ -136,9 +182,13 @@ export async function POST(request: NextRequest) {
       }, { status: 200 });
     }
 
+    // Generate the next client code for this salon
+    const clientCode = await generateNextClientCode(salonId);
+
     const client = await prisma.salonClient.create({
       data: {
         salonId,
+        clientCode,
         firstName: trimmedFirst,
         lastName: trimmedLast,
         phone: phone?.trim() || null,

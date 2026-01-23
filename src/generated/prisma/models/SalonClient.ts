@@ -27,6 +27,7 @@ export type AggregateSalonClient = {
 export type SalonClientMinAggregateOutputType = {
   id: string | null
   salonId: string | null
+  clientCode: string | null
   firstName: string | null
   lastName: string | null
   phone: string | null
@@ -39,6 +40,7 @@ export type SalonClientMinAggregateOutputType = {
 export type SalonClientMaxAggregateOutputType = {
   id: string | null
   salonId: string | null
+  clientCode: string | null
   firstName: string | null
   lastName: string | null
   phone: string | null
@@ -51,6 +53,7 @@ export type SalonClientMaxAggregateOutputType = {
 export type SalonClientCountAggregateOutputType = {
   id: number
   salonId: number
+  clientCode: number
   firstName: number
   lastName: number
   phone: number
@@ -65,6 +68,7 @@ export type SalonClientCountAggregateOutputType = {
 export type SalonClientMinAggregateInputType = {
   id?: true
   salonId?: true
+  clientCode?: true
   firstName?: true
   lastName?: true
   phone?: true
@@ -77,6 +81,7 @@ export type SalonClientMinAggregateInputType = {
 export type SalonClientMaxAggregateInputType = {
   id?: true
   salonId?: true
+  clientCode?: true
   firstName?: true
   lastName?: true
   phone?: true
@@ -89,6 +94,7 @@ export type SalonClientMaxAggregateInputType = {
 export type SalonClientCountAggregateInputType = {
   id?: true
   salonId?: true
+  clientCode?: true
   firstName?: true
   lastName?: true
   phone?: true
@@ -174,6 +180,7 @@ export type SalonClientGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type SalonClientGroupByOutputType = {
   id: string
   salonId: string
+  clientCode: string | null
   firstName: string
   lastName: string
   phone: string | null
@@ -207,6 +214,7 @@ export type SalonClientWhereInput = {
   NOT?: Prisma.SalonClientWhereInput | Prisma.SalonClientWhereInput[]
   id?: Prisma.StringFilter<"SalonClient"> | string
   salonId?: Prisma.StringFilter<"SalonClient"> | string
+  clientCode?: Prisma.StringNullableFilter<"SalonClient"> | string | null
   firstName?: Prisma.StringFilter<"SalonClient"> | string
   lastName?: Prisma.StringFilter<"SalonClient"> | string
   phone?: Prisma.StringNullableFilter<"SalonClient"> | string | null
@@ -221,6 +229,7 @@ export type SalonClientWhereInput = {
 export type SalonClientOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  clientCode?: Prisma.SortOrderInput | Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -234,10 +243,12 @@ export type SalonClientOrderByWithRelationInput = {
 
 export type SalonClientWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  salonId_clientCode?: Prisma.SalonClientSalonIdClientCodeCompoundUniqueInput
   AND?: Prisma.SalonClientWhereInput | Prisma.SalonClientWhereInput[]
   OR?: Prisma.SalonClientWhereInput[]
   NOT?: Prisma.SalonClientWhereInput | Prisma.SalonClientWhereInput[]
   salonId?: Prisma.StringFilter<"SalonClient"> | string
+  clientCode?: Prisma.StringNullableFilter<"SalonClient"> | string | null
   firstName?: Prisma.StringFilter<"SalonClient"> | string
   lastName?: Prisma.StringFilter<"SalonClient"> | string
   phone?: Prisma.StringNullableFilter<"SalonClient"> | string | null
@@ -247,11 +258,12 @@ export type SalonClientWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"SalonClient"> | Date | string
   salon?: Prisma.XOR<Prisma.SalonScalarRelationFilter, Prisma.SalonWhereInput>
   appointments?: Prisma.OwnerAppointmentListRelationFilter
-}, "id">
+}, "id" | "salonId_clientCode">
 
 export type SalonClientOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  clientCode?: Prisma.SortOrderInput | Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -270,6 +282,7 @@ export type SalonClientScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SalonClientScalarWhereWithAggregatesInput | Prisma.SalonClientScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SalonClient"> | string
   salonId?: Prisma.StringWithAggregatesFilter<"SalonClient"> | string
+  clientCode?: Prisma.StringNullableWithAggregatesFilter<"SalonClient"> | string | null
   firstName?: Prisma.StringWithAggregatesFilter<"SalonClient"> | string
   lastName?: Prisma.StringWithAggregatesFilter<"SalonClient"> | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"SalonClient"> | string | null
@@ -281,6 +294,7 @@ export type SalonClientScalarWhereWithAggregatesInput = {
 
 export type SalonClientCreateInput = {
   id?: string
+  clientCode?: string | null
   firstName: string
   lastName?: string
   phone?: string | null
@@ -295,6 +309,7 @@ export type SalonClientCreateInput = {
 export type SalonClientUncheckedCreateInput = {
   id?: string
   salonId: string
+  clientCode?: string | null
   firstName: string
   lastName?: string
   phone?: string | null
@@ -307,6 +322,7 @@ export type SalonClientUncheckedCreateInput = {
 
 export type SalonClientUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -321,6 +337,7 @@ export type SalonClientUpdateInput = {
 export type SalonClientUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   salonId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -334,6 +351,7 @@ export type SalonClientUncheckedUpdateInput = {
 export type SalonClientCreateManyInput = {
   id?: string
   salonId: string
+  clientCode?: string | null
   firstName: string
   lastName?: string
   phone?: string | null
@@ -345,6 +363,7 @@ export type SalonClientCreateManyInput = {
 
 export type SalonClientUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -357,6 +376,7 @@ export type SalonClientUpdateManyMutationInput = {
 export type SalonClientUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   salonId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -381,9 +401,15 @@ export type SalonClientNullableScalarRelationFilter = {
   isNot?: Prisma.SalonClientWhereInput | null
 }
 
+export type SalonClientSalonIdClientCodeCompoundUniqueInput = {
+  salonId: string
+  clientCode: string
+}
+
 export type SalonClientCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  clientCode?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -396,6 +422,7 @@ export type SalonClientCountOrderByAggregateInput = {
 export type SalonClientMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  clientCode?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -408,6 +435,7 @@ export type SalonClientMaxOrderByAggregateInput = {
 export type SalonClientMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  clientCode?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -477,6 +505,7 @@ export type SalonClientUpdateOneWithoutAppointmentsNestedInput = {
 
 export type SalonClientCreateWithoutSalonInput = {
   id?: string
+  clientCode?: string | null
   firstName: string
   lastName?: string
   phone?: string | null
@@ -489,6 +518,7 @@ export type SalonClientCreateWithoutSalonInput = {
 
 export type SalonClientUncheckedCreateWithoutSalonInput = {
   id?: string
+  clientCode?: string | null
   firstName: string
   lastName?: string
   phone?: string | null
@@ -531,6 +561,7 @@ export type SalonClientScalarWhereInput = {
   NOT?: Prisma.SalonClientScalarWhereInput | Prisma.SalonClientScalarWhereInput[]
   id?: Prisma.StringFilter<"SalonClient"> | string
   salonId?: Prisma.StringFilter<"SalonClient"> | string
+  clientCode?: Prisma.StringNullableFilter<"SalonClient"> | string | null
   firstName?: Prisma.StringFilter<"SalonClient"> | string
   lastName?: Prisma.StringFilter<"SalonClient"> | string
   phone?: Prisma.StringNullableFilter<"SalonClient"> | string | null
@@ -542,6 +573,7 @@ export type SalonClientScalarWhereInput = {
 
 export type SalonClientCreateWithoutAppointmentsInput = {
   id?: string
+  clientCode?: string | null
   firstName: string
   lastName?: string
   phone?: string | null
@@ -555,6 +587,7 @@ export type SalonClientCreateWithoutAppointmentsInput = {
 export type SalonClientUncheckedCreateWithoutAppointmentsInput = {
   id?: string
   salonId: string
+  clientCode?: string | null
   firstName: string
   lastName?: string
   phone?: string | null
@@ -582,6 +615,7 @@ export type SalonClientUpdateToOneWithWhereWithoutAppointmentsInput = {
 
 export type SalonClientUpdateWithoutAppointmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -595,6 +629,7 @@ export type SalonClientUpdateWithoutAppointmentsInput = {
 export type SalonClientUncheckedUpdateWithoutAppointmentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   salonId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -606,6 +641,7 @@ export type SalonClientUncheckedUpdateWithoutAppointmentsInput = {
 
 export type SalonClientCreateManySalonInput = {
   id?: string
+  clientCode?: string | null
   firstName: string
   lastName?: string
   phone?: string | null
@@ -617,6 +653,7 @@ export type SalonClientCreateManySalonInput = {
 
 export type SalonClientUpdateWithoutSalonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -629,6 +666,7 @@ export type SalonClientUpdateWithoutSalonInput = {
 
 export type SalonClientUncheckedUpdateWithoutSalonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -641,6 +679,7 @@ export type SalonClientUncheckedUpdateWithoutSalonInput = {
 
 export type SalonClientUncheckedUpdateManyWithoutSalonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -684,6 +723,7 @@ export type SalonClientCountOutputTypeCountAppointmentsArgs<ExtArgs extends runt
 export type SalonClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   salonId?: boolean
+  clientCode?: boolean
   firstName?: boolean
   lastName?: boolean
   phone?: boolean
@@ -699,6 +739,7 @@ export type SalonClientSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type SalonClientSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   salonId?: boolean
+  clientCode?: boolean
   firstName?: boolean
   lastName?: boolean
   phone?: boolean
@@ -712,6 +753,7 @@ export type SalonClientSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type SalonClientSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   salonId?: boolean
+  clientCode?: boolean
   firstName?: boolean
   lastName?: boolean
   phone?: boolean
@@ -725,6 +767,7 @@ export type SalonClientSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type SalonClientSelectScalar = {
   id?: boolean
   salonId?: boolean
+  clientCode?: boolean
   firstName?: boolean
   lastName?: boolean
   phone?: boolean
@@ -734,7 +777,7 @@ export type SalonClientSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SalonClientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "salonId" | "firstName" | "lastName" | "phone" | "email" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["salonClient"]>
+export type SalonClientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "salonId" | "clientCode" | "firstName" | "lastName" | "phone" | "email" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["salonClient"]>
 export type SalonClientInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
   appointments?: boolean | Prisma.SalonClient$appointmentsArgs<ExtArgs>
@@ -756,6 +799,7 @@ export type $SalonClientPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     salonId: string
+    clientCode: string | null
     firstName: string
     lastName: string
     phone: string | null
@@ -1190,6 +1234,7 @@ export interface Prisma__SalonClientClient<T, Null = never, ExtArgs extends runt
 export interface SalonClientFieldRefs {
   readonly id: Prisma.FieldRef<"SalonClient", 'String'>
   readonly salonId: Prisma.FieldRef<"SalonClient", 'String'>
+  readonly clientCode: Prisma.FieldRef<"SalonClient", 'String'>
   readonly firstName: Prisma.FieldRef<"SalonClient", 'String'>
   readonly lastName: Prisma.FieldRef<"SalonClient", 'String'>
   readonly phone: Prisma.FieldRef<"SalonClient", 'String'>

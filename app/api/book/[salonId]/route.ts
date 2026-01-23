@@ -83,6 +83,25 @@ export async function GET(
   }
 }
 
+// Helper to generate the next client code for a salon (CLT-0001, CLT-0002, etc.)
+async function generateNextClientCode(salonId: string): Promise<string> {
+  const lastClient = await prisma.salonClient.findFirst({
+    where: { salonId, clientCode: { not: null } },
+    orderBy: { clientCode: 'desc' },
+    select: { clientCode: true },
+  });
+
+  let nextNumber = 1;
+  if (lastClient?.clientCode) {
+    const match = lastClient.clientCode.match(/CLT-(\d+)/);
+    if (match) {
+      nextNumber = parseInt(match[1], 10) + 1;
+    }
+  }
+
+  return `CLT-${nextNumber.toString().padStart(4, '0')}`;
+}
+
 // POST - Create a new appointment (public booking)
 export async function POST(
   request: NextRequest,
@@ -100,6 +119,7 @@ export async function POST(
       durationHours = 0,
       durationMinutes = 0,
       employeeId = null, // Optional: client can select a specific employee
+      clientCode = null, // Optional: existing client code for linking
     } = body;
 
     // Validate salonId
@@ -193,7 +213,66 @@ export async function POST(
       selectedEmployeeId = employeeId;
     }
 
-    // Create the appointment (with optional employee assignment)
+    // Handle client code: lookup existing or create new SalonClient
+    let salonClientId: string | null = null;
+    let assignedClientCode: string | null = null;
+
+    if (clientCode && clientCode.trim()) {
+      // Look up existing client by code
+      const existingClient = await prisma.salonClient.findFirst({
+        where: { salonId, clientCode: clientCode.trim().toUpperCase() },
+      });
+      if (existingClient) {
+        salonClientId = existingClient.id;
+        assignedClientCode = existingClient.clientCode;
+      }
+    }
+
+    // Auto-create SalonClient if not found by code
+    if (!salonClientId) {
+      const nameParts = clientName.trim().split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+
+      // Check if client with same name already exists
+      const existingByName = await prisma.salonClient.findFirst({
+        where: {
+          salonId,
+          firstName: { equals: firstName, mode: 'insensitive' },
+          lastName: { equals: lastName, mode: 'insensitive' },
+        },
+      });
+
+      if (existingByName) {
+        salonClientId = existingByName.id;
+        // Backfill code if missing
+        if (!existingByName.clientCode) {
+          const newCode = await generateNextClientCode(salonId);
+          await prisma.salonClient.update({
+            where: { id: existingByName.id },
+            data: { clientCode: newCode },
+          });
+          assignedClientCode = newCode;
+        } else {
+          assignedClientCode = existingByName.clientCode;
+        }
+      } else {
+        // Create new client with auto-generated code
+        const newCode = await generateNextClientCode(salonId);
+        const newClient = await prisma.salonClient.create({
+          data: {
+            salonId,
+            clientCode: newCode,
+            firstName,
+            lastName,
+          },
+        });
+        salonClientId = newClient.id;
+        assignedClientCode = newCode;
+      }
+    }
+
+    // Create the appointment (with optional employee assignment and client linking)
     const appointment = await prisma.ownerAppointment.create({
       data: {
         salonId,
@@ -206,6 +285,7 @@ export async function POST(
         durationMinutes: dMinutes,
         status: 'Pending',
         employeeId: selectedEmployeeId,
+        salonClientId,
       },
     });
 
@@ -223,6 +303,7 @@ export async function POST(
           service: appointment.service,
           clientName: appointment.clientName,
         },
+        clientCode: assignedClientCode,
       },
       { status: 201 }
     );

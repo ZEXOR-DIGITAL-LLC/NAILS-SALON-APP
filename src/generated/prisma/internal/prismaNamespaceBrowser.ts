@@ -202,6 +202,7 @@ export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typ
 export const SalonClientScalarFieldEnum = {
   id: 'id',
   salonId: 'salonId',
+  clientCode: 'clientCode',
   firstName: 'firstName',
   lastName: 'lastName',
   phone: 'phone',

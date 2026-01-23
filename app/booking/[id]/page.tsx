@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useParams } from 'next/navigation';
+import { useState, useEffect, useRef, Suspense } from 'react';
+import { useParams, useSearchParams } from 'next/navigation';
 
 type BookingData = {
   id: string;
@@ -185,6 +185,18 @@ const translations = {
     FR: 'Merci pour votre visite!',
     PT: 'Obrigado pela sua visita!',
   },
+  yourClientCode: {
+    EN: 'Your Client Code',
+    ES: 'Tu Codigo de Cliente',
+    FR: 'Votre Code Client',
+    PT: 'Seu Codigo de Cliente',
+  },
+  saveClientCode: {
+    EN: 'Save this code for faster bookings next time',
+    ES: 'Guarda este codigo para reservas mas rapidas la proxima vez',
+    FR: 'Conservez ce code pour des reservations plus rapides la prochaine fois',
+    PT: 'Salve este codigo para agendamentos mais rapidos na proxima vez',
+  },
 };
 
 function formatTime(hour: number, minute: number): string {
@@ -218,9 +230,23 @@ function formatDate(dateStr: string, lang: Language): string {
   });
 }
 
-export default function BookingPage() {
+export default function BookingPageWrapper() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-pink-50 to-white">
+        <div className="w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+      </div>
+    }>
+      <BookingPage />
+    </Suspense>
+  );
+}
+
+function BookingPage() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const id = params?.id as string;
+  const clientCode = searchParams?.get('clientCode') || null;
 
   const [booking, setBooking] = useState<BookingData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -519,6 +545,15 @@ export default function BookingPage() {
               <p className="text-sm text-gray-500 mb-1">{t('service')}</p>
               <p className="text-lg font-semibold text-gray-800">{booking.service}</p>
             </div>
+
+            {/* Client Code */}
+            {clientCode && (
+              <div className="bg-pink-50 border border-pink-200 rounded-xl p-4">
+                <p className="text-sm text-pink-600 font-medium mb-1">{t('yourClientCode')}</p>
+                <p className="text-2xl font-bold text-pink-700 tracking-wider">{clientCode}</p>
+                <p className="text-xs text-pink-500 mt-2">{t('saveClientCode')}</p>
+              </div>
+            )}
           </div>
         </div>
 

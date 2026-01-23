@@ -291,6 +291,24 @@ const translations = {
     FR: 'Cet employe n\'est pas disponible a cette heure. Veuillez choisir un autre horaire ou employe.',
     PT: 'Este funcionario nao esta disponivel neste horario. Por favor escolha outro horario ou funcionario.',
   },
+  clientCodeLabel: {
+    EN: 'Client Code (Optional)',
+    ES: 'Codigo de Cliente (Opcional)',
+    FR: 'Code Client (Optionnel)',
+    PT: 'Codigo do Cliente (Opcional)',
+  },
+  clientCodePlaceholder: {
+    EN: 'Enter your code (e.g. CLT-0001)',
+    ES: 'Ingresa tu codigo (ej. CLT-0001)',
+    FR: 'Entrez votre code (ex. CLT-0001)',
+    PT: 'Digite seu codigo (ex. CLT-0001)',
+  },
+  clientCodeHint: {
+    EN: 'If you have a client code, enter it here. Otherwise, one will be assigned automatically.',
+    ES: 'Si tienes un codigo de cliente, ingresalo aqui. De lo contrario, se asignara uno automaticamente.',
+    FR: 'Si vous avez un code client, entrez-le ici. Sinon, un code sera attribue automatiquement.',
+    PT: 'Se voce tem um codigo de cliente, digite aqui. Caso contrario, um sera atribuido automaticamente.',
+  },
 };
 
 // 12-hour format hours (1-12)
@@ -424,6 +442,7 @@ export default function PublicBookingPage() {
   const [selectedAmPm, setSelectedAmPm] = useState<AmPm>('AM');
   const [selectedMinute, setSelectedMinute] = useState(0);
   const [clientName, setClientName] = useState('');
+  const [clientCodeInput, setClientCodeInput] = useState('');
   const [service, setService] = useState('');
 
   // Gallery modal state
@@ -546,14 +565,16 @@ export default function PublicBookingPage() {
           durationHours: FIXED_DURATION_HOURS,
           durationMinutes: FIXED_DURATION_MINUTES,
           employeeId: selectedEmployee,
+          clientCode: clientCodeInput.trim() || null,
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Redirect to the live status page
-        router.push(`/booking/${data.appointment.id}`);
+        // Redirect to the live status page with client code
+        const codeParam = data.clientCode ? `?clientCode=${encodeURIComponent(data.clientCode)}` : '';
+        router.push(`/booking/${data.appointment.id}${codeParam}`);
         return;
       } else {
         setValidationError(data.error || 'Booking failed');
@@ -570,6 +591,7 @@ export default function PublicBookingPage() {
     setBookingSuccess(false);
     setBookingResult(null);
     setClientName('');
+    setClientCodeInput('');
     setService('');
     setSelectedDate(today);
     setSelectedHour12(9);
@@ -958,6 +980,20 @@ export default function PublicBookingPage() {
               onChange={(e) => setClientName(e.target.value)}
               placeholder={t('clientNamePlaceholder')}
               className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+            />
+          </div>
+
+          {/* Client Code (Optional) */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t('clientCodeLabel')}</label>
+            <p className="text-xs text-gray-400 mb-3">{t('clientCodeHint')}</p>
+            <input
+              type="text"
+              value={clientCodeInput}
+              onChange={(e) => setClientCodeInput(e.target.value.toUpperCase())}
+              placeholder={t('clientCodePlaceholder')}
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent uppercase"
+              maxLength={8}
             />
           </div>
 
