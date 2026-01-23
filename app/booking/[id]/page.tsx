@@ -77,6 +77,12 @@ const translations = {
     FR: 'Planifie',
     PT: 'Agendado',
   },
+  inProgress: {
+    EN: 'In Progress',
+    ES: 'En Progreso',
+    FR: 'En cours',
+    PT: 'Em Andamento',
+  },
   completed: {
     EN: 'Completed',
     ES: 'Completada',
@@ -386,7 +392,7 @@ function BookingPage() {
 
       // Poll every 15 seconds for updates (only if not completed/canceled)
       const interval = setInterval(() => {
-        if (booking?.status === 'Pending') {
+        if (booking?.status === 'Pending' || booking?.status === 'InProgress') {
           fetchBooking();
         }
       }, 15000);
@@ -448,12 +454,12 @@ function BookingPage() {
     codeSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
-  // Auto-refresh code results if there are pending appointments
+  // Auto-refresh code results if there are active appointments
   useEffect(() => {
     if (!activeCode || !codeResults) return;
 
-    const hasPending = codeResults.some((r) => r.status === 'Pending');
-    if (!hasPending) return;
+    const hasActive = codeResults.some((r) => r.status === 'Pending' || r.status === 'InProgress');
+    if (!hasActive) return;
 
     const interval = setInterval(() => {
       fetchByCode(activeCode);
@@ -466,6 +472,8 @@ function BookingPage() {
     switch (status) {
       case 'Pending':
         return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'InProgress':
+        return 'bg-indigo-100 text-indigo-800 border-indigo-200';
       case 'Completed':
         return 'bg-green-100 text-green-800 border-green-200';
       case 'Canceled':
@@ -479,6 +487,8 @@ function BookingPage() {
     switch (status) {
       case 'Pending':
         return t('pending');
+      case 'InProgress':
+        return t('inProgress');
       case 'Completed':
         return t('completed');
       case 'Canceled':
@@ -566,7 +576,7 @@ function BookingPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-semibold text-gray-700">{t('yourAppointments')}</h3>
-                  {codeResults.some((r) => r.status === 'Pending') && (
+                  {codeResults.some((r) => r.status === 'Pending' || r.status === 'InProgress') && (
                     <div className="flex items-center gap-1.5">
                       <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                       <span className="text-xs text-green-600">{t('liveTracking')}</span>
@@ -581,6 +591,7 @@ function BookingPage() {
                         <div className="flex items-center gap-2">
                           <div className={`w-2 h-2 rounded-full ${
                             result.status === 'Pending' ? 'bg-blue-500 animate-pulse' :
+                            result.status === 'InProgress' ? 'bg-indigo-500 animate-pulse' :
                             result.status === 'Completed' ? 'bg-green-500' : 'bg-red-500'
                           }`}></div>
                           <span className="text-sm font-medium">{getStatusText(result.status)}</span>

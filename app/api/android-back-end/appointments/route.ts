@@ -8,6 +8,60 @@ function parseDateToUTC(dateStr: string): Date {
   return new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0));
 }
 
+// Auto-transition appointments based on current time
+// Pending → InProgress (when start time arrives)
+// InProgress → Completed (when end time passes)
+async function autoTransitionAppointments(salonId: string, date: Date) {
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+  const endOfDay = new Date(date);
+  endOfDay.setUTCHours(23, 59, 59, 999);
+
+  // 1. Pending → InProgress (start time has arrived)
+  const pendingAppointments = await prisma.ownerAppointment.findMany({
+    where: {
+      salonId,
+      appointmentDate: { gte: date, lte: endOfDay },
+      status: 'Pending',
+    },
+  });
+
+  const toStart = pendingAppointments.filter(apt => {
+    const aptStartMinutes = apt.appointmentHour * 60 + apt.appointmentMinute;
+    return currentMinutes >= aptStartMinutes;
+  });
+
+  if (toStart.length > 0) {
+    await prisma.ownerAppointment.updateMany({
+      where: { id: { in: toStart.map(a => a.id) } },
+      data: { status: 'InProgress' },
+    });
+  }
+
+  // 2. InProgress → Completed (end time has passed)
+  const inProgressAppointments = await prisma.ownerAppointment.findMany({
+    where: {
+      salonId,
+      appointmentDate: { gte: date, lte: endOfDay },
+      status: 'InProgress',
+    },
+  });
+
+  const toComplete = inProgressAppointments.filter(apt => {
+    const aptEndMinutes = (apt.appointmentHour * 60 + apt.appointmentMinute)
+      + (apt.durationHours * 60 + apt.durationMinutes);
+    return currentMinutes >= aptEndMinutes;
+  });
+
+  if (toComplete.length > 0) {
+    await prisma.ownerAppointment.updateMany({
+      where: { id: { in: toComplete.map(a => a.id) } },
+      data: { status: 'Completed' },
+    });
+  }
+}
+
 // GET - Fetch appointments for a salon owner (today's appointments by default)
 export async function GET(request: NextRequest) {
   try {
@@ -290,6 +344,13 @@ export async function GET(request: NextRequest) {
     const endOfDay = new Date(startOfDay);
     endOfDay.setUTCHours(23, 59, 59, 999);
 
+    // Auto-transition appointments for today before returning results
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    if (dateStr === todayStr) {
+      await autoTransitionAppointments(salonId, startOfDay);
+    }
+
     // Build where clause with optional status and employee filters
     const whereClause: {
       salonId: string;
@@ -305,7 +366,7 @@ export async function GET(request: NextRequest) {
     };
 
     // Add status filter if provided
-    if (statusParam && ['Pending', 'Completed', 'Canceled'].includes(statusParam)) {
+    if (statusParam && ['Pending', 'InProgress', 'Completed', 'Canceled'].includes(statusParam)) {
       whereClause.status = statusParam;
     }
 
