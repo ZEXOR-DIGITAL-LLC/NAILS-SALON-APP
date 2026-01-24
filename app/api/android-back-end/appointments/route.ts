@@ -280,21 +280,20 @@ export async function GET(request: NextRequest) {
       }, { status: 200 });
     }
 
-    // Handle future appointments query
+    // Handle future/upcoming appointments query (today + future pending)
     if (typeParam === 'future') {
       // Use client's local "today" date if provided, otherwise fall back to server UTC
       const todayParam = searchParams.get('today');
-      let tomorrow: Date;
+      let startDate: Date;
       if (todayParam && /^\d{4}-\d{2}-\d{2}$/.test(todayParam)) {
-        // Client sent its local today - compute tomorrow relative to that
-        tomorrow = parseDateToUTC(todayParam);
-        tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+        // Client sent its local today - include today's appointments
+        startDate = parseDateToUTC(todayParam);
       } else {
         const now = new Date();
-        tomorrow = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0, 0));
+        startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0));
       }
 
-      console.log('Fetching future appointments from:', tomorrow);
+      console.log('Fetching upcoming appointments from:', startDate);
 
       const whereClause: {
         salonId: string;
@@ -303,7 +302,7 @@ export async function GET(request: NextRequest) {
         employeeId?: string;
       } = {
         salonId,
-        appointmentDate: { gte: tomorrow },
+        appointmentDate: { gte: startDate },
         status: 'Pending',
       };
       if (employeeIdParam) {
