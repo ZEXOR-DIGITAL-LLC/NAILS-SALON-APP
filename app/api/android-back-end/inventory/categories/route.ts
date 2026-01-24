@@ -181,9 +181,13 @@ export async function PATCH(request: NextRequest) {
       updateData.order = parseInt(order, 10);
     }
 
-    const updatedCategory = await prisma.productCategory.update({
-      where: { id },
+    await prisma.productCategory.updateMany({
+      where: { id, salonId },
       data: updateData,
+    });
+
+    const updatedCategory = await prisma.productCategory.findUnique({
+      where: { id },
     });
 
     return NextResponse.json({
@@ -229,8 +233,8 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Delete the category (products will have categoryId set to null due to SetNull)
-    await prisma.productCategory.delete({
-      where: { id },
+    await prisma.productCategory.deleteMany({
+      where: { id, salonId },
     });
 
     return NextResponse.json({

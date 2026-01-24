@@ -144,9 +144,13 @@ export async function PATCH(request: NextRequest) {
     }
 
     // Update gallery
-    const gallery = await prisma.gallery.update({
-      where: { id: galleryId },
+    await prisma.gallery.updateMany({
+      where: { id: galleryId, salonId },
       data: updateData,
+    });
+
+    const gallery = await prisma.gallery.findUnique({
+      where: { id: galleryId },
       include: {
         images: {
           orderBy: { order: 'asc' },
@@ -210,8 +214,8 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Delete gallery (cascade will delete GalleryImage records)
-    await prisma.gallery.delete({
-      where: { id: galleryId },
+    await prisma.gallery.deleteMany({
+      where: { id: galleryId, salonId },
     });
 
     return NextResponse.json(

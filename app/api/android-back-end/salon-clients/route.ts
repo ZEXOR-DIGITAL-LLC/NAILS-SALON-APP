@@ -236,9 +236,13 @@ export async function PATCH(request: NextRequest) {
     if (email !== undefined) updateData.email = email?.trim() || null;
     if (notes !== undefined) updateData.notes = notes?.trim() || null;
 
-    const updatedClient = await prisma.salonClient.update({
-      where: { id },
+    await prisma.salonClient.updateMany({
+      where: { id, salonId },
       data: updateData,
+    });
+
+    const updatedClient = await prisma.salonClient.findUnique({
+      where: { id },
     });
 
     return NextResponse.json({
@@ -268,7 +272,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Client not found or access denied' }, { status: 404 });
     }
 
-    await prisma.salonClient.delete({ where: { id } });
+    await prisma.salonClient.deleteMany({ where: { id, salonId } });
 
     return NextResponse.json({
       message: 'Client deleted successfully',

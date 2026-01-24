@@ -165,9 +165,13 @@ export async function PATCH(request: NextRequest) {
       updateData.order = parseInt(order, 10);
     }
 
-    const updatedEmployee = await prisma.employee.update({
-      where: { id },
+    await prisma.employee.updateMany({
+      where: { id, salonId },
       data: updateData,
+    });
+
+    const updatedEmployee = await prisma.employee.findUnique({
+      where: { id },
     });
 
     return NextResponse.json({
@@ -209,8 +213,8 @@ export async function DELETE(request: NextRequest) {
 
     // Note: Due to onDelete: SetNull on OwnerAppointment.employee relation,
     // deleting an employee will set employeeId to null on all their appointments
-    await prisma.employee.delete({
-      where: { id },
+    await prisma.employee.deleteMany({
+      where: { id, salonId },
     });
 
     return NextResponse.json({

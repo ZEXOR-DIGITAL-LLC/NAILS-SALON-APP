@@ -222,8 +222,8 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Delete from database
-    await prisma.galleryImage.delete({
-      where: { id: imageId },
+    await prisma.galleryImage.deleteMany({
+      where: { id: imageId, salonId },
     });
 
     // Fetch updated gallery

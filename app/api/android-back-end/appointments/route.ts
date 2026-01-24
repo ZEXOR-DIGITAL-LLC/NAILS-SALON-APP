@@ -689,9 +689,13 @@ export async function PATCH(request: NextRequest) {
     if (durationHours !== undefined) updateData.durationHours = parseInt(durationHours, 10);
     if (durationMinutes !== undefined) updateData.durationMinutes = parseInt(durationMinutes, 10);
 
-    const updated = await prisma.ownerAppointment.update({
-      where: { id },
+    await prisma.ownerAppointment.updateMany({
+      where: { id, salonId },
       data: updateData,
+    });
+
+    const updated = await prisma.ownerAppointment.findUnique({
+      where: { id },
       include: {
         employee: {
           select: {
@@ -751,8 +755,8 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Delete the appointment
-    await prisma.ownerAppointment.delete({
-      where: { id: appointmentId },
+    await prisma.ownerAppointment.deleteMany({
+      where: { id: appointmentId, salonId },
     });
 
     return NextResponse.json({

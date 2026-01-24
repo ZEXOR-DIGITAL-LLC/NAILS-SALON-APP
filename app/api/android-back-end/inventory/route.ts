@@ -365,9 +365,13 @@ export async function PATCH(request: NextRequest) {
       updateData.isActive = Boolean(isActive);
     }
 
-    const updatedProduct = await prisma.product.update({
-      where: { id },
+    await prisma.product.updateMany({
+      where: { id, salonId },
       data: updateData,
+    });
+
+    const updatedProduct = await prisma.product.findUnique({
+      where: { id },
       include: {
         category: {
           select: {
@@ -426,8 +430,8 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Delete the product (history will cascade delete)
-    await prisma.product.delete({
-      where: { id },
+    await prisma.product.deleteMany({
+      where: { id, salonId },
     });
 
     return NextResponse.json({
