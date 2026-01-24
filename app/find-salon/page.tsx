@@ -98,6 +98,184 @@ const translations = {
   },
 };
 
+const navTranslations = {
+  features: { EN: 'Features', ES: 'Funciones', FR: 'Fonctionnalités', PT: 'Recursos' },
+  howItWorks: { EN: 'How It Works', ES: 'Cómo Funciona', FR: 'Comment Ça Marche', PT: 'Como Funciona' },
+  faq: { EN: 'FAQ', ES: 'Preguntas', FR: 'FAQ', PT: 'Perguntas' },
+  findSalon: { EN: 'Find a Salon', ES: 'Buscar Salon', FR: 'Trouver un Salon', PT: 'Encontrar Salao' },
+  download: { EN: 'Download App', ES: 'Descargar App', FR: "Télécharger", PT: 'Baixar App' },
+};
+
+const footerTranslations = {
+  privacy: { EN: 'Privacy Policy', ES: 'Política de Privacidad', FR: 'Politique de Confidentialité', PT: 'Política de Privacidade' },
+  terms: { EN: 'Terms of Service', ES: 'Términos de Servicio', FR: "Conditions d'Utilisation", PT: 'Termos de Serviço' },
+  cookie: { EN: 'Cookie Policy', ES: 'Política de Cookies', FR: 'Politique de Cookies', PT: 'Política de Cookies' },
+  contact: { EN: 'Contact', ES: 'Contacto', FR: 'Contact', PT: 'Contato' },
+};
+
+const langTooltip: Record<Language, string> = {
+  EN: 'Switch language anytime',
+  ES: 'Cambia el idioma cuando quieras',
+  FR: 'Changez de langue à tout moment',
+  PT: 'Mude o idioma quando quiser',
+};
+
+const Icons = {
+  Globe: ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+    </svg>
+  ),
+  ChevronDown: ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+    </svg>
+  ),
+  Menu: ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  ),
+  X: ({ className }: { className?: string }) => (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+    </svg>
+  ),
+};
+
+function LanguageSwitcher({ language, setLanguage }: { language: Language; setLanguage: (lang: Language) => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const languages: { code: Language; label: string }[] = [
+    { code: 'EN', label: 'English' },
+    { code: 'ES', label: 'Español' },
+    { code: 'FR', label: 'Français' },
+    { code: 'PT', label: 'Português' },
+  ];
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-rose-600 transition-colors rounded-full hover:bg-rose-50"
+        title={langTooltip[language]}
+      >
+        <Icons.Globe className="w-4 h-4" />
+        <span>{language}</span>
+        <Icons.ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      {isOpen && (
+        <>
+          <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)} />
+          <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-20 overflow-hidden">
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => { setLanguage(lang.code); setIsOpen(false); }}
+                className={`w-full px-4 py-2 text-left text-sm hover:bg-rose-50 transition-colors ${language === lang.code ? 'text-rose-600 font-semibold bg-rose-50' : 'text-gray-700'}`}
+              >
+                {lang.label}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function SubpageHeader({ language, setLanguage }: { language: Language; setLanguage: (lang: Language) => void }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm border-b border-white/20' : 'bg-white/80 backdrop-blur-md'}`}>
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          <a href="/" className="flex items-center gap-3">
+            <Image
+              src="/nails-salon.png"
+              alt="Nails Salon Logo"
+              width={44}
+              height={44}
+              className="rounded-xl shadow-lg shadow-rose-200/50"
+            />
+            <span className="font-serif font-bold text-2xl text-gray-900 tracking-tight">Nails Salon</span>
+          </a>
+
+          <div className="hidden md:flex items-center gap-8">
+            <a href="/#features" className="text-sm font-medium text-gray-600 hover:text-rose-600 transition-colors">{navTranslations.features[language]}</a>
+            <a href="/#how-it-works" className="text-sm font-medium text-gray-600 hover:text-rose-600 transition-colors">{navTranslations.howItWorks[language]}</a>
+            <a href="/#faq" className="text-sm font-medium text-gray-600 hover:text-rose-600 transition-colors">{navTranslations.faq[language]}</a>
+            <a href="/find-salon" className="text-sm font-medium text-rose-600 hover:text-rose-700 transition-colors">{navTranslations.findSalon[language]}</a>
+            <div className="w-px h-5 bg-gray-200"></div>
+            <LanguageSwitcher language={language} setLanguage={setLanguage} />
+            <a href="/#download" className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-2.5 rounded-full text-sm font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+              {navTranslations.download[language]}
+            </a>
+          </div>
+
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageSwitcher language={language} setLanguage={setLanguage} />
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
+              {mobileMenuOpen ? <Icons.X className="w-6 h-6" /> : <Icons.Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {mobileMenuOpen && (
+          <div className="md:hidden py-6 border-t border-gray-100 bg-white/95 backdrop-blur-lg absolute left-0 right-0 px-4 shadow-xl rounded-b-3xl">
+            <div className="flex flex-col gap-4">
+              <a href="/#features" className="text-left font-medium text-lg text-gray-600 hover:text-rose-600 py-2">{navTranslations.features[language]}</a>
+              <a href="/#how-it-works" className="text-left font-medium text-lg text-gray-600 hover:text-rose-600 py-2">{navTranslations.howItWorks[language]}</a>
+              <a href="/#faq" className="text-left font-medium text-lg text-gray-600 hover:text-rose-600 py-2">{navTranslations.faq[language]}</a>
+              <a href="/find-salon" className="text-left font-medium text-lg text-rose-600 hover:text-rose-700 py-2">{navTranslations.findSalon[language]}</a>
+              <a href="/#download" className="bg-gray-900 text-white px-4 py-3.5 rounded-xl text-center font-medium shadow-lg mt-2">
+                {navTranslations.download[language]}
+              </a>
+            </div>
+          </div>
+        )}
+      </nav>
+    </header>
+  );
+}
+
+function SubpageFooter({ language }: { language: Language }) {
+  return (
+    <footer className="py-12 bg-white border-t border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+          <a href="/" className="flex items-center gap-3">
+            <Image
+              src="/nails-salon.png"
+              alt="Nails Salon Logo"
+              width={32}
+              height={32}
+              className="rounded-lg grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all"
+            />
+            <span className="font-bold text-gray-400">Nails Salon</span>
+          </a>
+
+          <div className="flex items-center gap-8 text-sm text-gray-500 font-medium">
+            <a href="/privacy-policy" className="hover:text-rose-600 transition-colors">{footerTranslations.privacy[language]}</a>
+            <a href="/cookie-policy" className="hover:text-rose-600 transition-colors">{footerTranslations.cookie[language]}</a>
+            <a href="/terms-of-service" className="hover:text-rose-600 transition-colors">{footerTranslations.terms[language]}</a>
+            <a href="#" className="hover:text-rose-600 transition-colors">{footerTranslations.contact[language]}</a>
+          </div>
+
+          <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} Nails Salon.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 export default function FindSalonPage() {
   const [language, setLanguage] = useState<Language>('EN');
   const [countries, setCountries] = useState<string[]>([]);
@@ -186,31 +364,9 @@ export default function FindSalonPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-rose-600 transition-colors">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              <span className="text-sm font-medium">{t('back')}</span>
-            </Link>
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value as Language)}
-              className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
-            >
-              <option value="EN">English</option>
-              <option value="ES">Espanol</option>
-              <option value="FR">Francais</option>
-              <option value="PT">Portugues</option>
-            </select>
-          </div>
-        </div>
-      </header>
+      <SubpageHeader language={language} setLanguage={setLanguage} />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-28">
         {/* Title */}
         <div className="text-center mb-10">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">{t('title')}</h1>
@@ -329,11 +485,9 @@ export default function FindSalonPage() {
           </div>
         )}
 
-        {/* Footer */}
-        <div className="mt-16 text-center">
-          <p className="text-xs text-gray-400">Powered by Nails Salon Connect</p>
-        </div>
       </div>
+
+      <SubpageFooter language={language} />
     </div>
   );
 }
