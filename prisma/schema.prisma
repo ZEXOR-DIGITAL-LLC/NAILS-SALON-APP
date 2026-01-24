@@ -260,3 +260,18 @@ model InventoryNotification {
   @@index([salonId, isArchived])
   @@index([productId])
 }
+
+model PromoCode {
+  id          String    @id @default(cuid())
+  code        String    @unique  // 6-character uppercase code
+  usedByEmail String?   // Email of the user who redeemed it
+  salonId     String?   // Salon ID linked to the redemption
+  usedAt      DateTime? // When the code was first used (start of 30-day access)
+  expiresAt   DateTime? // When the 30-day access expires
+  isUsed      Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+
+  @@index([code])
+  @@index([usedByEmail])
+  @@index([salonId])
+}
