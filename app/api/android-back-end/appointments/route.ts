@@ -11,9 +11,10 @@ function parseDateToUTC(dateStr: string): Date {
 // Auto-transition appointments based on current time
 // Pending → InProgress (when start time arrives)
 // InProgress → Completed (when end time passes)
-async function autoTransitionAppointments(salonId: string, date: Date) {
+async function autoTransitionAppointments(salonId: string, date: Date, clientCurrentMinutes?: number) {
+  // Use client-provided time if available, otherwise fall back to server time
   const now = new Date();
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  const currentMinutes = clientCurrentMinutes ?? (now.getHours() * 60 + now.getMinutes());
 
   const endOfDay = new Date(date);
   endOfDay.setUTCHours(23, 59, 59, 999);
@@ -294,7 +295,18 @@ export async function GET(request: NextRequest) {
       }
 
       // Auto-transition today's appointments (Pending→InProgress→Completed)
-      await autoTransitionAppointments(salonId, startDate);
+      // Use client's local time to avoid server timezone mismatch
+      const nowHourParam = searchParams.get('nowHour');
+      const nowMinuteParam = searchParams.get('nowMinute');
+      let clientMinutes: number | undefined;
+      if (nowHourParam !== null && nowMinuteParam !== null) {
+        const h = parseInt(nowHourParam, 10);
+        const m = parseInt(nowMinuteParam, 10);
+        if (!isNaN(h) && !isNaN(m) && h >= 0 && h <= 23 && m >= 0 && m <= 59) {
+          clientMinutes = h * 60 + m;
+        }
+      }
+      await autoTransitionAppointments(salonId, startDate, clientMinutes);
 
       console.log('Fetching upcoming appointments from:', startDate);
 
@@ -358,7 +370,18 @@ export async function GET(request: NextRequest) {
     const today = new Date();
     const todayStr = today.toISOString().split('T')[0];
     if (dateStr === todayStr) {
-      await autoTransitionAppointments(salonId, startOfDay);
+      // Use client's local time to avoid server timezone mismatch
+      const nowHourP = searchParams.get('nowHour');
+      const nowMinuteP = searchParams.get('nowMinute');
+      let clientMins: number | undefined;
+      if (nowHourP !== null && nowMinuteP !== null) {
+        const h = parseInt(nowHourP, 10);
+        const m = parseInt(nowMinuteP, 10);
+        if (!isNaN(h) && !isNaN(m) && h >= 0 && h <= 23 && m >= 0 && m <= 59) {
+          clientMins = h * 60 + m;
+        }
+      }
+      await autoTransitionAppointments(salonId, startOfDay, clientMins);
     }
 
     // Build where clause with optional status and employee filters
