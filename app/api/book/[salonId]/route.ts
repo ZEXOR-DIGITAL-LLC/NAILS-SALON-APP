@@ -289,6 +289,36 @@ export async function POST(
       },
     });
 
+    // Send push notification to salon owner if they have a push token
+    if (salon.pushToken) {
+      const hour12 = hour % 12 || 12;
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      const timeStr = `${hour12}:${minute.toString().padStart(2, '0')} ${ampm}`;
+      const dateStr = appointmentDate;
+
+      try {
+        await fetch('https://exp.host/--/api/v2/push/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Accept-Encoding': 'gzip, deflate',
+          },
+          body: JSON.stringify({
+            to: salon.pushToken,
+            title: 'New Booking!',
+            body: `${clientName.trim()} booked "${service.trim()}" on ${dateStr} at ${timeStr}`,
+            sound: 'default',
+            priority: 'high',
+            data: { appointmentId: appointment.id },
+          }),
+        });
+      } catch (pushError) {
+        // Non-blocking: log but don't fail the booking
+        console.error('Failed to send push notification:', pushError);
+      }
+    }
+
     return NextResponse.json(
       {
         success: true,

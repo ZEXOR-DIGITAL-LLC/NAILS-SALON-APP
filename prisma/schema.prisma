@@ -47,6 +47,9 @@ model Salon {
   closingHour       Int       @default(18)        // Closing hour (0-23)
   closingMinute     Int       @default(0)         // Closing minute (0-59)
 
+  // Push Notifications
+  pushToken         String?   // Expo Push Token for booking notifications
+
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
@@ -234,6 +237,7 @@ model ProductHistory {
 model NotificationSettings {
   id                          String    @id @default(cuid())
   salonId                     String    @unique
+  bookingNotificationsEnabled Boolean   @default(false)
   inventoryExpirationEnabled  Boolean   @default(false)
   daysBeforeExpiration        Int       @default(7)
   lowStockEnabled             Boolean   @default(false)

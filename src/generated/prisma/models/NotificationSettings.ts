@@ -37,6 +37,7 @@ export type NotificationSettingsSumAggregateOutputType = {
 export type NotificationSettingsMinAggregateOutputType = {
   id: string | null
   salonId: string | null
+  bookingNotificationsEnabled: boolean | null
   inventoryExpirationEnabled: boolean | null
   daysBeforeExpiration: number | null
   lowStockEnabled: boolean | null
@@ -47,6 +48,7 @@ export type NotificationSettingsMinAggregateOutputType = {
 export type NotificationSettingsMaxAggregateOutputType = {
   id: string | null
   salonId: string | null
+  bookingNotificationsEnabled: boolean | null
   inventoryExpirationEnabled: boolean | null
   daysBeforeExpiration: number | null
   lowStockEnabled: boolean | null
@@ -57,6 +59,7 @@ export type NotificationSettingsMaxAggregateOutputType = {
 export type NotificationSettingsCountAggregateOutputType = {
   id: number
   salonId: number
+  bookingNotificationsEnabled: number
   inventoryExpirationEnabled: number
   daysBeforeExpiration: number
   lowStockEnabled: number
@@ -77,6 +80,7 @@ export type NotificationSettingsSumAggregateInputType = {
 export type NotificationSettingsMinAggregateInputType = {
   id?: true
   salonId?: true
+  bookingNotificationsEnabled?: true
   inventoryExpirationEnabled?: true
   daysBeforeExpiration?: true
   lowStockEnabled?: true
@@ -87,6 +91,7 @@ export type NotificationSettingsMinAggregateInputType = {
 export type NotificationSettingsMaxAggregateInputType = {
   id?: true
   salonId?: true
+  bookingNotificationsEnabled?: true
   inventoryExpirationEnabled?: true
   daysBeforeExpiration?: true
   lowStockEnabled?: true
@@ -97,6 +102,7 @@ export type NotificationSettingsMaxAggregateInputType = {
 export type NotificationSettingsCountAggregateInputType = {
   id?: true
   salonId?: true
+  bookingNotificationsEnabled?: true
   inventoryExpirationEnabled?: true
   daysBeforeExpiration?: true
   lowStockEnabled?: true
@@ -194,6 +200,7 @@ export type NotificationSettingsGroupByArgs<ExtArgs extends runtime.Types.Extens
 export type NotificationSettingsGroupByOutputType = {
   id: string
   salonId: string
+  bookingNotificationsEnabled: boolean
   inventoryExpirationEnabled: boolean
   daysBeforeExpiration: number
   lowStockEnabled: boolean
@@ -227,6 +234,7 @@ export type NotificationSettingsWhereInput = {
   NOT?: Prisma.NotificationSettingsWhereInput | Prisma.NotificationSettingsWhereInput[]
   id?: Prisma.StringFilter<"NotificationSettings"> | string
   salonId?: Prisma.StringFilter<"NotificationSettings"> | string
+  bookingNotificationsEnabled?: Prisma.BoolFilter<"NotificationSettings"> | boolean
   inventoryExpirationEnabled?: Prisma.BoolFilter<"NotificationSettings"> | boolean
   daysBeforeExpiration?: Prisma.IntFilter<"NotificationSettings"> | number
   lowStockEnabled?: Prisma.BoolFilter<"NotificationSettings"> | boolean
@@ -238,6 +246,7 @@ export type NotificationSettingsWhereInput = {
 export type NotificationSettingsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  bookingNotificationsEnabled?: Prisma.SortOrder
   inventoryExpirationEnabled?: Prisma.SortOrder
   daysBeforeExpiration?: Prisma.SortOrder
   lowStockEnabled?: Prisma.SortOrder
@@ -252,6 +261,7 @@ export type NotificationSettingsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.NotificationSettingsWhereInput | Prisma.NotificationSettingsWhereInput[]
   OR?: Prisma.NotificationSettingsWhereInput[]
   NOT?: Prisma.NotificationSettingsWhereInput | Prisma.NotificationSettingsWhereInput[]
+  bookingNotificationsEnabled?: Prisma.BoolFilter<"NotificationSettings"> | boolean
   inventoryExpirationEnabled?: Prisma.BoolFilter<"NotificationSettings"> | boolean
   daysBeforeExpiration?: Prisma.IntFilter<"NotificationSettings"> | number
   lowStockEnabled?: Prisma.BoolFilter<"NotificationSettings"> | boolean
@@ -263,6 +273,7 @@ export type NotificationSettingsWhereUniqueInput = Prisma.AtLeast<{
 export type NotificationSettingsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  bookingNotificationsEnabled?: Prisma.SortOrder
   inventoryExpirationEnabled?: Prisma.SortOrder
   daysBeforeExpiration?: Prisma.SortOrder
   lowStockEnabled?: Prisma.SortOrder
@@ -281,6 +292,7 @@ export type NotificationSettingsScalarWhereWithAggregatesInput = {
   NOT?: Prisma.NotificationSettingsScalarWhereWithAggregatesInput | Prisma.NotificationSettingsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"NotificationSettings"> | string
   salonId?: Prisma.StringWithAggregatesFilter<"NotificationSettings"> | string
+  bookingNotificationsEnabled?: Prisma.BoolWithAggregatesFilter<"NotificationSettings"> | boolean
   inventoryExpirationEnabled?: Prisma.BoolWithAggregatesFilter<"NotificationSettings"> | boolean
   daysBeforeExpiration?: Prisma.IntWithAggregatesFilter<"NotificationSettings"> | number
   lowStockEnabled?: Prisma.BoolWithAggregatesFilter<"NotificationSettings"> | boolean
@@ -290,6 +302,7 @@ export type NotificationSettingsScalarWhereWithAggregatesInput = {
 
 export type NotificationSettingsCreateInput = {
   id?: string
+  bookingNotificationsEnabled?: boolean
   inventoryExpirationEnabled?: boolean
   daysBeforeExpiration?: number
   lowStockEnabled?: boolean
@@ -301,6 +314,7 @@ export type NotificationSettingsCreateInput = {
 export type NotificationSettingsUncheckedCreateInput = {
   id?: string
   salonId: string
+  bookingNotificationsEnabled?: boolean
   inventoryExpirationEnabled?: boolean
   daysBeforeExpiration?: number
   lowStockEnabled?: boolean
@@ -310,6 +324,7 @@ export type NotificationSettingsUncheckedCreateInput = {
 
 export type NotificationSettingsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   inventoryExpirationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   daysBeforeExpiration?: Prisma.IntFieldUpdateOperationsInput | number
   lowStockEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -321,6 +336,7 @@ export type NotificationSettingsUpdateInput = {
 export type NotificationSettingsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   salonId?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   inventoryExpirationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   daysBeforeExpiration?: Prisma.IntFieldUpdateOperationsInput | number
   lowStockEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -331,6 +347,7 @@ export type NotificationSettingsUncheckedUpdateInput = {
 export type NotificationSettingsCreateManyInput = {
   id?: string
   salonId: string
+  bookingNotificationsEnabled?: boolean
   inventoryExpirationEnabled?: boolean
   daysBeforeExpiration?: number
   lowStockEnabled?: boolean
@@ -340,6 +357,7 @@ export type NotificationSettingsCreateManyInput = {
 
 export type NotificationSettingsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   inventoryExpirationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   daysBeforeExpiration?: Prisma.IntFieldUpdateOperationsInput | number
   lowStockEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -350,6 +368,7 @@ export type NotificationSettingsUpdateManyMutationInput = {
 export type NotificationSettingsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   salonId?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   inventoryExpirationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   daysBeforeExpiration?: Prisma.IntFieldUpdateOperationsInput | number
   lowStockEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -365,6 +384,7 @@ export type NotificationSettingsNullableScalarRelationFilter = {
 export type NotificationSettingsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  bookingNotificationsEnabled?: Prisma.SortOrder
   inventoryExpirationEnabled?: Prisma.SortOrder
   daysBeforeExpiration?: Prisma.SortOrder
   lowStockEnabled?: Prisma.SortOrder
@@ -379,6 +399,7 @@ export type NotificationSettingsAvgOrderByAggregateInput = {
 export type NotificationSettingsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  bookingNotificationsEnabled?: Prisma.SortOrder
   inventoryExpirationEnabled?: Prisma.SortOrder
   daysBeforeExpiration?: Prisma.SortOrder
   lowStockEnabled?: Prisma.SortOrder
@@ -389,6 +410,7 @@ export type NotificationSettingsMaxOrderByAggregateInput = {
 export type NotificationSettingsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   salonId?: Prisma.SortOrder
+  bookingNotificationsEnabled?: Prisma.SortOrder
   inventoryExpirationEnabled?: Prisma.SortOrder
   daysBeforeExpiration?: Prisma.SortOrder
   lowStockEnabled?: Prisma.SortOrder
@@ -434,6 +456,7 @@ export type NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput = {
 
 export type NotificationSettingsCreateWithoutSalonInput = {
   id?: string
+  bookingNotificationsEnabled?: boolean
   inventoryExpirationEnabled?: boolean
   daysBeforeExpiration?: number
   lowStockEnabled?: boolean
@@ -443,6 +466,7 @@ export type NotificationSettingsCreateWithoutSalonInput = {
 
 export type NotificationSettingsUncheckedCreateWithoutSalonInput = {
   id?: string
+  bookingNotificationsEnabled?: boolean
   inventoryExpirationEnabled?: boolean
   daysBeforeExpiration?: number
   lowStockEnabled?: boolean
@@ -468,6 +492,7 @@ export type NotificationSettingsUpdateToOneWithWhereWithoutSalonInput = {
 
 export type NotificationSettingsUpdateWithoutSalonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   inventoryExpirationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   daysBeforeExpiration?: Prisma.IntFieldUpdateOperationsInput | number
   lowStockEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -477,6 +502,7 @@ export type NotificationSettingsUpdateWithoutSalonInput = {
 
 export type NotificationSettingsUncheckedUpdateWithoutSalonInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNotificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   inventoryExpirationEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   daysBeforeExpiration?: Prisma.IntFieldUpdateOperationsInput | number
   lowStockEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -489,6 +515,7 @@ export type NotificationSettingsUncheckedUpdateWithoutSalonInput = {
 export type NotificationSettingsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   salonId?: boolean
+  bookingNotificationsEnabled?: boolean
   inventoryExpirationEnabled?: boolean
   daysBeforeExpiration?: boolean
   lowStockEnabled?: boolean
@@ -500,6 +527,7 @@ export type NotificationSettingsSelect<ExtArgs extends runtime.Types.Extensions.
 export type NotificationSettingsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   salonId?: boolean
+  bookingNotificationsEnabled?: boolean
   inventoryExpirationEnabled?: boolean
   daysBeforeExpiration?: boolean
   lowStockEnabled?: boolean
@@ -511,6 +539,7 @@ export type NotificationSettingsSelectCreateManyAndReturn<ExtArgs extends runtim
 export type NotificationSettingsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   salonId?: boolean
+  bookingNotificationsEnabled?: boolean
   inventoryExpirationEnabled?: boolean
   daysBeforeExpiration?: boolean
   lowStockEnabled?: boolean
@@ -522,6 +551,7 @@ export type NotificationSettingsSelectUpdateManyAndReturn<ExtArgs extends runtim
 export type NotificationSettingsSelectScalar = {
   id?: boolean
   salonId?: boolean
+  bookingNotificationsEnabled?: boolean
   inventoryExpirationEnabled?: boolean
   daysBeforeExpiration?: boolean
   lowStockEnabled?: boolean
@@ -529,7 +559,7 @@ export type NotificationSettingsSelectScalar = {
   updatedAt?: boolean
 }
 
-export type NotificationSettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "salonId" | "inventoryExpirationEnabled" | "daysBeforeExpiration" | "lowStockEnabled" | "createdAt" | "updatedAt", ExtArgs["result"]["notificationSettings"]>
+export type NotificationSettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "salonId" | "bookingNotificationsEnabled" | "inventoryExpirationEnabled" | "daysBeforeExpiration" | "lowStockEnabled" | "createdAt" | "updatedAt", ExtArgs["result"]["notificationSettings"]>
 export type NotificationSettingsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
 }
@@ -548,6 +578,7 @@ export type $NotificationSettingsPayload<ExtArgs extends runtime.Types.Extension
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     salonId: string
+    bookingNotificationsEnabled: boolean
     inventoryExpirationEnabled: boolean
     daysBeforeExpiration: number
     lowStockEnabled: boolean
@@ -979,6 +1010,7 @@ export interface Prisma__NotificationSettingsClient<T, Null = never, ExtArgs ext
 export interface NotificationSettingsFieldRefs {
   readonly id: Prisma.FieldRef<"NotificationSettings", 'String'>
   readonly salonId: Prisma.FieldRef<"NotificationSettings", 'String'>
+  readonly bookingNotificationsEnabled: Prisma.FieldRef<"NotificationSettings", 'Boolean'>
   readonly inventoryExpirationEnabled: Prisma.FieldRef<"NotificationSettings", 'Boolean'>
   readonly daysBeforeExpiration: Prisma.FieldRef<"NotificationSettings", 'Int'>
   readonly lowStockEnabled: Prisma.FieldRef<"NotificationSettings", 'Boolean'>

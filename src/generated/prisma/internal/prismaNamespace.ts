@@ -1450,6 +1450,7 @@ export const SalonScalarFieldEnum = {
   openingMinute: 'openingMinute',
   closingHour: 'closingHour',
   closingMinute: 'closingMinute',
+  pushToken: 'pushToken',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1607,6 +1608,7 @@ export type ProductHistoryScalarFieldEnum = (typeof ProductHistoryScalarFieldEnu
 export const NotificationSettingsScalarFieldEnum = {
   id: 'id',
   salonId: 'salonId',
+  bookingNotificationsEnabled: 'bookingNotificationsEnabled',
   inventoryExpirationEnabled: 'inventoryExpirationEnabled',
   daysBeforeExpiration: 'daysBeforeExpiration',
   lowStockEnabled: 'lowStockEnabled',
