@@ -241,6 +241,7 @@ export async function POST(request: NextRequest) {
     await prisma.productHistory.create({
       data: {
         productId: product.id,
+        salonId,
         action: 'created',
         newStock: product.currentStock,
         notes: `Product created with initial stock of ${product.currentStock}`,
@@ -381,6 +382,7 @@ export async function PATCH(request: NextRequest) {
     await prisma.productHistory.create({
       data: {
         productId: id,
+        salonId,
         action: 'updated',
         notes: 'Product details updated',
       },

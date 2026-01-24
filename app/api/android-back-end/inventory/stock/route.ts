@@ -113,6 +113,7 @@ export async function PATCH(request: NextRequest) {
     await prisma.productHistory.create({
       data: {
         productId,
+        salonId,
         action: action === 'add' ? 'stock_added' : 'stock_removed',
         previousStock,
         newStock,

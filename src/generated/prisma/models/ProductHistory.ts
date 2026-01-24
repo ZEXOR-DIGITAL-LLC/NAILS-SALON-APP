@@ -41,6 +41,7 @@ export type ProductHistorySumAggregateOutputType = {
 export type ProductHistoryMinAggregateOutputType = {
   id: string | null
   productId: string | null
+  salonId: string | null
   action: string | null
   previousStock: number | null
   newStock: number | null
@@ -52,6 +53,7 @@ export type ProductHistoryMinAggregateOutputType = {
 export type ProductHistoryMaxAggregateOutputType = {
   id: string | null
   productId: string | null
+  salonId: string | null
   action: string | null
   previousStock: number | null
   newStock: number | null
@@ -63,6 +65,7 @@ export type ProductHistoryMaxAggregateOutputType = {
 export type ProductHistoryCountAggregateOutputType = {
   id: number
   productId: number
+  salonId: number
   action: number
   previousStock: number
   newStock: number
@@ -88,6 +91,7 @@ export type ProductHistorySumAggregateInputType = {
 export type ProductHistoryMinAggregateInputType = {
   id?: true
   productId?: true
+  salonId?: true
   action?: true
   previousStock?: true
   newStock?: true
@@ -99,6 +103,7 @@ export type ProductHistoryMinAggregateInputType = {
 export type ProductHistoryMaxAggregateInputType = {
   id?: true
   productId?: true
+  salonId?: true
   action?: true
   previousStock?: true
   newStock?: true
@@ -110,6 +115,7 @@ export type ProductHistoryMaxAggregateInputType = {
 export type ProductHistoryCountAggregateInputType = {
   id?: true
   productId?: true
+  salonId?: true
   action?: true
   previousStock?: true
   newStock?: true
@@ -208,6 +214,7 @@ export type ProductHistoryGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type ProductHistoryGroupByOutputType = {
   id: string
   productId: string
+  salonId: string
   action: string
   previousStock: number | null
   newStock: number | null
@@ -242,6 +249,7 @@ export type ProductHistoryWhereInput = {
   NOT?: Prisma.ProductHistoryWhereInput | Prisma.ProductHistoryWhereInput[]
   id?: Prisma.StringFilter<"ProductHistory"> | string
   productId?: Prisma.StringFilter<"ProductHistory"> | string
+  salonId?: Prisma.StringFilter<"ProductHistory"> | string
   action?: Prisma.StringFilter<"ProductHistory"> | string
   previousStock?: Prisma.IntNullableFilter<"ProductHistory"> | number | null
   newStock?: Prisma.IntNullableFilter<"ProductHistory"> | number | null
@@ -249,11 +257,13 @@ export type ProductHistoryWhereInput = {
   notes?: Prisma.StringNullableFilter<"ProductHistory"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProductHistory"> | Date | string
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  salon?: Prisma.XOR<Prisma.SalonScalarRelationFilter, Prisma.SalonWhereInput>
 }
 
 export type ProductHistoryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  salonId?: Prisma.SortOrder
   action?: Prisma.SortOrder
   previousStock?: Prisma.SortOrderInput | Prisma.SortOrder
   newStock?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -261,6 +271,7 @@ export type ProductHistoryOrderByWithRelationInput = {
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   product?: Prisma.ProductOrderByWithRelationInput
+  salon?: Prisma.SalonOrderByWithRelationInput
 }
 
 export type ProductHistoryWhereUniqueInput = Prisma.AtLeast<{
@@ -269,6 +280,7 @@ export type ProductHistoryWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ProductHistoryWhereInput[]
   NOT?: Prisma.ProductHistoryWhereInput | Prisma.ProductHistoryWhereInput[]
   productId?: Prisma.StringFilter<"ProductHistory"> | string
+  salonId?: Prisma.StringFilter<"ProductHistory"> | string
   action?: Prisma.StringFilter<"ProductHistory"> | string
   previousStock?: Prisma.IntNullableFilter<"ProductHistory"> | number | null
   newStock?: Prisma.IntNullableFilter<"ProductHistory"> | number | null
@@ -276,11 +288,13 @@ export type ProductHistoryWhereUniqueInput = Prisma.AtLeast<{
   notes?: Prisma.StringNullableFilter<"ProductHistory"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProductHistory"> | Date | string
   product?: Prisma.XOR<Prisma.ProductScalarRelationFilter, Prisma.ProductWhereInput>
+  salon?: Prisma.XOR<Prisma.SalonScalarRelationFilter, Prisma.SalonWhereInput>
 }, "id">
 
 export type ProductHistoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  salonId?: Prisma.SortOrder
   action?: Prisma.SortOrder
   previousStock?: Prisma.SortOrderInput | Prisma.SortOrder
   newStock?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -300,6 +314,7 @@ export type ProductHistoryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ProductHistoryScalarWhereWithAggregatesInput | Prisma.ProductHistoryScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ProductHistory"> | string
   productId?: Prisma.StringWithAggregatesFilter<"ProductHistory"> | string
+  salonId?: Prisma.StringWithAggregatesFilter<"ProductHistory"> | string
   action?: Prisma.StringWithAggregatesFilter<"ProductHistory"> | string
   previousStock?: Prisma.IntNullableWithAggregatesFilter<"ProductHistory"> | number | null
   newStock?: Prisma.IntNullableWithAggregatesFilter<"ProductHistory"> | number | null
@@ -317,11 +332,13 @@ export type ProductHistoryCreateInput = {
   notes?: string | null
   createdAt?: Date | string
   product: Prisma.ProductCreateNestedOneWithoutHistoryInput
+  salon: Prisma.SalonCreateNestedOneWithoutProductHistoriesInput
 }
 
 export type ProductHistoryUncheckedCreateInput = {
   id?: string
   productId: string
+  salonId: string
   action: string
   previousStock?: number | null
   newStock?: number | null
@@ -339,11 +356,13 @@ export type ProductHistoryUpdateInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product?: Prisma.ProductUpdateOneRequiredWithoutHistoryNestedInput
+  salon?: Prisma.SalonUpdateOneRequiredWithoutProductHistoriesNestedInput
 }
 
 export type ProductHistoryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  salonId?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
   previousStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   newStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -355,6 +374,7 @@ export type ProductHistoryUncheckedUpdateInput = {
 export type ProductHistoryCreateManyInput = {
   id?: string
   productId: string
+  salonId: string
   action: string
   previousStock?: number | null
   newStock?: number | null
@@ -376,6 +396,7 @@ export type ProductHistoryUpdateManyMutationInput = {
 export type ProductHistoryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  salonId?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
   previousStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   newStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -397,6 +418,7 @@ export type ProductHistoryOrderByRelationAggregateInput = {
 export type ProductHistoryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  salonId?: Prisma.SortOrder
   action?: Prisma.SortOrder
   previousStock?: Prisma.SortOrder
   newStock?: Prisma.SortOrder
@@ -414,6 +436,7 @@ export type ProductHistoryAvgOrderByAggregateInput = {
 export type ProductHistoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  salonId?: Prisma.SortOrder
   action?: Prisma.SortOrder
   previousStock?: Prisma.SortOrder
   newStock?: Prisma.SortOrder
@@ -425,6 +448,7 @@ export type ProductHistoryMaxOrderByAggregateInput = {
 export type ProductHistoryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  salonId?: Prisma.SortOrder
   action?: Prisma.SortOrder
   previousStock?: Prisma.SortOrder
   newStock?: Prisma.SortOrder
@@ -437,6 +461,48 @@ export type ProductHistorySumOrderByAggregateInput = {
   previousStock?: Prisma.SortOrder
   newStock?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+}
+
+export type ProductHistoryCreateNestedManyWithoutSalonInput = {
+  create?: Prisma.XOR<Prisma.ProductHistoryCreateWithoutSalonInput, Prisma.ProductHistoryUncheckedCreateWithoutSalonInput> | Prisma.ProductHistoryCreateWithoutSalonInput[] | Prisma.ProductHistoryUncheckedCreateWithoutSalonInput[]
+  connectOrCreate?: Prisma.ProductHistoryCreateOrConnectWithoutSalonInput | Prisma.ProductHistoryCreateOrConnectWithoutSalonInput[]
+  createMany?: Prisma.ProductHistoryCreateManySalonInputEnvelope
+  connect?: Prisma.ProductHistoryWhereUniqueInput | Prisma.ProductHistoryWhereUniqueInput[]
+}
+
+export type ProductHistoryUncheckedCreateNestedManyWithoutSalonInput = {
+  create?: Prisma.XOR<Prisma.ProductHistoryCreateWithoutSalonInput, Prisma.ProductHistoryUncheckedCreateWithoutSalonInput> | Prisma.ProductHistoryCreateWithoutSalonInput[] | Prisma.ProductHistoryUncheckedCreateWithoutSalonInput[]
+  connectOrCreate?: Prisma.ProductHistoryCreateOrConnectWithoutSalonInput | Prisma.ProductHistoryCreateOrConnectWithoutSalonInput[]
+  createMany?: Prisma.ProductHistoryCreateManySalonInputEnvelope
+  connect?: Prisma.ProductHistoryWhereUniqueInput | Prisma.ProductHistoryWhereUniqueInput[]
+}
+
+export type ProductHistoryUpdateManyWithoutSalonNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductHistoryCreateWithoutSalonInput, Prisma.ProductHistoryUncheckedCreateWithoutSalonInput> | Prisma.ProductHistoryCreateWithoutSalonInput[] | Prisma.ProductHistoryUncheckedCreateWithoutSalonInput[]
+  connectOrCreate?: Prisma.ProductHistoryCreateOrConnectWithoutSalonInput | Prisma.ProductHistoryCreateOrConnectWithoutSalonInput[]
+  upsert?: Prisma.ProductHistoryUpsertWithWhereUniqueWithoutSalonInput | Prisma.ProductHistoryUpsertWithWhereUniqueWithoutSalonInput[]
+  createMany?: Prisma.ProductHistoryCreateManySalonInputEnvelope
+  set?: Prisma.ProductHistoryWhereUniqueInput | Prisma.ProductHistoryWhereUniqueInput[]
+  disconnect?: Prisma.ProductHistoryWhereUniqueInput | Prisma.ProductHistoryWhereUniqueInput[]
+  delete?: Prisma.ProductHistoryWhereUniqueInput | Prisma.ProductHistoryWhereUniqueInput[]
+  connect?: Prisma.ProductHistoryWhereUniqueInput | Prisma.ProductHistoryWhereUniqueInput[]
+  update?: Prisma.ProductHistoryUpdateWithWhereUniqueWithoutSalonInput | Prisma.ProductHistoryUpdateWithWhereUniqueWithoutSalonInput[]
+  updateMany?: Prisma.ProductHistoryUpdateManyWithWhereWithoutSalonInput | Prisma.ProductHistoryUpdateManyWithWhereWithoutSalonInput[]
+  deleteMany?: Prisma.ProductHistoryScalarWhereInput | Prisma.ProductHistoryScalarWhereInput[]
+}
+
+export type ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductHistoryCreateWithoutSalonInput, Prisma.ProductHistoryUncheckedCreateWithoutSalonInput> | Prisma.ProductHistoryCreateWithoutSalonInput[] | Prisma.ProductHistoryUncheckedCreateWithoutSalonInput[]
+  connectOrCreate?: Prisma.ProductHistoryCreateOrConnectWithoutSalonInput | Prisma.ProductHistoryCreateOrConnectWithoutSalonInput[]
+  upsert?: Prisma.ProductHistoryUpsertWithWhereUniqueWithoutSalonInput | Prisma.ProductHistoryUpsertWithWhereUniqueWithoutSalonInput[]
+  createMany?: Prisma.ProductHistoryCreateManySalonInputEnvelope
+  set?: Prisma.ProductHistoryWhereUniqueInput | Prisma.ProductHistoryWhereUniqueInput[]
+  disconnect?: Prisma.ProductHistoryWhereUniqueInput | Prisma.ProductHistoryWhereUniqueInput[]
+  delete?: Prisma.ProductHistoryWhereUniqueInput | Prisma.ProductHistoryWhereUniqueInput[]
+  connect?: Prisma.ProductHistoryWhereUniqueInput | Prisma.ProductHistoryWhereUniqueInput[]
+  update?: Prisma.ProductHistoryUpdateWithWhereUniqueWithoutSalonInput | Prisma.ProductHistoryUpdateWithWhereUniqueWithoutSalonInput[]
+  updateMany?: Prisma.ProductHistoryUpdateManyWithWhereWithoutSalonInput | Prisma.ProductHistoryUpdateManyWithWhereWithoutSalonInput[]
+  deleteMany?: Prisma.ProductHistoryScalarWhereInput | Prisma.ProductHistoryScalarWhereInput[]
 }
 
 export type ProductHistoryCreateNestedManyWithoutProductInput = {
@@ -489,8 +555,20 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type ProductHistoryCreateWithoutProductInput = {
+export type ProductHistoryCreateWithoutSalonInput = {
   id?: string
+  action: string
+  previousStock?: number | null
+  newStock?: number | null
+  quantity?: number | null
+  notes?: string | null
+  createdAt?: Date | string
+  product: Prisma.ProductCreateNestedOneWithoutHistoryInput
+}
+
+export type ProductHistoryUncheckedCreateWithoutSalonInput = {
+  id?: string
+  productId: string
   action: string
   previousStock?: number | null
   newStock?: number | null
@@ -499,8 +577,61 @@ export type ProductHistoryCreateWithoutProductInput = {
   createdAt?: Date | string
 }
 
+export type ProductHistoryCreateOrConnectWithoutSalonInput = {
+  where: Prisma.ProductHistoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductHistoryCreateWithoutSalonInput, Prisma.ProductHistoryUncheckedCreateWithoutSalonInput>
+}
+
+export type ProductHistoryCreateManySalonInputEnvelope = {
+  data: Prisma.ProductHistoryCreateManySalonInput | Prisma.ProductHistoryCreateManySalonInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProductHistoryUpsertWithWhereUniqueWithoutSalonInput = {
+  where: Prisma.ProductHistoryWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProductHistoryUpdateWithoutSalonInput, Prisma.ProductHistoryUncheckedUpdateWithoutSalonInput>
+  create: Prisma.XOR<Prisma.ProductHistoryCreateWithoutSalonInput, Prisma.ProductHistoryUncheckedCreateWithoutSalonInput>
+}
+
+export type ProductHistoryUpdateWithWhereUniqueWithoutSalonInput = {
+  where: Prisma.ProductHistoryWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProductHistoryUpdateWithoutSalonInput, Prisma.ProductHistoryUncheckedUpdateWithoutSalonInput>
+}
+
+export type ProductHistoryUpdateManyWithWhereWithoutSalonInput = {
+  where: Prisma.ProductHistoryScalarWhereInput
+  data: Prisma.XOR<Prisma.ProductHistoryUpdateManyMutationInput, Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonInput>
+}
+
+export type ProductHistoryScalarWhereInput = {
+  AND?: Prisma.ProductHistoryScalarWhereInput | Prisma.ProductHistoryScalarWhereInput[]
+  OR?: Prisma.ProductHistoryScalarWhereInput[]
+  NOT?: Prisma.ProductHistoryScalarWhereInput | Prisma.ProductHistoryScalarWhereInput[]
+  id?: Prisma.StringFilter<"ProductHistory"> | string
+  productId?: Prisma.StringFilter<"ProductHistory"> | string
+  salonId?: Prisma.StringFilter<"ProductHistory"> | string
+  action?: Prisma.StringFilter<"ProductHistory"> | string
+  previousStock?: Prisma.IntNullableFilter<"ProductHistory"> | number | null
+  newStock?: Prisma.IntNullableFilter<"ProductHistory"> | number | null
+  quantity?: Prisma.IntNullableFilter<"ProductHistory"> | number | null
+  notes?: Prisma.StringNullableFilter<"ProductHistory"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"ProductHistory"> | Date | string
+}
+
+export type ProductHistoryCreateWithoutProductInput = {
+  id?: string
+  action: string
+  previousStock?: number | null
+  newStock?: number | null
+  quantity?: number | null
+  notes?: string | null
+  createdAt?: Date | string
+  salon: Prisma.SalonCreateNestedOneWithoutProductHistoriesInput
+}
+
 export type ProductHistoryUncheckedCreateWithoutProductInput = {
   id?: string
+  salonId: string
   action: string
   previousStock?: number | null
   newStock?: number | null
@@ -535,22 +666,53 @@ export type ProductHistoryUpdateManyWithWhereWithoutProductInput = {
   data: Prisma.XOR<Prisma.ProductHistoryUpdateManyMutationInput, Prisma.ProductHistoryUncheckedUpdateManyWithoutProductInput>
 }
 
-export type ProductHistoryScalarWhereInput = {
-  AND?: Prisma.ProductHistoryScalarWhereInput | Prisma.ProductHistoryScalarWhereInput[]
-  OR?: Prisma.ProductHistoryScalarWhereInput[]
-  NOT?: Prisma.ProductHistoryScalarWhereInput | Prisma.ProductHistoryScalarWhereInput[]
-  id?: Prisma.StringFilter<"ProductHistory"> | string
-  productId?: Prisma.StringFilter<"ProductHistory"> | string
-  action?: Prisma.StringFilter<"ProductHistory"> | string
-  previousStock?: Prisma.IntNullableFilter<"ProductHistory"> | number | null
-  newStock?: Prisma.IntNullableFilter<"ProductHistory"> | number | null
-  quantity?: Prisma.IntNullableFilter<"ProductHistory"> | number | null
-  notes?: Prisma.StringNullableFilter<"ProductHistory"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"ProductHistory"> | Date | string
+export type ProductHistoryCreateManySalonInput = {
+  id?: string
+  productId: string
+  action: string
+  previousStock?: number | null
+  newStock?: number | null
+  quantity?: number | null
+  notes?: string | null
+  createdAt?: Date | string
+}
+
+export type ProductHistoryUpdateWithoutSalonInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  action?: Prisma.StringFieldUpdateOperationsInput | string
+  previousStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  newStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductUpdateOneRequiredWithoutHistoryNestedInput
+}
+
+export type ProductHistoryUncheckedUpdateWithoutSalonInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  action?: Prisma.StringFieldUpdateOperationsInput | string
+  previousStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  newStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ProductHistoryUncheckedUpdateManyWithoutSalonInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  action?: Prisma.StringFieldUpdateOperationsInput | string
+  previousStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  newStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ProductHistoryCreateManyProductInput = {
   id?: string
+  salonId: string
   action: string
   previousStock?: number | null
   newStock?: number | null
@@ -567,10 +729,12 @@ export type ProductHistoryUpdateWithoutProductInput = {
   quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salon?: Prisma.SalonUpdateOneRequiredWithoutProductHistoriesNestedInput
 }
 
 export type ProductHistoryUncheckedUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  salonId?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
   previousStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   newStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -581,6 +745,7 @@ export type ProductHistoryUncheckedUpdateWithoutProductInput = {
 
 export type ProductHistoryUncheckedUpdateManyWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  salonId?: Prisma.StringFieldUpdateOperationsInput | string
   action?: Prisma.StringFieldUpdateOperationsInput | string
   previousStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   newStock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -594,6 +759,7 @@ export type ProductHistoryUncheckedUpdateManyWithoutProductInput = {
 export type ProductHistorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   productId?: boolean
+  salonId?: boolean
   action?: boolean
   previousStock?: boolean
   newStock?: boolean
@@ -601,11 +767,13 @@ export type ProductHistorySelect<ExtArgs extends runtime.Types.Extensions.Intern
   notes?: boolean
   createdAt?: boolean
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productHistory"]>
 
 export type ProductHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   productId?: boolean
+  salonId?: boolean
   action?: boolean
   previousStock?: boolean
   newStock?: boolean
@@ -613,11 +781,13 @@ export type ProductHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Type
   notes?: boolean
   createdAt?: boolean
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productHistory"]>
 
 export type ProductHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   productId?: boolean
+  salonId?: boolean
   action?: boolean
   previousStock?: boolean
   newStock?: boolean
@@ -625,11 +795,13 @@ export type ProductHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   notes?: boolean
   createdAt?: boolean
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productHistory"]>
 
 export type ProductHistorySelectScalar = {
   id?: boolean
   productId?: boolean
+  salonId?: boolean
   action?: boolean
   previousStock?: boolean
   newStock?: boolean
@@ -638,25 +810,30 @@ export type ProductHistorySelectScalar = {
   createdAt?: boolean
 }
 
-export type ProductHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "productId" | "action" | "previousStock" | "newStock" | "quantity" | "notes" | "createdAt", ExtArgs["result"]["productHistory"]>
+export type ProductHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "productId" | "salonId" | "action" | "previousStock" | "newStock" | "quantity" | "notes" | "createdAt", ExtArgs["result"]["productHistory"]>
 export type ProductHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
 }
 export type ProductHistoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
 }
 export type ProductHistoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   product?: boolean | Prisma.ProductDefaultArgs<ExtArgs>
+  salon?: boolean | Prisma.SalonDefaultArgs<ExtArgs>
 }
 
 export type $ProductHistoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProductHistory"
   objects: {
     product: Prisma.$ProductPayload<ExtArgs>
+    salon: Prisma.$SalonPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     productId: string
+    salonId: string
     action: string
     previousStock: number | null
     newStock: number | null
@@ -1058,6 +1235,7 @@ readonly fields: ProductHistoryFieldRefs;
 export interface Prisma__ProductHistoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   product<T extends Prisma.ProductDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductClient<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  salon<T extends Prisma.SalonDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SalonDefaultArgs<ExtArgs>>): Prisma.Prisma__SalonClient<runtime.Types.Result.GetResult<Prisma.$SalonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1089,6 +1267,7 @@ export interface Prisma__ProductHistoryClient<T, Null = never, ExtArgs extends r
 export interface ProductHistoryFieldRefs {
   readonly id: Prisma.FieldRef<"ProductHistory", 'String'>
   readonly productId: Prisma.FieldRef<"ProductHistory", 'String'>
+  readonly salonId: Prisma.FieldRef<"ProductHistory", 'String'>
   readonly action: Prisma.FieldRef<"ProductHistory", 'String'>
   readonly previousStock: Prisma.FieldRef<"ProductHistory", 'Int'>
   readonly newStock: Prisma.FieldRef<"ProductHistory", 'Int'>

@@ -182,6 +182,7 @@ export type GalleryScalarFieldEnum = (typeof GalleryScalarFieldEnum)[keyof typeo
 export const GalleryImageScalarFieldEnum = {
   id: 'id',
   galleryId: 'galleryId',
+  salonId: 'salonId',
   imageUrl: 'imageUrl',
   order: 'order',
   createdAt: 'createdAt'
@@ -259,6 +260,7 @@ export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeo
 export const ProductHistoryScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
+  salonId: 'salonId',
   action: 'action',
   previousStock: 'previousStock',
   newStock: 'newStock',

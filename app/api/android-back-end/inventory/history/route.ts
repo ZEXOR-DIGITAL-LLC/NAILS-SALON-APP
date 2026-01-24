@@ -26,10 +26,8 @@ export async function GET(request: NextRequest) {
 
     // Build where clause for history
     interface WhereClause {
-      product: {
-        salonId: string;
-        id?: string;
-      };
+      salonId: string;
+      productId?: string;
       createdAt?: {
         gte?: Date;
         lte?: Date;
@@ -37,9 +35,7 @@ export async function GET(request: NextRequest) {
     }
 
     const whereClause: WhereClause = {
-      product: {
-        salonId,
-      },
+      salonId,
     };
 
     // If productId is provided, verify the product exists and belongs to the salon
@@ -55,7 +51,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'Product not found' }, { status: 404 });
       }
 
-      whereClause.product.id = productId;
+      whereClause.productId = productId;
     }
 
     // Date filters

@@ -139,6 +139,7 @@ export async function POST(request: NextRequest) {
       const galleryImage = await prisma.galleryImage.create({
         data: {
           galleryId,
+          salonId,
           imageUrl,
           order: currentImageCount + i,
         },

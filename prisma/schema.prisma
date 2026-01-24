@@ -55,10 +55,12 @@ model Salon {
 
   appointments           OwnerAppointment[]
   galleries              Gallery[]
+  galleryImages          GalleryImage[]
   employees              Employee[]
   salonClients           SalonClient[]
   products               Product[]
   productCategories      ProductCategory[]
+  productHistories       ProductHistory[]
   notificationSettings   NotificationSettings?
   inventoryNotifications InventoryNotification[]
 }
@@ -128,13 +130,16 @@ model Gallery {
 model GalleryImage {
   id        String   @id @default(cuid())
   galleryId String
+  salonId   String
   imageUrl  String
   order     Int      @default(0)
   createdAt DateTime @default(now())
 
   gallery   Gallery  @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+  salon     Salon    @relation(fields: [salonId], references: [id], onDelete: Cascade)
 
   @@index([galleryId])
+  @@index([salonId])
 }
 
 model Employee {
@@ -221,6 +226,7 @@ model Product {
 model ProductHistory {
   id            String    @id @default(cuid())
   productId     String
+  salonId       String
   action        String
   previousStock Int?
   newStock      Int?
@@ -229,9 +235,11 @@ model ProductHistory {
   createdAt     DateTime  @default(now())
 
   product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  salon         Salon     @relation(fields: [salonId], references: [id], onDelete: Cascade)
 
   @@index([productId])
   @@index([productId, createdAt])
+  @@index([salonId])
 }
 
 model NotificationSettings {

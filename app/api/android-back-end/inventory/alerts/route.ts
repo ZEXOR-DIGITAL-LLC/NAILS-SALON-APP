@@ -89,6 +89,7 @@ export async function GET(request: NextRequest) {
       await prisma.productHistory.createMany({
         data: newlyExpiredIds.map(id => ({
           productId: id,
+          salonId: salonId!,
           action: 'expired',
           notes: 'Product marked as expired automatically',
         })),
