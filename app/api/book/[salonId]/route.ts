@@ -297,7 +297,7 @@ export async function POST(
       const dateStr = appointmentDate;
 
       try {
-        await fetch('https://exp.host/--/api/v2/push/send', {
+        const pushResponse = await fetch('https://exp.host/--/api/v2/push/send', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -314,6 +314,19 @@ export async function POST(
             data: { appointmentId: appointment.id },
           }),
         });
+
+        // Check if Expo rejected the token (e.g., DeviceNotRegistered)
+        const pushResult = await pushResponse.json();
+        if (pushResult?.data?.[0]?.status === 'error') {
+          console.error('Push notification error:', pushResult.data[0].message);
+          // Clear invalid token so it gets re-registered on next app open
+          if (pushResult.data[0].details?.error === 'DeviceNotRegistered') {
+            await prisma.salon.update({
+              where: { id: salonId },
+              data: { pushToken: null },
+            });
+          }
+        }
       } catch (pushError) {
         // Non-blocking: log but don't fail the booking
         console.error('Failed to send push notification:', pushError);
