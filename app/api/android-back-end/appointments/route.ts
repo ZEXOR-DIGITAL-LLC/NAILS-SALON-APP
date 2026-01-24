@@ -282,9 +282,17 @@ export async function GET(request: NextRequest) {
 
     // Handle future appointments query
     if (typeParam === 'future') {
-      // Get tomorrow's date at midnight UTC (future starts from tomorrow)
-      const now = new Date();
-      const tomorrow = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0, 0));
+      // Use client's local "today" date if provided, otherwise fall back to server UTC
+      const todayParam = searchParams.get('today');
+      let tomorrow: Date;
+      if (todayParam && /^\d{4}-\d{2}-\d{2}$/.test(todayParam)) {
+        // Client sent its local today - compute tomorrow relative to that
+        tomorrow = parseDateToUTC(todayParam);
+        tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+      } else {
+        const now = new Date();
+        tomorrow = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0, 0));
+      }
 
       console.log('Fetching future appointments from:', tomorrow);
 
