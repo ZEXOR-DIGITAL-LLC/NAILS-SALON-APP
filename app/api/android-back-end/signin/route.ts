@@ -30,6 +30,20 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
       }
 
+      // Check if trial or promo has expired and auto-update status
+      let subscriptionStatus = salon.subscriptionStatus;
+      if (
+        salon.subscriptionExpiresAt &&
+        new Date() > salon.subscriptionExpiresAt &&
+        ['trial', 'promo'].includes(salon.subscriptionStatus)
+      ) {
+        subscriptionStatus = 'expired';
+        await prisma.salon.update({
+          where: { id: salon.id },
+          data: { subscriptionStatus: 'expired' },
+        });
+      }
+
       return NextResponse.json({
         message: 'Sign in successful',
         userType: 'salon',
@@ -39,6 +53,12 @@ export async function POST(request: NextRequest) {
           email: salon.email,
           firstName: salon.firstName,
           lastName: salon.lastName
+        },
+        subscription: {
+          status: subscriptionStatus,
+          startDate: salon.subscriptionStartDate,
+          expiresAt: salon.subscriptionExpiresAt,
+          promoCodeUsed: salon.promoCodeUsed,
         }
       }, { status: 200 });
     }

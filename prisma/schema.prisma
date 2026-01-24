@@ -33,6 +33,12 @@ model Salon {
   resetPinExpiry    DateTime? // Expiry time for reset PIN
   revenuePin        String?   // 4-digit PIN for revenue page access
 
+  // Subscription Tracking
+  subscriptionStatus    String    @default("none")  // 'none' | 'trial' | 'paid' | 'promo' | 'expired'
+  subscriptionStartDate DateTime? // When the current subscription period started
+  subscriptionExpiresAt DateTime? // When the current access expires
+  promoCodeUsed         String?   // The promo code used (if status is 'promo')
+
   // Business Hours
   isOpen            Boolean   @default(true)      // Open/Closed toggle for bookings
   workingDays       Int[]     @default([1, 2, 3, 4, 5, 6]) // Days of week: 0=Sun, 1=Mon, ..., 6=Sat

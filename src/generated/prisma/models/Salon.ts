@@ -64,6 +64,10 @@ export type SalonMinAggregateOutputType = {
   resetPin: string | null
   resetPinExpiry: Date | null
   revenuePin: string | null
+  subscriptionStatus: string | null
+  subscriptionStartDate: Date | null
+  subscriptionExpiresAt: Date | null
+  promoCodeUsed: string | null
   isOpen: boolean | null
   openingHour: number | null
   openingMinute: number | null
@@ -95,6 +99,10 @@ export type SalonMaxAggregateOutputType = {
   resetPin: string | null
   resetPinExpiry: Date | null
   revenuePin: string | null
+  subscriptionStatus: string | null
+  subscriptionStartDate: Date | null
+  subscriptionExpiresAt: Date | null
+  promoCodeUsed: string | null
   isOpen: boolean | null
   openingHour: number | null
   openingMinute: number | null
@@ -127,6 +135,10 @@ export type SalonCountAggregateOutputType = {
   resetPin: number
   resetPinExpiry: number
   revenuePin: number
+  subscriptionStatus: number
+  subscriptionStartDate: number
+  subscriptionExpiresAt: number
+  promoCodeUsed: number
   isOpen: number
   workingDays: number
   openingHour: number
@@ -177,6 +189,10 @@ export type SalonMinAggregateInputType = {
   resetPin?: true
   resetPinExpiry?: true
   revenuePin?: true
+  subscriptionStatus?: true
+  subscriptionStartDate?: true
+  subscriptionExpiresAt?: true
+  promoCodeUsed?: true
   isOpen?: true
   openingHour?: true
   openingMinute?: true
@@ -208,6 +224,10 @@ export type SalonMaxAggregateInputType = {
   resetPin?: true
   resetPinExpiry?: true
   revenuePin?: true
+  subscriptionStatus?: true
+  subscriptionStartDate?: true
+  subscriptionExpiresAt?: true
+  promoCodeUsed?: true
   isOpen?: true
   openingHour?: true
   openingMinute?: true
@@ -240,6 +260,10 @@ export type SalonCountAggregateInputType = {
   resetPin?: true
   resetPinExpiry?: true
   revenuePin?: true
+  subscriptionStatus?: true
+  subscriptionStartDate?: true
+  subscriptionExpiresAt?: true
+  promoCodeUsed?: true
   isOpen?: true
   workingDays?: true
   openingHour?: true
@@ -360,6 +384,10 @@ export type SalonGroupByOutputType = {
   resetPin: string | null
   resetPinExpiry: Date | null
   revenuePin: string | null
+  subscriptionStatus: string
+  subscriptionStartDate: Date | null
+  subscriptionExpiresAt: Date | null
+  promoCodeUsed: string | null
   isOpen: boolean
   workingDays: number[]
   openingHour: number
@@ -416,6 +444,10 @@ export type SalonWhereInput = {
   resetPin?: Prisma.StringNullableFilter<"Salon"> | string | null
   resetPinExpiry?: Prisma.DateTimeNullableFilter<"Salon"> | Date | string | null
   revenuePin?: Prisma.StringNullableFilter<"Salon"> | string | null
+  subscriptionStatus?: Prisma.StringFilter<"Salon"> | string
+  subscriptionStartDate?: Prisma.DateTimeNullableFilter<"Salon"> | Date | string | null
+  subscriptionExpiresAt?: Prisma.DateTimeNullableFilter<"Salon"> | Date | string | null
+  promoCodeUsed?: Prisma.StringNullableFilter<"Salon"> | string | null
   isOpen?: Prisma.BoolFilter<"Salon"> | boolean
   workingDays?: Prisma.IntNullableListFilter<"Salon">
   openingHour?: Prisma.IntFilter<"Salon"> | number
@@ -457,6 +489,10 @@ export type SalonOrderByWithRelationInput = {
   resetPin?: Prisma.SortOrderInput | Prisma.SortOrder
   resetPinExpiry?: Prisma.SortOrderInput | Prisma.SortOrder
   revenuePin?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
+  subscriptionStartDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  promoCodeUsed?: Prisma.SortOrderInput | Prisma.SortOrder
   isOpen?: Prisma.SortOrder
   workingDays?: Prisma.SortOrder
   openingHour?: Prisma.SortOrder
@@ -501,6 +537,10 @@ export type SalonWhereUniqueInput = Prisma.AtLeast<{
   resetPin?: Prisma.StringNullableFilter<"Salon"> | string | null
   resetPinExpiry?: Prisma.DateTimeNullableFilter<"Salon"> | Date | string | null
   revenuePin?: Prisma.StringNullableFilter<"Salon"> | string | null
+  subscriptionStatus?: Prisma.StringFilter<"Salon"> | string
+  subscriptionStartDate?: Prisma.DateTimeNullableFilter<"Salon"> | Date | string | null
+  subscriptionExpiresAt?: Prisma.DateTimeNullableFilter<"Salon"> | Date | string | null
+  promoCodeUsed?: Prisma.StringNullableFilter<"Salon"> | string | null
   isOpen?: Prisma.BoolFilter<"Salon"> | boolean
   workingDays?: Prisma.IntNullableListFilter<"Salon">
   openingHour?: Prisma.IntFilter<"Salon"> | number
@@ -542,6 +582,10 @@ export type SalonOrderByWithAggregationInput = {
   resetPin?: Prisma.SortOrderInput | Prisma.SortOrder
   resetPinExpiry?: Prisma.SortOrderInput | Prisma.SortOrder
   revenuePin?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
+  subscriptionStartDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  promoCodeUsed?: Prisma.SortOrderInput | Prisma.SortOrder
   isOpen?: Prisma.SortOrder
   workingDays?: Prisma.SortOrder
   openingHour?: Prisma.SortOrder
@@ -583,6 +627,10 @@ export type SalonScalarWhereWithAggregatesInput = {
   resetPin?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
   resetPinExpiry?: Prisma.DateTimeNullableWithAggregatesFilter<"Salon"> | Date | string | null
   revenuePin?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
+  subscriptionStatus?: Prisma.StringWithAggregatesFilter<"Salon"> | string
+  subscriptionStartDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Salon"> | Date | string | null
+  subscriptionExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Salon"> | Date | string | null
+  promoCodeUsed?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
   isOpen?: Prisma.BoolWithAggregatesFilter<"Salon"> | boolean
   workingDays?: Prisma.IntNullableListFilter<"Salon">
   openingHour?: Prisma.IntWithAggregatesFilter<"Salon"> | number
@@ -616,6 +664,10 @@ export type SalonCreateInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -657,6 +709,10 @@ export type SalonUncheckedCreateInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -698,6 +754,10 @@ export type SalonUpdateInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -739,6 +799,10 @@ export type SalonUncheckedUpdateInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -780,6 +844,10 @@ export type SalonCreateManyInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -813,6 +881,10 @@ export type SalonUpdateManyMutationInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -846,6 +918,10 @@ export type SalonUncheckedUpdateManyInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -895,6 +971,10 @@ export type SalonCountOrderByAggregateInput = {
   resetPin?: Prisma.SortOrder
   resetPinExpiry?: Prisma.SortOrder
   revenuePin?: Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
+  subscriptionStartDate?: Prisma.SortOrder
+  subscriptionExpiresAt?: Prisma.SortOrder
+  promoCodeUsed?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
   workingDays?: Prisma.SortOrder
   openingHour?: Prisma.SortOrder
@@ -935,6 +1015,10 @@ export type SalonMaxOrderByAggregateInput = {
   resetPin?: Prisma.SortOrder
   resetPinExpiry?: Prisma.SortOrder
   revenuePin?: Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
+  subscriptionStartDate?: Prisma.SortOrder
+  subscriptionExpiresAt?: Prisma.SortOrder
+  promoCodeUsed?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
   openingHour?: Prisma.SortOrder
   openingMinute?: Prisma.SortOrder
@@ -966,6 +1050,10 @@ export type SalonMinOrderByAggregateInput = {
   resetPin?: Prisma.SortOrder
   resetPinExpiry?: Prisma.SortOrder
   revenuePin?: Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
+  subscriptionStartDate?: Prisma.SortOrder
+  subscriptionExpiresAt?: Prisma.SortOrder
+  promoCodeUsed?: Prisma.SortOrder
   isOpen?: Prisma.SortOrder
   openingHour?: Prisma.SortOrder
   openingMinute?: Prisma.SortOrder
@@ -1169,6 +1257,10 @@ export type SalonCreateWithoutAppointmentsInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -1209,6 +1301,10 @@ export type SalonUncheckedCreateWithoutAppointmentsInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -1265,6 +1361,10 @@ export type SalonUpdateWithoutAppointmentsInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1305,6 +1405,10 @@ export type SalonUncheckedUpdateWithoutAppointmentsInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1345,6 +1449,10 @@ export type SalonCreateWithoutGalleriesInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -1385,6 +1493,10 @@ export type SalonUncheckedCreateWithoutGalleriesInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -1441,6 +1553,10 @@ export type SalonUpdateWithoutGalleriesInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1481,6 +1597,10 @@ export type SalonUncheckedUpdateWithoutGalleriesInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1521,6 +1641,10 @@ export type SalonCreateWithoutEmployeesInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -1561,6 +1685,10 @@ export type SalonUncheckedCreateWithoutEmployeesInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -1617,6 +1745,10 @@ export type SalonUpdateWithoutEmployeesInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1657,6 +1789,10 @@ export type SalonUncheckedUpdateWithoutEmployeesInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1697,6 +1833,10 @@ export type SalonCreateWithoutSalonClientsInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -1737,6 +1877,10 @@ export type SalonUncheckedCreateWithoutSalonClientsInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -1793,6 +1937,10 @@ export type SalonUpdateWithoutSalonClientsInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1833,6 +1981,10 @@ export type SalonUncheckedUpdateWithoutSalonClientsInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1873,6 +2025,10 @@ export type SalonCreateWithoutProductCategoriesInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -1913,6 +2069,10 @@ export type SalonUncheckedCreateWithoutProductCategoriesInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -1969,6 +2129,10 @@ export type SalonUpdateWithoutProductCategoriesInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2009,6 +2173,10 @@ export type SalonUncheckedUpdateWithoutProductCategoriesInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2049,6 +2217,10 @@ export type SalonCreateWithoutProductsInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -2089,6 +2261,10 @@ export type SalonUncheckedCreateWithoutProductsInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -2145,6 +2321,10 @@ export type SalonUpdateWithoutProductsInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2185,6 +2365,10 @@ export type SalonUncheckedUpdateWithoutProductsInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2225,6 +2409,10 @@ export type SalonCreateWithoutNotificationSettingsInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -2265,6 +2453,10 @@ export type SalonUncheckedCreateWithoutNotificationSettingsInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -2321,6 +2513,10 @@ export type SalonUpdateWithoutNotificationSettingsInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2361,6 +2557,10 @@ export type SalonUncheckedUpdateWithoutNotificationSettingsInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2401,6 +2601,10 @@ export type SalonCreateWithoutInventoryNotificationsInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -2441,6 +2645,10 @@ export type SalonUncheckedCreateWithoutInventoryNotificationsInput = {
   resetPin?: string | null
   resetPinExpiry?: Date | string | null
   revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
   isOpen?: boolean
   workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
   openingHour?: number
@@ -2497,6 +2705,10 @@ export type SalonUpdateWithoutInventoryNotificationsInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2537,6 +2749,10 @@ export type SalonUncheckedUpdateWithoutInventoryNotificationsInput = {
   resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
   workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
   openingHour?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2662,6 +2878,10 @@ export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   resetPin?: boolean
   resetPinExpiry?: boolean
   revenuePin?: boolean
+  subscriptionStatus?: boolean
+  subscriptionStartDate?: boolean
+  subscriptionExpiresAt?: boolean
+  promoCodeUsed?: boolean
   isOpen?: boolean
   workingDays?: boolean
   openingHour?: boolean
@@ -2704,6 +2924,10 @@ export type SalonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   resetPin?: boolean
   resetPinExpiry?: boolean
   revenuePin?: boolean
+  subscriptionStatus?: boolean
+  subscriptionStartDate?: boolean
+  subscriptionExpiresAt?: boolean
+  promoCodeUsed?: boolean
   isOpen?: boolean
   workingDays?: boolean
   openingHour?: boolean
@@ -2737,6 +2961,10 @@ export type SalonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   resetPin?: boolean
   resetPinExpiry?: boolean
   revenuePin?: boolean
+  subscriptionStatus?: boolean
+  subscriptionStartDate?: boolean
+  subscriptionExpiresAt?: boolean
+  promoCodeUsed?: boolean
   isOpen?: boolean
   workingDays?: boolean
   openingHour?: boolean
@@ -2770,6 +2998,10 @@ export type SalonSelectScalar = {
   resetPin?: boolean
   resetPinExpiry?: boolean
   revenuePin?: boolean
+  subscriptionStatus?: boolean
+  subscriptionStartDate?: boolean
+  subscriptionExpiresAt?: boolean
+  promoCodeUsed?: boolean
   isOpen?: boolean
   workingDays?: boolean
   openingHour?: boolean
@@ -2780,7 +3012,7 @@ export type SalonSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SalonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "businessName" | "businessImage" | "type" | "otherType" | "waitingAmenities" | "otherAmenity" | "country" | "city" | "address" | "phoneNumber" | "phoneCode" | "termsAccepted" | "pin" | "confirmed" | "resetPin" | "resetPinExpiry" | "revenuePin" | "isOpen" | "workingDays" | "openingHour" | "openingMinute" | "closingHour" | "closingMinute" | "createdAt" | "updatedAt", ExtArgs["result"]["salon"]>
+export type SalonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "businessName" | "businessImage" | "type" | "otherType" | "waitingAmenities" | "otherAmenity" | "country" | "city" | "address" | "phoneNumber" | "phoneCode" | "termsAccepted" | "pin" | "confirmed" | "resetPin" | "resetPinExpiry" | "revenuePin" | "subscriptionStatus" | "subscriptionStartDate" | "subscriptionExpiresAt" | "promoCodeUsed" | "isOpen" | "workingDays" | "openingHour" | "openingMinute" | "closingHour" | "closingMinute" | "createdAt" | "updatedAt", ExtArgs["result"]["salon"]>
 export type SalonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   appointments?: boolean | Prisma.Salon$appointmentsArgs<ExtArgs>
   galleries?: boolean | Prisma.Salon$galleriesArgs<ExtArgs>
@@ -2830,6 +3062,10 @@ export type $SalonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     resetPin: string | null
     resetPinExpiry: Date | null
     revenuePin: string | null
+    subscriptionStatus: string
+    subscriptionStartDate: Date | null
+    subscriptionExpiresAt: Date | null
+    promoCodeUsed: string | null
     isOpen: boolean
     workingDays: number[]
     openingHour: number
@@ -3291,6 +3527,10 @@ export interface SalonFieldRefs {
   readonly resetPin: Prisma.FieldRef<"Salon", 'String'>
   readonly resetPinExpiry: Prisma.FieldRef<"Salon", 'DateTime'>
   readonly revenuePin: Prisma.FieldRef<"Salon", 'String'>
+  readonly subscriptionStatus: Prisma.FieldRef<"Salon", 'String'>
+  readonly subscriptionStartDate: Prisma.FieldRef<"Salon", 'DateTime'>
+  readonly subscriptionExpiresAt: Prisma.FieldRef<"Salon", 'DateTime'>
+  readonly promoCodeUsed: Prisma.FieldRef<"Salon", 'String'>
   readonly isOpen: Prisma.FieldRef<"Salon", 'Boolean'>
   readonly workingDays: Prisma.FieldRef<"Salon", 'Int[]'>
   readonly openingHour: Prisma.FieldRef<"Salon", 'Int'>

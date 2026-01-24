@@ -50,6 +50,17 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Update the Salon's subscription status to 'promo'
+    await prisma.salon.update({
+      where: { id: salonId },
+      data: {
+        subscriptionStatus: 'promo',
+        subscriptionStartDate: now,
+        subscriptionExpiresAt: expiresAt,
+        promoCodeUsed: normalizedCode,
+      },
+    });
+
     return NextResponse.json({
       message: 'Promo code redeemed successfully',
       promoCode: {
