@@ -13,6 +13,7 @@ const translations = {
     features: { EN: 'Features', ES: 'Funciones', FR: 'Fonctionnalités', PT: 'Recursos' },
     howItWorks: { EN: 'How It Works', ES: 'Cómo Funciona', FR: 'Comment Ça Marche', PT: 'Como Funciona' },
     faq: { EN: 'FAQ', ES: 'Preguntas', FR: 'FAQ', PT: 'Perguntas' },
+    findSalon: { EN: 'Find a Salon', ES: 'Buscar Salon', FR: 'Trouver un Salon', PT: 'Encontrar Salao' },
     download: { EN: 'Download App', ES: 'Descargar App', FR: "Télécharger", PT: 'Baixar App' },
   },
   hero: {
@@ -546,6 +547,7 @@ function Header({ language, setLanguage }: { language: Language; setLanguage: (l
             <button onClick={() => scrollTo('features')} className="text-sm font-medium text-gray-600 hover:text-rose-600 transition-colors">{t.features[language]}</button>
             <button onClick={() => scrollTo('how-it-works')} className="text-sm font-medium text-gray-600 hover:text-rose-600 transition-colors">{t.howItWorks[language]}</button>
             <button onClick={() => scrollTo('faq')} className="text-sm font-medium text-gray-600 hover:text-rose-600 transition-colors">{t.faq[language]}</button>
+            <a href="/find-salon" className="text-sm font-medium text-rose-600 hover:text-rose-700 transition-colors">{t.findSalon[language]}</a>
             <div className="w-px h-5 bg-gray-200"></div>
             <LanguageSwitcher language={language} setLanguage={setLanguage} />
             <button onClick={() => scrollTo('download')} className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-2.5 rounded-full text-sm font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
@@ -569,6 +571,7 @@ function Header({ language, setLanguage }: { language: Language; setLanguage: (l
               <button onClick={() => scrollTo('features')} className="text-left font-medium text-lg text-gray-600 hover:text-rose-600 py-2">{t.features[language]}</button>
               <button onClick={() => scrollTo('how-it-works')} className="text-left font-medium text-lg text-gray-600 hover:text-rose-600 py-2">{t.howItWorks[language]}</button>
               <button onClick={() => scrollTo('faq')} className="text-left font-medium text-lg text-gray-600 hover:text-rose-600 py-2">{t.faq[language]}</button>
+              <a href="/find-salon" className="text-left font-medium text-lg text-rose-600 hover:text-rose-700 py-2">{t.findSalon[language]}</a>
               <button onClick={() => scrollTo('download')} className="bg-gray-900 text-white px-4 py-3.5 rounded-xl text-center font-medium shadow-lg mt-2">
                 {t.download[language]}
               </button>
