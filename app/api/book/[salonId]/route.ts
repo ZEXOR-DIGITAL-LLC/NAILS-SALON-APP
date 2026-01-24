@@ -310,6 +310,7 @@ export async function POST(
             body: `${clientName.trim()} booked "${service.trim()}" on ${dateStr} at ${timeStr}`,
             sound: 'default',
             priority: 'high',
+            channelId: 'bookings',
             data: { appointmentId: appointment.id },
           }),
         });
