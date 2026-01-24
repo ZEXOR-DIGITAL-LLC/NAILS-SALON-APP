@@ -1,6 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/app/lib/prisma';
 
+// Helper function to send push notification for inventory alerts
+async function sendInventoryPushNotification(
+  pushToken: string,
+  title: string,
+  body: string,
+  data?: Record<string, string>
+) {
+  try {
+    await fetch('https://exp.host/--/api/v2/push/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Accept-Encoding': 'gzip, deflate',
+      },
+      body: JSON.stringify({
+        to: pushToken,
+        title,
+        body,
+        sound: 'default',
+        priority: 'high',
+        channelId: 'inventory-alerts',
+        data: data || {},
+      }),
+    });
+  } catch (error) {
+    console.error('Failed to send inventory push notification:', error);
+  }
+}
+
 // GET - Fetch inventory notifications for a salon
 export async function GET(request: NextRequest) {
   try {
@@ -44,10 +74,10 @@ export async function GET(request: NextRequest) {
 
     // Refresh notifications based on current product states
     if (expirationEnabled) {
-      await refreshExpirationNotifications(salonId, settings!.daysBeforeExpiration);
+      await refreshExpirationNotifications(salonId, settings!.daysBeforeExpiration, salon.pushToken);
     }
     if (lowStockEnabled) {
-      await refreshLowStockNotifications(salonId);
+      await refreshLowStockNotifications(salonId, salon.pushToken);
     }
 
     // If type is 'count', just return the count
@@ -264,7 +294,7 @@ export async function DELETE(request: NextRequest) {
 }
 
 // Helper function to refresh expiration notifications
-async function refreshExpirationNotifications(salonId: string, daysBeforeExpiration: number) {
+async function refreshExpirationNotifications(salonId: string, daysBeforeExpiration: number, pushToken?: string | null) {
   try {
     const now = new Date();
     const futureDate = new Date();
@@ -295,6 +325,9 @@ async function refreshExpirationNotifications(salonId: string, daysBeforeExpirat
       },
     });
 
+    let newExpiringCount = 0;
+    let newExpiredCount = 0;
+
     // Create notifications for expiring products (if not already exists)
     for (const product of expiringProducts) {
       if (!product.expirationDate) continue;
@@ -323,6 +356,7 @@ async function refreshExpirationNotifications(salonId: string, daysBeforeExpirat
             expiresAt: product.expirationDate,
           },
         });
+        newExpiringCount++;
       } else {
         // Update the message with current days remaining
         await prisma.inventoryNotification.update({
@@ -358,6 +392,7 @@ async function refreshExpirationNotifications(salonId: string, daysBeforeExpirat
             isRead: false, // Mark as unread since status changed
           },
         });
+        newExpiredCount++;
       } else {
         // Check if expired notification already exists
         const existingExpiredNotification = await prisma.inventoryNotification.findFirst({
@@ -380,8 +415,26 @@ async function refreshExpirationNotifications(salonId: string, daysBeforeExpirat
               expiresAt: product.expirationDate,
             },
           });
+          newExpiredCount++;
         }
       }
+    }
+
+    // Send push notification for new expiration alerts
+    if (pushToken && (newExpiringCount > 0 || newExpiredCount > 0)) {
+      const parts: string[] = [];
+      if (newExpiringCount > 0) {
+        parts.push(`${newExpiringCount} item${newExpiringCount === 1 ? '' : 's'} expiring soon`);
+      }
+      if (newExpiredCount > 0) {
+        parts.push(`${newExpiredCount} item${newExpiredCount === 1 ? ' has' : 's have'} expired`);
+      }
+      await sendInventoryPushNotification(
+        pushToken,
+        'Inventory Expiration Alert',
+        parts.join(', '),
+        { type: 'expiration' }
+      );
     }
 
     // Remove expiration notifications for products that are no longer expiring soon
@@ -415,7 +468,7 @@ async function refreshExpirationNotifications(salonId: string, daysBeforeExpirat
 }
 
 // Helper function to refresh low stock notifications
-async function refreshLowStockNotifications(salonId: string) {
+async function refreshLowStockNotifications(salonId: string, pushToken?: string | null) {
   try {
     // Prisma doesn't support field-to-field comparison, so we filter in application code
     const allActiveProducts = await prisma.product.findMany({
@@ -432,6 +485,9 @@ async function refreshLowStockNotifications(salonId: string) {
     const criticalProducts = allActiveProducts.filter(
       (p) => p.currentStock <= p.criticalPoint
     );
+
+    let newLowCount = 0;
+    let newCriticalCount = 0;
 
     // Create/update notifications for low stock products
     for (const product of lowProducts) {
@@ -454,6 +510,7 @@ async function refreshLowStockNotifications(salonId: string) {
             message: `${product.name} is low on stock (${product.currentStock} remaining)`,
           },
         });
+        newLowCount++;
       } else if (existingNotification.type === 'critical_stock') {
         // Upgrade from critical back to low (stock was replenished partially)
         await prisma.inventoryNotification.update({
@@ -496,6 +553,7 @@ async function refreshLowStockNotifications(salonId: string) {
             message: `${product.name} is critically low on stock (${product.currentStock} remaining)`,
           },
         });
+        newCriticalCount++;
       } else if (existingNotification.type === 'low_stock') {
         // Downgrade from low to critical (stock decreased further)
         await prisma.inventoryNotification.update({
@@ -506,6 +564,7 @@ async function refreshLowStockNotifications(salonId: string) {
             isRead: false,
           },
         });
+        newCriticalCount++;
       } else {
         // Update the message with current stock count
         await prisma.inventoryNotification.update({
@@ -515,6 +574,23 @@ async function refreshLowStockNotifications(salonId: string) {
           },
         });
       }
+    }
+
+    // Send push notification for new stock alerts
+    if (pushToken && (newLowCount > 0 || newCriticalCount > 0)) {
+      const parts: string[] = [];
+      if (newCriticalCount > 0) {
+        parts.push(`${newCriticalCount} item${newCriticalCount === 1 ? '' : 's'} critically low`);
+      }
+      if (newLowCount > 0) {
+        parts.push(`${newLowCount} item${newLowCount === 1 ? '' : 's'} low on stock`);
+      }
+      await sendInventoryPushNotification(
+        pushToken,
+        'Low Stock Alert',
+        parts.join(', '),
+        { type: 'low_stock' }
+      );
     }
 
     // Archive stock notifications for products that are no longer low/critical

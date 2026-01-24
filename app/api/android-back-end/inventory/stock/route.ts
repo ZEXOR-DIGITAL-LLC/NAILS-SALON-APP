@@ -1,6 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/app/lib/prisma';
 
+// Helper function to send push notification for inventory alerts
+async function sendInventoryPushNotification(
+  pushToken: string,
+  title: string,
+  body: string,
+  data?: Record<string, string>
+) {
+  try {
+    await fetch('https://exp.host/--/api/v2/push/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Accept-Encoding': 'gzip, deflate',
+      },
+      body: JSON.stringify({
+        to: pushToken,
+        title,
+        body,
+        sound: 'default',
+        priority: 'high',
+        channelId: 'inventory-alerts',
+        data: data || {},
+      }),
+    });
+  } catch (error) {
+    console.error('Failed to send inventory push notification:', error);
+  }
+}
+
 // PATCH - Adjust stock level for a product
 export async function PATCH(request: NextRequest) {
   try {
@@ -100,6 +130,44 @@ export async function PATCH(request: NextRequest) {
       status = 'critical';
     } else if (newStock <= updatedProduct.reorderPoint) {
       status = 'low';
+    }
+
+    // Send push notification if stock crossed a threshold (only when removing stock)
+    if (action === 'remove' && (status === 'low' || status === 'critical')) {
+      // Check if this is a new threshold crossing (previous stock was above the threshold)
+      const previousStatus = previousStock <= updatedProduct.criticalPoint
+        ? 'critical'
+        : previousStock <= updatedProduct.reorderPoint
+          ? 'low'
+          : 'ok';
+
+      if (previousStatus !== status) {
+        // Check notification settings and get push token
+        try {
+          const salon = await prisma.salon.findUnique({
+            where: { id: salonId },
+            select: { pushToken: true },
+          });
+
+          const settings = await prisma.notificationSettings.findUnique({
+            where: { salonId },
+          });
+
+          if (salon?.pushToken && settings?.lowStockEnabled) {
+            const title = status === 'critical' ? 'Critical Stock Alert' : 'Low Stock Alert';
+            const body = status === 'critical'
+              ? `${updatedProduct.name} is critically low (${newStock} remaining)`
+              : `${updatedProduct.name} is running low (${newStock} remaining)`;
+
+            await sendInventoryPushNotification(salon.pushToken, title, body, {
+              type: status === 'critical' ? 'critical_stock' : 'low_stock',
+              productId: updatedProduct.id,
+            });
+          }
+        } catch (pushError) {
+          console.error('Error sending stock push notification:', pushError);
+        }
+      }
     }
 
     return NextResponse.json({

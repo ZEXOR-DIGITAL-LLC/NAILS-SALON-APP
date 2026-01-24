@@ -1,6 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/app/lib/prisma';
 
+// Helper function to send push notification for inventory alerts
+async function sendInventoryPushNotification(
+  pushToken: string,
+  title: string,
+  body: string,
+  data?: Record<string, string>
+) {
+  try {
+    await fetch('https://exp.host/--/api/v2/push/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Accept-Encoding': 'gzip, deflate',
+      },
+      body: JSON.stringify({
+        to: pushToken,
+        title,
+        body,
+        sound: 'default',
+        priority: 'high',
+        channelId: 'inventory-alerts',
+        data: data || {},
+      }),
+    });
+  } catch (error) {
+    console.error('Failed to send inventory push notification:', error);
+  }
+}
+
 // GET - Fetch notification settings for a salon
 export async function GET(request: NextRequest) {
   try {
@@ -94,12 +124,12 @@ export async function PATCH(request: NextRequest) {
 
     // If expiration notifications were enabled, generate notifications for expiring products
     if (inventoryExpirationEnabled) {
-      await generateExpirationNotifications(salonId, settings.daysBeforeExpiration);
+      await generateExpirationNotifications(salonId, settings.daysBeforeExpiration, salon.pushToken);
     }
 
     // If low stock notifications were enabled, generate notifications for low stock products
     if (lowStockEnabled) {
-      await generateLowStockNotifications(salonId);
+      await generateLowStockNotifications(salonId, salon.pushToken);
     }
 
     return NextResponse.json(
@@ -116,7 +146,7 @@ export async function PATCH(request: NextRequest) {
 }
 
 // Helper function to generate expiration notifications
-async function generateExpirationNotifications(salonId: string, daysBeforeExpiration: number) {
+async function generateExpirationNotifications(salonId: string, daysBeforeExpiration: number, pushToken?: string | null) {
   try {
     const now = new Date();
     const futureDate = new Date();
@@ -147,6 +177,9 @@ async function generateExpirationNotifications(salonId: string, daysBeforeExpira
       },
     });
 
+    let newExpiringCount = 0;
+    let newExpiredCount = 0;
+
     // Create notifications for expiring products (if not already exists)
     for (const product of expiringProducts) {
       if (!product.expirationDate) continue;
@@ -175,6 +208,7 @@ async function generateExpirationNotifications(salonId: string, daysBeforeExpira
             expiresAt: product.expirationDate,
           },
         });
+        newExpiringCount++;
       }
     }
 
@@ -202,7 +236,25 @@ async function generateExpirationNotifications(salonId: string, daysBeforeExpira
             expiresAt: product.expirationDate,
           },
         });
+        newExpiredCount++;
       }
+    }
+
+    // Send push notification summary if there are new alerts
+    if (pushToken && (newExpiringCount > 0 || newExpiredCount > 0)) {
+      const parts: string[] = [];
+      if (newExpiringCount > 0) {
+        parts.push(`${newExpiringCount} item${newExpiringCount === 1 ? '' : 's'} expiring soon`);
+      }
+      if (newExpiredCount > 0) {
+        parts.push(`${newExpiredCount} item${newExpiredCount === 1 ? ' has' : 's have'} expired`);
+      }
+      await sendInventoryPushNotification(
+        pushToken,
+        'Inventory Expiration Alert',
+        parts.join(', '),
+        { type: 'expiration' }
+      );
     }
   } catch (error) {
     console.error('Error generating expiration notifications:', error);
@@ -210,7 +262,7 @@ async function generateExpirationNotifications(salonId: string, daysBeforeExpira
 }
 
 // Helper function to generate low stock notifications
-async function generateLowStockNotifications(salonId: string) {
+async function generateLowStockNotifications(salonId: string, pushToken?: string | null) {
   try {
     const allActiveProducts = await prisma.product.findMany({
       where: {
@@ -226,6 +278,9 @@ async function generateLowStockNotifications(salonId: string) {
     const criticalProducts = allActiveProducts.filter(
       (p) => p.currentStock <= p.criticalPoint
     );
+
+    let newLowCount = 0;
+    let newCriticalCount = 0;
 
     for (const product of lowProducts) {
       const existingNotification = await prisma.inventoryNotification.findFirst({
@@ -247,6 +302,7 @@ async function generateLowStockNotifications(salonId: string) {
             message: `${product.name} is low on stock (${product.currentStock} remaining)`,
           },
         });
+        newLowCount++;
       }
     }
 
@@ -270,7 +326,25 @@ async function generateLowStockNotifications(salonId: string) {
             message: `${product.name} is critically low on stock (${product.currentStock} remaining)`,
           },
         });
+        newCriticalCount++;
       }
+    }
+
+    // Send push notification summary if there are new alerts
+    if (pushToken && (newLowCount > 0 || newCriticalCount > 0)) {
+      const parts: string[] = [];
+      if (newCriticalCount > 0) {
+        parts.push(`${newCriticalCount} item${newCriticalCount === 1 ? '' : 's'} critically low`);
+      }
+      if (newLowCount > 0) {
+        parts.push(`${newLowCount} item${newLowCount === 1 ? '' : 's'} low on stock`);
+      }
+      await sendInventoryPushNotification(
+        pushToken,
+        'Low Stock Alert',
+        parts.join(', '),
+        { type: 'low_stock' }
+      );
     }
   } catch (error) {
     console.error('Error generating low stock notifications:', error);
