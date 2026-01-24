@@ -309,6 +309,60 @@ const translations = {
     FR: 'Si vous avez un code client, entrez-le ici. Sinon, un code sera attribue automatiquement.',
     PT: 'Se voce tem um codigo de cliente, digite aqui. Caso contrario, um sera atribuido automaticamente.',
   },
+  lookupButton: {
+    EN: 'Look Up My Account',
+    ES: 'Buscar Mi Cuenta',
+    FR: 'Rechercher Mon Compte',
+    PT: 'Buscar Minha Conta',
+  },
+  lookupDescription: {
+    EN: 'Have a client code? Look up your info to book faster.',
+    ES: 'Tienes un codigo de cliente? Busca tu informacion para reservar mas rapido.',
+    FR: 'Vous avez un code client? Recherchez vos informations pour reserver plus vite.',
+    PT: 'Tem um codigo de cliente? Busque suas informacoes para agendar mais rapido.',
+  },
+  lookupTitle: {
+    EN: 'Look Up Your Account',
+    ES: 'Buscar Tu Cuenta',
+    FR: 'Rechercher Votre Compte',
+    PT: 'Buscar Sua Conta',
+  },
+  lookupInputPlaceholder: {
+    EN: 'Enter code (e.g. CLT-0001 or 0001)',
+    ES: 'Ingresa codigo (ej. CLT-0001 o 0001)',
+    FR: 'Entrez code (ex. CLT-0001 ou 0001)',
+    PT: 'Digite codigo (ex. CLT-0001 ou 0001)',
+  },
+  lookupSearch: {
+    EN: 'Search',
+    ES: 'Buscar',
+    FR: 'Rechercher',
+    PT: 'Buscar',
+  },
+  lookupSearching: {
+    EN: 'Searching...',
+    ES: 'Buscando...',
+    FR: 'Recherche...',
+    PT: 'Buscando...',
+  },
+  lookupNotFound: {
+    EN: 'No account found with this code. Please check and try again.',
+    ES: 'No se encontro una cuenta con este codigo. Verifica e intenta de nuevo.',
+    FR: 'Aucun compte trouve avec ce code. Veuillez verifier et reessayer.',
+    PT: 'Nenhuma conta encontrada com este codigo. Verifique e tente novamente.',
+  },
+  lookupSuccess: {
+    EN: 'Account found! Your info has been filled in.',
+    ES: 'Cuenta encontrada! Tu informacion ha sido completada.',
+    FR: 'Compte trouve! Vos informations ont ete remplies.',
+    PT: 'Conta encontrada! Suas informacoes foram preenchidas.',
+  },
+  cancel: {
+    EN: 'Cancel',
+    ES: 'Cancelar',
+    FR: 'Annuler',
+    PT: 'Cancelar',
+  },
 };
 
 // 12-hour format hours (1-12)
@@ -456,6 +510,13 @@ export default function PublicBookingPage() {
   const [showMinutePicker, setShowMinutePicker] = useState(false);
   const [showAmPmPicker, setShowAmPmPicker] = useState(false);
 
+  // Client lookup state
+  const [showLookupModal, setShowLookupModal] = useState(false);
+  const [lookupCode, setLookupCode] = useState('');
+  const [lookupLoading, setLookupLoading] = useState(false);
+  const [lookupError, setLookupError] = useState<string | null>(null);
+  const [lookupSuccess, setLookupSuccess] = useState(false);
+
   // Error modals
   const [showPastTimeError, setShowPastTimeError] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -598,6 +659,44 @@ export default function PublicBookingPage() {
     setSelectedAmPm('AM');
     setSelectedMinute(0);
     setSelectedEmployee(null);
+  };
+
+  // Handle client code lookup
+  const handleLookup = async () => {
+    if (!lookupCode.trim()) return;
+
+    setLookupLoading(true);
+    setLookupError(null);
+    setLookupSuccess(false);
+
+    try {
+      const response = await fetch(`/api/book/${salonId}/lookup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: lookupCode.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.client) {
+        const fullName = [data.client.firstName, data.client.lastName].filter(Boolean).join(' ');
+        setClientName(fullName);
+        setClientCodeInput(data.client.clientCode || '');
+        setLookupSuccess(true);
+        // Close modal after a short delay
+        setTimeout(() => {
+          setShowLookupModal(false);
+          setLookupCode('');
+          setLookupSuccess(false);
+        }, 1500);
+      } else {
+        setLookupError(t('lookupNotFound'));
+      }
+    } catch {
+      setLookupError('Network error. Please try again.');
+    } finally {
+      setLookupLoading(false);
+    }
   };
 
   // Get selected employee name for display
@@ -900,6 +999,25 @@ export default function PublicBookingPage() {
             {validationError}
           </div>
         )}
+
+        {/* Client Lookup Button */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-6">
+          <p className="text-sm text-gray-500 mb-3">{t('lookupDescription')}</p>
+          <button
+            onClick={() => {
+              setShowLookupModal(true);
+              setLookupError(null);
+              setLookupSuccess(false);
+              setLookupCode('');
+            }}
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-pink-50 border border-pink-200 rounded-xl text-pink-600 font-medium hover:bg-pink-100 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            {t('lookupButton')}
+          </button>
+        </div>
 
         {/* Booking Form */}
         <div className="space-y-6">
@@ -1263,6 +1381,74 @@ export default function PublicBookingPage() {
             >
               OK
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Client Lookup Modal */}
+      {showLookupModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setShowLookupModal(false)}>
+          <div className="bg-white rounded-2xl w-full max-w-sm p-6" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('lookupTitle')}</h3>
+
+            <input
+              type="text"
+              value={lookupCode}
+              onChange={(e) => {
+                setLookupCode(e.target.value.toUpperCase());
+                setLookupError(null);
+                setLookupSuccess(false);
+              }}
+              placeholder={t('lookupInputPlaceholder')}
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent uppercase mb-4"
+              maxLength={8}
+              autoFocus
+            />
+
+            {/* Error Message */}
+            {lookupError && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
+                {lookupError}
+              </div>
+            )}
+
+            {/* Success Message */}
+            {lookupSuccess && (
+              <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-xl text-green-600 text-sm flex items-center gap-2">
+                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                {t('lookupSuccess')}
+              </div>
+            )}
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowLookupModal(false)}
+                className="flex-1 px-4 py-3 border border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+              >
+                {t('cancel')}
+              </button>
+              <button
+                onClick={handleLookup}
+                disabled={lookupLoading || !lookupCode.trim()}
+                className="flex-1 px-4 py-3 bg-pink-500 text-white rounded-xl font-medium hover:bg-pink-600 disabled:bg-pink-300 transition-colors flex items-center justify-center gap-2"
+              >
+                {lookupLoading ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    {t('lookupSearching')}
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    {t('lookupSearch')}
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )}
