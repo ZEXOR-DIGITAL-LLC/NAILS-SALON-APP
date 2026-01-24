@@ -293,6 +293,9 @@ export async function GET(request: NextRequest) {
         startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0));
       }
 
+      // Auto-transition today's appointments (Pending→InProgress→Completed)
+      await autoTransitionAppointments(salonId, startDate);
+
       console.log('Fetching upcoming appointments from:', startDate);
 
       const whereClause: {
