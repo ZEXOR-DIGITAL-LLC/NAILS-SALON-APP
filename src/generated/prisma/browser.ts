@@ -78,6 +78,11 @@ export type NotificationSettings = Prisma.NotificationSettingsModel
  */
 export type InventoryNotification = Prisma.InventoryNotificationModel
 /**
+ * Model SalonNotification
+ * 
+ */
+export type SalonNotification = Prisma.SalonNotificationModel
+/**
  * Model PromoCode
  * 
  */

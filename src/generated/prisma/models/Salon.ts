@@ -73,6 +73,8 @@ export type SalonMinAggregateOutputType = {
   openingMinute: number | null
   closingHour: number | null
   closingMinute: number | null
+  lastAutoOpenDate: string | null
+  lastAutoCloseDate: string | null
   pushToken: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -109,6 +111,8 @@ export type SalonMaxAggregateOutputType = {
   openingMinute: number | null
   closingHour: number | null
   closingMinute: number | null
+  lastAutoOpenDate: string | null
+  lastAutoCloseDate: string | null
   pushToken: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -147,6 +151,8 @@ export type SalonCountAggregateOutputType = {
   openingMinute: number
   closingHour: number
   closingMinute: number
+  lastAutoOpenDate: number
+  lastAutoCloseDate: number
   pushToken: number
   createdAt: number
   updatedAt: number
@@ -201,6 +207,8 @@ export type SalonMinAggregateInputType = {
   openingMinute?: true
   closingHour?: true
   closingMinute?: true
+  lastAutoOpenDate?: true
+  lastAutoCloseDate?: true
   pushToken?: true
   createdAt?: true
   updatedAt?: true
@@ -237,6 +245,8 @@ export type SalonMaxAggregateInputType = {
   openingMinute?: true
   closingHour?: true
   closingMinute?: true
+  lastAutoOpenDate?: true
+  lastAutoCloseDate?: true
   pushToken?: true
   createdAt?: true
   updatedAt?: true
@@ -275,6 +285,8 @@ export type SalonCountAggregateInputType = {
   openingMinute?: true
   closingHour?: true
   closingMinute?: true
+  lastAutoOpenDate?: true
+  lastAutoCloseDate?: true
   pushToken?: true
   createdAt?: true
   updatedAt?: true
@@ -400,6 +412,8 @@ export type SalonGroupByOutputType = {
   openingMinute: number
   closingHour: number
   closingMinute: number
+  lastAutoOpenDate: string | null
+  lastAutoCloseDate: string | null
   pushToken: string | null
   createdAt: Date
   updatedAt: Date
@@ -461,6 +475,8 @@ export type SalonWhereInput = {
   openingMinute?: Prisma.IntFilter<"Salon"> | number
   closingHour?: Prisma.IntFilter<"Salon"> | number
   closingMinute?: Prisma.IntFilter<"Salon"> | number
+  lastAutoOpenDate?: Prisma.StringNullableFilter<"Salon"> | string | null
+  lastAutoCloseDate?: Prisma.StringNullableFilter<"Salon"> | string | null
   pushToken?: Prisma.StringNullableFilter<"Salon"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Salon"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Salon"> | Date | string
@@ -474,6 +490,7 @@ export type SalonWhereInput = {
   productHistories?: Prisma.ProductHistoryListRelationFilter
   notificationSettings?: Prisma.XOR<Prisma.NotificationSettingsNullableScalarRelationFilter, Prisma.NotificationSettingsWhereInput> | null
   inventoryNotifications?: Prisma.InventoryNotificationListRelationFilter
+  salonNotifications?: Prisma.SalonNotificationListRelationFilter
 }
 
 export type SalonOrderByWithRelationInput = {
@@ -509,6 +526,8 @@ export type SalonOrderByWithRelationInput = {
   openingMinute?: Prisma.SortOrder
   closingHour?: Prisma.SortOrder
   closingMinute?: Prisma.SortOrder
+  lastAutoOpenDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastAutoCloseDate?: Prisma.SortOrderInput | Prisma.SortOrder
   pushToken?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -522,6 +541,7 @@ export type SalonOrderByWithRelationInput = {
   productHistories?: Prisma.ProductHistoryOrderByRelationAggregateInput
   notificationSettings?: Prisma.NotificationSettingsOrderByWithRelationInput
   inventoryNotifications?: Prisma.InventoryNotificationOrderByRelationAggregateInput
+  salonNotifications?: Prisma.SalonNotificationOrderByRelationAggregateInput
 }
 
 export type SalonWhereUniqueInput = Prisma.AtLeast<{
@@ -560,6 +580,8 @@ export type SalonWhereUniqueInput = Prisma.AtLeast<{
   openingMinute?: Prisma.IntFilter<"Salon"> | number
   closingHour?: Prisma.IntFilter<"Salon"> | number
   closingMinute?: Prisma.IntFilter<"Salon"> | number
+  lastAutoOpenDate?: Prisma.StringNullableFilter<"Salon"> | string | null
+  lastAutoCloseDate?: Prisma.StringNullableFilter<"Salon"> | string | null
   pushToken?: Prisma.StringNullableFilter<"Salon"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Salon"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Salon"> | Date | string
@@ -573,6 +595,7 @@ export type SalonWhereUniqueInput = Prisma.AtLeast<{
   productHistories?: Prisma.ProductHistoryListRelationFilter
   notificationSettings?: Prisma.XOR<Prisma.NotificationSettingsNullableScalarRelationFilter, Prisma.NotificationSettingsWhereInput> | null
   inventoryNotifications?: Prisma.InventoryNotificationListRelationFilter
+  salonNotifications?: Prisma.SalonNotificationListRelationFilter
 }, "id" | "email">
 
 export type SalonOrderByWithAggregationInput = {
@@ -608,6 +631,8 @@ export type SalonOrderByWithAggregationInput = {
   openingMinute?: Prisma.SortOrder
   closingHour?: Prisma.SortOrder
   closingMinute?: Prisma.SortOrder
+  lastAutoOpenDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastAutoCloseDate?: Prisma.SortOrderInput | Prisma.SortOrder
   pushToken?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -654,6 +679,8 @@ export type SalonScalarWhereWithAggregatesInput = {
   openingMinute?: Prisma.IntWithAggregatesFilter<"Salon"> | number
   closingHour?: Prisma.IntWithAggregatesFilter<"Salon"> | number
   closingMinute?: Prisma.IntWithAggregatesFilter<"Salon"> | number
+  lastAutoOpenDate?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
+  lastAutoCloseDate?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
   pushToken?: Prisma.StringNullableWithAggregatesFilter<"Salon"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Salon"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Salon"> | Date | string
@@ -692,6 +719,8 @@ export type SalonCreateInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -705,6 +734,7 @@ export type SalonCreateInput = {
   productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateInput = {
@@ -740,6 +770,8 @@ export type SalonUncheckedCreateInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -753,6 +785,7 @@ export type SalonUncheckedCreateInput = {
   productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUpdateInput = {
@@ -788,6 +821,8 @@ export type SalonUpdateInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -801,6 +836,7 @@ export type SalonUpdateInput = {
   productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateInput = {
@@ -836,6 +872,8 @@ export type SalonUncheckedUpdateInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -849,6 +887,7 @@ export type SalonUncheckedUpdateInput = {
   productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateManyInput = {
@@ -884,6 +923,8 @@ export type SalonCreateManyInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -922,6 +963,8 @@ export type SalonUpdateManyMutationInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -960,6 +1003,8 @@ export type SalonUncheckedUpdateManyInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1014,6 +1059,8 @@ export type SalonCountOrderByAggregateInput = {
   openingMinute?: Prisma.SortOrder
   closingHour?: Prisma.SortOrder
   closingMinute?: Prisma.SortOrder
+  lastAutoOpenDate?: Prisma.SortOrder
+  lastAutoCloseDate?: Prisma.SortOrder
   pushToken?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1058,6 +1105,8 @@ export type SalonMaxOrderByAggregateInput = {
   openingMinute?: Prisma.SortOrder
   closingHour?: Prisma.SortOrder
   closingMinute?: Prisma.SortOrder
+  lastAutoOpenDate?: Prisma.SortOrder
+  lastAutoCloseDate?: Prisma.SortOrder
   pushToken?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1094,6 +1143,8 @@ export type SalonMinOrderByAggregateInput = {
   openingMinute?: Prisma.SortOrder
   closingHour?: Prisma.SortOrder
   closingMinute?: Prisma.SortOrder
+  lastAutoOpenDate?: Prisma.SortOrder
+  lastAutoCloseDate?: Prisma.SortOrder
   pushToken?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1298,6 +1349,20 @@ export type SalonUpdateOneRequiredWithoutInventoryNotificationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SalonUpdateToOneWithWhereWithoutInventoryNotificationsInput, Prisma.SalonUpdateWithoutInventoryNotificationsInput>, Prisma.SalonUncheckedUpdateWithoutInventoryNotificationsInput>
 }
 
+export type SalonCreateNestedOneWithoutSalonNotificationsInput = {
+  create?: Prisma.XOR<Prisma.SalonCreateWithoutSalonNotificationsInput, Prisma.SalonUncheckedCreateWithoutSalonNotificationsInput>
+  connectOrCreate?: Prisma.SalonCreateOrConnectWithoutSalonNotificationsInput
+  connect?: Prisma.SalonWhereUniqueInput
+}
+
+export type SalonUpdateOneRequiredWithoutSalonNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.SalonCreateWithoutSalonNotificationsInput, Prisma.SalonUncheckedCreateWithoutSalonNotificationsInput>
+  connectOrCreate?: Prisma.SalonCreateOrConnectWithoutSalonNotificationsInput
+  upsert?: Prisma.SalonUpsertWithoutSalonNotificationsInput
+  connect?: Prisma.SalonWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SalonUpdateToOneWithWhereWithoutSalonNotificationsInput, Prisma.SalonUpdateWithoutSalonNotificationsInput>, Prisma.SalonUncheckedUpdateWithoutSalonNotificationsInput>
+}
+
 export type SalonCreateWithoutAppointmentsInput = {
   id?: string
   firstName: string
@@ -1331,6 +1396,8 @@ export type SalonCreateWithoutAppointmentsInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1343,6 +1410,7 @@ export type SalonCreateWithoutAppointmentsInput = {
   productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutAppointmentsInput = {
@@ -1378,6 +1446,8 @@ export type SalonUncheckedCreateWithoutAppointmentsInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1390,6 +1460,7 @@ export type SalonUncheckedCreateWithoutAppointmentsInput = {
   productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutAppointmentsInput = {
@@ -1441,6 +1512,8 @@ export type SalonUpdateWithoutAppointmentsInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1453,6 +1526,7 @@ export type SalonUpdateWithoutAppointmentsInput = {
   productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutAppointmentsInput = {
@@ -1488,6 +1562,8 @@ export type SalonUncheckedUpdateWithoutAppointmentsInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1500,6 +1576,7 @@ export type SalonUncheckedUpdateWithoutAppointmentsInput = {
   productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutGalleriesInput = {
@@ -1535,6 +1612,8 @@ export type SalonCreateWithoutGalleriesInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1547,6 +1626,7 @@ export type SalonCreateWithoutGalleriesInput = {
   productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutGalleriesInput = {
@@ -1582,6 +1662,8 @@ export type SalonUncheckedCreateWithoutGalleriesInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1594,6 +1676,7 @@ export type SalonUncheckedCreateWithoutGalleriesInput = {
   productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutGalleriesInput = {
@@ -1645,6 +1728,8 @@ export type SalonUpdateWithoutGalleriesInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1657,6 +1742,7 @@ export type SalonUpdateWithoutGalleriesInput = {
   productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutGalleriesInput = {
@@ -1692,6 +1778,8 @@ export type SalonUncheckedUpdateWithoutGalleriesInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1704,6 +1792,7 @@ export type SalonUncheckedUpdateWithoutGalleriesInput = {
   productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutGalleryImagesInput = {
@@ -1739,6 +1828,8 @@ export type SalonCreateWithoutGalleryImagesInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1751,6 +1842,7 @@ export type SalonCreateWithoutGalleryImagesInput = {
   productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutGalleryImagesInput = {
@@ -1786,6 +1878,8 @@ export type SalonUncheckedCreateWithoutGalleryImagesInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1798,6 +1892,7 @@ export type SalonUncheckedCreateWithoutGalleryImagesInput = {
   productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutGalleryImagesInput = {
@@ -1849,6 +1944,8 @@ export type SalonUpdateWithoutGalleryImagesInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1861,6 +1958,7 @@ export type SalonUpdateWithoutGalleryImagesInput = {
   productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutGalleryImagesInput = {
@@ -1896,6 +1994,8 @@ export type SalonUncheckedUpdateWithoutGalleryImagesInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1908,6 +2008,7 @@ export type SalonUncheckedUpdateWithoutGalleryImagesInput = {
   productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutEmployeesInput = {
@@ -1943,6 +2044,8 @@ export type SalonCreateWithoutEmployeesInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1955,6 +2058,7 @@ export type SalonCreateWithoutEmployeesInput = {
   productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutEmployeesInput = {
@@ -1990,6 +2094,8 @@ export type SalonUncheckedCreateWithoutEmployeesInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2002,6 +2108,7 @@ export type SalonUncheckedCreateWithoutEmployeesInput = {
   productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutEmployeesInput = {
@@ -2053,6 +2160,8 @@ export type SalonUpdateWithoutEmployeesInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2065,6 +2174,7 @@ export type SalonUpdateWithoutEmployeesInput = {
   productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutEmployeesInput = {
@@ -2100,6 +2210,8 @@ export type SalonUncheckedUpdateWithoutEmployeesInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2112,6 +2224,7 @@ export type SalonUncheckedUpdateWithoutEmployeesInput = {
   productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutSalonClientsInput = {
@@ -2147,6 +2260,8 @@ export type SalonCreateWithoutSalonClientsInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2159,6 +2274,7 @@ export type SalonCreateWithoutSalonClientsInput = {
   productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutSalonClientsInput = {
@@ -2194,6 +2310,8 @@ export type SalonUncheckedCreateWithoutSalonClientsInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2206,6 +2324,7 @@ export type SalonUncheckedCreateWithoutSalonClientsInput = {
   productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutSalonClientsInput = {
@@ -2257,6 +2376,8 @@ export type SalonUpdateWithoutSalonClientsInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2269,6 +2390,7 @@ export type SalonUpdateWithoutSalonClientsInput = {
   productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutSalonClientsInput = {
@@ -2304,6 +2426,8 @@ export type SalonUncheckedUpdateWithoutSalonClientsInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2316,6 +2440,7 @@ export type SalonUncheckedUpdateWithoutSalonClientsInput = {
   productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutProductCategoriesInput = {
@@ -2351,6 +2476,8 @@ export type SalonCreateWithoutProductCategoriesInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2363,6 +2490,7 @@ export type SalonCreateWithoutProductCategoriesInput = {
   productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutProductCategoriesInput = {
@@ -2398,6 +2526,8 @@ export type SalonUncheckedCreateWithoutProductCategoriesInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2410,6 +2540,7 @@ export type SalonUncheckedCreateWithoutProductCategoriesInput = {
   productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutProductCategoriesInput = {
@@ -2461,6 +2592,8 @@ export type SalonUpdateWithoutProductCategoriesInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2473,6 +2606,7 @@ export type SalonUpdateWithoutProductCategoriesInput = {
   productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutProductCategoriesInput = {
@@ -2508,6 +2642,8 @@ export type SalonUncheckedUpdateWithoutProductCategoriesInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2520,6 +2656,7 @@ export type SalonUncheckedUpdateWithoutProductCategoriesInput = {
   productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutProductsInput = {
@@ -2555,6 +2692,8 @@ export type SalonCreateWithoutProductsInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2567,6 +2706,7 @@ export type SalonCreateWithoutProductsInput = {
   productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutProductsInput = {
@@ -2602,6 +2742,8 @@ export type SalonUncheckedCreateWithoutProductsInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2614,6 +2756,7 @@ export type SalonUncheckedCreateWithoutProductsInput = {
   productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutProductsInput = {
@@ -2665,6 +2808,8 @@ export type SalonUpdateWithoutProductsInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2677,6 +2822,7 @@ export type SalonUpdateWithoutProductsInput = {
   productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutProductsInput = {
@@ -2712,6 +2858,8 @@ export type SalonUncheckedUpdateWithoutProductsInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2724,6 +2872,7 @@ export type SalonUncheckedUpdateWithoutProductsInput = {
   productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutProductHistoriesInput = {
@@ -2759,6 +2908,8 @@ export type SalonCreateWithoutProductHistoriesInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2771,6 +2922,7 @@ export type SalonCreateWithoutProductHistoriesInput = {
   productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutProductHistoriesInput = {
@@ -2806,6 +2958,8 @@ export type SalonUncheckedCreateWithoutProductHistoriesInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2818,6 +2972,7 @@ export type SalonUncheckedCreateWithoutProductHistoriesInput = {
   productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutProductHistoriesInput = {
@@ -2869,6 +3024,8 @@ export type SalonUpdateWithoutProductHistoriesInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2881,6 +3038,7 @@ export type SalonUpdateWithoutProductHistoriesInput = {
   productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutProductHistoriesInput = {
@@ -2916,6 +3074,8 @@ export type SalonUncheckedUpdateWithoutProductHistoriesInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2928,6 +3088,7 @@ export type SalonUncheckedUpdateWithoutProductHistoriesInput = {
   productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutNotificationSettingsInput = {
@@ -2963,6 +3124,8 @@ export type SalonCreateWithoutNotificationSettingsInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2975,6 +3138,7 @@ export type SalonCreateWithoutNotificationSettingsInput = {
   productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
   productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutNotificationSettingsInput = {
@@ -3010,6 +3174,8 @@ export type SalonUncheckedCreateWithoutNotificationSettingsInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3022,6 +3188,7 @@ export type SalonUncheckedCreateWithoutNotificationSettingsInput = {
   productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
   productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutNotificationSettingsInput = {
@@ -3073,6 +3240,8 @@ export type SalonUpdateWithoutNotificationSettingsInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3085,6 +3254,7 @@ export type SalonUpdateWithoutNotificationSettingsInput = {
   productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
   productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutNotificationSettingsInput = {
@@ -3120,6 +3290,8 @@ export type SalonUncheckedUpdateWithoutNotificationSettingsInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3132,6 +3304,7 @@ export type SalonUncheckedUpdateWithoutNotificationSettingsInput = {
   productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
   productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
   inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonCreateWithoutInventoryNotificationsInput = {
@@ -3167,6 +3340,8 @@ export type SalonCreateWithoutInventoryNotificationsInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3179,6 +3354,7 @@ export type SalonCreateWithoutInventoryNotificationsInput = {
   productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
   productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationCreateNestedManyWithoutSalonInput
 }
 
 export type SalonUncheckedCreateWithoutInventoryNotificationsInput = {
@@ -3214,6 +3390,8 @@ export type SalonUncheckedCreateWithoutInventoryNotificationsInput = {
   openingMinute?: number
   closingHour?: number
   closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
   pushToken?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3226,6 +3404,7 @@ export type SalonUncheckedCreateWithoutInventoryNotificationsInput = {
   productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
   productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedCreateNestedManyWithoutSalonInput
 }
 
 export type SalonCreateOrConnectWithoutInventoryNotificationsInput = {
@@ -3277,6 +3456,8 @@ export type SalonUpdateWithoutInventoryNotificationsInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3289,6 +3470,7 @@ export type SalonUpdateWithoutInventoryNotificationsInput = {
   productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
   productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUpdateManyWithoutSalonNestedInput
 }
 
 export type SalonUncheckedUpdateWithoutInventoryNotificationsInput = {
@@ -3324,6 +3506,8 @@ export type SalonUncheckedUpdateWithoutInventoryNotificationsInput = {
   openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
   closingHour?: Prisma.IntFieldUpdateOperationsInput | number
   closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3336,6 +3520,223 @@ export type SalonUncheckedUpdateWithoutInventoryNotificationsInput = {
   productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
   productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
   notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
+  salonNotifications?: Prisma.SalonNotificationUncheckedUpdateManyWithoutSalonNestedInput
+}
+
+export type SalonCreateWithoutSalonNotificationsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  businessName: string
+  businessImage?: string | null
+  type: string
+  otherType?: string | null
+  waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
+  otherAmenity?: string | null
+  country: string
+  city: string
+  address: string
+  phoneNumber: string
+  phoneCode: string
+  termsAccepted: boolean
+  pin?: string | null
+  confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
+  revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
+  isOpen?: boolean
+  workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
+  openingHour?: number
+  openingMinute?: number
+  closingHour?: number
+  closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
+  pushToken?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  appointments?: Prisma.OwnerAppointmentCreateNestedManyWithoutSalonInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutSalonInput
+  galleryImages?: Prisma.GalleryImageCreateNestedManyWithoutSalonInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutSalonInput
+  salonClients?: Prisma.SalonClientCreateNestedManyWithoutSalonInput
+  products?: Prisma.ProductCreateNestedManyWithoutSalonInput
+  productCategories?: Prisma.ProductCategoryCreateNestedManyWithoutSalonInput
+  productHistories?: Prisma.ProductHistoryCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationCreateNestedManyWithoutSalonInput
+}
+
+export type SalonUncheckedCreateWithoutSalonNotificationsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  businessName: string
+  businessImage?: string | null
+  type: string
+  otherType?: string | null
+  waitingAmenities?: Prisma.SalonCreatewaitingAmenitiesInput | string[]
+  otherAmenity?: string | null
+  country: string
+  city: string
+  address: string
+  phoneNumber: string
+  phoneCode: string
+  termsAccepted: boolean
+  pin?: string | null
+  confirmed?: boolean
+  resetPin?: string | null
+  resetPinExpiry?: Date | string | null
+  revenuePin?: string | null
+  subscriptionStatus?: string
+  subscriptionStartDate?: Date | string | null
+  subscriptionExpiresAt?: Date | string | null
+  promoCodeUsed?: string | null
+  isOpen?: boolean
+  workingDays?: Prisma.SalonCreateworkingDaysInput | number[]
+  openingHour?: number
+  openingMinute?: number
+  closingHour?: number
+  closingMinute?: number
+  lastAutoOpenDate?: string | null
+  lastAutoCloseDate?: string | null
+  pushToken?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  appointments?: Prisma.OwnerAppointmentUncheckedCreateNestedManyWithoutSalonInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutSalonInput
+  galleryImages?: Prisma.GalleryImageUncheckedCreateNestedManyWithoutSalonInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSalonInput
+  salonClients?: Prisma.SalonClientUncheckedCreateNestedManyWithoutSalonInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutSalonInput
+  productCategories?: Prisma.ProductCategoryUncheckedCreateNestedManyWithoutSalonInput
+  productHistories?: Prisma.ProductHistoryUncheckedCreateNestedManyWithoutSalonInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutSalonInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedCreateNestedManyWithoutSalonInput
+}
+
+export type SalonCreateOrConnectWithoutSalonNotificationsInput = {
+  where: Prisma.SalonWhereUniqueInput
+  create: Prisma.XOR<Prisma.SalonCreateWithoutSalonNotificationsInput, Prisma.SalonUncheckedCreateWithoutSalonNotificationsInput>
+}
+
+export type SalonUpsertWithoutSalonNotificationsInput = {
+  update: Prisma.XOR<Prisma.SalonUpdateWithoutSalonNotificationsInput, Prisma.SalonUncheckedUpdateWithoutSalonNotificationsInput>
+  create: Prisma.XOR<Prisma.SalonCreateWithoutSalonNotificationsInput, Prisma.SalonUncheckedCreateWithoutSalonNotificationsInput>
+  where?: Prisma.SalonWhereInput
+}
+
+export type SalonUpdateToOneWithWhereWithoutSalonNotificationsInput = {
+  where?: Prisma.SalonWhereInput
+  data: Prisma.XOR<Prisma.SalonUpdateWithoutSalonNotificationsInput, Prisma.SalonUncheckedUpdateWithoutSalonNotificationsInput>
+}
+
+export type SalonUpdateWithoutSalonNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
+  otherAmenity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
+  openingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  closingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointments?: Prisma.OwnerAppointmentUpdateManyWithoutSalonNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutSalonNestedInput
+  galleryImages?: Prisma.GalleryImageUpdateManyWithoutSalonNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutSalonNestedInput
+  salonClients?: Prisma.SalonClientUpdateManyWithoutSalonNestedInput
+  products?: Prisma.ProductUpdateManyWithoutSalonNestedInput
+  productCategories?: Prisma.ProductCategoryUpdateManyWithoutSalonNestedInput
+  productHistories?: Prisma.ProductHistoryUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUpdateManyWithoutSalonNestedInput
+}
+
+export type SalonUncheckedUpdateWithoutSalonNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  otherType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  waitingAmenities?: Prisma.SalonUpdatewaitingAmenitiesInput | string[]
+  otherAmenity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  phoneCode?: Prisma.StringFieldUpdateOperationsInput | string
+  termsAccepted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  confirmed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  resetPin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetPinExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revenuePin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionStartDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  subscriptionExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  promoCodeUsed?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  workingDays?: Prisma.SalonUpdateworkingDaysInput | number[]
+  openingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  openingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  closingHour?: Prisma.IntFieldUpdateOperationsInput | number
+  closingMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lastAutoOpenDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastAutoCloseDate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pushToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointments?: Prisma.OwnerAppointmentUncheckedUpdateManyWithoutSalonNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutSalonNestedInput
+  galleryImages?: Prisma.GalleryImageUncheckedUpdateManyWithoutSalonNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSalonNestedInput
+  salonClients?: Prisma.SalonClientUncheckedUpdateManyWithoutSalonNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutSalonNestedInput
+  productCategories?: Prisma.ProductCategoryUncheckedUpdateManyWithoutSalonNestedInput
+  productHistories?: Prisma.ProductHistoryUncheckedUpdateManyWithoutSalonNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutSalonNestedInput
+  inventoryNotifications?: Prisma.InventoryNotificationUncheckedUpdateManyWithoutSalonNestedInput
 }
 
 
@@ -3353,6 +3754,7 @@ export type SalonCountOutputType = {
   productCategories: number
   productHistories: number
   inventoryNotifications: number
+  salonNotifications: number
 }
 
 export type SalonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3365,6 +3767,7 @@ export type SalonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   productCategories?: boolean | SalonCountOutputTypeCountProductCategoriesArgs
   productHistories?: boolean | SalonCountOutputTypeCountProductHistoriesArgs
   inventoryNotifications?: boolean | SalonCountOutputTypeCountInventoryNotificationsArgs
+  salonNotifications?: boolean | SalonCountOutputTypeCountSalonNotificationsArgs
 }
 
 /**
@@ -3440,6 +3843,13 @@ export type SalonCountOutputTypeCountInventoryNotificationsArgs<ExtArgs extends 
   where?: Prisma.InventoryNotificationWhereInput
 }
 
+/**
+ * SalonCountOutputType without action
+ */
+export type SalonCountOutputTypeCountSalonNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalonNotificationWhereInput
+}
+
 
 export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3474,6 +3884,8 @@ export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   openingMinute?: boolean
   closingHour?: boolean
   closingMinute?: boolean
+  lastAutoOpenDate?: boolean
+  lastAutoCloseDate?: boolean
   pushToken?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -3487,6 +3899,7 @@ export type SalonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   productHistories?: boolean | Prisma.Salon$productHistoriesArgs<ExtArgs>
   notificationSettings?: boolean | Prisma.Salon$notificationSettingsArgs<ExtArgs>
   inventoryNotifications?: boolean | Prisma.Salon$inventoryNotificationsArgs<ExtArgs>
+  salonNotifications?: boolean | Prisma.Salon$salonNotificationsArgs<ExtArgs>
   _count?: boolean | Prisma.SalonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["salon"]>
 
@@ -3523,6 +3936,8 @@ export type SalonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   openingMinute?: boolean
   closingHour?: boolean
   closingMinute?: boolean
+  lastAutoOpenDate?: boolean
+  lastAutoCloseDate?: boolean
   pushToken?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -3561,6 +3976,8 @@ export type SalonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   openingMinute?: boolean
   closingHour?: boolean
   closingMinute?: boolean
+  lastAutoOpenDate?: boolean
+  lastAutoCloseDate?: boolean
   pushToken?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -3599,12 +4016,14 @@ export type SalonSelectScalar = {
   openingMinute?: boolean
   closingHour?: boolean
   closingMinute?: boolean
+  lastAutoOpenDate?: boolean
+  lastAutoCloseDate?: boolean
   pushToken?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SalonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "businessName" | "businessImage" | "type" | "otherType" | "waitingAmenities" | "otherAmenity" | "country" | "city" | "address" | "phoneNumber" | "phoneCode" | "termsAccepted" | "pin" | "confirmed" | "resetPin" | "resetPinExpiry" | "revenuePin" | "subscriptionStatus" | "subscriptionStartDate" | "subscriptionExpiresAt" | "promoCodeUsed" | "isOpen" | "workingDays" | "openingHour" | "openingMinute" | "closingHour" | "closingMinute" | "pushToken" | "createdAt" | "updatedAt", ExtArgs["result"]["salon"]>
+export type SalonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "businessName" | "businessImage" | "type" | "otherType" | "waitingAmenities" | "otherAmenity" | "country" | "city" | "address" | "phoneNumber" | "phoneCode" | "termsAccepted" | "pin" | "confirmed" | "resetPin" | "resetPinExpiry" | "revenuePin" | "subscriptionStatus" | "subscriptionStartDate" | "subscriptionExpiresAt" | "promoCodeUsed" | "isOpen" | "workingDays" | "openingHour" | "openingMinute" | "closingHour" | "closingMinute" | "lastAutoOpenDate" | "lastAutoCloseDate" | "pushToken" | "createdAt" | "updatedAt", ExtArgs["result"]["salon"]>
 export type SalonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   appointments?: boolean | Prisma.Salon$appointmentsArgs<ExtArgs>
   galleries?: boolean | Prisma.Salon$galleriesArgs<ExtArgs>
@@ -3616,6 +4035,7 @@ export type SalonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   productHistories?: boolean | Prisma.Salon$productHistoriesArgs<ExtArgs>
   notificationSettings?: boolean | Prisma.Salon$notificationSettingsArgs<ExtArgs>
   inventoryNotifications?: boolean | Prisma.Salon$inventoryNotificationsArgs<ExtArgs>
+  salonNotifications?: boolean | Prisma.Salon$salonNotificationsArgs<ExtArgs>
   _count?: boolean | Prisma.SalonCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SalonIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3634,6 +4054,7 @@ export type $SalonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     productHistories: Prisma.$ProductHistoryPayload<ExtArgs>[]
     notificationSettings: Prisma.$NotificationSettingsPayload<ExtArgs> | null
     inventoryNotifications: Prisma.$InventoryNotificationPayload<ExtArgs>[]
+    salonNotifications: Prisma.$SalonNotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3668,6 +4089,8 @@ export type $SalonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     openingMinute: number
     closingHour: number
     closingMinute: number
+    lastAutoOpenDate: string | null
+    lastAutoCloseDate: string | null
     pushToken: string | null
     createdAt: Date
     updatedAt: Date
@@ -4075,6 +4498,7 @@ export interface Prisma__SalonClient<T, Null = never, ExtArgs extends runtime.Ty
   productHistories<T extends Prisma.Salon$productHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$productHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notificationSettings<T extends Prisma.Salon$notificationSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$notificationSettingsArgs<ExtArgs>>): Prisma.Prisma__NotificationSettingsClient<runtime.Types.Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   inventoryNotifications<T extends Prisma.Salon$inventoryNotificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$inventoryNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryNotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salonNotifications<T extends Prisma.Salon$salonNotificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Salon$salonNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalonNotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4136,6 +4560,8 @@ export interface SalonFieldRefs {
   readonly openingMinute: Prisma.FieldRef<"Salon", 'Int'>
   readonly closingHour: Prisma.FieldRef<"Salon", 'Int'>
   readonly closingMinute: Prisma.FieldRef<"Salon", 'Int'>
+  readonly lastAutoOpenDate: Prisma.FieldRef<"Salon", 'String'>
+  readonly lastAutoCloseDate: Prisma.FieldRef<"Salon", 'String'>
   readonly pushToken: Prisma.FieldRef<"Salon", 'String'>
   readonly createdAt: Prisma.FieldRef<"Salon", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Salon", 'DateTime'>
@@ -4759,6 +5185,30 @@ export type Salon$inventoryNotificationsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.InventoryNotificationScalarFieldEnum | Prisma.InventoryNotificationScalarFieldEnum[]
+}
+
+/**
+ * Salon.salonNotifications
+ */
+export type Salon$salonNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalonNotification
+   */
+  select?: Prisma.SalonNotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalonNotification
+   */
+  omit?: Prisma.SalonNotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalonNotificationInclude<ExtArgs> | null
+  where?: Prisma.SalonNotificationWhereInput
+  orderBy?: Prisma.SalonNotificationOrderByWithRelationInput | Prisma.SalonNotificationOrderByWithRelationInput[]
+  cursor?: Prisma.SalonNotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalonNotificationScalarFieldEnum | Prisma.SalonNotificationScalarFieldEnum[]
 }
 
 /**

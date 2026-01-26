@@ -63,6 +63,7 @@ export const ModelName = {
   ProductHistory: 'ProductHistory',
   NotificationSettings: 'NotificationSettings',
   InventoryNotification: 'InventoryNotification',
+  SalonNotification: 'SalonNotification',
   PromoCode: 'PromoCode'
 } as const
 
@@ -115,6 +116,8 @@ export const SalonScalarFieldEnum = {
   openingMinute: 'openingMinute',
   closingHour: 'closingHour',
   closingMinute: 'closingMinute',
+  lastAutoOpenDate: 'lastAutoOpenDate',
+  lastAutoCloseDate: 'lastAutoCloseDate',
   pushToken: 'pushToken',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -301,6 +304,19 @@ export const InventoryNotificationScalarFieldEnum = {
 } as const
 
 export type InventoryNotificationScalarFieldEnum = (typeof InventoryNotificationScalarFieldEnum)[keyof typeof InventoryNotificationScalarFieldEnum]
+
+
+export const SalonNotificationScalarFieldEnum = {
+  id: 'id',
+  salonId: 'salonId',
+  type: 'type',
+  message: 'message',
+  isRead: 'isRead',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SalonNotificationScalarFieldEnum = (typeof SalonNotificationScalarFieldEnum)[keyof typeof SalonNotificationScalarFieldEnum]
 
 
 export const PromoCodeScalarFieldEnum = {

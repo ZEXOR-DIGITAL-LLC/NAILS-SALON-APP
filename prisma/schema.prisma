@@ -47,6 +47,10 @@ model Salon {
   closingHour       Int       @default(18)        // Closing hour (0-23)
   closingMinute     Int       @default(0)         // Closing minute (0-59)
 
+  // Auto-Schedule Tracking
+  lastAutoOpenDate  String?   // "YYYY-MM-DD" — prevents re-opening same day
+  lastAutoCloseDate String?   // "YYYY-MM-DD" — prevents re-closing same day
+
   // Push Notifications
   pushToken         String?   // Expo Push Token for booking notifications
 
@@ -63,6 +67,7 @@ model Salon {
   productHistories       ProductHistory[]
   notificationSettings   NotificationSettings?
   inventoryNotifications InventoryNotification[]
+  salonNotifications     SalonNotification[]
 }
 
 model Client {
@@ -277,6 +282,21 @@ model InventoryNotification {
   @@index([salonId, isRead])
   @@index([salonId, isArchived])
   @@index([productId])
+}
+
+model SalonNotification {
+  id        String   @id @default(cuid())
+  salonId   String
+  type      String   // 'auto_opened' | 'auto_closed'
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  salon     Salon    @relation(fields: [salonId], references: [id], onDelete: Cascade)
+
+  @@index([salonId])
+  @@index([salonId, isRead])
 }
 
 model PromoCode {
