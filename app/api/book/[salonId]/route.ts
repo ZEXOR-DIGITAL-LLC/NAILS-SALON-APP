@@ -213,6 +213,55 @@ export async function POST(
       selectedEmployeeId = employeeId;
     }
 
+    // Check for employee scheduling conflict (time overlap)
+    if (selectedEmployeeId) {
+      const endOfDay = new Date(parsedDate);
+      endOfDay.setUTCHours(23, 59, 59, 999);
+
+      const existingAppointments = await prisma.ownerAppointment.findMany({
+        where: {
+          salonId,
+          employeeId: selectedEmployeeId,
+          appointmentDate: { gte: parsedDate, lte: endOfDay },
+          status: { not: 'Canceled' },
+        },
+        select: {
+          appointmentHour: true,
+          appointmentMinute: true,
+          durationHours: true,
+          durationMinutes: true,
+        },
+      });
+
+      const newStartMinutes = hour * 60 + minute;
+      const newEndMinutes = newStartMinutes + dHours * 60 + dMinutes;
+
+      const conflict = existingAppointments.find((apt) => {
+        const existingStart = apt.appointmentHour * 60 + apt.appointmentMinute;
+        const existingEnd = existingStart + apt.durationHours * 60 + apt.durationMinutes;
+        return newStartMinutes < existingEnd && newEndMinutes > existingStart;
+      });
+
+      if (conflict) {
+        const conflictStart = conflict.appointmentHour * 60 + conflict.appointmentMinute;
+        const conflictEnd = conflictStart + conflict.durationHours * 60 + conflict.durationMinutes;
+        const fmtTime = (mins: number) => {
+          const h = Math.floor(mins / 60);
+          const m = mins % 60;
+          const h12 = h % 12 || 12;
+          const ampm = h >= 12 ? 'PM' : 'AM';
+          return `${h12}:${m.toString().padStart(2, '0')} ${ampm}`;
+        };
+        return NextResponse.json(
+          {
+            error: `This employee already has a booking from ${fmtTime(conflictStart)} to ${fmtTime(conflictEnd)} on this date. Please choose a different time or employee.`,
+            code: 'EMPLOYEE_CONFLICT',
+          },
+          { status: 409 }
+        );
+      }
+    }
+
     // Handle client code: lookup existing or create new SalonClient
     let salonClientId: string | null = null;
     let assignedClientCode: string | null = null;

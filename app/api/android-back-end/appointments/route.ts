@@ -529,6 +529,55 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Check for employee scheduling conflict (time overlap)
+    if (employeeId) {
+      const endOfDay = new Date(parsedDate);
+      endOfDay.setUTCHours(23, 59, 59, 999);
+
+      const existingAppointments = await prisma.ownerAppointment.findMany({
+        where: {
+          salonId,
+          employeeId,
+          appointmentDate: { gte: parsedDate, lte: endOfDay },
+          status: { not: 'Canceled' },
+        },
+        select: {
+          appointmentHour: true,
+          appointmentMinute: true,
+          durationHours: true,
+          durationMinutes: true,
+        },
+      });
+
+      const newStartMinutes = hour * 60 + minute;
+      const newEndMinutes = newStartMinutes + dHours * 60 + dMinutes;
+
+      const conflict = existingAppointments.find((apt) => {
+        const existingStart = apt.appointmentHour * 60 + apt.appointmentMinute;
+        const existingEnd = existingStart + apt.durationHours * 60 + apt.durationMinutes;
+        return newStartMinutes < existingEnd && newEndMinutes > existingStart;
+      });
+
+      if (conflict) {
+        const conflictStart = conflict.appointmentHour * 60 + conflict.appointmentMinute;
+        const conflictEnd = conflictStart + conflict.durationHours * 60 + conflict.durationMinutes;
+        const fmtTime = (mins: number) => {
+          const h = Math.floor(mins / 60);
+          const m = mins % 60;
+          const h12 = h % 12 || 12;
+          const ampm = h >= 12 ? 'PM' : 'AM';
+          return `${h12}:${m.toString().padStart(2, '0')} ${ampm}`;
+        };
+        return NextResponse.json(
+          {
+            error: `This employee already has a booking from ${fmtTime(conflictStart)} to ${fmtTime(conflictEnd)} on this date. Please choose a different time or employee.`,
+            code: 'EMPLOYEE_CONFLICT',
+          },
+          { status: 409 }
+        );
+      }
+    }
+
     // Validate salonClientId if provided
     if (salonClientId) {
       const salonClient = await prisma.salonClient.findFirst({
@@ -688,6 +737,61 @@ export async function PATCH(request: NextRequest) {
       updateData.appointmentMinute = parseInt(appointmentMinute, 10);
     if (durationHours !== undefined) updateData.durationHours = parseInt(durationHours, 10);
     if (durationMinutes !== undefined) updateData.durationMinutes = parseInt(durationMinutes, 10);
+
+    // Check for employee scheduling conflict (time overlap) on update
+    if (targetEmployeeId) {
+      const resolvedHour = updateData.appointmentHour ?? currentAppointment.appointmentHour;
+      const resolvedMinute = updateData.appointmentMinute ?? currentAppointment.appointmentMinute;
+      const resolvedDHours = updateData.durationHours ?? currentAppointment.durationHours;
+      const resolvedDMinutes = updateData.durationMinutes ?? currentAppointment.durationMinutes;
+
+      const endOfTargetDay = new Date(targetDate);
+      endOfTargetDay.setUTCHours(23, 59, 59, 999);
+
+      const existingAppointments = await prisma.ownerAppointment.findMany({
+        where: {
+          salonId,
+          employeeId: targetEmployeeId,
+          appointmentDate: { gte: targetDate, lte: endOfTargetDay },
+          status: { not: 'Canceled' },
+          id: { not: id }, // Exclude the appointment being updated
+        },
+        select: {
+          appointmentHour: true,
+          appointmentMinute: true,
+          durationHours: true,
+          durationMinutes: true,
+        },
+      });
+
+      const newStartMinutes = resolvedHour * 60 + resolvedMinute;
+      const newEndMinutes = newStartMinutes + resolvedDHours * 60 + resolvedDMinutes;
+
+      const conflict = existingAppointments.find((apt) => {
+        const existingStart = apt.appointmentHour * 60 + apt.appointmentMinute;
+        const existingEnd = existingStart + apt.durationHours * 60 + apt.durationMinutes;
+        return newStartMinutes < existingEnd && newEndMinutes > existingStart;
+      });
+
+      if (conflict) {
+        const conflictStart = conflict.appointmentHour * 60 + conflict.appointmentMinute;
+        const conflictEnd = conflictStart + conflict.durationHours * 60 + conflict.durationMinutes;
+        const fmtTime = (mins: number) => {
+          const h = Math.floor(mins / 60);
+          const m = mins % 60;
+          const h12 = h % 12 || 12;
+          const ampm = h >= 12 ? 'PM' : 'AM';
+          return `${h12}:${m.toString().padStart(2, '0')} ${ampm}`;
+        };
+        return NextResponse.json(
+          {
+            error: `This employee already has a booking from ${fmtTime(conflictStart)} to ${fmtTime(conflictEnd)} on this date. Please choose a different time or employee.`,
+            code: 'EMPLOYEE_CONFLICT',
+          },
+          { status: 409 }
+        );
+      }
+    }
 
     await prisma.ownerAppointment.updateMany({
       where: { id, salonId },
