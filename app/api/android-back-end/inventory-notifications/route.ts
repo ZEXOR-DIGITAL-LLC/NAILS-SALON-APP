@@ -72,12 +72,22 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Refresh notifications based on current product states
-    if (expirationEnabled) {
-      await refreshExpirationNotifications(salonId, settings!.daysBeforeExpiration, salon.pushToken);
-    }
-    if (lowStockEnabled) {
-      await refreshLowStockNotifications(salonId, salon.pushToken);
+    // Refresh notifications based on current product states (with 60s time guard)
+    const latestNotification = await prisma.inventoryNotification.findFirst({
+      where: { salonId },
+      orderBy: { updatedAt: 'desc' },
+      select: { updatedAt: true },
+    });
+    const shouldRefresh = !latestNotification ||
+      (Date.now() - latestNotification.updatedAt.getTime() > 60000);
+
+    if (shouldRefresh) {
+      if (expirationEnabled) {
+        await refreshExpirationNotifications(salonId, settings!.daysBeforeExpiration, salon.pushToken);
+      }
+      if (lowStockEnabled) {
+        await refreshLowStockNotifications(salonId, salon.pushToken);
+      }
     }
 
     // If type is 'count', just return the count
